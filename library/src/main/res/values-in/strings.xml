@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+    <string name="service_error">Server jaringan menurun</string>
+    <string name="json_error">Kesalahan penguraian data</string>
+    <string name="url_error">Tidak dapat menguraikan zona</string>
+    <string name="not_activity">Kelas tidak dapat ditemukan</string>
+
+    <string name="Loading">Memuat.....</string>
+
+    <string name="exit_dialog_Cancel">Batalkan</string>
+    <string name="tips_dialog_Drop">Tinggalkan</string>
+    <string name="input_error">Masukan tidak lengkap</string>
+    <!--选择获取图片dialog中的文字-->
+    <string name="please_turn_on_camera_permissions">Harap aktifkan izin kamera di Pengaturan</string>
+    <string name="Camera">Kamera</string>
+    <string name="Album">Album </string>
+    <string name="how_to_get_picture">Pilih cara mendapatkan gambar</string>
+
+    <string-array name="sp_font_name">
+        <item>Othmani</item>
+        <item>Indopak</item>
+    </string-array>
+
+
+</resources>

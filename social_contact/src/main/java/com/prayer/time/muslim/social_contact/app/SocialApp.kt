@@ -1,6 +1,6 @@
 package com.prayer.time.muslim.social_contact.app
 
-import android.app.Application
+import android.support.multidex.MultiDexApplication
 import com.base.library.retrofit_rx.RxRetrofitApp
 import com.prayer.time.muslim.social_contact.BuildConfig
 import com.squareup.leakcanary.LeakCanary
@@ -14,7 +14,7 @@ import com.squareup.leakcanary.LeakCanary
  *
  *Company :cpx
  */
-class SocialApp : Application() {
+class SocialApp : MultiDexApplication() {
 
     override fun onCreate() {
         super.onCreate()

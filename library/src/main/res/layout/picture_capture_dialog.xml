@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent">
+    <!--@android:color/transparent-->
+
+    <LinearLayout
+        android:id="@+id/content_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/Select_Cancel"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="10dp"
+        android:background="@drawable/bg_exit_dialog"
+        android:orientation="vertical">
+        <!--Select camera or album-->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="15dp"
+            android:text="@string/how_to_get_picture"
+            android:textColor="@color/c_999999"
+            android:textSize="18sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/c_999999" />
+
+        <TextView
+            android:id="@+id/Camera_btn"
+            style="@style/Camera_Album_style"
+            android:text="@string/Camera" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/c_999999" />
+
+        <TextView
+            android:id="@+id/Album_btn"
+            style="@style/Camera_Album_style"
+            android:text="@string/Album" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/Select_Cancel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/space"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/bg_exit_dialog"
+        android:gravity="center"
+        android:padding="15dp"
+        android:text="@string/exit_dialog_Cancel"
+        android:textColor="@color/c_FF3030"
+        android:textSize="16sp" />
+
+    <View
+        android:id="@+id/space"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_alignParentBottom="true" />
+
+</RelativeLayout>

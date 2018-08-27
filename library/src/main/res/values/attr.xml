@@ -1,0 +1,390 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <declare-styleable name="SelectableRoundedImageView">
+        <attr name="riv_corner_radius" format="dimension" />
+        <attr name="sriv_left_top_corner_radius" format="dimension" />
+        <attr name="sriv_right_top_corner_radius" format="dimension" />
+        <attr name="sriv_left_bottom_corner_radius" format="dimension" />
+        <attr name="sriv_right_bottom_corner_radius" format="dimension" />
+        <attr name="sriv_border_width" format="dimension" />
+        <attr name="sriv_border_color" format="color" />
+        <attr name="riv_mutate_background" format="boolean" />
+        <attr name="sriv_oval" format="boolean" />
+        <attr name="android:scaleType" />
+        <attr name="riv_tile_mode">
+            <enum name="clamp" value="0" />
+            <enum name="repeat" value="1" />
+            <enum name="mirror" value="2" />
+        </attr>
+        <attr name="riv_tile_mode_x">
+            <enum name="clamp" value="0" />
+            <enum name="repeat" value="1" />
+            <enum name="mirror" value="2" />
+        </attr>
+        <attr name="riv_tile_mode_y">
+            <enum name="clamp" value="0" />
+            <enum name="repeat" value="1" />
+            <enum name="mirror" value="2" />
+        </attr>
+    </declare-styleable>
+
+
+
+    <declare-styleable name="ProgressWheel">
+        <attr name="pwText" format="string"/>
+        <attr name="pwTextColor" format="color"/>
+        <attr name="pwTextSize" format="dimension"/>
+        <attr name="pwBarColor" format="color"/>
+        <attr name="pwRimColor" format="color"/>
+        <attr name="pwRimWidth" format="dimension"/>
+        <attr name="pwSpinSpeed" format="dimension"/>
+        <attr name="pwDelayMillis" format="integer"/>
+        <attr name="pwCircleColor" format="color"/>
+        <attr name="pwRadius" format="dimension"/>
+        <attr name="pwBarWidth" format="dimension"/>
+        <attr name="pwBarLength" format="dimension"/>
+        <attr name="pwContourColor" format="color"/>
+        <attr name="pwContourSize" format="dimension"/>
+    </declare-styleable>
+
+
+    <declare-styleable name="EasyRecyclerView">
+        <attr name="layout_empty" format="reference" />
+        <attr name="layout_progress" format="reference" />
+        <attr name="layout_error" format="reference" />
+        <attr name="recyclerClipToPadding" format="boolean" />
+        <attr name="recyclerPadding" format="dimension" />
+        <attr name="recyclerPaddingTop" format="dimension" />
+        <attr name="recyclerPaddingBottom" format="dimension" />
+        <attr name="recyclerPaddingLeft" format="dimension" />
+        <attr name="recyclerPaddingRight" format="dimension" />
+        <attr name="scrollbarStyle">
+            <enum name="insideOverlay" value="0x0" />
+            <enum name="insideInset" value="0x01000000" />
+            <enum name="outsideOverlay" value="0x02000000" />
+            <enum name="outsideInset" value="0x03000000" />
+        </attr>
+        <attr name="scrollbars">
+            <enum name="vertical" value="1"/>
+            <enum name="horizontal" value="0"/>
+            <enum name="none" value="2"/>
+        </attr>
+    </declare-styleable>
+
+
+
+    <declare-styleable name="innerrect">
+        <attr name="inner_width" format="dimension"/>
+        <attr name="inner_height" format="dimension"/>
+        <attr name="inner_margintop" format="dimension"/>
+        <attr name="inner_corner_color" format="color"/>
+        <attr name="inner_corner_length" format="dimension"/>
+        <attr name="inner_corner_width" format="dimension"/>
+        <attr name="inner_scan_bitmap" format="reference"/>
+        <attr name="inner_scan_speed" format="integer"/>
+        <attr name="inner_scan_iscircle" format="boolean"/>
+    </declare-styleable>
+
+
+    <declare-styleable name="LogisticsInformationView">
+        <attr name="width" format="dimension"/>
+        <attr name="radius" format="dimension"/>
+    </declare-styleable>
+
+
+    <declare-styleable name="SwitchButton">
+        <attr name="frameDrawable" format="reference|color"/>
+        <attr name="stateDrawable" format="reference|color"/>
+        <attr name="stateMaskDrawable" format="reference|color"/>
+        <attr name="sliderDrawable" format="reference|color"/>
+        <attr name="withTextInterval" format="dimension"/>
+    </declare-styleable>
+
+    <declare-styleable name="SwipeLayout">
+        <attr name="drag_edge">
+            <flag name="left" value="1"/>
+            <flag name="right" value="2"/>
+            <flag name="top" value="4"/>
+            <flag name="bottom" value="8"/>
+        </attr>
+        <attr name="leftEdgeSwipeOffset" format="dimension"/>
+        <attr name="rightEdgeSwipeOffset" format="dimension"/>
+        <attr name="topEdgeSwipeOffset" format="dimension"/>
+        <attr name="bottomEdgeSwipeOffset" format="dimension"/>
+        <attr name="show_mode" format="enum">
+            <enum name="lay_down" value="0"/>
+            <enum name="pull_out" value="1"/>
+        </attr>
+        <attr name="clickToClose" format="boolean"/>
+    </declare-styleable>
+
+
+    <declare-styleable name="WrapLayout">
+        <attr name="wlyHorizontalSpacing" format="dimension"/>
+        <attr name="wlyVerticalSpacing" format="dimension"/>
+        <attr name="wlyGravity" format="enum">
+            <enum name="top" value="0"/>
+            <enum name="center" value="1"/>
+            <enum name="bottom" value="2"/>
+        </attr>
+    </declare-styleable>
+    <declare-styleable name="WrapLayout_Layout">
+        <attr name="wlyLayout_gravity" format="enum">
+            <enum name="top" value="0"/>
+            <enum name="center" value="1"/>
+            <enum name="bottom" value="2"/>
+        </attr>
+    </declare-styleable>
+
+
+    <declare-styleable name="pickerview">
+        <attr name="pickerview_gravity">
+            <enum name="center" value="17"/>
+            <enum name="left" value="3"/>
+            <enum name="right" value="5"/>
+        </attr>
+        <attr name="pickerview_textSize" format="dimension"/>
+        <attr name="pickerview_textColorOut" format="color"/>
+        <attr name="pickerview_textColorCenter" format="color"/>
+        <attr name="pickerview_dividerColor" format="color"/>
+        <attr name="pickerview_lineSpacingMultiplier" format="float"/>
+    </declare-styleable>
+
+
+    <declare-styleable name="PagerSlidingTabStrip">
+        <attr name="pstsIndicatorColor" format="color"/>
+        <attr name="pstsUnderlineColor" format="color"/>
+        <attr name="pstsDividerColor" format="color"/>
+        <attr name="tl_textSelectColor" format="color"/>
+        <attr name="tl_textUnselectColor" format="color"/>
+        <attr name="pstsIndicatorHeight" format="dimension"/>
+        <attr name="pstsUnderlineHeight" format="dimension"/>
+        <attr name="pstsDividerPadding" format="dimension"/>
+        <attr name="pstsTabPaddingLeftRight" format="dimension"/>
+        <attr name="pstsScrollOffset" format="dimension"/>
+        <attr name="pstsTabBackground" format="reference"/>
+        <attr name="pstsShouldExpand" format="boolean"/>
+        <attr name="pstsTextAllCaps" format="boolean"/>
+    </declare-styleable>
+
+
+    <declare-styleable name="JazzyViewPager">
+
+        <attr name="fadeJazzEnabled" format="boolean"/>
+        <attr name="outlineEnabled" format="boolean"/>
+        <attr name="outlineColor" format="color|reference"/>
+
+        <attr name="styles">
+            <enum name="standard" value="0"/>
+            <enum name="tablet" value="1"/>
+            <enum name="cubein" value="2"/>
+            <enum name="cubeout" value="3"/>
+            <enum name="flipvertical" value="4"/>
+            <enum name="fliphorizontal" value="5"/>
+            <enum name="stack" value="6"/>
+            <enum name="zoomin" value="7"/>
+            <enum name="zoomout" value="8"/>
+            <enum name="rotateup" value="9"/>
+            <enum name="rotatedown" value="10"/>
+            <enum name="accordion" value="11"/>
+        </attr>
+    </declare-styleable>
+
+
+    <attr name="item_count" format="integer"></attr>
+
+    <declare-styleable name="ViewPagerIndicator">
+        <attr name="item_count"/>
+    </declare-styleable>
+
+    <declare-styleable name="ConvenientBanner">
+        <attr name="canLoop" format="boolean"/>
+        <attr name="slip_bottom" format="dimension"/>
+    </declare-styleable>
+
+    <declare-styleable name="RoundProgressBar">
+        <attr name="roundColor" format="color"/>
+        <attr name="roundProgressColor" format="color"/>
+        <attr name="roundWidth" format="dimension"></attr>
+        <attr name="textColor" format="color"/>
+        <attr name="textSize" format="dimension"/>
+        <attr name="max" format="integer"></attr>
+        <attr name="textIsDisplayable" format="boolean"></attr>
+        <attr name="style">
+            <enum name="STROKE" value="0"></enum>
+            <enum name="FILL" value="1"></enum>
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="MetroLayout">
+        <attr name="metro_divider" format="dimension"></attr>
+    </declare-styleable>
+
+    <declare-styleable name="AutoLayout_Layout">
+
+        <attr name="layout_auto_basewidth">
+            <flag name="width" value="1"></flag>
+            <flag name="height" value="2"></flag>
+            <flag name="textSize" value="4"></flag>
+            <flag name="padding" value="8"></flag>
+            <flag name="margin" value="16"></flag>
+            <flag name="marginLeft" value="32"></flag>
+            <flag name="marginTop" value="64"></flag>
+            <flag name="marginRight" value="128"></flag>
+            <flag name="marginBottom" value="256"></flag>
+            <flag name="paddingLeft" value="512"></flag>
+            <flag name="paddingTop" value="1024"></flag>
+            <flag name="paddingRight" value="2048"></flag>
+            <flag name="paddingBottom" value="4096"></flag>
+        </attr>
+
+        <attr name="layout_auto_baseheight">
+            <flag name="width" value="1"></flag>
+            <flag name="height" value="2"></flag>
+            <flag name="textSize" value="4"></flag>
+            <flag name="padding" value="8"></flag>
+            <flag name="margin" value="16"></flag>
+            <flag name="marginLeft" value="32"></flag>
+            <flag name="marginTop" value="64"></flag>
+            <flag name="marginRight" value="128"></flag>
+            <flag name="marginBottom" value="256"></flag>
+            <flag name="paddingLeft" value="512"></flag>
+            <flag name="paddingTop" value="1024"></flag>
+            <flag name="paddingRight" value="2048"></flag>
+            <flag name="paddingBottom" value="4096"></flag>
+            <flag name="minWidth" value="8192"></flag>
+            <flag name="maxWidth" value="16384"></flag>
+            <flag name="minHeight" value="32768"></flag>
+            <flag name="maxHeight" value="65536"></flag>
+        </attr>
+
+    </declare-styleable>
+
+    <declare-styleable name="TextViewVertical">
+        <attr name="v_text" format="string"/>
+        <attr name="v_textSize" format="dimension"/>
+        <attr name="v_textColor" format="color"/>
+        <attr name="v_start" format="enum">
+            <enum name="left" value="1"/>
+            <enum name="right" value="2"/>
+        </attr>
+        <attr name="v_line" format="enum">
+            <enum name="none" value="0"/>
+            <enum name="left" value="1"/>
+            <enum name="right" value="2"/>
+        </attr>
+        <attr name="v_lineWidth" format="dimension"/>
+        <attr name="v_lineColor" format="color"/>
+        <attr name="v_textVerticalMargin" format="dimension"/>
+        <attr name="v_textHorizontalMargin" format="dimension"/>
+        <attr name="v_cutChars" format="string"/>
+        <attr name="v_line2TextMargin" format="dimension"/>
+    </declare-styleable>
+
+
+    <declare-styleable name="MaterialEditText">
+        <!-- The base color of the line and the texts. Default is black. -->
+        <attr name="met_baseColor" format="color"/>
+        <!-- The highlight color of the line, and the floating label if the highlightFloatingLabel is true. -->
+        <attr name="met_primaryColor" format="color"/>
+        <!-- How the floating label should be shown. Default is none -->
+        <attr name="met_floatingLabel">
+            <enum name="none" value="0"/>
+            <enum name="normal" value="1"/>
+            <enum name="highlight" value="2"/>
+        </attr>
+        <!-- The color for when something is wrong.(e.g. exceeding max characters) -->
+        <attr name="met_errorColor" format="color"/>
+        <!-- Min characters count limit. 0 means no limit. -->
+        <attr name="met_minCharacters" format="integer"/>
+        <!-- max Characters count limit. 0 means no limit. -->
+        <attr name="met_maxCharacters" format="integer"/>
+        <!-- Whether to show the bottom ellipsis in singleLine mode -->
+        <attr name="met_singleLineEllipsis" format="boolean"/>
+        <!-- Reserved bottom text lines count, no matter if there is some helper/error text. -->
+        <attr name="met_minBottomTextLines" format="integer"/>
+        <!-- Helper text at the bottom -->
+        <attr name="met_helperText" format="string"/>
+        <!-- Helper text color -->
+        <attr name="met_helperTextColor" format="color"/>
+        <!-- Font of the paint used to draw accent texts -->
+        <attr name="met_accentTypeface" format="string"/>
+        <!-- Font used on view -->
+        <attr name="met_typeface" format="string"/>
+        <!-- Custom float label text -->
+        <attr name="met_floatingLabelText" format="string"/>
+        <!-- spacing between the main text and the floating label -->
+        <attr name="met_floatingLabelPadding" format="dimension"/>
+        <!-- Hide underline -->
+        <attr name="met_hideUnderline" format="boolean"/>
+        <!-- Underline's color -->
+        <attr name="met_underlineColor" format="color"/>
+        <!-- Auto validate -->
+        <attr name="met_autoValidate" format="boolean"/>
+        <!-- Left icon -->
+        <attr name="met_iconLeft" format="reference"/>
+        <!-- Right icon -->
+        <attr name="met_iconRight" format="reference"/>
+        <!-- Padding between icon(s) and the main area. 8dp by default. -->
+        <attr name="met_iconPadding" format="dimension"/>
+        <!-- Clear button -->
+        <attr name="met_clearButton" format="boolean"/>
+        <!-- The floating label's text size. 12sp by default. -->
+        <attr name="met_floatingLabelTextSize" format="dimension"/>
+        <!-- The floating label's text color. -1 by default. -->
+        <attr name="met_floatingLabelTextColor" format="color"/>
+        <!-- The bottom texts' size. 12sp by default. -->
+        <attr name="met_bottomTextSize" format="dimension"/>
+        <!-- Always show the floating label, instead of animating it in/out. False by default. -->
+        <attr name="met_floatingLabelAlwaysShown" format="boolean"/>
+        <!-- Always show the helper text, no matter if the edit text is focused. False by default. -->
+        <attr name="met_helperTextAlwaysShown" format="boolean"/>
+        <!-- Whether use animation to show/hide the floating label. True by default. -->
+        <attr name="met_floatingLabelAnimating" format="boolean"/>
+        <!-- Text color -->
+        <attr name="met_textColor" format="color"/>
+        <!-- Hint Text Color -->
+        <attr name="met_textColorHint" format="color"/>
+        <!-- Auto validate on focus lost. False by default. -->
+        <attr name="met_validateOnFocusLost" format="boolean"/>
+        <!-- Whether check the characters count at the beginning it's shown. True by default. -->
+        <attr name="met_checkCharactersCountAtBeginning" format="boolean"/>
+
+    </declare-styleable>
+
+    <declare-styleable name="AndroidJgraph">
+        <attr name="graphstyle" format="enum">
+            <enum name="bar" value="0"/>
+            <enum name="line" value="1"/>
+        </attr>
+        <attr name="scrollable" format="boolean"/>
+        <attr name="visiblenums" format="integer"/>
+        <attr name="showymsg" format="boolean"/>
+        <attr name="normolcolor" format="color"/>
+        <attr name="activationcolor" format="color"/>
+        <attr name="linestyle" format="enum">
+            <!--折线-->
+            <enum name="broken" value="0"/>
+            <!--曲线-->
+            <enum name="curve" value="1"/>
+        </attr>
+        <attr name="linemode" format="enum">
+            <!--链接每一个点-->
+            <enum name="everypoint" value="1"/>
+            <!--跳过0的点-->
+            <enum name="jump0" value="2"/>
+            <!--跳过的0点用虚线链接-->
+            <enum name="dash0" value="3"/>
+        </attr>
+        <attr name="linewidth" format="dimension"/>
+        <attr name="lineshowstyle" format="enum">
+            <enum name="drawing" value="0"/>
+            <enum name="section" value="1"/>
+            <enum name="fromline" value="2"/>
+            <enum name="fromcorner" value="3"/>
+            <enum name="aswave" value="4"/>
+        </attr>
+    </declare-styleable>
+</resources>

@@ -16,12 +16,28 @@ android {
         versionCode rootProject.ext.android.versionCode
         versionName rootProject.ext.android.versionName
         resourcePrefix "social_contact_"
+        multiDexEnabled true
+    }
+
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
     }
 
     dexOptions {
-        javaMaxHeapSize "10g" //此处可根据电脑本身配置 数值越大 当然越快
+        javaMaxHeapSize "6g" //此处可根据电脑本身配置 数值越大 当然越快
     }
 
+    buildTypes {
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
 
     sourceSets {
         main {
@@ -42,19 +58,20 @@ android {
     }
 }
 
-repositories {
-    flatDir {
-        dirs 'libs'
-    }
+greendao {
+    schemaVersion 1
+    daoPackage 'com.prayer.time.muslim.greeting_cards.dao'
+    targetGenDir 'src/main/java'
 }
-
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    api(name: 'library-debug', ext: 'aar')
-    /*leak 内存泄露检查*/
-    debugImplementation rootProject.ext.dependencies["debugleakcanary"]
-    releaseImplementation rootProject.ext.dependencies["releaseleakcanary"]
-
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    if (isDebug.toBoolean()) {
+        api project(':library')
+        /*leak 内存泄露检查*/
+        debugImplementation rootProject.ext.dependencies["debugleakcanary"]
+        releaseImplementation rootProject.ext.dependencies["releaseleakcanary"]
+    } else {
+        api project(':library')
+    }
 }
-

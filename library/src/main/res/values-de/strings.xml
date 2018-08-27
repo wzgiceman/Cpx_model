@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+
+    <string name="service_error">Der Netzwerk-Server ist nicht verfügbar</string>
+    <string name="json_error">Daten-Parsing-Fehler</string>
+    <string name="url_error">Bereich kann nicht analysiert werden</string>
+    <string name="not_activity">Die Klasse kann nicht gefunden werden</string>
+
+    <string name="Loading">Lädt .....</string>
+
+    <string name="exit_dialog_Cancel">Abbrechen</string>
+    <string name="tips_dialog_Drop">Verwerfen</string>
+    <string name="input_error">Die Eingabe ist unvollständig</string>
+    <!--选择获取图片dialog中的文字-->
+    <string name="please_turn_on_camera_permissions">Bitte aktivieren Sie die Kameraberechtigungen in den Einstellungen</string>
+    <string name="Camera">Kamera</string>
+    <string name="Album">Album</string>
+    <string name="how_to_get_picture">Auswählen, wie Sie Bilder erhalten</string>
+
+    <string-array name="sp_font_name">
+        <item>Othmani</item>
+        <item>Indopak</item>
+    </string-array>
+
+
+</resources>

@@ -1,0 +1,50 @@
+{
+  "project_info": {
+    "project_number": "114410019909",
+    "firebase_url": "https://muslim-plus.firebaseio.com",
+    "project_id": "muslim-plus",
+    "storage_bucket": "muslim-plus.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:114410019909:android:5bf0addd5a4d92ce",
+        "android_client_info": {
+          "package_name": "com.base.library"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "114410019909-oi976ln2urcu7vsq35fqobuku67d5ufa.apps.googleusercontent.com",
+          "client_type": 3,
+          "android_info": {
+            "package_name": "com.base.library",
+            "certificate_hash": "881dc65405b5d457349ccb2a680c6f4fbf2c3f92"
+          }
+        },
+        {
+          "client_id": "114410019909-oi976ln2urcu7vsq35fqobuku67d5ufa.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBTTPsthyzF7hr_rjfYlWXzBLKJOEkeFqY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

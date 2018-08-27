@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+    <string name="service_error">Le serveur réseau est tombé en panne</string>
+    <string name="json_error">Erreur d\'analyse des données</string>
+    <string name="url_error">Impossible d\'analyser la zone</string>
+    <string name="not_activity">La classe ne peut pas être trouvée</string>
+
+    <string name="Loading">Chargement.....</string>
+
+    <string name="exit_dialog_Cancel">Annuler</string>
+    <string name="tips_dialog_Drop">Abandonner</string>
+    <string name="input_error">L\'entrée est incomplète</string>
+    <!--选择获取图片dialog中的文字-->
+    <string name="please_turn_on_camera_permissions">Veuillez activer les autorisations de la caméra dans Paramètres</string>
+    <string name="Camera">Caméra</string>
+    <string name="Album">Album</string>
+    <string name="how_to_get_picture">Choisissez comment obtenir des photos</string>
+
+    <string-array name="sp_font_name">
+        <item>Othmani</item>
+        <item>Indopak</item>
+    </string-array>
+
+
+</resources>

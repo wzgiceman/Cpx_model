@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="pickerview_timebtn_nor">#057dff</color>
+    <color name="pickerview_timebtn_pre">#c2daf5</color>
+    <color name="pickerview_bg_topbar">#f5f5f5</color>
+    <color name="pickerview_topbar_title">#000000</color>
+    <color name="pickerview_bgColor_overlay">#60000000</color>
+    <color name="bg_no">#00000000</color>
+    <color name="checkColor">#FF9730</color>
+    <color name="c_434343">#C3C3C3</color>
+    <color name="c_A0A0A0">#C3C3C3</color>
+    <color name="c_EAEAEA">#C3C3C3</color>
+    <color name="possible_result_points">#c0ffff00</color>
+    <color name="result_view">#b0000000</color>
+    <color name="c_0effc2">#0effc2</color>
+    <color name="viewfinder_mask">#60000000</color>
+
+
+    <!--导航栏-->
+    <color name="colorPrimaryDark">#0effc2</color>
+    <color name="colorPrimaryDark_night">#FF9730</color>
+    <!--标题栏-->
+    <color name="colorPrimary">#FF008643</color>
+    <!--内容栏-->
+    <color name="colorAccent">#008642</color>
+
+
+    <color name="c_7F000000">#7F000000</color>
+    <color name="c_50000000">#50000000</color>
+    <color name="c_ffffff">#ffffff</color>
+    <color name="c_FFFFFFFF">#FFFFFFFF</color>
+    <color name="c_FF000000">#FF000000</color>
+    <color name="c_FF02CB5F">#FF02CB5F</color>
+    <color name="c_FF001208">#FF001208</color>
+    <color name="c_000000">#000000</color>
+    <color name="c_99000000">#99000000</color>
+    <color name="c_F4F4F4">#F4F4F4</color>
+    <color name="c_FF334139">#FF334139</color>
+    <color name="c_FFCDCDCD">#FFCDCDCD</color>
+    <color name="c_FF43C784">#FF43C784</color>
+    <color name="c_FF00732F">#FF00732F</color>
+    <color name="c_FF008642">#FF008642</color>
+    <color name="c_4D008642">#4D008642</color>
+    <color name="c_D3D3D3">#D3D3D3</color>
+    <color name="c_FF006C35">#FF006C35</color>
+    <color name="c_CC334139">#CC334139</color>
+    <color name="c_80334139">#80334139</color>
+    <color name="c_FFEDEDED">#FFEDEDED</color>
+    <color name="c_979797">#979797</color>
+    <color name="c_967828">#967828</color>
+    <color name="c_FF252525">#FF252525</color>
+    <color name="c_FF9B9B9B">#FF9B9B9B</color>
+    <color name="c_B3252525">#B3252525</color>
+    <color name="c_FFD1D1D1">#FFD1D1D1</color>
+    <color name="c_FF009B47">#FF009B47</color>
+    <color name="c_FFFF6262">#FFFF6262</color>
+    <color name="c_FFFF2424">#FFFF2424</color>
+    <color name="c_4D001208">#4D001208</color>
+    <color name="c_FFC3C3C3">#FFC3C3C3</color>
+    <color name="c_FFFF3D03">#FFFF3D03</color>
+    <color name="c_FF37589B">#FF37589B</color>
+    <color name="c_F0EBEBEB">#F0EBEBEB</color>
+    <color name="c_FFE9E9E9">#FFE9E9E9</color>
+    <color name="c_9900732F">#9900732F</color>
+    <color name="c_FF49A56E">#FF49A56E</color>
+    <color name="c_FFFFFFEC">#FFFFFFEC</color>
+    <color name="c_FF0571FA">#FF0571FA</color>
+    <color name="c_FFD6D6D6">#FFD6D6D6</color>
+    <color name="c_FF828282">#FF828282</color>
+    <color name="c_FFFF5D03">#FFFF5D03</color>
+    <color name="c_FF292929">#FF292929</color>
+    <color name="c_4DFFFFFF">#4DFFFFFF</color>
+    <color name="c_FFD8D8D8">#FFD8D8D8</color>
+    <color name="c_80000000">#80000000</color>
+    <color name="c_FFF76B1C">#FFF76B1C</color>
+    <color name="c_FF000A05">#FF000A05</color>
+    <color name="c_EFEFEF">#EFEFEF</color>
+
+    <!--贺卡页面用到的颜色-->
+    <color name="c_808080">#808080</color>
+    <color name="c_FFFF00">#FFFF00</color>
+    <color name="c_800080">#800080</color>
+    <color name="c_008000">#008000</color>
+    <color name="c_0000FF">#0000FF</color>
+    <color name="c_edaf00">#edaf00</color>
+    <color name="c_b0d844">#b0d844</color>
+    <color name="c_cf438a">#cf438a</color>
+    <color name="c_8B6914">#8B6914</color>
+    <color name="c_00FFFF">#00FFFF</color>
+    <color name="c_EDEDED">#EDEDED</color>
+    <color name="c_F6F6F6">#F6F6F6</color>
+    <color name="c_334139">#334139</color>
+    <color name="c_eeeeee">#eeeeee</color>
+    <color name="c_abcdf0">#abcdf0</color>
+    <color name="c_FF3030">#FF3030</color>
+    <color name="c_ff8800">#ff8800</color>
+    <color name="c_00ff33">#00ff33</color>
+    <color name="c_A52A2A">#A52A2A</color>
+    <color name="c_999999">#999999</color>
+    <color name="c_666666">#666666</color>
+    <color name="c_00732F">#00732F</color>
+    <!--透明度94%-->
+    <color name="c_F000732F">#F000732F</color>
+    <color name="c_001208">#001208</color>
+
+    <!--念珠页面用到的颜色-->
+    <color name="c_4388FF">#4388FF</color>
+    <color name="c_FF7C34">#FF7C34</color>
+    <color name="c_FFCF38">#FFCF38</color>
+    <color name="c_FF5234">#FF5234</color>
+    <color name="c_FF5D03">#FF5D03</color>
+    <color name="c_0571FA">#0571FA</color>
+    <color name="c_5E5E5E">#5E5E5E</color>
+    <color name="c_FFFEF6">#FFFEF6</color>
+</resources>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="facebook_app_id">176946966312538</string>
+    <string name="social_fb_login_protocol_scheme">fb834269166958001</string>
+    <string name="greeting_cards_default_notification_channel_id" translatable="false">fcm_default_channel</string>
+
+
+    <!--埋点1期-->
+    <string name="click_prayers">click_button_prayers</string>
+    <string name="click_wallpaper">click_button_wallpaper</string>
+    <string name="choose_wallpaper">choose_wallpaper</string>
+    <string name="click_button_sharehome">click_button_sharehome</string>
+    <string name="time_pre_reminder">time_pre_reminder</string>
+    <string name="click_button_qibla">click_button_qibla</string>
+    <string name="click_button_QBbackground">click_button_QBbackground</string>
+    <string name="click_button_quran">click_button_quran</string>
+    <string name="click_Quran_chapter">click_Quran_chapter</string>
+    <string name="favorite_ID">favorite_ID</string>
+    <string name="notes_ID">notes_ID</string>
+    <string name="shareapp">shareapp</string>
+    <string name="click_bell">click_bell</string>
+    <string name="click_noti_none">click_noti_none</string>
+    <string name="click_noti_silent">click_noti_silent</string>
+    <string name="click_noti_beep">click_noti_beep</string>
+    <!--埋点2期-->
+    <string name="click_manu">click_menu</string>
+    <string name="click_tasbeeth">click_tasbih</string>
+    <string name="click_card">click_card</string>
+    <string name="click_setting">click_setting</string>
+    <string name="click_language">click_language</string>
+    <string name="click_asr">click_asr</string>
+    <string name="click_high">click_high</string>
+    <string name="click_share">click_share</string>
+    <string name="click_feedback">click_feedback</string>
+    <string name="click_aboutus">click_aboutus</string>
+    <string name="post">post</string>
+    <string name="post_success">post_success</string>
+    <string name="post_myzakar">post_myzakar</string>
+
+    <string name="pickerview_cancel">Cancel</string>
+    <string name="pickerview_submit">Confirm</string>
+    <string name="pickerview_year">Year</string>
+    <string name="pickerview_month">Month</string>
+    <string name="pickerview_day">Day</string>
+    <string name="pickerview_hours">Hour</string>
+    <string name="pickerview_minutes">Min</string>
+    <string name="pickerview_seconds">Second</string>
+
+    <string name="Turn_position">Turn_position</string>
+    <string name="click_skip">click_skip</string>
+    <string name="choose_guran">choose_guran</string>
+    <string name="confirm_language">confirm_language</string>
+    <string name="click_login">login</string>
+    <string name="login_sucs">login successfully</string>
+
+    <!--字体-->
+    <string-array name="sp_font">
+        <item>Hafs.otf</item>
+        <item>Al Qalam Quran Majeed.ttf</item>
+    </string-array>
+
+</resources>

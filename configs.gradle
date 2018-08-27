@@ -2,11 +2,8 @@ ext {
     android = [
             compileSdkVersion: 26,
             buildToolsVersion: "26.1.0",
-            applicationId    : "com.prayer.time.muslim",
             minSdkVersion    : 17,
             targetSdkVersion : 26,
-            versionCode      : 2,
-            versionName      : "1.0.1"
     ]
 
     dependencies = [
@@ -21,7 +18,7 @@ ext {
             "NineOldAndroids"       : "com.nineoldandroids:library:latest.integration",
             /* 视频播放*/
             "squareup"              : "com.squareup:otto:latest.integration",
-            "fastjson"              : "com.alibaba:fastjson:latest.integration",
+            "fastjson"              : "com.alibaba:fastjson:1.2.47",
             /*友盟统计*/
             "collectionsUser"       : "com.umeng.analytics:analytics:latest.integration",
             /*模糊渐变清晰的imageview*/
@@ -34,8 +31,8 @@ ext {
             "convenientbanner"      : "com.bigkoo:convenientbanner:latest.integration",
             /*rx-android-java内存管理*/
             "rxjava"                : 'io.reactivex:rxjava:latest.integration',
-            "rxlifecycle"           : 'com.trello:rxlifecycle:latest.integration',
-            "rxlifecycle_components": 'com.trello:rxlifecycle-components:latest.integration',
+            "rxlifecycle"           : 'com.trello:rxlifecycle:1.0',
+            "rxlifecycle_components": 'com.trello:rxlifecycle-components:1.0',
             "Jackson"               : 'com.squareup.retrofit2:converter-gson:2.0.2',
             /*butterknife*/
             "butterknife"           : 'com.jakewharton:butterknife:8.5.1',
@@ -86,11 +83,17 @@ ext {
             "facebook-ays"          : 'com.facebook.android:facebook-android-sdk:4.31.0',
             "multidex"              : 'com.android.support:multidex:+',
             /*google map*/
-            "google-maps"           : 'com.google.android.gms:play-services-maps:15.0.0',
-            "google-service"        : 'com.google.android.gms:play-services:+',
+            "google-maps"           : 'com.google.android.gms:play-services-maps:11.4.2',
+            "google-service"        : 'com.google.android.gms:play-services:11.4.2',
             "kotlin"                : 'org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.2.41',
             "debugleakcanary"       : 'com.squareup.leakcanary:leakcanary-android:1.5.4',
             "releaseleakcanary"     : 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4',
+            "firebase-core"         : 'com.google.firebase:firebase-core:11.4.2',
+            "firebase-crashlytics"  : 'com.crashlytics.sdk.android:crashlytics:2.9.1',
+            /*firebase 通知*/
+            "firebase-messaging"    : 'com.google.firebase:firebase-messaging:11.4.2',
+            /*鲁班图片压缩*/
+            "luban-compression"     : 'top.zibin:Luban:1.1.7'
     ]
 
 }

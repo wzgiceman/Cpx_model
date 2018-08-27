@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+    <string name="service_error">The network server runs down</string>
+    <string name="json_error">Data parsing error</string>
+    <string name="url_error">Unable to parse zone</string>
+    <string name="not_activity">The class cannot be found</string>
+
+    <string name="Loading">Loading.....</string>
+    <string name="exit_dialog_Cancel">Cancel</string>
+    <string name="tips_dialog_Drop">Abandon</string>
+    <string name="input_error">The input is incomplete</string>
+    <string name="please_turn_on_camera_permissions">Please enable camera permissions in Settings</string>
+    <string name="Camera">Camera</string>
+    <string name="Album">Album</string>
+    <string name="how_to_get_picture">Choose how to get pictures</string>
+
+    <string-array name="sp_font_name">
+        <item>Othmani</item>
+        <item>Indopak</item>
+    </string-array>
+
+
+    <!--未翻译-->
+    <string name="http_cancel">Network request cancellation</string>
+
+</resources>
