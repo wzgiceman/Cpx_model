@@ -17,6 +17,8 @@ class NoticePostApi constructor(var token: String?) : BaseApi() {
     init {
         isShowProgress = false
         terminal_type = "android"
+        cache=true
+        method="message/message/userTerminal"
         device_id = AbAppUtil.getMacID()
     }
 

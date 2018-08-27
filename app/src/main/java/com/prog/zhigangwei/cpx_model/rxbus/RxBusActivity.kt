@@ -40,7 +40,7 @@ class RxBusActivity : BaseFragmentActivity() {
      */
     @Subscribe(thread = EventThread.MAIN_THREAD)
     fun updateScRecord(event: SendEvent) {
-        tv_name.setText(event.msg)
+        tv_name.text = event.msg
     }
 
     override fun onDestroy() {
