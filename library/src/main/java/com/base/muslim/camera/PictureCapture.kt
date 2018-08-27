@@ -31,6 +31,7 @@ object PictureCapture :OnPicturePathListener ,Serializable{
     fun getPicture(context: Context, listener: OnPicturePathListener, needCrop: Boolean) {
         this.needCrop = needCrop
         listenerItem.listener = listener
+        listenerItem.listener = this
         showDialog(context)
     }
 

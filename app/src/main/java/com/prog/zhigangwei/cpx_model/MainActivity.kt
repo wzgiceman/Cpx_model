@@ -4,6 +4,7 @@ import com.base.muslim.base.activity.BaseFragmentActivity
 import com.prog.zhigangwei.cpx_model.http.HttpActivity
 import com.prog.zhigangwei.cpx_model.image.ImageActivity
 import com.prog.zhigangwei.cpx_model.permission.PermisssionActivity
+import com.prog.zhigangwei.cpx_model.rxbus.RxBusActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 /**
@@ -53,6 +54,7 @@ class MainActivity : BaseFragmentActivity() {
         btn_http.setOnClickListener { jumpActivity(HttpActivity::class.java) }
         btn_permission.setOnClickListener { jumpActivity(PermisssionActivity::class.java) }
         btn_img.setOnClickListener { jumpActivity(ImageActivity::class.java) }
+        btn_RxBus.setOnClickListener { jumpActivity(RxBusActivity::class.java) }
 
     }
 

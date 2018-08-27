@@ -1,6 +1,9 @@
 package com.prog.zhigangwei.cpx_model.image
 
 import com.base.muslim.base.activity.BaseFragmentActivity
+import com.base.muslim.camera.OnPicturePathListener
+import com.base.muslim.camera.PictureCapture
+import com.base.muslim.camera.utils.Photo
 import com.bumptech.glide.Glide
 import com.prog.zhigangwei.cpx_model.R
 import kotlinx.android.synthetic.main.activity_image.*
@@ -14,7 +17,8 @@ import kotlinx.android.synthetic.main.activity_image.*
  *
  *Company :cpx
  */
-class ImageActivity : BaseFragmentActivity() {
+class ImageActivity : BaseFragmentActivity(), OnPicturePathListener {
+
     private lateinit var path: String
 
 
@@ -33,11 +37,15 @@ class ImageActivity : BaseFragmentActivity() {
             Glide.with(this).load(path).asBitmap().into(iv_user)
         }
 
-        btn_post.setOnClickListener {
-            Glide.with(this).load(path).placeholder(R.drawable.shape_bg_place_img).into(iv)
+        btn_local.setOnClickListener {
+            PictureCapture.getPicture(this, this, false)
         }
 
-
     }
+
+    override fun onPhoto(photo: Photo) {
+        Glide.with(this@ImageActivity).load(photo.originalFile.absolutePath).asBitmap().into(iv)
+    }
+
 
 }

@@ -23,7 +23,7 @@
 
     <ImageView
         android:id="@+id/iv"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:scaleType="fitXY"
         android:layout_height="50dp"/>
 
@@ -35,10 +35,10 @@
         android:text="网络加载图片"/>
 
     <Button
-        android:id="@+id/btn_post"
+        android:id="@+id/btn_local"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="post-网络请求"/>
+        android:text="拍照/相册"/>
 
 
 </LinearLayout>

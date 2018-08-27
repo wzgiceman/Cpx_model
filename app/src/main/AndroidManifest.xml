@@ -2,6 +2,7 @@
 <manifest package="com.prog.zhigangwei.cpx_model"
           xmlns:android="http://schemas.android.com/apk/res/android">
 
+
     <application
         android:name=".app.MApp"
         android:allowBackup="true"
@@ -21,6 +22,7 @@
         <activity android:name=".http.HttpActivity"></activity>
         <activity android:name=".permission.PermisssionActivity"></activity>
         <activity android:name=".image.ImageActivity"></activity>
+        <activity android:name=".rxbus.RxBusActivity"></activity>
     </application>
 
 </manifest>
