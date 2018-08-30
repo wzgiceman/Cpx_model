@@ -1,4 +1,4 @@
-package com.prog.zhigangwei.cpx_model.easyRecyclerView
+package com.prog.zhigangwei.cpx_model.easyRecyclerView.adapter
 
 import android.content.Context
 import android.view.ViewGroup
@@ -9,10 +9,11 @@ import com.base.library.easyrecyclerview.adapter.RecyclerArrayAdapter
 import com.base.muslim.base.adapter.BaseHolder
 import com.base.muslim.weak.Weak
 import com.prog.zhigangwei.cpx_model.R
+import com.prog.zhigangwei.cpx_model.easyRecyclerView.RecyclerItemBean
 
 
 /**
- * Describe:壁纸
+ * Describe:adapter的使用
  *
  *
  * Created by zhigang wei
@@ -25,11 +26,13 @@ class RecAdapter(context: Context) : RecyclerArrayAdapter<RecyclerItemBean>(cont
 
 
     override fun OnCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<*> {
+        /*弱引用防止泄露*/
         val adapter by Weak {
             this
         }
         return WaterHolder(parent, adapter!!)
     }
+
 
     /*纪录历史位置信息-方便刷新*/
     private var olderPosition = -1
@@ -53,6 +56,10 @@ class RecAdapter(context: Context) : RecyclerArrayAdapter<RecyclerItemBean>(cont
     }
 
 
+    /**
+     * holder里面只能做和显示相关的处理
+     * 操作的逻辑必须踢出到外层处理
+     */
     internal class WaterHolder(parent: ViewGroup, val adapter: RecAdapter) : BaseHolder<RecyclerItemBean>(parent, R.layout
             .holder_recycler) {
 

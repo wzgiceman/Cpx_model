@@ -3,6 +3,9 @@ package com.prog.zhigangwei.cpx_model.easyRecyclerView
 import android.support.v7.widget.LinearLayoutManager
 import com.base.muslim.base.activity.BaseFragmentActivity
 import com.prog.zhigangwei.cpx_model.R
+import com.prog.zhigangwei.cpx_model.easyRecyclerView.adapter.RecAdapter
+import com.prog.zhigangwei.cpx_model.easyRecyclerView.adapter.footer.RcFooter
+import com.prog.zhigangwei.cpx_model.easyRecyclerView.adapter.head.RcHead
 import kotlinx.android.synthetic.main.activity_recycler.*
 
 
@@ -17,7 +20,7 @@ import kotlinx.android.synthetic.main.activity_recycler.*
  *
  *Company :cpx
  */
-class RecyclerActivity :BaseFragmentActivity(){
+class RecyclerActivity : BaseFragmentActivity() {
     private val adapter by lazy { RecAdapter(this) }
 
 
@@ -27,16 +30,39 @@ class RecyclerActivity :BaseFragmentActivity(){
     }
 
     override fun initResource() {
-        for(item in 0..3){
-            adapter.add(RecyclerItemBean("位置$item",item,false))
+        for (item in 0..3) {
+            adapter.add(RecyclerItemBean("位置$item", item, false))
         }
     }
 
     override fun initWidget() {
-        erc.setLayoutManager(LinearLayoutManager(this))
-        erc.adapter=adapter
+        initComplexWidget()
+        initHead()
+        initFooter()
     }
 
 
+    override fun initComplexWidget() {
+        super.initComplexWidget()
+        erc.setLayoutManager(LinearLayoutManager(this))
+        erc.adapter = adapter
+        btn_head.setOnClickListener { initHead() }
+        btn_footer.setOnClickListener { initFooter() }
+    }
+
+    /**
+     * 添加头
+     */
+    private fun initHead() {
+        adapter.addHeader(RcHead(RecyclerItemBean("header", 0, false)))
+    }
+
+    /**
+     * 添加尾
+     */
+    private fun initFooter() {
+        adapter.addFooter(RcFooter(RecyclerItemBean("footer", 0, false)))
+
+    }
 
 }
