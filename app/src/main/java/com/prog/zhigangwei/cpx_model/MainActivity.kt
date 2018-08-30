@@ -1,6 +1,7 @@
 package com.prog.zhigangwei.cpx_model
 
 import com.base.muslim.base.activity.BaseFragmentActivity
+import com.prog.zhigangwei.cpx_model.easyRecyclerView.RecyclerActivity
 import com.prog.zhigangwei.cpx_model.http.HttpActivity
 import com.prog.zhigangwei.cpx_model.image.ImageActivity
 import com.prog.zhigangwei.cpx_model.permission.PermisssionActivity
@@ -55,7 +56,7 @@ class MainActivity : BaseFragmentActivity() {
         btn_permission.setOnClickListener { jumpActivity(PermisssionActivity::class.java) }
         btn_img.setOnClickListener { jumpActivity(ImageActivity::class.java) }
         btn_RxBus.setOnClickListener { jumpActivity(RxBusActivity::class.java) }
-
+        btn_EasyRecyclerView.setOnClickListener { jumpActivity(RecyclerActivity::class.java) }
     }
 
     override fun initComplexWidget() {

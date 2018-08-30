@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
+    android:orientation="vertical"
+    >
+
+    <Button
+        android:id="@+id/btn_head"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="add-head"/>
+
+    <Button
+        android:id="@+id/btn_footer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="add-footer"/>
+
+
+    <com.base.library.easyrecyclerview.EasyRecyclerView
+        android:id="@+id/erc"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+    </com.base.library.easyrecyclerview.EasyRecyclerView>
+
+
+
+</LinearLayout>
