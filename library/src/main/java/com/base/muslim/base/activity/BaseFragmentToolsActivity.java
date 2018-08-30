@@ -24,12 +24,15 @@ import com.base.library.utils.FirebaseUtils;
  * Company :Sichuan Ziyan
  */
 public class BaseFragmentToolsActivity extends BaseFragmentManagerActivity {
-    protected ProgressDialog loadingDailog;
+    /**
+     * 上个界面传入的数据
+     */
+    protected Bundle bundle;
+    private ProgressDialog loadingDailog;
 
 
     /**
      * 显示统一的加载框
-     *
      * @param cancel
      * @param title
      */
@@ -108,16 +111,11 @@ public class BaseFragmentToolsActivity extends BaseFragmentManagerActivity {
         finish();
     }
 
-
     /**
      * 统计埋点
      *
      * @param key
      */
-    public void collectionFireabse(@NonNull int key) {
-        FirebaseUtils.getInstance().report(getString(key));
-    }
-
     public void collectionFireabse(@NonNull String key) {
         FirebaseUtils.getInstance().report(key);
     }
@@ -128,8 +126,8 @@ public class BaseFragmentToolsActivity extends BaseFragmentManagerActivity {
      * @param key
      * @param bundle
      */
-    public void collectionFireabse(@NonNull int key, Bundle bundle) {
-        FirebaseUtils.getInstance().report(getString(key), bundle);
+    public void collectionFireabse(@NonNull String key, Bundle bundle) {
+        FirebaseUtils.getInstance().report(key, bundle);
     }
 
 
@@ -173,12 +171,44 @@ public class BaseFragmentToolsActivity extends BaseFragmentManagerActivity {
         return false;
     }
 
-
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        if (null != loadingDailog) {
+    protected void onStop() {
+        super.onStop();
+        if(isFinishing()&&null != loadingDailog){
             loadingDailog.dismiss();
         }
     }
+
+
+    /*start------------------------bundle数据的恢复和保存-------------------------------*/
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        resotreSaveState(savedInstanceState);
+    }
+
+
+    /**
+     * 复原数据
+     *
+     * @param savedInstanceState
+     */
+    protected void resotreSaveState(Bundle savedInstanceState) {
+        bundle = getIntent().getExtras();
+        if (bundle == null && savedInstanceState != null && savedInstanceState.containsKey("bundle")) {
+            bundle = savedInstanceState.getBundle("bundle");
+        }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        if (null == bundle) return;
+        outState.putBundle("bundle", bundle);
+    }
+
+    /*end------------------------bundle数据的恢复和保存-------------------------------*/
+
+
 }

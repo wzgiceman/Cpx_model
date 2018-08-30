@@ -43,9 +43,11 @@ class RxBusActivity : BaseFragmentActivity() {
         tv_name.text = event.msg
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        RxBus.get().unregister(this)
+    override fun onStop() {
+        super.onStop()
+        if(isFinishing){
+            RxBus.get().unregister(this)
+        }
     }
 
 }
