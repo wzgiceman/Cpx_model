@@ -62,7 +62,6 @@ class RecyclerActivity : BaseFragmentActivity() {
      */
     private fun initFooter() {
         adapter.addFooter(RcFooter(RecyclerItemBean("footer", 0, false)))
-
     }
 
 }
