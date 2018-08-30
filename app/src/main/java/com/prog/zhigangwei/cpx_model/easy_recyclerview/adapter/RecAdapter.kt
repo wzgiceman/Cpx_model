@@ -1,4 +1,4 @@
-package com.prog.zhigangwei.cpx_model.easyRecyclerView.adapter
+package com.prog.zhigangwei.cpx_model.easy_recyclerview.adapter
 
 import android.content.Context
 import android.view.ViewGroup
@@ -9,7 +9,7 @@ import com.base.library.easyrecyclerview.adapter.RecyclerArrayAdapter
 import com.base.muslim.base.adapter.BaseHolder
 import com.base.muslim.weak.Weak
 import com.prog.zhigangwei.cpx_model.R
-import com.prog.zhigangwei.cpx_model.easyRecyclerView.RecyclerItemBean
+import com.prog.zhigangwei.cpx_model.easy_recyclerview.RecyclerItemBean
 
 
 /**

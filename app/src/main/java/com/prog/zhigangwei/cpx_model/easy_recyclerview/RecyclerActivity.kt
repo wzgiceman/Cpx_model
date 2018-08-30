@@ -1,11 +1,11 @@
-package com.prog.zhigangwei.cpx_model.easyRecyclerView
+package com.prog.zhigangwei.cpx_model.easy_recyclerview
 
 import android.support.v7.widget.LinearLayoutManager
 import com.base.muslim.base.activity.BaseFragmentActivity
 import com.prog.zhigangwei.cpx_model.R
-import com.prog.zhigangwei.cpx_model.easyRecyclerView.adapter.RecAdapter
-import com.prog.zhigangwei.cpx_model.easyRecyclerView.adapter.footer.RcFooter
-import com.prog.zhigangwei.cpx_model.easyRecyclerView.adapter.head.RcHead
+import com.prog.zhigangwei.cpx_model.easy_recyclerview.adapter.RecAdapter
+import com.prog.zhigangwei.cpx_model.easy_recyclerview.adapter.footer.RcFooter
+import com.prog.zhigangwei.cpx_model.easy_recyclerview.adapter.head.RcHead
 import kotlinx.android.synthetic.main.activity_recycler.*
 
 

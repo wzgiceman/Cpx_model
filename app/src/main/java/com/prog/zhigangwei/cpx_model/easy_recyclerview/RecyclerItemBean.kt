@@ -1,4 +1,4 @@
-package com.prog.zhigangwei.cpx_model.easyRecyclerView
+package com.prog.zhigangwei.cpx_model.easy_recyclerview
 
 /**
  *
