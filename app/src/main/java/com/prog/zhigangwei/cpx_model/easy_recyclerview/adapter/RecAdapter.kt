@@ -61,7 +61,7 @@ class RecAdapter(context: Context) : RecyclerArrayAdapter<RecyclerItemBean>(cont
      * 操作的逻辑必须踢出到外层处理
      */
     internal class WaterHolder(parent: ViewGroup, val adapter: RecAdapter) : BaseHolder<RecyclerItemBean>(parent, R.layout
-            .holder_recycler) {
+            .recycler_item_holder_recycler) {
 
         var tv: TextView = `$`(R.id.tv_msg)
         var btn: Button = `$`(R.id.btn_test)

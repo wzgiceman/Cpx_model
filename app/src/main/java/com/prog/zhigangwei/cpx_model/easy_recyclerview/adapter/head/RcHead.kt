@@ -22,7 +22,7 @@ class RcHead constructor(val data: RecyclerItemBean) : RecyclerArrayAdapter.Item
 
     override fun onCreateView(parent: ViewGroup): View {
         context = parent.context
-        return LayoutInflater.from(parent.context).inflate(R.layout.rc_head_recycler, parent, false)
+        return LayoutInflater.from(parent.context).inflate(R.layout.recycler_item_head_recycler, parent, false)
     }
 
 

@@ -24,7 +24,7 @@ class RcFooter constructor(val data: RecyclerItemBean) : RecyclerArrayAdapter.It
 
     override fun onCreateView(parent: ViewGroup): View {
         context = parent.context
-        return LayoutInflater.from(parent.context).inflate(R.layout.rc_footer_recycler, parent, false)
+        return LayoutInflater.from(parent.context).inflate(R.layout.recycler_item_footer_recycler, parent, false)
     }
 
 
