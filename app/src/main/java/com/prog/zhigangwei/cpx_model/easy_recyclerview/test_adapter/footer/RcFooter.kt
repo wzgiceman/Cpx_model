@@ -1,4 +1,4 @@
-package com.prog.zhigangwei.cpx_model.easy_recyclerview.adapter.footer
+package com.prog.zhigangwei.cpx_model.easy_recyclerview.test_adapter.footer
 
 import android.content.Context
 import android.view.LayoutInflater

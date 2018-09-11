@@ -1,4 +1,4 @@
-package com.prog.zhigangwei.cpx_model.easy_recyclerview.adapter.head
+package com.prog.zhigangwei.cpx_model.easy_recyclerview.test_adapter.head
 
 import android.content.Context
 import android.view.LayoutInflater
