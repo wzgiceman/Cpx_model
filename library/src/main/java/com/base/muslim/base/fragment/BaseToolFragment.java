@@ -22,22 +22,20 @@ public class BaseToolFragment extends BaseFragmentManagerFragment {
      */
     private ProgressDialog loadingDailog;
 
-
     /**
-     * 更新ui
-     * 手动更新避免卡顿
-     * 当前Fragment显示才update
-     * 非常重要
+     * 显示统一的加载框
+     *
+     * @param cancel 是否可以取消
+     * @param title 显示的标题
      */
-    public void updateUi(Object o) {
-    }
-
     protected void showLoading(boolean cancel, String title) {
+        String message = AbStrUtil.isEmpty(title) ? getString(R.string.Loading) : title;
         if (loadingDailog == null) {
-            loadingDailog = ProgressDialog.show(getRxActivity(), null, AbStrUtil.isEmpty(title) ? getString(R.string.Loading) :
-                    title);
+            loadingDailog = ProgressDialog.show(getRxActivity(), null, message);
             loadingDailog.setCancelable(cancel);
         } else if (loadingDailog != null && !loadingDailog.isShowing()) {
+            loadingDailog.setMessage(message);
+            loadingDailog.setCancelable(cancel);
             loadingDailog.show();
         }
     }
@@ -96,7 +94,11 @@ public class BaseToolFragment extends BaseFragmentManagerFragment {
      * @param key
      */
     public void collectionFireabse(@NonNull int key) {
-        FirebaseUtils.getInstance().report(getString(key));
+        collectionFireabse(getString(key));
+    }
+
+    public void collectionFireabse(@NonNull String key) {
+        FirebaseUtils.getInstance().report(key);
     }
 
     /**
@@ -106,7 +108,11 @@ public class BaseToolFragment extends BaseFragmentManagerFragment {
      * @param bundle
      */
     public void collectionFireabse(@NonNull int key, Bundle bundle) {
-        FirebaseUtils.getInstance().report(getString(key), bundle);
+        collectionFireabse(getString(key), bundle);
+    }
+
+    public void collectionFireabse(@NonNull String key, Bundle bundle) {
+        FirebaseUtils.getInstance().report(key, bundle);
     }
 
     protected RxAppCompatActivity getRxActivity() {

@@ -194,6 +194,8 @@ object PictureCompression {
                     for (file in it)
                         listener.onPictureFile(file)
                 }
+
+
     }
 
     /**

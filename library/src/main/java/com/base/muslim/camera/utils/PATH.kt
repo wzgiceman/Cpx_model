@@ -2,8 +2,7 @@ package com.base.muslim.camera.utils
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.text.TextUtils
-import java.io.File
+import java.lang.ref.WeakReference
 
 @SuppressLint("StaticFieldLeak")
 /**
@@ -13,12 +12,12 @@ import java.io.File
  */
 object PATH {
 
+    private lateinit var weakReference: WeakReference<Context>
+
     fun initialize(context: Context) {
-        mContext = context
+        weakReference = WeakReference(context)
         FILE.createDir(imageSaveDir)
     }
-
-    private lateinit var mContext: Context
 
     /**
      * 图片另存为SDCard/Android/data/目录
@@ -26,6 +25,6 @@ object PATH {
      * @return
      */
     val imageSaveDir: String
-        get() = mContext.getExternalFilesDir(null).toString() + "/photo/"
+        get() = weakReference.get()!!.getExternalFilesDir(null).toString() + "/photo/"
 
 }

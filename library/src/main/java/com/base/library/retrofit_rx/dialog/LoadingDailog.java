@@ -17,7 +17,7 @@ public class LoadingDailog extends BaseDialog {
 
     public LoadingDailog(Context context) {
         super(context, R.style.progress_dialog, false);
-        init(R.layout.load_more_view);
+        init(R.layout.view_load_more);
     }
 
     @Override

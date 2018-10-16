@@ -27,7 +27,7 @@ object PermissionHelper {
     }
 
     fun requestPermissions(activity: Activity, requestCode: Int, permissions: List<String>) {
-        ActivityCompat.requestPermissions(activity,  permissions.toTypedArray(), requestCode)
+        ActivityCompat.requestPermissions(activity, permissions.toTypedArray(), requestCode)
     }
 
     fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray): Boolean {

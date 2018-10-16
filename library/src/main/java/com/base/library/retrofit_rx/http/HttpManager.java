@@ -3,15 +3,14 @@ package com.base.library.retrofit_rx.http;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
+import com.alibaba.fastjson.support.retrofit.Retrofit2ConverterFactory;
 import com.base.library.retrofit_rx.Api.BaseApi;
 import com.base.library.retrofit_rx.RxRetrofitApp;
 import com.base.library.retrofit_rx.exception.RetryWhenNetworkException;
-import com.base.library.retrofit_rx.http.converter_gson.FastJsonConverterFactory;
 import com.base.library.retrofit_rx.http.func.ExceptionFunc;
 import com.base.library.retrofit_rx.http.func.ResulteFunc;
 import com.base.library.retrofit_rx.http.head.HeadInterceptor;
 import com.base.library.retrofit_rx.listener.HttpOnNextListener;
-import com.base.library.retrofit_rx.listener.HttpOnNextSubListener;
 import com.base.library.retrofit_rx.subscribers.ProgressSubscriber;
 import com.trello.rxlifecycle.android.ActivityEvent;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
@@ -34,21 +33,10 @@ import rx.schedulers.Schedulers;
 public class HttpManager {
     /*软引用對象*/
     private SoftReference<HttpOnNextListener> onNextListener;
-    private SoftReference<HttpOnNextSubListener> onNextSubListener;
     private SoftReference<RxAppCompatActivity> appCompatActivity;
 
-    public HttpManager(@NonNull HttpOnNextListener onNextListener,@NonNull RxAppCompatActivity appCompatActivity) {
+    public HttpManager(@NonNull HttpOnNextListener onNextListener, @NonNull RxAppCompatActivity appCompatActivity) {
         this.onNextListener = new SoftReference(onNextListener);
-        this.appCompatActivity = new SoftReference(appCompatActivity);
-    }
-
-    public HttpManager(@NonNull HttpOnNextSubListener onNextSubListener,@NonNull RxAppCompatActivity appCompatActivity) {
-        this.onNextSubListener = new SoftReference(onNextSubListener);
-        this.appCompatActivity = new SoftReference(appCompatActivity);
-    }
-
-
-    public HttpManager(RxAppCompatActivity appCompatActivity) {
         this.appCompatActivity = new SoftReference(appCompatActivity);
     }
 
@@ -85,7 +73,7 @@ public class HttpManager {
         /*创建retrofit对象*/
         final Retrofit retrofit = new Retrofit.Builder()
                 .client(builder.build())
-                .addConverterFactory(FastJsonConverterFactory.create())
+                .addConverterFactory(new Retrofit2ConverterFactory())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .baseUrl(basePar.getBaseUrl())
                 .build();
@@ -106,6 +94,7 @@ public class HttpManager {
                 /*tokean过期统一处理*/
 //                .flatMap(new TokeanFunc(basePar, retrofit))
                 /*返回数据统一判断*/
+                .onErrorResumeNext(new ExceptionFunc())
                 .map(new ResulteFunc(basePar))
                 /*http请求线程*/
                 .subscribeOn(Schedulers.io())
@@ -113,28 +102,13 @@ public class HttpManager {
                 /*回调线程*/
                 .observeOn(AndroidSchedulers.mainThread());
 
-        /*生命周期管理*/
-        if (appCompatActivity != null) {
-            observable.compose(appCompatActivity.get().bindUntilEvent(ActivityEvent.DESTROY));
-        }
-
-        /*是否不需要处理sub对象*/
-        if (basePar.isNoSub()) {
-            return observable;
-        } else {
-            /*异常处理*/
-            observable.onErrorResumeNext(new ExceptionFunc());
-        }
-
-        /*ober回调，链接式返回*/
-        if (onNextSubListener != null && null != onNextSubListener.get()) {
-            onNextSubListener.get().onNext(observable, basePar.getMethod());
-        }
 
         /*数据String回调*/
-        if (onNextListener != null && null != onNextListener.get()&&null!=appCompatActivity) {
+        if (onNextListener != null && null != onNextListener.get() && null != appCompatActivity && null != appCompatActivity
+                .get()) {
             ProgressSubscriber subscriber = new ProgressSubscriber(basePar, onNextListener, appCompatActivity);
-            observable.subscribe(subscriber);
+            observable.compose(appCompatActivity.get().bindUntilEvent(ActivityEvent.DESTROY)).observeOn(AndroidSchedulers.mainThread()).subscribe
+                    (subscriber);
         }
 
         return observable;

@@ -172,17 +172,20 @@ abstract public class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
 
 
     public void stopMore() {
-        if (mEventDelegate == null) throw new NullPointerException("You should invoking setLoadMore() first");
+        if (mEventDelegate == null)
+            throw new NullPointerException("You should invoking setLoadMore() first");
         mEventDelegate.stopLoadMore();
     }
 
     public void pauseMore() {
-        if (mEventDelegate == null) throw new NullPointerException("You should invoking setLoadMore() first");
+        if (mEventDelegate == null)
+            throw new NullPointerException("You should invoking setLoadMore() first");
         mEventDelegate.pauseLoadMore();
     }
 
     public void resumeMore() {
-        if (mEventDelegate == null) throw new NullPointerException("You should invoking setLoadMore() first");
+        if (mEventDelegate == null)
+            throw new NullPointerException("You should invoking setLoadMore() first");
         mEventDelegate.resumeLoadMore();
     }
 
@@ -356,14 +359,16 @@ abstract public class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
      * @param collection The Collection to add at the end of the array.
      */
     public void addAll(Collection<? extends T> collection) {
-        if (mEventDelegate != null) mEventDelegate.addData(collection == null ? 0 : collection.size());
+        if (mEventDelegate != null)
+            mEventDelegate.addData(collection == null ? 0 : collection.size());
         if (collection != null && collection.size() != 0) {
             synchronized (mLock) {
                 mObjects.addAll(collection);
             }
         }
         int dataCount = collection == null ? 0 : collection.size();
-        if (mNotifyOnChange) notifyItemRangeInserted(headers.size() + getCount() - dataCount, dataCount);
+        if (mNotifyOnChange)
+            notifyItemRangeInserted(headers.size() + getCount() - dataCount, dataCount);
         log("addAll notifyItemRangeInserted " + (headers.size() + getCount() - dataCount) + "," + (dataCount));
 
     }
@@ -381,7 +386,8 @@ abstract public class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
             }
         }
         int dataCount = items == null ? 0 : items.length;
-        if (mNotifyOnChange) notifyItemRangeInserted(headers.size() + getCount() - dataCount, dataCount);
+        if (mNotifyOnChange)
+            notifyItemRangeInserted(headers.size() + getCount() - dataCount, dataCount);
         log("addAll notifyItemRangeInserted " + ((headers.size() + getCount() - dataCount) + "," + (dataCount)));
     }
 
@@ -571,8 +577,7 @@ abstract public class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
                 if (view.getLayoutParams() != null)
                     layoutParams = new StaggeredGridLayoutManager.LayoutParams(view.getLayoutParams());
                 else
-                    layoutParams = new StaggeredGridLayoutManager.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup
-                            .LayoutParams.WRAP_CONTENT);
+                    layoutParams = new StaggeredGridLayoutManager.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                 layoutParams.setFullSpan(true);
                 view.setLayoutParams(layoutParams);
                 return view;
@@ -585,8 +590,7 @@ abstract public class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
                 if (view.getLayoutParams() != null)
                     layoutParams = new StaggeredGridLayoutManager.LayoutParams(view.getLayoutParams());
                 else
-                    layoutParams = new StaggeredGridLayoutManager.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup
-                            .LayoutParams.WRAP_CONTENT);
+                    layoutParams = new StaggeredGridLayoutManager.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                 layoutParams.setFullSpan(true);
                 view.setLayoutParams(layoutParams);
                 return view;
@@ -682,6 +686,8 @@ abstract public class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
 
 
     public List<T> getAllData() {
+        if (mObjects != null)
+            return mObjects;
         return new ArrayList<>(mObjects);
     }
 
@@ -762,5 +768,4 @@ abstract public class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
             loadingDailog.dismiss();
         }
     }
-
 }

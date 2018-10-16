@@ -26,7 +26,7 @@ class TipsDialogAdapter(private val data: List<String>, private val mContext: Co
         var view = convertView
         var holder: TipsViewHolder
         if (view == null) {
-            view = View.inflate(mContext, R.layout.exit_dialog_hint_content_item, null)
+            view = View.inflate(mContext, R.layout.list_item_tips, null)
             holder = TipsViewHolder(view)
             view.tag = holder
         } else {

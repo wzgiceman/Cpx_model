@@ -23,7 +23,7 @@
             android:layout_margin="10dp"
             android:padding="4dp"
             android:layout_centerHorizontal="true"
-            android:background="@drawable/bg_banner_point"
+            android:background="@drawable/selector_banner_point_bg"
             android:orientation="horizontal" >
 
         </LinearLayout>

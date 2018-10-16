@@ -96,7 +96,7 @@ public class EasyRecyclerView extends FrameLayout {
             return;
         }
         //生成主View
-        View v = LayoutInflater.from(getContext()).inflate(R.layout.layout_progress_recyclerview, this);
+        View v = LayoutInflater.from(getContext()).inflate(R.layout.view_easy_recyclerview, this);
         mPtrLayout = (SwipeRefreshLayout) v.findViewById(R.id.ptr_layout);
         mPtrLayout.setEnabled(false);
         mPtrLayout.setColorSchemeColors(getResources().getColor(R.color.colorAccent));

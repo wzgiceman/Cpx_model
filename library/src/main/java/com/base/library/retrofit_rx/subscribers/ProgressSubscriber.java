@@ -14,6 +14,8 @@ import com.base.library.retrofit_rx.listener.HttpOnNextListener;
 import com.base.library.retrofit_rx.utils.AppUtil;
 import com.base.library.retrofit_rx.utils.CookieDbUtil;
 import com.base.library.utils.AbLogUtil;
+import com.base.library.utils.AbStrUtil;
+import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 
 import java.lang.ref.SoftReference;
 
@@ -31,7 +33,7 @@ public class ProgressSubscriber<T> extends Subscriber<T> {
     //    回调接口
     private SoftReference<HttpOnNextListener> mSubscriberOnNextListener;
     //    软引用反正内存泄露
-    private SoftReference<Context> mActivity;
+    private SoftReference<RxAppCompatActivity> mActivity;
     //    加载框可自己定义
     private ProgressDialog pd;
     /*请求数据*/
@@ -43,8 +45,8 @@ public class ProgressSubscriber<T> extends Subscriber<T> {
      *
      * @param api
      */
-    public ProgressSubscriber(BaseApi api, SoftReference<HttpOnNextListener> listenerSoftReference, SoftReference<Context>
-            mActivity) {
+    public ProgressSubscriber(BaseApi api, SoftReference<HttpOnNextListener> listenerSoftReference,
+                              SoftReference<RxAppCompatActivity> mActivity) {
         this.api = api;
         this.mSubscriberOnNextListener = listenerSoftReference;
         this.mActivity = mActivity;
@@ -57,19 +59,19 @@ public class ProgressSubscriber<T> extends Subscriber<T> {
      */
     @Override
     public void onStart() {
-        /*缓存并且有网*/
-        if (api.isCache() && AppUtil.isNetworkAvailable(RxRetrofitApp.getApplication())) {
+        if (api.isCache()) {
             /*获取缓存数据*/
+            int duration = AppUtil.isNetworkAvailable(RxRetrofitApp.getApplication()) ? api.getCookieNetWorkTime() : api
+                    .getCookieNoNetWorkTime();
             CookieResulte cookieResulte = CookieDbUtil.getInstance().queryCookieBy(api.getCacheUrl());
             if (cookieResulte != null && mSubscriberOnNextListener.get() != null && (System.currentTimeMillis() - cookieResulte
-                    .getTime()) / 1000 < api.getCookieNetWorkTime()) {
+                    .getTime()) / 1000 < duration) {
                 mSubscriberOnNextListener.get().onNext(cookieResulte.getResulte(), api.getMethod());
                 onCompleted();
                 unsubscribe();
                 return;
             }
         }
-
         if (api.isShowProgress()) {
             initProgressDialog(api.isCancel());
         }
@@ -120,6 +122,7 @@ public class ProgressSubscriber<T> extends Subscriber<T> {
      */
     @Override
     public void onError(Throwable e) {
+        if (null == mActivity || null == mActivity.get() || mActivity.get().isFinishing()) return;
         /*需要緩存并且本地有缓存才返回*/
         if (api.isCache()) {
             getCache(e);
@@ -134,14 +137,20 @@ public class ProgressSubscriber<T> extends Subscriber<T> {
      */
     private void getCache(Throwable te) {
         try {
-            /*获取缓存数据*/
+            /*获取db缓存数据*/
             CookieResulte cookieResulte = CookieDbUtil.getInstance().queryCookieBy(api.getCacheUrl());
             if (cookieResulte == null) {
-                errorDo(te);
-                return;
-            }
-            if (mSubscriberOnNextListener.get() != null) {
-                mSubscriberOnNextListener.get().onNext(cookieResulte.getResulte(), api.getMethod());
+                /*获取gson文件缓存数据*/
+                String resulte = AbStrUtil.getAssetsJsonBy(RxRetrofitApp.getApplication(), "gson/" + api.getMethod() + ".json");
+                if (!AbStrUtil.isEmpty(resulte) && mSubscriberOnNextListener.get() != null) {
+                    mSubscriberOnNextListener.get().onNext(resulte, api.getMethod());
+                } else {
+                    errorDo(te);
+                }
+            } else {
+                if (mSubscriberOnNextListener.get() != null) {
+                    mSubscriberOnNextListener.get().onNext(cookieResulte.getResulte(), api.getMethod());
+                }
             }
         } catch (Exception e) {
             errorDo(te == null ? e : te);
@@ -155,17 +164,16 @@ public class ProgressSubscriber<T> extends Subscriber<T> {
      * @param e
      */
     private void errorDo(Throwable e) {
-        Context context = mActivity.get();
-        if (context == null) return;
         if (e instanceof ApiException) {
             onReturnError((ApiException) e);
         } else if (e instanceof HttpException) {
             HttpException exception = (HttpException) e;
             onReturnError(new ApiException(exception, exception.code(), exception.getMessage()));
         } else {
-            onReturnError(new ApiException(e, HttpTimeException.UNKNOWN_ERROR, e.getMessage()));
+            onReturnError(new ApiException(e, HttpTimeException.UNKNOWN_ERROR, RxRetrofitApp.getApplication().getString(R
+                    .string.service_error)));
         }
-        AbLogUtil.e("RxRetrofit", "--->" + e.getMessage());
+        AbLogUtil.e("RxRetrofit", "error--->" + e.getMessage());
     }
 
 
@@ -189,10 +197,10 @@ public class ProgressSubscriber<T> extends Subscriber<T> {
      */
     @Override
     public void onNext(T t) {
-        if (mSubscriberOnNextListener.get() != null) {
+        if (null != mSubscriberOnNextListener && null != mSubscriberOnNextListener.get() && null != mActivity && null !=
+                mActivity.get() && !mActivity.get().isFinishing()) {
             mSubscriberOnNextListener.get().onNext((String) t, api.getMethod());
         }
-
         /*缓存处理*/
         CookieResulte resulte = CookieDbUtil.getInstance().queryCookieBy(api.getCacheUrl());
         long time = System.currentTimeMillis();

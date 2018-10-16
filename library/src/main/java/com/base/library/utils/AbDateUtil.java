@@ -53,6 +53,8 @@ public class AbDateUtil {
      * 时间日期格式化到年月日时分.
      */
     public static final String dateFormatYMDHM = "yyyy-MM-dd HH:mm";
+    public static final String dateFormatMDHM = "MM/dd HH:mm";
+    public static final String DATE_FORMAT_DMHM = "dd/MM HH:mm";
 
     /**
      * 时间日期格式化到月日.

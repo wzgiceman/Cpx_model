@@ -16,7 +16,7 @@ public interface HttpOnNextListener {
      * @param resulte
      * @param method
      */
-    void onNext(@NonNull String resulte,@NonNull String method);
+    void onNext(@NonNull String resulte, @NonNull String method);
 
     /**
      * 失败
@@ -25,5 +25,5 @@ public interface HttpOnNextListener {
      *
      * @param e
      */
-    void onError(@NonNull ApiException e,@NonNull String method);
+    void onError(@NonNull ApiException e, @NonNull String method);
 }

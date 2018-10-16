@@ -1,0 +1,100 @@
+
+{
+  "mp3_lang": [
+    {
+      "lang_type": 1,
+      "lang_code": "AL-GHAMDI",
+      "icon": "https://cdn.countryflags.com/thumbs/saudi-arabia/flag-square-250.png",
+      "display_name": "Al-Ghamdi",
+      "author": "ghamdi"
+    },
+    {
+      "lang_type": 1,
+      "lang_code": "AL-SAMAD",
+      "icon": "https://cdn.countryflags.com/thumbs/saudi-arabia/flag-square-250.png",
+      "display_name": "Al-Samad",
+      "author": "samad"
+    },
+    {
+      "lang_type": 1,
+      "lang_code": "AL-ALAFASY",
+      "icon": "https://cdn.countryflags.com/thumbs/saudi-arabia/flag-square-250.png",
+      "display_name": "Al-afasy",
+      "author": "alafasy"
+    },
+    {
+      "lang_type": 1,
+      "lang_code": "EN_US",
+      "icon": "https://cdn.countryflags.com/thumbs/united-states-of-america/flag-square-250.png",
+      "display_name": "English",
+      "author": "Sahih"
+    }
+  ],
+  "phonetic_lang": [
+    {
+      "lang_type": 2,
+      "lang_code": "EN_TRANSLITERATION",
+      "icon": "http://icons.iconarchive.com/icons/iconscity/flags/256/usa-icon.png",
+      "display_name": "English",
+      "author": "Transliteration"
+    }
+  ],
+  "translation_lang": [
+    {
+      "lang_type": 3,
+      "lang_code": "EN_SAHEEH",
+      "icon": "http://icons.iconarchive.com/icons/iconscity/flags/256/usa-icon.png",
+      "display_name": "English",
+      "author": "Saheeh International *"
+    },
+    {
+      "lang_type": 3,
+      "lang_code": "TR_GOLPINARLI",
+      "icon": "https://cdn.countryflags.com/thumbs/turkey/flag-square-250.png",
+      "display_name": "Türkçe",
+      "author": "Abdulbaki_Golpinarli"
+    },
+    {
+      "lang_type": 3,
+      "lang_code": "DE_ABURIDA",
+      "icon": "https://cdn.countryflags.com/thumbs/belgium/flag-square-250.png",
+      "display_name": "Deutsch",
+      "author": "Abu_Rida"
+    },
+    {
+      "lang_type": 3,
+      "lang_code": "ID_INDONESIAN",
+      "icon": "https://cdn.countryflags.com/thumbs/singapore/flag-round-250.png",
+      "display_name": "BhsIndonesia",
+      "author": "Religious_Affairs"
+    },
+    {
+      "lang_type": 3,
+      "lang_code": "JA_JAPANESE",
+      "icon": "http://flags.fmcdn.net/data/flags/w1160/jp.png",
+      "display_name": "日本語",
+      "author": "Unknown"
+    },
+    {
+      "lang_type": 3,
+      "lang_code": "KO_KOREAN",
+      "icon": "http://icons.iconarchive.com/icons/custom-icon-design/round-world-flags/512/South-Korea-icon.png",
+      "display_name": "한국어",
+      "author": "Unknown"
+    },
+    {
+      "lang_type": 3,
+      "lang_code": "AR_JALALAYN",
+      "icon": "https://cdn.countryflags.com/thumbs/saudi-arabia/flag-square-250.png",
+      "display_name": "تفسير المیسر",
+      "author": "الجلالين"
+    },
+    {
+      "lang_type": 3,
+      "lang_code": "AR_MUYASSAR",
+      "icon": "https://cdn.countryflags.com/thumbs/saudi-arabia/flag-square-250.png",
+      "display_name": "التفسير الميسر",
+      "author": "إعداد نخبة من العلماء"
+    }
+  ]
+}

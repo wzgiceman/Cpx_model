@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 
 import com.base.library.R;
+import com.trello.rxlifecycle.components.support.RxFragment;
 
 import java.util.List;
 
@@ -17,7 +18,7 @@ import java.util.List;
  * 系统方法
  * Created by WZG on 2016/1/28.
  */
-public class BaseFragmentManagerFragment extends Fragment {
+public class BaseFragmentManagerFragment extends RxFragment {
     protected FragmentManager fragmentManager;
     //    当前显示的位置
     protected int show = 0;

@@ -35,7 +35,7 @@ public abstract class BaseApi {
     /*无网络的情况下本地缓存时间默认30天*/
     private transient int cookieNoNetWorkTime = 24 * 60 * 60 * 30 * 12;
     /* retry次数*/
-    private transient int retryCount = 0;
+    private transient int retryCount = 1;
     /*retry延迟*/
     private transient long retryDelay = 100;
     /*retry叠加延迟*/
@@ -46,8 +46,6 @@ public abstract class BaseApi {
     private transient static String config;
     /*忽略结果判断*/
     private transient boolean ignorJudge;
-    /*忽略自带sub处理*/
-    private transient boolean noSub;
 
     /**
      * 设置参数
@@ -57,13 +55,6 @@ public abstract class BaseApi {
      */
     public abstract Observable getObservable(Retrofit retrofit);
 
-    public boolean isNoSub() {
-        return noSub;
-    }
-
-    public void setNoSub(boolean noSub) {
-        this.noSub = noSub;
-    }
 
     public int getCookieNoNetWorkTime() {
         return cookieNoNetWorkTime;

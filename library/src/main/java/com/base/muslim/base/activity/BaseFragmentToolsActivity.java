@@ -33,14 +33,18 @@ public class BaseFragmentToolsActivity extends BaseFragmentManagerActivity {
 
     /**
      * 显示统一的加载框
-     * @param cancel
-     * @param title
+     *
+     * @param cancel 是否可以取消
+     * @param title 显示的标题
      */
     protected void showLoading(boolean cancel, String title) {
+        String message = AbStrUtil.isEmpty(title) ? getString(R.string.Loading) : title;
         if (loadingDailog == null) {
-            loadingDailog = ProgressDialog.show(this, null, AbStrUtil.isEmpty(title) ? getString(R.string.Loading) : title);
+            loadingDailog = ProgressDialog.show(this, null, message);
             loadingDailog.setCancelable(cancel);
         } else if (loadingDailog != null && !loadingDailog.isShowing()) {
+            loadingDailog.setMessage(message);
+            loadingDailog.setCancelable(cancel);
             loadingDailog.show();
         }
     }
@@ -116,6 +120,10 @@ public class BaseFragmentToolsActivity extends BaseFragmentManagerActivity {
      *
      * @param key
      */
+    public void collectionFireabse(@NonNull int key) {
+        collectionFireabse(getString(key));
+    }
+
     public void collectionFireabse(@NonNull String key) {
         FirebaseUtils.getInstance().report(key);
     }
@@ -126,6 +134,10 @@ public class BaseFragmentToolsActivity extends BaseFragmentManagerActivity {
      * @param key
      * @param bundle
      */
+    public void collectionFireabse(@NonNull int key, Bundle bundle) {
+        collectionFireabse(getString(key), bundle);
+    }
+
     public void collectionFireabse(@NonNull String key, Bundle bundle) {
         FirebaseUtils.getInstance().report(key, bundle);
     }
@@ -174,7 +186,7 @@ public class BaseFragmentToolsActivity extends BaseFragmentManagerActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        if(isFinishing()&&null != loadingDailog){
+        if (isFinishing() && null != loadingDailog) {
             loadingDailog.dismiss();
         }
     }
