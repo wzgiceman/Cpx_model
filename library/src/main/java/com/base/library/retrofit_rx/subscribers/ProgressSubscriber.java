@@ -201,7 +201,8 @@ public class ProgressSubscriber<T> extends Subscriber<T> {
     private void resulteonError(ApiException apiException) {
         try {
             HttpOnNextListener httpOnNextListener = mSubscriberOnNextListener.get();
-            if (httpOnNextListener != null) {
+            if (null != mSubscriberOnNextListener && null != mSubscriberOnNextListener.get() && null != mActivity && null !=
+                    mActivity.get() && !mActivity.get().isFinishing()) {
                 httpOnNextListener.onError(apiException, api.getMethod());
             }
         } catch (Exception e) {

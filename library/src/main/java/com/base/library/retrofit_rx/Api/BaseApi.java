@@ -1,11 +1,10 @@
 package com.base.library.retrofit_rx.Api;
 
-import android.util.Log;
-
-import com.alibaba.fastjson.support.retrofit.Retrofit2ConverterFactory;
 import com.base.library.retrofit_rx.RxRetrofitApp;
+import com.base.library.retrofit_rx.http.converter.RetrofitStringConverterFactory;
 import com.base.library.retrofit_rx.http.head.HeadInterceptor;
 import com.base.library.retrofit_rx.http.head.HttpLoggingInterceptor;
+import com.base.library.utils.AbLogUtil;
 import com.base.library.utils.AbSharedUtil;
 import com.base.library.utils.AbStrUtil;
 
@@ -212,7 +211,7 @@ public abstract class BaseApi {
         /*创建retrofit对象*/
         final Retrofit retrofit = new Retrofit.Builder()
                 .client(builder.build())
-                .addConverterFactory(new Retrofit2ConverterFactory())
+                .addConverterFactory(RetrofitStringConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .baseUrl(getBaseUrl())
                 .build();
@@ -230,7 +229,7 @@ public abstract class BaseApi {
         //日志显示级别
         HttpLoggingInterceptor.Level level = HttpLoggingInterceptor.Level.BODY;
         //新建log拦截器
-        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor(message -> Log.d("RxRetrofit",
+        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor(message -> AbLogUtil.d("RxRetrofit",
                 "Retrofit====Message:" + message));
 
         loggingInterceptor.setLevel(level);

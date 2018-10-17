@@ -4,10 +4,10 @@ package com.base.library.retrofit_rx.downlaod;
 import android.os.Handler;
 import android.os.Looper;
 
-import com.alibaba.fastjson.support.retrofit.Retrofit2ConverterFactory;
 import com.base.library.retrofit_rx.downlaod.DownLoadListener.DownloadInterceptor;
 import com.base.library.retrofit_rx.exception.HttpTimeException;
 import com.base.library.retrofit_rx.exception.RetryWhenNetworkException;
+import com.base.library.retrofit_rx.http.converter.RetrofitStringConverterFactory;
 import com.base.library.retrofit_rx.subscribers.ProgressDownSubscriber;
 import com.base.library.retrofit_rx.utils.DbDwonUtil;
 
@@ -99,7 +99,7 @@ public class HttpDownManager {
 
             Retrofit retrofit = new Retrofit.Builder()
                     .client(builder.build())
-                    .addConverterFactory(new Retrofit2ConverterFactory())
+                    .addConverterFactory(RetrofitStringConverterFactory.create())
                     .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                     .baseUrl(getBasUrl(info.getUrl()))
                     .build();

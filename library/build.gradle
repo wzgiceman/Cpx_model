@@ -70,7 +70,6 @@ dependencies {
     api rootProject.ext.dependencies["rxlifecycle_components"]
     api rootProject.ext.dependencies["rxjava_adpater"]
     api rootProject.ext.dependencies["retrofit"]
-    api rootProject.ext.dependencies["logging-interceptor"]
     api rootProject.ext.dependencies["greenDao"]
     api rootProject.ext.dependencies["fastjson"]
     api rootProject.ext.dependencies["recyclerview"]
