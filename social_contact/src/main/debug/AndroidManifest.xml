@@ -4,7 +4,7 @@
 
     <application
         android:name=".app.SocialApp"
-        android:allowBackup="true"
+        android:allowBackup="false"
         android:icon="@mipmap/social_contact_ic_launcher"
         android:label="@string/social_contact_app_name"
         android:supportsRtl="true"

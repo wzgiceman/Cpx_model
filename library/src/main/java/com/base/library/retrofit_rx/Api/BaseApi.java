@@ -1,10 +1,18 @@
 package com.base.library.retrofit_rx.Api;
 
 import com.base.library.retrofit_rx.RxRetrofitApp;
+import com.base.library.retrofit_rx.http.converter.RetrofitStringConverterFactory;
+import com.base.library.retrofit_rx.http.head.HeadInterceptor;
+import com.base.library.retrofit_rx.http.head.HttpLoggingInterceptor;
+import com.base.library.utils.AbLogUtil;
 import com.base.library.utils.AbSharedUtil;
 import com.base.library.utils.AbStrUtil;
 
+import java.util.concurrent.TimeUnit;
+
+import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import rx.Observable;
 
 /**
@@ -31,11 +39,11 @@ public abstract class BaseApi {
     /*超时时间-默认10秒*/
     private transient int connectionTime = 15;
     /*有网情况下的本地缓存时间默xxx秒*/
-    private transient int cookieNetWorkTime = 60*10;
+    private transient int cookieNetWorkTime = 60 * 10;
     /*无网络的情况下本地缓存时间默认30天*/
     private transient int cookieNoNetWorkTime = 24 * 60 * 60 * 30 * 12;
     /* retry次数*/
-    private transient int retryCount = 0;
+    private transient int retryCount = 1;
     /*retry延迟*/
     private transient long retryDelay = 100;
     /*retry叠加延迟*/
@@ -46,8 +54,9 @@ public abstract class BaseApi {
     private transient static String config;
     /*忽略结果判断*/
     private transient boolean ignorJudge;
-    /*忽略自带sub处理*/
-    private transient boolean noSub;
+    /*retrofit控制器*/
+    protected transient Retrofit retrofit;
+
 
     /**
      * 设置参数
@@ -57,13 +66,6 @@ public abstract class BaseApi {
      */
     public abstract Observable getObservable(Retrofit retrofit);
 
-    public boolean isNoSub() {
-        return noSub;
-    }
-
-    public void setNoSub(boolean noSub) {
-        this.noSub = noSub;
-    }
 
     public int getCookieNoNetWorkTime() {
         return cookieNoNetWorkTime;
@@ -187,5 +189,50 @@ public abstract class BaseApi {
 
     public static void setConfig(String config) {
         BaseApi.config = config;
+    }
+
+
+    /**
+     * 获取Retrofit对象
+     * 目的是为了保证每一个api公用一个Retrofit,和方便多接口嵌套使用
+     *
+     * @return
+     */
+    public Retrofit getReTrofit() {
+        if (null != retrofit) return retrofit;
+        //手动创建一个OkHttpClient并设置超时时间缓存等设置
+        OkHttpClient.Builder builder = new OkHttpClient.Builder();
+        builder.connectTimeout(getConnectionTime(), TimeUnit.SECONDS);
+        if (RxRetrofitApp.isDebug()) {
+            builder.addInterceptor(getHttpLoggingInterceptor());
+        }
+        builder.addInterceptor(new HeadInterceptor(this));
+
+        /*创建retrofit对象*/
+        final Retrofit retrofit = new Retrofit.Builder()
+                .client(builder.build())
+                .addConverterFactory(RetrofitStringConverterFactory.create())
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .baseUrl(getBaseUrl())
+                .build();
+        return retrofit;
+    }
+
+
+    /**
+     * 日志输出
+     * 自行判定是否添加
+     *
+     * @return
+     */
+    private HttpLoggingInterceptor getHttpLoggingInterceptor() {
+        //日志显示级别
+        HttpLoggingInterceptor.Level level = HttpLoggingInterceptor.Level.BODY;
+        //新建log拦截器
+        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor(message -> AbLogUtil.d("RxRetrofit",
+                "Retrofit====Message:" + message));
+
+        loggingInterceptor.setLevel(level);
+        return loggingInterceptor;
     }
 }

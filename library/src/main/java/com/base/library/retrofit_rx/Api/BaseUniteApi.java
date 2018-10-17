@@ -1,10 +1,9 @@
 package com.base.library.retrofit_rx.Api;
 
 
-import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 import com.base.library.retrofit_rx.http.HttpManager;
 import com.base.library.retrofit_rx.listener.HttpOnNextListener;
-import com.base.library.retrofit_rx.listener.HttpOnNextSubListener;
+import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 
 import retrofit2.Retrofit;
 import rx.Observable;
@@ -20,17 +19,9 @@ public class BaseUniteApi extends BaseApi {
         manager = new HttpManager(onNextListener, appCompatActivity);
     }
 
-    public BaseUniteApi(HttpOnNextSubListener onNextSubListener, RxAppCompatActivity appCompatActivity) {
-        manager = new HttpManager(onNextSubListener, appCompatActivity);
-    }
 
-    protected Retrofit getRetrofit() {
-        return manager.getReTrofit(this);
-    }
-
-
-    protected void doHttpDeal(Retrofit retrofit) {
-        manager.httpDeal(retrofit, this);
+    protected void doHttpDeal() {
+        manager.httpDeal(this);
     }
 
     @Override

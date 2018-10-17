@@ -20,6 +20,7 @@ object ShareSparse {
      */
     const val USER_CLS: String = "1"
 
+
     /**
      * 存放数据的对象
      */
@@ -27,22 +28,44 @@ object ShareSparse {
 
     /**
      * 根据上面定义的常量获取对象
+     * @param key 关键key
      */
     fun getValueBy(key: String): Any {
-        if (MUSLIM_DATA.get(key.toInt()) == null) {
-            putValue(key, ShareDataDb.getInstance().queryBy(key))
+        if (null == MUSLIM_DATA.get(key.toInt())) {
+            putValue(key, getDbValueBy(key))
         }
         return MUSLIM_DATA.get(key.toInt())
     }
 
+
     /**
-     * 临时的全局变量
+     * 根据上面定义的常量从数据库获取
+     * @param key 关键key
+     */
+    fun getDbValueBy(key: String): Any {
+        return ShareDataDb.getInstance().queryBy(key)
+    }
+
+
+    /**
+     * set全局变量
      * @param key 关键key
      * @param any 数据源
      */
     fun putValue(key: String, any: Any) {
         putValue(key, any, false)
     }
+
+
+    /**
+     * set全局db变量
+     * @param key 关键key
+     * @param any 数据源
+     */
+    fun putDbValue(key: String, any: Any) {
+        ShareDataDb.getInstance().savrOrUpdate(ShareData(key, JSONObject.toJSONString(any)))
+    }
+
 
     /**
      * 是否需要保持数据到本地
@@ -53,7 +76,7 @@ object ShareSparse {
      */
     fun putValue(key: String, any: Any, saveLocal: Boolean) {
         if (saveLocal) {
-            ShareDataDb.getInstance().savrOrUpdate(ShareData(key, JSONObject.toJSONString(any)))
+            putDbValue(key, any)
         }
         MUSLIM_DATA.put(key.toInt(), any)
     }

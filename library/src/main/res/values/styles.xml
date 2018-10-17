@@ -16,6 +16,7 @@
     </style>
 
 
+    <!--无背景全屏透明-->
     <style name="AppTheme_bg_no" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowBackground">@android:color/transparent</item>
@@ -80,16 +81,6 @@
         <item name="android:windowBackground">@android:color/transparent</item>
     </style>
 
-    <!--退出时弹窗中的Cancel 和Drop 按钮-->
-    <style name="exit_dialog_tv_style">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_alignParentBottom">true</item>
-        <item name="android:button">@null</item>
-        <item name="android:textSize">16sp</item>
-        <item name="android:textDirection">locale</item>
-        <item name="android:textAlignment">viewStart</item>
-    </style>
 
     <!--选择相机或相册的dialog-->
     <style name="PictureCaptureDialog" parent="Theme.AppCompat.Dialog">
@@ -116,6 +107,25 @@
     <style name="CustomBottomSheetStyle" parent="Widget.Design.BottomSheet.Modal">
         <item name="android:background">@android:color/transparent</item>
         <item name="behavior_peekHeight">500dp</item>
+    </style>
+
+    <!--快捷回复dialog-->
+    <style name="ReplyCommentsDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:windowFrame">@null</item>
+        <!-- Dialog的windowFrame框为无 -->
+        <item name="android:windowIsFloating">true</item>
+        <!-- 是否漂现在activity上 -->
+        <item name="android:windowIsTranslucent">true</item>
+        <!-- 是否半透明 -->
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:background">@null</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <!-- 去除黑色边框的关键设置项 -->
+        <item name="android:backgroundDimEnabled">true</item>
+        <!-- 屏幕背景是否变暗 -->
+        <item name="android:backgroundDimAmount">0.3</item>
+        <item name="android:windowSoftInputMode">adjustPan </item>
     </style>
 
 </resources>

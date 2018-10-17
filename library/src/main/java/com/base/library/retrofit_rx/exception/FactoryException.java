@@ -66,9 +66,8 @@ public class FactoryException {
         } else {
             /*未知异常*/
             apiException.setCode(UNKNOWN_ERROR);
-            apiException.setDisplayMessage(e.getMessage());
+            apiException.setDisplayMessage(HttpException_MSG);
         }
-
         return apiException;
     }
 

@@ -7,7 +7,7 @@ import android.os.Looper;
 import com.base.library.retrofit_rx.downlaod.DownLoadListener.DownloadInterceptor;
 import com.base.library.retrofit_rx.exception.HttpTimeException;
 import com.base.library.retrofit_rx.exception.RetryWhenNetworkException;
-import com.base.library.retrofit_rx.http.converter_gson.FastJsonConverterFactory;
+import com.base.library.retrofit_rx.http.converter.RetrofitStringConverterFactory;
 import com.base.library.retrofit_rx.subscribers.ProgressDownSubscriber;
 import com.base.library.retrofit_rx.utils.DbDwonUtil;
 
@@ -58,7 +58,7 @@ public class HttpDownManager {
 
     /**
      * 获取单例
-     *
+     *a
      * @return
      */
     public static HttpDownManager getInstance() {
@@ -99,7 +99,7 @@ public class HttpDownManager {
 
             Retrofit retrofit = new Retrofit.Builder()
                     .client(builder.build())
-                    .addConverterFactory(FastJsonConverterFactory.create())
+                    .addConverterFactory(RetrofitStringConverterFactory.create())
                     .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                     .baseUrl(getBasUrl(info.getUrl()))
                     .build();
@@ -215,7 +215,7 @@ public class HttpDownManager {
      * @param info
      * @throws IOException
      */
-    public void writeCache(ResponseBody responseBody, File file, DownInfo info) {
+    private void writeCache(ResponseBody responseBody, File file, DownInfo info) {
         try {
             RandomAccessFile randomAccessFile = null;
             FileChannel channelOut = null;

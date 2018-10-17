@@ -51,6 +51,7 @@ class HttpActivity : BaseFragmentActivity(), HttpOnNextListener {
     }
 
     override fun onError(e: ApiException, method: String) {
+        showToast(e.displayMessage)
         when (method) {
             wallApi.method -> {
                 tv_msg.text = "error:wallApi->${e.displayMessage}"

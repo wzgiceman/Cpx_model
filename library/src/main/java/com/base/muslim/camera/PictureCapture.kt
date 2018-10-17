@@ -9,6 +9,7 @@ import com.base.muslim.camera.capturedialog.PictureCaptureDialog
 import com.base.muslim.camera.utils.Photo
 import com.base.muslim.compression.PictureCompression
 import java.io.Serializable
+import java.lang.ref.WeakReference
 
 /**
  * 图片获取（拍照或从相册）
@@ -19,7 +20,7 @@ object PictureCapture :OnPicturePathListener ,Serializable{
     const val BUNDLE_KEY = "ListenerItem"
     private val listenerItem by lazy { ListenerItem() }
     private val bundle by lazy { Bundle() }
-    private lateinit var mListener: OnPicturePathListener
+    private lateinit var weakReference: WeakReference<OnPicturePathListener>
 
 
     /**
@@ -30,7 +31,7 @@ object PictureCapture :OnPicturePathListener ,Serializable{
      */
     fun getPicture(context: Context, listener: OnPicturePathListener, needCrop: Boolean) {
         this.needCrop = needCrop
-        mListener = listener
+        weakReference = WeakReference(listener)
         listenerItem.listener = this
         showDialog(context)
     }
@@ -43,7 +44,7 @@ object PictureCapture :OnPicturePathListener ,Serializable{
      */
     fun getCompressionPicture(context: Context, listener: OnPicturePathListener, needCrop: Boolean) {
         this.needCrop = needCrop
-        mListener = listener
+        weakReference = WeakReference(listener)
         listenerItem.listener = this
         showDialog(context)
     }
@@ -52,7 +53,7 @@ object PictureCapture :OnPicturePathListener ,Serializable{
      * 使用getCompressionPicture时在此回掉方法中去压缩图片
      */
     override fun onPhoto(photo: Photo) {
-        PictureCompression.compressionPictureRx(RxRetrofitApp.getApplication(), photo, mListener)
+        PictureCompression.compressionPictureRx(RxRetrofitApp.getApplication(), photo, weakReference.get()!!)
     }
 
     /**

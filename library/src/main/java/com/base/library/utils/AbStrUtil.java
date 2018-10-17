@@ -16,11 +16,13 @@
 package com.base.library.utils;
 
 import android.content.Context;
+import android.content.res.AssetManager;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -534,5 +536,32 @@ public class AbStrUtil {
      */
     public static String http2String(String http) {
         return http.replace("//", "").replace("/", "").replace(":", "").replace(".", "");
+    }
+
+    /**
+     * 得到Assets下json文件中的内容
+     *
+     * @param context
+     * @param fileName
+     * @return
+     */
+    public static String getAssetsJsonBy(Context context, String fileName) {
+        StringBuilder stringBuilder = new StringBuilder();
+        //获得assets资源管理器
+        AssetManager assetManager = context.getAssets();
+        //使用IO流读取json文件内容
+        try {
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(
+                    assetManager.open(fileName), "utf-8"));
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
+                stringBuilder.append(line);
+            }
+        }catch (FileNotFoundException e){
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return stringBuilder.toString();
     }
 }

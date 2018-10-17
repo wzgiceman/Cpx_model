@@ -4,25 +4,42 @@ import android.content.Context
 import android.graphics.Color
 import android.view.View
 import android.widget.LinearLayout
-import android.widget.ListView
-import android.widget.RadioButton
 import com.base.library.R
 import com.base.muslim.base.dialog.BaseDialog
-import kotlinx.android.synthetic.main.exit_dialog_layout.*
+import kotlinx.android.synthetic.main.dialog_tips.*
 
 /**
  * 弹窗
  */
 class TipsDialog : BaseDialog {
-    private lateinit var listener: OnDropBtnClickListener
+    private var listener: OnDropBtnClickListener? = null
+    private var listener1: OnBtnClickListener? = null
     private lateinit var adapter: TipsDialogAdapter
     private var type: Any = "type"
     private var okBtnText: String = context.getString(R.string.tips_dialog_Drop)
 
+    /**
+     * 使用的构造方法
+     *
+     * @param context
+     * @param listener 此接口参数只有确定按钮的回调方法
+     */
     constructor(context: Context, listener: OnDropBtnClickListener) : super(context) {
         this.listener = listener
         setDialogSystemLine()
-        init(R.layout.exit_dialog_layout)
+        init(R.layout.dialog_tips)
+    }
+
+    /**
+     * 使用的构造方法
+     *
+     * @param context
+     * @param listener 此接口参数有确定和取消两个按钮的回调方法
+     */
+    constructor(context: Context, listener: OnBtnClickListener) : super(context) {
+        this.listener1 = listener
+        setDialogSystemLine()
+        init(R.layout.dialog_tips)
     }
 
     /**
@@ -50,11 +67,14 @@ class TipsDialog : BaseDialog {
 
     override fun onClick(v: View) {
         when (v.id) {
-            R.id.Cancel_btn -> dismiss()
+            R.id.Cancel_btn -> {
+                dismiss()
+//                listener1?.let { listener1!!.onCancelBtnClick() }
+            }
             R.id.Drop_btn -> {
                 dismiss()
-                if (listener != null)
-                    listener.onClick(Drop_btn!!, type)
+                listener?.let { listener!!.onClick(Drop_btn!!, type) }
+                listener1?.let { listener1!!.onOkBtnClick() }
             }
         }
     }
@@ -115,6 +135,11 @@ class TipsDialog : BaseDialog {
 
     interface OnDropBtnClickListener {
         fun onClick(v: View, type: Any)
+    }
+
+    interface OnBtnClickListener {
+        fun onCancelBtnClick()
+        fun onOkBtnClick()
     }
 
 }

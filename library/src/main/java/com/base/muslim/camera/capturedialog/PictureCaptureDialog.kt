@@ -15,12 +15,11 @@ import com.base.muslim.camera.helper.PermissionHelper
 import com.base.muslim.camera.helper.PictureHelper
 import com.base.muslim.camera.utils.PATH
 import com.base.muslim.camera.utils.PictureType
-import kotlinx.android.synthetic.main.picture_capture_dialog.*
+import kotlinx.android.synthetic.main.dialog_picture_capture.*
 import java.io.File
 import android.provider.MediaStore
 import android.widget.FrameLayout
 import android.widget.Toast
-import com.base.library.R.id.*
 import com.base.muslim.camera.utils.Photo
 
 /**
@@ -54,7 +53,7 @@ class PictureCaptureDialog : BaseFragmentActivity() {
     }
 
     override fun setContentViews() {
-        setContentView(R.layout.picture_capture_dialog)
+        setContentView(R.layout.dialog_picture_capture)
         super.setContentViews()
     }
 

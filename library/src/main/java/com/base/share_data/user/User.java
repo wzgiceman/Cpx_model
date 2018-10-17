@@ -15,6 +15,7 @@ import com.base.library.utils.AbSharedUtil;
  */
 public class User {
     private String id;
+    private String ui_id="";
     private String userName;
     private String nikeName;
     private String mobile;
@@ -33,12 +34,10 @@ public class User {
      * 播放设置 0不处理 1循环播放 2播放完成后切换下一章节
      */
     private String spPlayType;
-    private String spPlayMsg;
     /**
      * 经文播放循环次数
      */
     private int rePlaySp;
-    private String rePlaySpMsg;
     /**
      * 经纬度
      */
@@ -165,6 +164,7 @@ public class User {
         setUserName(object.getString("username"));
         setToken(object.getString("token"));
         setEmail(object.getString("email"));
+        setUi_id("");
         if (object.containsKey("avatar")) {
             setAvatar(object.getString("avatar"));
         }else{
@@ -205,21 +205,6 @@ public class User {
         this.version = version;
     }
 
-    public String getSpPlayMsg() {
-        return spPlayMsg;
-    }
-
-    public void setSpPlayMsg(String spPlayMsg) {
-        this.spPlayMsg = spPlayMsg;
-    }
-
-    public String getRePlaySpMsg() {
-        return rePlaySpMsg;
-    }
-
-    public void setRePlaySpMsg(String rePlaySpMsg) {
-        this.rePlaySpMsg = rePlaySpMsg;
-    }
 
     public boolean isLogin() {
         return login;
@@ -414,6 +399,14 @@ public class User {
         return this.scriptureProgress;
     }
 
+
+    public String getUi_id() {
+        return ui_id;
+    }
+
+    public void setUi_id(String ui_id) {
+        this.ui_id = ui_id;
+    }
 
     public void setScriptureProgress(boolean scriptureProgress) {
         this.scriptureProgress = scriptureProgress;

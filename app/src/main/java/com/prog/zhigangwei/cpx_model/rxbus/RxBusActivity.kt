@@ -12,6 +12,8 @@ import kotlinx.android.synthetic.main.activity_rxbus.*
  *
  *Describe:RxBus使用
  *
+ * 不推荐使用rxbus(跳跃性和逻辑性跨度太大,不易理解),能用回掉或者系统回掉处理推荐使用系统的
+ *
  *Created by zhigang wei
  *on 2018/8/24
  *

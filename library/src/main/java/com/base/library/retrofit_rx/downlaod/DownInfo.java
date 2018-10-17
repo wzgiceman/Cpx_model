@@ -7,7 +7,6 @@ import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Keep;
 import org.greenrobot.greendao.annotation.Transient;
-import org.greenrobot.greendao.annotation.Generated;
 
 /**
  * apk下载请求数据基础类
@@ -40,14 +39,6 @@ public class DownInfo {
     @Transient
     private boolean updateProgress;
 
-    public DownInfo(String url, HttpDownOnNextListener listener) {
-        setUrl(url);
-        setListener(listener);
-    }
-
-    public DownInfo(String url) {
-        setUrl(url);
-    }
 
     @Keep
     public DownInfo(Long id, String savePath, Long countLength, Long readLength,
@@ -63,9 +54,10 @@ public class DownInfo {
 
     @Keep
     public DownInfo() {
-        readLength=0l;
-        countLength=0l;
-        stateInte=DownState.START.getState();
+        setId(System.currentTimeMillis());
+        setReadLength(0l);
+        setCountLength(0l);
+        setStateInte(DownState.START.getState());
     }
 
     public DownState getState() {

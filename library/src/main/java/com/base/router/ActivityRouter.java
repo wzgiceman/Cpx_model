@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.base.library.utils.AbLogUtil;
+import com.base.router.empty.EmptyActivity;
 
 /**
  * Describe:路由器
@@ -42,6 +43,7 @@ public class ActivityRouter {
             Class clazz = Class.forName(name);
             startActivity(context, clazz, bundle);
         } catch (ClassNotFoundException e) {
+            startActivity(context, EmptyActivity.class,null);
             AbLogUtil.e("The class cannot be found");
         }
     }
@@ -56,6 +58,7 @@ public class ActivityRouter {
             Class clazz = Class.forName(name);
             startActivity(context, clazz, null);
         } catch (ClassNotFoundException e) {
+            startActivity(context, EmptyActivity.class,null);
             AbLogUtil.e("The class cannot be found");
         }
     }

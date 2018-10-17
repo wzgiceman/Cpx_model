@@ -358,7 +358,7 @@ public class AbAppUtil {
                 .PRODUCT.length() % 10);
         String serial = null;
         try {
-            serial = android.os.Build.class.getField("SERIAL").get(null).toString();
+            serial = Build.class.getField("SERIAL").get(null).toString();
             return new UUID(m_szDevIDShort.hashCode(), serial.hashCode()).toString();
         } catch (Exception exception) {
             serial = "serial"; // some value
