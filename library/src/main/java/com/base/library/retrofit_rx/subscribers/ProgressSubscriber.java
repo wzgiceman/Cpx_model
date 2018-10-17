@@ -64,9 +64,9 @@ public class ProgressSubscriber<T> extends Subscriber<T> {
                     .getCookieNoNetWorkTime();
             CookieResulte cookieResulte = CookieDbUtil.getInstance().queryCookieBy(api.getCacheUrl());
             if (cookieResulte != null && (System.currentTimeMillis() - cookieResulte.getTime()) / 1000 < duration) {
+                resulteOnNext(cookieResulte.getResulte());
                 onCompleted();
                 unsubscribe();
-                resulteOnNext(cookieResulte.getResulte());
                 return;
             }
         }
@@ -208,7 +208,6 @@ public class ProgressSubscriber<T> extends Subscriber<T> {
         } catch (Exception e) {
             AbLogUtil.e("listener onError error--->" + e.getMessage());
         }
-
     }
 
 
@@ -218,13 +217,9 @@ public class ProgressSubscriber<T> extends Subscriber<T> {
      * @param resulte
      */
     private void resulteOnNext(String resulte) {
-        try {
-            if (null != mSubscriberOnNextListener && null != mSubscriberOnNextListener.get() && null != mActivity && null !=
-                    mActivity.get() && !mActivity.get().isFinishing()) {
-                mSubscriberOnNextListener.get().onNext(resulte, api.getMethod());
-            }
-        } catch (Exception e) {
-            AbLogUtil.e("listener onNext error--->" + e.getMessage());
+        if (null != mSubscriberOnNextListener && null != mSubscriberOnNextListener.get() && null != mActivity && null !=
+                mActivity.get() && !mActivity.get().isFinishing()) {
+            mSubscriberOnNextListener.get().onNext(resulte, api.getMethod());
         }
     }
 }
