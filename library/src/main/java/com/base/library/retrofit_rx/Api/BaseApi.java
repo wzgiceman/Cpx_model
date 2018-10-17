@@ -5,13 +5,13 @@ import android.util.Log;
 import com.alibaba.fastjson.support.retrofit.Retrofit2ConverterFactory;
 import com.base.library.retrofit_rx.RxRetrofitApp;
 import com.base.library.retrofit_rx.http.head.HeadInterceptor;
+import com.base.library.retrofit_rx.http.head.HttpLoggingInterceptor;
 import com.base.library.utils.AbSharedUtil;
 import com.base.library.utils.AbStrUtil;
 
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import rx.Observable;
