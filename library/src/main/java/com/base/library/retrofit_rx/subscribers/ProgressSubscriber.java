@@ -72,6 +72,7 @@ public class ProgressSubscriber<T> extends Subscriber<T> {
                 return;
             }
         }
+
         if (api.isShowProgress()) {
             initProgressDialog(api.isCancel());
         }

@@ -1,27 +1,18 @@
 package com.base.library.retrofit_rx.http;
 
 import android.support.annotation.NonNull;
-import android.util.Log;
 
-import com.alibaba.fastjson.support.retrofit.Retrofit2ConverterFactory;
 import com.base.library.retrofit_rx.Api.BaseApi;
-import com.base.library.retrofit_rx.RxRetrofitApp;
 import com.base.library.retrofit_rx.exception.RetryWhenNetworkException;
 import com.base.library.retrofit_rx.http.func.ExceptionFunc;
 import com.base.library.retrofit_rx.http.func.ResulteFunc;
-import com.base.library.retrofit_rx.http.head.HeadInterceptor;
 import com.base.library.retrofit_rx.listener.HttpOnNextListener;
 import com.base.library.retrofit_rx.subscribers.ProgressSubscriber;
 import com.trello.rxlifecycle.android.ActivityEvent;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 
 import java.lang.ref.SoftReference;
-import java.util.concurrent.TimeUnit;
 
-import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
-import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -51,43 +42,18 @@ public class HttpManager {
      * @param basePar 封装的请求数据
      */
     public Observable<String> doHttpDeal(final BaseApi basePar) {
-        return httpDeal(getReTrofit(basePar), basePar);
+        return httpDeal(basePar);
     }
 
-
-    /**
-     * 获取Retrofit对象
-     *
-     * @param basePar
-     * @return
-     */
-    public Retrofit getReTrofit(final BaseApi basePar) {
-        //手动创建一个OkHttpClient并设置超时时间缓存等设置
-        OkHttpClient.Builder builder = new OkHttpClient.Builder();
-        builder.connectTimeout(basePar.getConnectionTime(), TimeUnit.SECONDS);
-        if (RxRetrofitApp.isDebug()) {
-            builder.addInterceptor(getHttpLoggingInterceptor());
-        }
-        builder.addInterceptor(new HeadInterceptor(basePar));
-
-        /*创建retrofit对象*/
-        final Retrofit retrofit = new Retrofit.Builder()
-                .client(builder.build())
-                .addConverterFactory(new Retrofit2ConverterFactory())
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                .baseUrl(basePar.getBaseUrl())
-                .build();
-        return retrofit;
-    }
 
     /**
      * RxRetrofit处理
      *
      * @param basePar
      */
-    public Observable httpDeal(Retrofit retrofit, BaseApi basePar) {
+    public Observable httpDeal(BaseApi basePar) {
         /*失败后的retry配置*/
-        Observable observable = basePar.getObservable(retrofit)
+        Observable observable = basePar.getObservable(basePar.getReTrofit())
                 /*失败后retry处理控制*/
                 .retryWhen(new RetryWhenNetworkException(basePar.getRetryCount(),
                         basePar.getRetryDelay(), basePar.getRetryIncreaseDelay()))
@@ -107,28 +73,13 @@ public class HttpManager {
         if (onNextListener != null && null != onNextListener.get() && null != appCompatActivity && null != appCompatActivity
                 .get()) {
             ProgressSubscriber subscriber = new ProgressSubscriber(basePar, onNextListener, appCompatActivity);
-            observable.compose(appCompatActivity.get().bindUntilEvent(ActivityEvent.DESTROY)).observeOn(AndroidSchedulers.mainThread()).subscribe
+            observable.compose(appCompatActivity.get().bindUntilEvent(ActivityEvent.DESTROY)).observeOn(AndroidSchedulers
+                    .mainThread()).subscribe
                     (subscriber);
         }
 
         return observable;
     }
 
-    /**
-     * 日志输出
-     * 自行判定是否添加
-     *
-     * @return
-     */
-    private HttpLoggingInterceptor getHttpLoggingInterceptor() {
-        //日志显示级别
-        HttpLoggingInterceptor.Level level = HttpLoggingInterceptor.Level.BODY;
-        //新建log拦截器
-        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor(message -> Log.d("RxRetrofit",
-                "Retrofit====Message:" + message));
-
-        loggingInterceptor.setLevel(level);
-        return loggingInterceptor;
-    }
 
 }

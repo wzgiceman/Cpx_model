@@ -58,7 +58,7 @@ public class HttpDownManager {
 
     /**
      * 获取单例
-     *
+     *a
      * @return
      */
     public static HttpDownManager getInstance() {
@@ -215,7 +215,7 @@ public class HttpDownManager {
      * @param info
      * @throws IOException
      */
-    public void writeCache(ResponseBody responseBody, File file, DownInfo info) {
+    private void writeCache(ResponseBody responseBody, File file, DownInfo info) {
         try {
             RandomAccessFile randomAccessFile = null;
             FileChannel channelOut = null;

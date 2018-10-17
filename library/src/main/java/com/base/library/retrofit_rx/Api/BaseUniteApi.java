@@ -20,13 +20,8 @@ public class BaseUniteApi extends BaseApi {
     }
 
 
-    protected Retrofit getRetrofit() {
-        return manager.getReTrofit(this);
-    }
-
-
-    protected void doHttpDeal(Retrofit retrofit) {
-        manager.httpDeal(retrofit, this);
+    protected void doHttpDeal() {
+        manager.httpDeal(this);
     }
 
     @Override
