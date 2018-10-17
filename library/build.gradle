@@ -78,6 +78,4 @@ dependencies {
     api rootProject.ext.dependencies["support-v7"]
     api rootProject.ext.dependencies["design"]
     api rootProject.ext.dependencies["firebase-core"]
-
-
 }
