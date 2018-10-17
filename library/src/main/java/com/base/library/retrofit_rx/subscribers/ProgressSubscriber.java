@@ -13,13 +13,11 @@ import com.base.library.retrofit_rx.http.cookie.CookieResulte;
 import com.base.library.retrofit_rx.listener.HttpOnNextListener;
 import com.base.library.retrofit_rx.utils.AppUtil;
 import com.base.library.retrofit_rx.utils.CookieDbUtil;
-import com.base.library.utils.AbLogUtil;
 import com.base.library.utils.AbStrUtil;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 
 import java.lang.ref.SoftReference;
 
-import retrofit2.adapter.rxjava.HttpException;
 import rx.Subscriber;
 
 
@@ -137,24 +135,20 @@ public class ProgressSubscriber<T> extends Subscriber<T> {
      * 获取cache数据
      */
     private void getCache(Throwable te) {
-        try {
-            /*获取db缓存数据*/
-            CookieResulte cookieResulte = CookieDbUtil.getInstance().queryCookieBy(api.getCacheUrl());
-            if (cookieResulte == null) {
-                /*获取gson文件缓存数据*/
-                String resulte = AbStrUtil.getAssetsJsonBy(RxRetrofitApp.getApplication(), "gson/" + api.getMethod() + ".json");
-                if (!AbStrUtil.isEmpty(resulte) && mSubscriberOnNextListener.get() != null) {
-                    mSubscriberOnNextListener.get().onNext(resulte, api.getMethod());
-                } else {
-                    errorDo(te);
-                }
+        /*获取db缓存数据*/
+        CookieResulte cookieResulte = CookieDbUtil.getInstance().queryCookieBy(api.getCacheUrl());
+        if (cookieResulte == null) {
+            /*获取gson文件缓存数据*/
+            String resulte = AbStrUtil.getAssetsJsonBy(RxRetrofitApp.getApplication(), "gson/" + api.getMethod() + ".json");
+            if (!AbStrUtil.isEmpty(resulte) && mSubscriberOnNextListener.get() != null) {
+                mSubscriberOnNextListener.get().onNext(resulte, api.getMethod());
             } else {
-                if (mSubscriberOnNextListener.get() != null) {
-                    mSubscriberOnNextListener.get().onNext(cookieResulte.getResulte(), api.getMethod());
-                }
+                errorDo(te);
             }
-        } catch (Exception e) {
-            errorDo(te == null ? e : te);
+        } else {
+            if (mSubscriberOnNextListener.get() != null) {
+                mSubscriberOnNextListener.get().onNext(cookieResulte.getResulte(), api.getMethod());
+            }
         }
     }
 
@@ -167,14 +161,10 @@ public class ProgressSubscriber<T> extends Subscriber<T> {
     private void errorDo(Throwable e) {
         if (e instanceof ApiException) {
             onReturnError((ApiException) e);
-        } else if (e instanceof HttpException) {
-            HttpException exception = (HttpException) e;
-            onReturnError(new ApiException(exception, exception.code(), exception.getMessage()));
         } else {
             onReturnError(new ApiException(e, HttpTimeException.UNKNOWN_ERROR, RxRetrofitApp.getApplication().getString(R
                     .string.service_error)));
         }
-        AbLogUtil.e("RxRetrofit", "error--->" + e.getMessage());
     }
 
 

@@ -8,8 +8,12 @@ package com.base.library.retrofit_rx.exception;
 public class ApiException extends Exception {
     /*错误码*/
     private int code;
-    /*显示的信息*/
+    /*给用户显示的信息*/
     private String displayMessage;
+    /*给开发显示的原始错误信息*/
+    private String message;
+
+
 
     public ApiException(Throwable e) {
         super(e);
@@ -19,6 +23,7 @@ public class ApiException extends Exception {
         super(showMsg, cause);
         setCode(code);
         setDisplayMessage(showMsg);
+        setMessage(cause.getMessage());
     }
 
     public int getCode() {
@@ -37,4 +42,12 @@ public class ApiException extends Exception {
         this.displayMessage = displayMessage;
     }
 
+    @Override
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
 }
