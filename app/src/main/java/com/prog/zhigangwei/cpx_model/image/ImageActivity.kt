@@ -34,7 +34,7 @@ class ImageActivity : BaseFragmentActivity(), OnPicturePathListener {
 
     override fun initWidget() {
         btn_glide.setOnClickListener {
-            Glide.with(this).load(path).asBitmap().into(iv_user)
+            Glide.with(this).asBitmap().load(path).into(iv_user)
         }
 
         btn_local.setOnClickListener {
@@ -45,7 +45,7 @@ class ImageActivity : BaseFragmentActivity(), OnPicturePathListener {
     }
 
     override fun onPhoto(photo: Photo) {
-        Glide.with(this@ImageActivity).load(photo.originalFile.absolutePath).asBitmap().into(iv)
+        Glide.with(this@ImageActivity).asBitmap().load(photo.originalFile.absolutePath).into(iv)
     }
 
 

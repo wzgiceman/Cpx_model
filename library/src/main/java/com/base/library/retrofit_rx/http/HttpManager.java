@@ -45,7 +45,6 @@ public class HttpManager {
         return httpDeal(basePar);
     }
 
-
     /**
      * RxRetrofit处理
      *
@@ -80,6 +79,5 @@ public class HttpManager {
 
         return observable;
     }
-
 
 }

@@ -64,9 +64,9 @@ public class ProgressSubscriber<T> extends Subscriber<T> {
                     .getCookieNoNetWorkTime();
             CookieResulte cookieResulte = CookieDbUtil.getInstance().queryCookieBy(api.getCacheUrl());
             if (cookieResulte != null && (System.currentTimeMillis() - cookieResulte.getTime()) / 1000 < duration) {
-                resulteOnNext(cookieResulte.getResulte());
                 onCompleted();
                 unsubscribe();
+                resulteOnNext(cookieResulte.getResulte());
                 return;
             }
         }
@@ -208,6 +208,7 @@ public class ProgressSubscriber<T> extends Subscriber<T> {
         } catch (Exception e) {
             AbLogUtil.e("listener onError error--->" + e.getMessage());
         }
+
     }
 
 

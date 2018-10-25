@@ -3,6 +3,7 @@ package com.base.library.retrofit_rx.http.cookie;
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Keep;
+import org.greenrobot.greendao.annotation.Generated;
 
 /**
  * post請求緩存数据
