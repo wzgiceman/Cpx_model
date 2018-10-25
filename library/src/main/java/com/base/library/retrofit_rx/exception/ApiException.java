@@ -23,6 +23,7 @@ public class ApiException extends Exception {
         super(showMsg, cause);
         setCode(code);
         setDisplayMessage(showMsg);
+        if(cause==null)return;
         setMessage(cause.getMessage());
     }
 
