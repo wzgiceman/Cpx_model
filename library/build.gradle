@@ -73,7 +73,9 @@ dependencies {
     api rootProject.ext.dependencies["greenDao"]
     api rootProject.ext.dependencies["fastjson"]
     api rootProject.ext.dependencies["recyclerview"]
-    api rootProject.ext.dependencies["glide"]
+    api(rootProject.ext.dependencies["glide"]){
+        exclude group: "com.android.support"
+    }
     api rootProject.ext.dependencies["kotlin"]
     api rootProject.ext.dependencies["support-v7"]
     api rootProject.ext.dependencies["design"]
