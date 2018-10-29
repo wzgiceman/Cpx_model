@@ -25,7 +25,7 @@ public class RouterList {
     /**
      * 祈福界面
      */
-    public static final String WISH_LIST_FRAGMENT = "com.muslim.pro.imuslim.azan.greeting_cards.azkar.AzkarFragment";
+    public static final String WISH_LIST_FRAGMENT = "com.muslim.pro.imuslim.azan.portion.azkar.AzkarFragment";
 
     /**
      * 祈福详情界面
@@ -35,27 +35,27 @@ public class RouterList {
      *                  value：AzkarDetailActivity.TYPE_OFFICIAL（官方祈福）、
      *                         AzkarDetailActivity.TYPE_USER（用户发布的祈福））
      */
-    public static final String AZKAR_DETAIL = "com.muslim.pro.imuslim.azan.greeting_cards.azkar.detail.AzkarDetailActivity";
+    public static final String AZKAR_DETAIL = "com.muslim.pro.imuslim.azan.portion.azkar.detail.AzkarDetailActivity";
 
     /**
      * 贺卡入口界面
      */
-    public static final String GREETING_CARDS_ACTIVITY = "com.muslim.pro.imuslim.azan.greeting_cards.greetingcards.SelectImageActivity";
+    public static final String GREETING_CARDS_ACTIVITY = "com.muslim.pro.imuslim.azan.portion.greetingCards.SelectImageActivity";
 
     /**
      * 通知界面
      */
-    public static final String NOTICE_ACTIVITY = "com.muslim.pro.imuslim.azan.greeting_cards.notifications.NotificationsActivity";
+    public static final String NOTICE_ACTIVITY = "com.muslim.pro.imuslim.azan.portion.notifications.NotificationsActivity";
 
     /**
      * 我的祈福界面
      */
-    public static final String MY_AZKAR_ACTIVITY = "com.muslim.pro.imuslim.azan.greeting_cards.azkar.myAzkar.MyAzkarActivity";
+    public static final String MY_AZKAR_ACTIVITY = "com.muslim.pro.imuslim.azan.portion.azkar.myAzkar.MyAzkarActivity";
 
     /**
      * 主界面
      */
-    public static final String MAIN_ACTIVITY = "com.prog.muslim.ui.MainActivity";
+    public static final String MAIN_ACTIVITY = "com.prog.muslim.main.MainActivity";
 
     /**
      * 视频channel页面

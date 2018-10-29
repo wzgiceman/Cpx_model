@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.base.library.R;
 import com.base.library.utils.AbAppUtil;
 import com.base.library.utils.AbStrUtil;
+import com.base.library.utils.AbToastUtil;
 import com.base.library.utils.FirebaseUtils;
 
 
@@ -38,6 +39,9 @@ public class BaseFragmentToolsActivity extends BaseFragmentManagerActivity {
      * @param title 显示的标题
      */
     protected void showLoading(boolean cancel, String title) {
+        if (!isValidActivity()) {
+            return;
+        }
         String message = AbStrUtil.isEmpty(title) ? getString(R.string.Loading) : title;
         if (loadingDailog == null) {
             loadingDailog = ProgressDialog.show(this, null, message);
@@ -54,9 +58,23 @@ public class BaseFragmentToolsActivity extends BaseFragmentManagerActivity {
      * 关闭加载框
      */
     protected void closeLoading() {
+        if (!isValidActivity()) {
+            return;
+        }
         if (loadingDailog != null && loadingDailog.isShowing()) {
             loadingDailog.dismiss();
         }
+    }
+
+    /**
+     * 判断Activity是否是合法
+     * @return
+     */
+    private boolean isValidActivity(){
+        if (isDestroyed() || isFinishing()) {
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -65,8 +83,7 @@ public class BaseFragmentToolsActivity extends BaseFragmentManagerActivity {
      * @param content
      */
     protected void showToast(String content) {
-        Toast toast = Toast.makeText(this, content, Toast.LENGTH_SHORT);
-        toast.show();
+        AbToastUtil.showToast(this,content);
     }
 
     /**
@@ -75,8 +92,7 @@ public class BaseFragmentToolsActivity extends BaseFragmentManagerActivity {
      * @param content
      */
     protected void showToast(int content) {
-        Toast toast = Toast.makeText(this, content, Toast.LENGTH_SHORT);
-        toast.show();
+        AbToastUtil.showToast(this,content);
     }
 
 

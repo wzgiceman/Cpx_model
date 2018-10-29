@@ -1,13 +1,16 @@
 package com.base.muslim.base.fragment;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.FragmentActivity;
 import android.widget.Toast;
 
 import com.base.library.R;
 import com.base.library.utils.AbStrUtil;
+import com.base.library.utils.AbToastUtil;
 import com.base.library.utils.FirebaseUtils;
 import com.base.library.rxlifecycle.components.support.RxAppCompatActivity;
 
@@ -29,9 +32,13 @@ public class BaseToolFragment extends BaseFragmentManagerFragment {
      * @param title 显示的标题
      */
     protected void showLoading(boolean cancel, String title) {
+        RxAppCompatActivity activity = getRxActivity();
+        if(!isValidActivity(activity)){
+            return;
+        }
         String message = AbStrUtil.isEmpty(title) ? getString(R.string.Loading) : title;
         if (loadingDailog == null) {
-            loadingDailog = ProgressDialog.show(getRxActivity(), null, message);
+            loadingDailog = ProgressDialog.show(activity, null, message);
             loadingDailog.setCancelable(cancel);
         } else if (loadingDailog != null && !loadingDailog.isShowing()) {
             loadingDailog.setMessage(message);
@@ -40,10 +47,29 @@ public class BaseToolFragment extends BaseFragmentManagerFragment {
         }
     }
 
+    /**
+     * 关闭加载框
+     */
     protected void closeLoading() {
+        RxAppCompatActivity activity = getRxActivity();
+        if(!isValidActivity(activity)){
+            return;
+        }
         if (loadingDailog != null && loadingDailog.isShowing()) {
             loadingDailog.dismiss();
         }
+    }
+
+    /**
+     * 判断Activity是否是合法
+     * @param activity
+     * @return
+     */
+    private boolean isValidActivity(FragmentActivity activity){
+        if (activity.isDestroyed() || activity.isFinishing()) {
+            return false;
+        }
+        return true;
     }
 
 
@@ -53,7 +79,7 @@ public class BaseToolFragment extends BaseFragmentManagerFragment {
      * @param msg
      */
     protected void showToast(int msg) {
-        Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
+        AbToastUtil.showToast(getActivity(),msg);
     }
 
     /**
@@ -62,7 +88,7 @@ public class BaseToolFragment extends BaseFragmentManagerFragment {
      * @param msg
      */
     protected void showToast(String msg) {
-        Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
+        AbToastUtil.showToast(getActivity(),msg);
     }
 
     /**
