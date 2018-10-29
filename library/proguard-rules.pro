@@ -151,10 +151,14 @@
 #作者Github地址：https://github.com/yourtion
 -keep public class * implements com.bumptech.glide.module.GlideModule
 -keep public class * extends com.bumptech.glide.module.AppGlideModule
--keep public enum com.bumptech.glide.load.resource.bitmap.ImageHeaderParser$** {
+-keep public enum com.bumptech.glide.load.ImageHeaderParser$** {
   **[] $VALUES;
   public *;
 }
+
+#If you're targeting any API level less than Android API 27
+-dontwarn com.bumptech.glide.load.resource.bitmap.VideoDecoder
+
 
 #---------------------------------反射相关的类和方法-----------------------
 
@@ -194,18 +198,40 @@
 
 
 
-#retrofit+rxjava
--dontwarn javax.annotation.**
+#retrofit
 -dontwarn javax.inject.**
+# Retrofit does reflection on generic parameters. InnerClasses is required to use Signature and
+# EnclosingMethod is required to use InnerClasses.
+-keepattributes Signature, InnerClasses, EnclosingMethod
+
+# Retain service method parameters when optimizing.
+-keepclassmembers,allowshrinking,allowobfuscation interface * {
+    @retrofit2.http.* <methods>;
+}
+
+# Ignore annotation used for build tooling.
+-dontwarn org.codehaus.mojo.animal_sniffer.IgnoreJRERequirement
+
+# Ignore JSR 305 annotations for embedding nullability information.
+-dontwarn javax.annotation.**
+
+# Guarded by a NoClassDefFoundError try/catch and only used when on the classpath.
+-dontwarn kotlin.Unit
+
+# Top-level functions that can only be used by Kotlin.
+
 # OkHttp3
--dontwarn okhttp3.logging.**
--keep class okhttp3.internal.**{*;}
--dontwarn okio.**
-# Retrofit
--dontwarn retrofit2.**
--keep class retrofit2.** { *; }
--keepattributes Signature
--keepattributes Exceptions
+# JSR 305 annotations are for embedding nullability information.
+-dontwarn javax.annotation.**
+
+# A resource is loaded with a relative path so the package of this class must be preserved.
+-keepnames class okhttp3.internal.publicsuffix.PublicSuffixDatabase
+
+# Animal Sniffer compileOnly dependency to ensure APIs are compatible with older versions of Java.
+-dontwarn org.codehaus.mojo.animal_sniffer.*
+
+# OkHttp platform used only on JVM and when Conscrypt dependency is available.
+-dontwarn okhttp3.internal.platform.ConscryptPlatform
 
 # RxJava RxAndroid
 -dontwarn sun.misc.**
@@ -247,8 +273,6 @@ public static java.lang.String TABLENAME;
 
 
 #social
--keep class com.prayer.time.muslim.social.tasbih.entities.** {*;}
--keep class com.prayer.time.muslim.social.wish.entities.** {*;}
 
 #需要反射的实体类
 -keep class com.base.share_data.** { *; }
@@ -256,8 +280,8 @@ public static java.lang.String TABLENAME;
 
 
 #greeting_cards
--keep class com.prayer.time.muslim.greeting_cards.greetingcards.controller.**{*;}
--keep class com.prayer.time.muslim.greeting_cards.greetingcards.model.**{*;}
--keep class com.prayer.time.muslim.greeting_cards.notifications.model.**{*;}
--keep class com.prayer.time.muslim.greeting_cards.notifications.api.**{*;}
+-keep class com.muslim.pro.imuslim.azan.greeting_cards.greetingcards.controller.**{*;}
+-keep class com.muslim.pro.imuslim.azan.greeting_cards.greetingcards.common.model.**{*;}
+-keep class com.muslim.pro.imuslim.azan.greeting_cards.notifications.model.**{*;}
+-keep class com.muslim.pro.imuslim.azan.greeting_cards.notifications.common.api.**{*;}
 -keep class com.base.library.retrofit_rx.** {*;}
