@@ -2,7 +2,7 @@ package com.base.library.retrofit_rx.listener;
 
 import android.support.annotation.NonNull;
 
-import rx.Observable;
+import io.reactivex.Observable;
 
 /**
  * 回调ober对象

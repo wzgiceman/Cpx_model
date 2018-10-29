@@ -9,7 +9,7 @@ import android.widget.Toast;
 import com.base.library.R;
 import com.base.library.utils.AbStrUtil;
 import com.base.library.utils.FirebaseUtils;
-import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
+import com.base.library.rxlifecycle.components.support.RxAppCompatActivity;
 
 
 /**

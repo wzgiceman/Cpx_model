@@ -5,6 +5,7 @@ import android.support.multidex.MultiDexApplication
 import com.base.library.retrofit_rx.RxRetrofitApp
 import com.bumptech.glide.Glide
 import com.prog.zhigangwei.cpx_model.BuildConfig
+import com.squareup.leakcanary.LeakCanary
 
 /**
  *
@@ -21,6 +22,7 @@ class MApp : MultiDexApplication() {
     override fun onCreate() {
         super.onCreate()
         RxRetrofitApp.init(this, BuildConfig.DEBUG)
+        initMAT()
     }
 
 
@@ -45,5 +47,16 @@ class MApp : MultiDexApplication() {
     override fun onLowMemory() {
         super.onLowMemory()
         Glide.get(this).clearMemory()
+    }
+
+    /**
+     * 检测内存泄露
+     */
+    private fun initMAT() {
+        if (!BuildConfig.DEBUG) return
+        if (LeakCanary.isInAnalyzerProcess(this)) {
+            return
+        }
+        LeakCanary.install(this)
     }
 }

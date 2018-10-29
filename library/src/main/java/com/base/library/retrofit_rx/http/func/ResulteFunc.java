@@ -9,14 +9,14 @@ import com.base.library.retrofit_rx.http.cookie.CookieResulte;
 import com.base.library.retrofit_rx.utils.CookieDbUtil;
 import com.base.library.utils.AbStrUtil;
 
-import rx.functions.Func1;
+import io.reactivex.functions.Function;
 
 /**
  * 服务器返回数据判断
  * Created by WZG on 2017/3/23.
  */
 
-public class ResulteFunc implements Func1<Object, Object> {
+public class ResulteFunc implements Function<Object, Object> {
     private BaseApi basePar;
 
     public ResulteFunc(BaseApi basePar) {
@@ -24,7 +24,7 @@ public class ResulteFunc implements Func1<Object, Object> {
     }
 
     @Override
-    public Object call(Object o) {
+    public Object apply(Object o) {
         if (o == null || "".equals(o.toString())) {
             throw new HttpTimeException(HttpTimeException.CHACHE_HTTP_ERROR, "error service");
         }

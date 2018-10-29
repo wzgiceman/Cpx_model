@@ -3,10 +3,10 @@ package com.base.library.retrofit_rx.Api;
 
 import com.base.library.retrofit_rx.http.HttpManager;
 import com.base.library.retrofit_rx.listener.HttpOnNextListener;
-import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
+import com.base.library.rxlifecycle.components.support.RxAppCompatActivity;
 
 import retrofit2.Retrofit;
-import rx.Observable;
+import io.reactivex.Observable;
 
 /**
  * 请求数据统一封装类
@@ -25,7 +25,7 @@ public class BaseUniteApi extends BaseApi {
     }
 
     @Override
-    public Observable getObservable(Retrofit retrofit) {
+    public Observable getObservable() {
         return null;
     }
 }

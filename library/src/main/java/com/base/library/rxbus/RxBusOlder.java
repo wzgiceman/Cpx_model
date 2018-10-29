@@ -6,10 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
-import rx.Observable;
-import rx.subjects.PublishSubject;
-import rx.subjects.SerializedSubject;
-import rx.subjects.Subject;
+import io.reactivex.Observable;
+import io.reactivex.subjects.PublishSubject;
+import io.reactivex.subjects.Subject;
+
 
 @Deprecated
 public class RxBusOlder {
@@ -35,8 +35,7 @@ public class RxBusOlder {
             subjectList = new ArrayList<>();
             mSubjectsMapper.put(tag, subjectList);
         }
-
-        Subject<T, T> subject = new SerializedSubject<>(PublishSubject.<T>create());
+        Subject<T> subject = PublishSubject.<T>create().toSerialized();
         subjectList.add(subject);
         return subject;
     }

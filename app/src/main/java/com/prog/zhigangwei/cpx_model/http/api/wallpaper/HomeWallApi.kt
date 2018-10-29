@@ -3,7 +3,7 @@ package com.prog.zhigangwei.cpx_model.http.api.wallpaper
 import com.base.library.retrofit_rx.Api.BaseApi
 import com.prog.zhigangwei.cpx_model.http.api.ApiService
 import retrofit2.Retrofit
-import rx.Observable
+import io.reactivex.Observable
 
 
 /**
@@ -22,7 +22,7 @@ class HomeWallApi : BaseApi() {
         cache = true
     }
 
-    override fun getObservable(retrofit: Retrofit): Observable<*> {
+    override fun getObservable(): Observable<*> {
         val httpService = retrofit.create(ApiService::class.java)
         return httpService.loadHomeWall()
     }

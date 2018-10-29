@@ -4,10 +4,11 @@ import android.os.Handler;
 
 import java.util.concurrent.Executor;
 
-import rx.Scheduler;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.android.schedulers.HandlerScheduler;
-import rx.schedulers.Schedulers;
+import io.reactivex.Scheduler;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.internal.schedulers.ImmediateThinScheduler;
+import io.reactivex.schedulers.Schedulers;
+
 
 public enum EventThread {
     /**
@@ -86,13 +87,13 @@ public enum EventThread {
                 scheduler = Schedulers.trampoline();
                 break;
             case IMMEDIATE:
-                scheduler = Schedulers.immediate();
+                scheduler = ImmediateThinScheduler.INSTANCE;
                 break;
             case EXECUTOR:
                 scheduler = Schedulers.from(ThreadHandler.DEFAULT.getExecutor());
                 break;
             case HANDLER:
-                scheduler = HandlerScheduler.from(ThreadHandler.DEFAULT.getHandler());
+                scheduler = AndroidSchedulers.from(ThreadHandler.DEFAULT.getHandler().getLooper());
                 break;
             default:
                 scheduler = AndroidSchedulers.mainThread();

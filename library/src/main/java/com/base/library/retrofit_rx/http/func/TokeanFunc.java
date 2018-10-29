@@ -6,10 +6,11 @@ import com.base.library.retrofit_rx.Api.resulte.BaseResulte;
 import com.base.library.retrofit_rx.exception.HttpTimeException;
 import com.base.library.utils.AbStrUtil;
 
+
+import io.reactivex.Observable;
+import io.reactivex.functions.Function;
 import retrofit2.Retrofit;
 import retrofit2.http.POST;
-import rx.Observable;
-import rx.functions.Func1;
 
 /**
  * Describe:toekan失效统一处理
@@ -18,7 +19,7 @@ import rx.functions.Func1;
  * on 2018/1/12.
  * <p>
  */
-public class TokeanFunc implements Func1<Object, Observable> {
+public class TokeanFunc implements Function<Object, Observable> {
     private BaseApi basePar;
     private Retrofit retrofit;
 
@@ -28,7 +29,7 @@ public class TokeanFunc implements Func1<Object, Observable> {
     }
 
     @Override
-    public Observable call(Object o) {
+    public Observable apply(Object o) {
         /*这里简单的以tokean为空来判断，实际运用中需要通过服务器错误标示来判断启用tokean机制*/
         if (o == null || "".equals(o.toString())) {
             throw new HttpTimeException(HttpTimeException.CHACHE_HTTP_ERROR, "The network server runs down");
@@ -38,9 +39,9 @@ public class TokeanFunc implements Func1<Object, Observable> {
 
         if (resulte.getCode() == 1) {
             return retrofit.create(TokeanServiceApi.class).tokean()
-                    .flatMap(new Func1() {
+                    .flatMap(new Function() {
                         @Override
-                        public Observable call(Object o) {
+                        public Observable apply(Object o) {
                             if (!AbStrUtil.isEmpty(o.toString())) {
                                 BaseResulte resulte = JSONObject.parseObject(o.toString(), BaseResulte.class);
                                 if (0 == resulte.getCode()) {
@@ -50,7 +51,7 @@ public class TokeanFunc implements Func1<Object, Observable> {
                                     throw new HttpTimeException(HttpTimeException.HTTP_TOKEAN_ERROR, "The network server runs down");
                                 }
                                 /*继续当前接口请求*/
-                                return basePar.getObservable(retrofit);
+                                return basePar.getObservable();
                             }
                             throw new HttpTimeException(HttpTimeException.HTTP_TOKEAN_ERROR, "The network server runs down");
                         }

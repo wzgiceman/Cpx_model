@@ -1,10 +1,11 @@
 package com.base.router;
 
+import android.support.annotation.Nullable;
+
 import com.base.library.utils.AbLogUtil;
 import com.base.muslim.base.fragment.BaseFragment;
 import com.base.router.empty.EmptyFragment;
 
-import javax.annotation.Nullable;
 
 /**
  * Describe:路由器

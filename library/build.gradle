@@ -66,16 +66,23 @@ greendao {
 
 dependencies {
     api fileTree(include: ['*.jar'], dir: 'libs')
-    api rootProject.ext.dependencies["rxlifecycle"]
-    api rootProject.ext.dependencies["rxlifecycle_components"]
+
+    api rootProject.ext.dependencies["rxjava"]
+    api rootProject.ext.dependencies["rxandroid"]
     api rootProject.ext.dependencies["rxjava_adpater"]
     api rootProject.ext.dependencies["retrofit"]
     api rootProject.ext.dependencies["greenDao"]
     api rootProject.ext.dependencies["fastjson"]
     api rootProject.ext.dependencies["recyclerview"]
-    api rootProject.ext.dependencies["glide"]
+    api(rootProject.ext.dependencies["glide"]){
+        exclude group: "com.android.support"
+    }
     api rootProject.ext.dependencies["kotlin"]
     api rootProject.ext.dependencies["support-v7"]
     api rootProject.ext.dependencies["design"]
     api rootProject.ext.dependencies["firebase-core"]
+
+    /*leak 内存泄露检查*/
+    debugApi rootProject.ext.dependencies["debugleakcanary"]
+    releaseApi rootProject.ext.dependencies["releaseleakcanary"]
 }

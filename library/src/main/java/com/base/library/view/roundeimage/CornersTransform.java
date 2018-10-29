@@ -11,21 +11,25 @@ import android.support.annotation.NonNull;
 import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
 import com.bumptech.glide.load.resource.bitmap.BitmapTransformation;
 
+import java.nio.charset.Charset;
+import java.security.MessageDigest;
+
 /**
  * Created by cpx on 2018/5/5.
  */
 
 public class CornersTransform extends BitmapTransformation {
 
+    private static final String ID = "com.base.library.view.roundeimage.CornersTransform";
+    private static final byte[] ID_BYTES = ID.getBytes(Charset.forName("UTF-8"));
+
     private float radius;
 
     public CornersTransform(Context context) {
-        super(context);
         radius = 10;
     }
 
     public CornersTransform(Context context,float radius){
-        super(context);
         this.radius = radius;
     }
 
@@ -52,7 +56,17 @@ public class CornersTransform extends BitmapTransformation {
     }
 
     @Override
-    public String getId() {
-        return getClass().getName();
+    public void updateDiskCacheKey(@NonNull MessageDigest messageDigest) {
+        messageDigest.update(ID_BYTES);
+    }
+
+    @Override
+    public boolean equals(Object o){
+        return o instanceof CircleTransform;
+    }
+
+    @Override
+    public int hashCode(){
+        return ID.hashCode();
     }
 }

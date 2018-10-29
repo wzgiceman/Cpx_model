@@ -13,13 +13,15 @@ import com.base.library.retrofit_rx.http.cookie.CookieResulte;
 import com.base.library.retrofit_rx.listener.HttpOnNextListener;
 import com.base.library.retrofit_rx.utils.AppUtil;
 import com.base.library.retrofit_rx.utils.CookieDbUtil;
+import com.base.library.rxlifecycle.components.support.RxAppCompatActivity;
 import com.base.library.utils.AbLogUtil;
 import com.base.library.utils.AbStrUtil;
-import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
+
 
 import java.lang.ref.SoftReference;
 
-import rx.Subscriber;
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
 
 
 /**
@@ -28,7 +30,7 @@ import rx.Subscriber;
  * 调用者自己对请求数据进行处理
  * Created by WZG on 2016/7/16.
  */
-public class ProgressSubscriber<T> extends Subscriber<T> {
+public class ProgressSubscriber<T> implements Observer<T> {
     //    回调接口
     private SoftReference<HttpOnNextListener> mSubscriberOnNextListener;
     //    软引用反正内存泄露
@@ -38,6 +40,16 @@ public class ProgressSubscriber<T> extends Subscriber<T> {
     /*请求数据*/
     private BaseApi api;
 
+
+    /**
+     * 缓存数据的的文件夹名称
+     */
+    private static final String CACHE_DATA_DIR_NAME = "gson/";
+
+    /**
+     * json 后缀
+     */
+    private static final String JSON_SUFFIX = ".json";
 
     /**
      * 构造
@@ -57,21 +69,22 @@ public class ProgressSubscriber<T> extends Subscriber<T> {
      * 显示ProgressDialog
      */
     @Override
-    public void onStart() {
+    public void onSubscribe(Disposable d) {
         if (api.isCache()) {
             /*获取缓存数据*/
             int duration = AppUtil.isNetworkAvailable(RxRetrofitApp.getApplication()) ? api.getCookieNetWorkTime() : api
                     .getCookieNoNetWorkTime();
             CookieResulte cookieResulte = CookieDbUtil.getInstance().queryCookieBy(api.getCacheUrl());
             if (cookieResulte != null && (System.currentTimeMillis() - cookieResulte.getTime()) / 1000 < duration) {
+                onComplete();
+                d.dispose();
                 resulteOnNext(cookieResulte.getResulte());
-                onCompleted();
-                unsubscribe();
                 return;
             }
         }
 
         if (api.isShowProgress()) {
+            api.setDisposable(d);
             initProgressDialog(api.isCancel());
         }
     }
@@ -81,7 +94,9 @@ public class ProgressSubscriber<T> extends Subscriber<T> {
      * 初始化加载框
      */
     private void initProgressDialog(boolean cancel) {
-        if (!api.isShowProgress()) return;
+        if (!api.isShowProgress()){
+            return;
+        }
         Context context = mActivity.get();
         if (pd == null && context != null) {
             pd = ProgressDialog.show(context, null, context.getString(R.string.Loading));
@@ -109,7 +124,7 @@ public class ProgressSubscriber<T> extends Subscriber<T> {
      * 完成，隐藏ProgressDialog
      */
     @Override
-    public void onCompleted() {
+    public void onComplete() {
         dismissProgressDialog();
     }
 
@@ -121,7 +136,9 @@ public class ProgressSubscriber<T> extends Subscriber<T> {
      */
     @Override
     public void onError(Throwable e) {
-        if (null == mActivity || null == mActivity.get() || mActivity.get().isFinishing()) return;
+        if (null == mActivity || null == mActivity.get() || mActivity.get().isFinishing()){
+            return;
+        }
         /*需要緩存并且本地有缓存才返回*/
         if (api.isCache()) {
             getCache(e);
@@ -139,7 +156,7 @@ public class ProgressSubscriber<T> extends Subscriber<T> {
         CookieResulte cookieResulte = CookieDbUtil.getInstance().queryCookieBy(api.getCacheUrl());
         if (cookieResulte == null) {
             /*获取gson文件缓存数据*/
-            String resulte = AbStrUtil.getAssetsJsonBy(RxRetrofitApp.getApplication(), "gson/" + api.getMethod() + ".json");
+            String resulte = AbStrUtil.getAssetsJsonBy(RxRetrofitApp.getApplication(), getPreCacheFileName());
             if (!AbStrUtil.isEmpty(resulte)) {
                 resulteOnNext(resulte);
             } else {
@@ -148,6 +165,18 @@ public class ProgressSubscriber<T> extends Subscriber<T> {
         } else {
             resulteOnNext(cookieResulte.getResulte());
         }
+    }
+
+    /**
+     * 获取预制的缓存文件名
+     * @return
+     */
+    private String getPreCacheFileName(){
+        String fileName = CACHE_DATA_DIR_NAME + api.getMethod();
+        if(!api.getMethod().endsWith(JSON_SUFFIX)){
+            fileName += JSON_SUFFIX;
+        }
+        return fileName;
     }
 
 
@@ -181,14 +210,16 @@ public class ProgressSubscriber<T> extends Subscriber<T> {
      * 取消ProgressDialog的时候，取消对observable的订阅，同时也取消了http请求
      */
     public void onCancelProgress() {
-        if (!this.isUnsubscribed()) {
-            this.unsubscribe();
+        Disposable disposable = api.getDisposable();
+        if(disposable!=null && !disposable.isDisposed()){
+            disposable.dispose();
             if (api.isCache()) {
                 getCache(null);
             } else {
                 errorDo(new ApiException(new Throwable(), HttpTimeException.HTTP_CANCEL, RxRetrofitApp.getApplication()
                         .getString(R.string.http_cancel)));
             }
+            api.setDisposable(null);
         }
     }
 
@@ -208,6 +239,7 @@ public class ProgressSubscriber<T> extends Subscriber<T> {
         } catch (Exception e) {
             AbLogUtil.e("listener onError error--->" + e.getMessage());
         }
+
     }
 
 

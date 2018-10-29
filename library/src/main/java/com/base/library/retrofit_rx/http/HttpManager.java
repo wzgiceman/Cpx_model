@@ -8,14 +8,15 @@ import com.base.library.retrofit_rx.http.func.ExceptionFunc;
 import com.base.library.retrofit_rx.http.func.ResulteFunc;
 import com.base.library.retrofit_rx.listener.HttpOnNextListener;
 import com.base.library.retrofit_rx.subscribers.ProgressSubscriber;
-import com.trello.rxlifecycle.android.ActivityEvent;
-import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
+import com.base.library.rxlifecycle.android.ActivityEvent;
+import com.base.library.rxlifecycle.components.support.RxAppCompatActivity;
 
 import java.lang.ref.SoftReference;
 
-import rx.Observable;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
+
 
 /**
  * http交互处理类
@@ -45,7 +46,6 @@ public class HttpManager {
         return httpDeal(basePar);
     }
 
-
     /**
      * RxRetrofit处理
      *
@@ -53,7 +53,7 @@ public class HttpManager {
      */
     public Observable httpDeal(BaseApi basePar) {
         /*失败后的retry配置*/
-        Observable observable = basePar.getObservable(basePar.getReTrofit())
+        Observable observable = basePar.getObservable()
                 /*失败后retry处理控制*/
                 .retryWhen(new RetryWhenNetworkException(basePar.getRetryCount(),
                         basePar.getRetryDelay(), basePar.getRetryIncreaseDelay()))
@@ -80,6 +80,5 @@ public class HttpManager {
 
         return observable;
     }
-
 
 }

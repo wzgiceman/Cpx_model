@@ -7,7 +7,7 @@ import android.support.v4.app.FragmentTransaction;
 
 import com.base.library.R;
 import com.base.muslim.base.fragment.BaseFragment;
-import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
+import com.base.library.rxlifecycle.components.support.RxAppCompatActivity;
 
 import java.util.List;
 

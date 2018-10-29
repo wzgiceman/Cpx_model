@@ -13,7 +13,8 @@ import com.base.library.retrofit_rx.utils.DbDwonUtil;
 import java.io.File;
 import java.lang.ref.SoftReference;
 
-import rx.Subscriber;
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
 
 /**
  * 断点下载处理类Subscriber
@@ -22,12 +23,13 @@ import rx.Subscriber;
  * 调用者自己对请求数据进行处理
  * Created by WZG on 2016/7/16.
  */
-public class ProgressDownSubscriber<T> extends Subscriber<T> implements DownloadProgressListener {
+public class ProgressDownSubscriber<T>  implements Observer<T>, DownloadProgressListener {
     //弱引用结果回调
     private SoftReference<HttpDownOnNextListener> mSubscriberOnNextListener;
     /*下载数据*/
     private DownInfo downInfo;
     private Handler handler;
+    private Disposable disposable;
 
 
     public ProgressDownSubscriber(DownInfo downInfo, Handler handler) {
@@ -48,7 +50,8 @@ public class ProgressDownSubscriber<T> extends Subscriber<T> implements Download
      * 显示ProgressDialog
      */
     @Override
-    public void onStart() {
+    public void onSubscribe(Disposable d) {
+        disposable = d;
         if (mSubscriberOnNextListener.get() != null) {
             mSubscriberOnNextListener.get().onStart();
         }
@@ -59,7 +62,7 @@ public class ProgressDownSubscriber<T> extends Subscriber<T> implements Download
      * 完成，隐藏ProgressDialog
      */
     @Override
-    public void onCompleted() {
+    public void onComplete() {
         if (mSubscriberOnNextListener.get() != null) {
             mSubscriberOnNextListener.get().onComplete();
         }
@@ -119,6 +122,15 @@ public class ProgressDownSubscriber<T> extends Subscriber<T> implements Download
             downInfo.setState(DownState.DOWN);
             mSubscriberOnNextListener.get().updateProgress(downInfo.getReadLength(), downInfo.getCountLength());
         });
+    }
+
+    /**
+     * 取消订阅
+     */
+    public void unsubscribe(){
+        if(disposable !=null && disposable.isDisposed()){
+            disposable.dispose();
+        }
     }
 
 }

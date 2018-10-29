@@ -23,7 +23,9 @@ public class ApiException extends Exception {
         super(showMsg, cause);
         setCode(code);
         setDisplayMessage(showMsg);
-        setMessage(cause.getMessage());
+        if(cause != null){
+            setMessage(cause.getMessage());
+        }
     }
 
     public int getCode() {

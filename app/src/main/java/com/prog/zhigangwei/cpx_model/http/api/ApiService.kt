@@ -4,7 +4,7 @@ import com.prog.zhigangwei.cpx_model.http.api.notice.NoticePostApi
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
-import rx.Observable
+import io.reactivex.Observable
 
 
 /**

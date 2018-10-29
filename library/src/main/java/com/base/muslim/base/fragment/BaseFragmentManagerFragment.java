@@ -8,7 +8,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 
 import com.base.library.R;
-import com.trello.rxlifecycle.components.support.RxFragment;
+import com.base.library.rxlifecycle.components.support.RxFragment;
 
 import java.util.List;
 

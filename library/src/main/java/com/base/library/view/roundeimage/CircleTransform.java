@@ -15,17 +15,26 @@ import android.graphics.BitmapShader;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Paint;
+import android.support.annotation.NonNull;
 
 import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
 import com.bumptech.glide.load.resource.bitmap.BitmapTransformation;
+
+import java.nio.charset.Charset;
+import java.security.MessageDigest;
 
 /**
  * 圆形的Transformation
  * Created by Raye on 2016/5/3.
  */
 public class CircleTransform extends BitmapTransformation {
+
+    private static final String ID = "com.base.library.view.roundeimage.CircleTransform";
+    private static final byte[] ID_BYTES = ID.getBytes(Charset.forName("UTF-8"));
+
+
     public CircleTransform(Context context) {
-        super(context);
+
     }
 
     @Override
@@ -65,7 +74,17 @@ public class CircleTransform extends BitmapTransformation {
     }
 
     @Override
-    public String getId() {
-        return getClass().getName();
+    public void updateDiskCacheKey(@NonNull MessageDigest messageDigest) {
+        messageDigest.update(ID_BYTES);
+    }
+
+    @Override
+    public boolean equals(Object o){
+        return o instanceof CircleTransform;
+    }
+
+    @Override
+    public int hashCode(){
+        return ID.hashCode();
     }
 }

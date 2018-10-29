@@ -66,12 +66,6 @@ greendao {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    if (isDebug.toBoolean()) {
-        api project(':library')
-        /*leak 内存泄露检查*/
-        debugImplementation rootProject.ext.dependencies["debugleakcanary"]
-        releaseImplementation rootProject.ext.dependencies["releaseleakcanary"]
-    } else {
-        api project(':library')
-    }
+    api project(':library')
+
 }

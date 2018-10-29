@@ -5,15 +5,16 @@ import java.net.SocketTimeoutException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
-import rx.Observable;
-import rx.functions.Func1;
-import rx.functions.Func2;
+import io.reactivex.Observable;
+import io.reactivex.functions.BiFunction;
+import io.reactivex.functions.Function;
+
 
 /**
  * retry条件
  * Created by WZG on 2016/10/17.
  */
-public class RetryWhenNetworkException implements Func1<Observable<? extends Throwable>, Observable<?>> {
+public class RetryWhenNetworkException implements Function<Observable<? extends Throwable>, Observable<?>> {
     /* retry次数*/
     private int count = 1;
     /*延迟*/
@@ -37,16 +38,16 @@ public class RetryWhenNetworkException implements Func1<Observable<? extends Thr
     }
 
     @Override
-    public Observable<?> call(Observable<? extends Throwable> observable) {
+    public Observable<?> apply(Observable<? extends Throwable> observable) throws Exception {
         return observable
-                .zipWith(Observable.range(1, count + 1), new Func2<Throwable, Integer, Wrapper>() {
+                .zipWith(Observable.range(1, count + 1), new BiFunction<Throwable, Integer, Wrapper>() {
                     @Override
-                    public Wrapper call(Throwable throwable, Integer integer) {
+                    public Wrapper apply(Throwable throwable, Integer integer) throws Exception {
                         return new Wrapper(throwable, integer);
                     }
-                }).flatMap(new Func1<Wrapper, Observable<?>>() {
+                }).flatMap(new Function<Wrapper, Observable<?>>() {
                     @Override
-                    public Observable<?> call(Wrapper wrapper) {
+                    public Observable<?> apply(Wrapper wrapper) throws Exception {
                         if ((wrapper.throwable instanceof ConnectException
                                 || wrapper.throwable instanceof SocketTimeoutException
                                 || wrapper.throwable instanceof TimeoutException)

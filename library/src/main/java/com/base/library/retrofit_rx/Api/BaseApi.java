@@ -1,5 +1,8 @@
 package com.base.library.retrofit_rx.Api;
 
+import android.util.Log;
+
+import com.alibaba.fastjson.support.retrofit.Retrofit2ConverterFactory;
 import com.base.library.retrofit_rx.RxRetrofitApp;
 import com.base.library.retrofit_rx.http.converter.RetrofitStringConverterFactory;
 import com.base.library.retrofit_rx.http.head.HeadInterceptor;
@@ -10,10 +13,11 @@ import com.base.library.utils.AbStrUtil;
 
 import java.util.concurrent.TimeUnit;
 
+import io.reactivex.Observable;
+import io.reactivex.disposables.Disposable;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
-import rx.Observable;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
 /**
  * Describe:请求数据统一封装类
@@ -55,16 +59,17 @@ public abstract class BaseApi {
     /*忽略结果判断*/
     private transient boolean ignorJudge;
     /*retrofit控制器*/
-    protected transient Retrofit retrofit;
+    private Retrofit retrofit;
+
+    private Disposable mDisposable;
 
 
     /**
      * 设置参数
      *
-     * @param retrofit
      * @return
      */
-    public abstract Observable getObservable(Retrofit retrofit);
+    public abstract Observable getObservable();
 
 
     public int getCookieNoNetWorkTime() {
@@ -191,6 +196,13 @@ public abstract class BaseApi {
         BaseApi.config = config;
     }
 
+    public Disposable getDisposable() {
+        return mDisposable;
+    }
+
+    public void setDisposable(Disposable mDisposable) {
+        this.mDisposable = mDisposable;
+    }
 
     /**
      * 获取Retrofit对象
@@ -198,8 +210,10 @@ public abstract class BaseApi {
      *
      * @return
      */
-    public Retrofit getReTrofit() {
-        if (null != retrofit) return retrofit;
+    public Retrofit getRetrofit() {
+        if (null != retrofit) {
+            return retrofit;
+        }
         //手动创建一个OkHttpClient并设置超时时间缓存等设置
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
         builder.connectTimeout(getConnectionTime(), TimeUnit.SECONDS);
@@ -209,15 +223,18 @@ public abstract class BaseApi {
         builder.addInterceptor(new HeadInterceptor(this));
 
         /*创建retrofit对象*/
-        final Retrofit retrofit = new Retrofit.Builder()
+        retrofit = new Retrofit.Builder()
                 .client(builder.build())
                 .addConverterFactory(RetrofitStringConverterFactory.create())
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .baseUrl(getBaseUrl())
                 .build();
         return retrofit;
     }
 
+    public void setRetrofit(Retrofit retrofit) {
+        this.retrofit = retrofit;
+    }
 
     /**
      * 日志输出

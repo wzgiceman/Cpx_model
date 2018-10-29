@@ -1031,7 +1031,11 @@ public class AbImageUtil {
             if (bitmap != null && !bitmap.isRecycled()) {
                 bitmap.recycle();
             }
-            bitmap = Bitmap.createBitmap(width, height, Config.ARGB_8888);
+            try{
+                bitmap = Bitmap.createBitmap(width, height, Config.RGB_565);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
             view.setTag(R.id.CACHE_BITMAP_KEY, bitmap);
             dirty = true;
         }
@@ -1113,8 +1117,8 @@ public class AbImageUtil {
 
         try {
             Bitmap bitmap = Glide.with(context)
-                    .load(url)
                     .asBitmap()
+                    .load(url)
                     .into(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL)
                     .get();
             if (bitmap != null) {

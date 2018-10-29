@@ -12,9 +12,9 @@ import com.base.muslim.compression.luban.Luban
 import com.base.muslim.compression.luban.OnCompressListener
 import com.base.muslim.compression.minterface.OnCompressionPicturesListener
 import com.base.muslim.compression.minterface.OnPictureCompressionListener
-import rx.Observable
-import rx.android.schedulers.AndroidSchedulers
-import rx.schedulers.Schedulers
+import io.reactivex.Observable
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import java.io.File
 
 /**
