@@ -92,7 +92,9 @@ ext {
             /*firebase 通知*/
             "firebase-messaging"    : 'com.google.firebase:firebase-messaging:17.3.3',
             /*鲁班图片压缩*/
-            "luban-compression"     : 'top.zibin:Luban:1.1.7'
+            "luban-compression"     : 'top.zibin:Luban:1.1.7',
+            /*图片裁剪*/
+            "ucrop"                 : 'com.github.yalantis:ucrop:2.2.2'
     ]
 
 }
