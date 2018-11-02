@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/c_F4F4F4"
+    android:orientation="vertical"
+    >
+
+    <TextView
+        android:id="@+id/tv_back"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/c_ffffff"
+        android:drawablePadding="8dp"
+        android:drawableStart="@mipmap/close_black_btn"
+        android:padding="16dp"
+        android:text="@string/log"
+        android:textAlignment="textStart"
+        android:textColor="@color/c_FF001208"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        />
+
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="325dp"
+        android:layout_marginEnd="31dp"
+        android:layout_marginLeft="31dp"
+        android:layout_marginRight="31dp"
+        android:layout_marginStart="31dp"
+        android:layout_marginTop="44dp">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="22dp"
+            android:layout_marginTop="25dp"
+            android:background="@drawable/shape_bg_login"
+            android:minHeight="281dp"/>
+
+
+        <TextView
+            android:id="@+id/tv_lg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:drawablePadding="3dp"
+            android:drawableTop="@mipmap/ic_launcher_round"
+            android:text="@string/app_name"
+            android:textColor="@color/c_FF001208"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            />
+
+
+        <EditText
+            android:id="@+id/etv_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_lg"
+            android:layout_marginEnd="27dp"
+            android:layout_marginLeft="27dp"
+            android:layout_marginRight="27dp"
+            android:layout_marginStart="27dp"
+            android:layout_marginTop="45dp"
+            android:background="@drawable/green_line"
+            android:drawableLeft="@mipmap/email_ic"
+            android:drawablePadding="16dp"
+            android:drawableStart="@mipmap/email_ic"
+            android:hint="@string/input_email"
+            android:inputType="textEmailAddress"
+            android:maxLength="30"
+            android:maxLines="1"
+            android:paddingBottom="10dp"
+            android:textAlignment="viewStart"
+            android:textColor="@color/c_FF001208"
+            android:textColorHint="@color/c_4D001208"
+            android:textSize="15sp"/>
+
+        <EditText
+            android:id="@+id/etv_psd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/etv_email"
+            android:layout_marginEnd="27dp"
+            android:layout_marginLeft="27dp"
+            android:layout_marginRight="27dp"
+            android:layout_marginStart="27dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/green_line"
+            android:drawablePadding="16dp"
+            android:drawableStart="@mipmap/key_ic"
+            android:hint="@string/input_psd"
+            android:inputType="textPassword"
+            android:maxLength="16"
+            android:maxLines="1"
+            android:paddingBottom="10dp"
+            android:textAlignment="viewStart"
+            android:textColor="@color/c_FF001208"
+            android:textColorHint="@color/c_4D001208"
+            android:textSize="15sp"/>
+
+
+        <TextView
+            android:id="@+id/tv_forgeot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/etv_psd"
+            android:layout_marginLeft="27dp"
+            android:layout_marginStart="27dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/forgot_psd"
+            android:textColor="@color/c_FFDF5151"
+            android:textSize="12sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/tv_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/shape_btn_save"
+            android:gravity="center"
+            android:minHeight="44dp"
+            android:layout_alignParentBottom="true"
+            android:minWidth="180dp"
+            android:text="@string/LOGIN"
+            android:textColor="@color/c_ffffff"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            />
+
+    </RelativeLayout>
+
+
+    <TextView
+        android:id="@+id/tv_sign_up"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="36dp"
+        android:text="@string/sign_up"
+        android:textColor="@color/c_FF0767FF"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        />
+
+
+    <TextView
+        android:id="@+id/tv_facbook"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_forgeot"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="60dp"
+        android:background="@drawable/shape_btn_login_facebook"
+        android:drawableLeft="@mipmap/fb_logo"
+        android:drawablePadding="8dp"
+        android:drawableStart="@mipmap/fb_logo"
+        android:gravity="center"
+        android:minHeight="44dp"
+        android:minWidth="180dp"
+        android:paddingEnd="16dp"
+        android:paddingStart="16dp"
+        android:text="@string/log_facbook"
+        android:textColor="@color/c_ffffff"
+        android:textSize="12sp"/>
+
+</LinearLayout>

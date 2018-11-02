@@ -16,6 +16,7 @@
 
 package com.base.library.easyrecyclerview.adapter;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.support.v7.widget.GridLayoutManager;
@@ -25,6 +26,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.base.library.R;
 import com.base.library.easyrecyclerview.EasyRecyclerView;
 import com.base.library.utils.AbStrUtil;
 
@@ -748,24 +750,53 @@ abstract public class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
 
     /**
      * 显示统一的加载框
+     *
+     * @param cancel 是否可以取消
+     * @param title 显示的标题
      */
-    protected void showLoading(Boolean cancel, String title) {
+    protected void showLoading(boolean cancel, String title) {
+        if (getContext() instanceof Activity) {
+            Activity activity = (Activity) getContext();
+            if(!isValidActivity(activity)) {
+                return;
+            }
+        }
+        String message = AbStrUtil.isEmpty(title) ? getContext().getString(R.string.Loading) : title;
         if (loadingDailog == null) {
-            loadingDailog = ProgressDialog.show(getContext(), null, AbStrUtil.isEmpty(title) ? getContext().getString(com.base.library
-                    .R.string.Loading) : title);
+            loadingDailog = ProgressDialog.show(getContext(), null, message);
             loadingDailog.setCancelable(cancel);
         } else if (loadingDailog != null && !loadingDailog.isShowing()) {
+            loadingDailog.setMessage(message);
+            loadingDailog.setCancelable(cancel);
             loadingDailog.show();
         }
     }
-
 
     /**
      * 关闭加载框
      */
     protected void closeLoading() {
+        if (getContext() instanceof Activity){
+            Activity activity = (Activity) getContext();
+            if(!isValidActivity(activity)){
+                return;
+            }
+        }
+
         if (loadingDailog != null && loadingDailog.isShowing()) {
             loadingDailog.dismiss();
         }
+    }
+
+    /**
+     * 判断Activity是否是合法
+     * @param activity
+     * @return
+     */
+    private boolean isValidActivity(Activity activity){
+        if (activity.isDestroyed() || activity.isFinishing()) {
+            return false;
+        }
+        return true;
     }
 }

@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:drawableTop="@mipmap/no_more_img"
-        android:text="قد وصل إلى أسفل"
+        android:text="@string/no_more"
         android:textColor="@color/c_FF292929"
         android:textSize="10sp"
         />

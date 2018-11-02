@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/c_F4F4F4"
+    android:orientation="vertical"
+    >
+
+
+    <TextView
+        android:id="@+id/tv_back"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/c_ffffff"
+        android:drawablePadding="8dp"
+        android:drawableStart="@mipmap/close_black_btn"
+        android:padding="16dp"
+        android:text="@string/signup"
+        android:textAlignment="textStart"
+        android:textColor="@color/c_FF001208"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        />
+
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_marginEnd="31dp"
+        android:layout_marginLeft="31dp"
+        android:layout_height="345dp"
+        android:layout_marginRight="31dp"
+        android:layout_marginStart="31dp"
+        android:layout_marginTop="44dp">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="22dp"
+            android:layout_marginTop="25dp"
+            android:background="@drawable/shape_bg_login"
+            android:minHeight="300dp"/>
+
+
+        <TextView
+            android:id="@+id/tv_lg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:drawablePadding="3dp"
+            android:drawableTop="@mipmap/ic_launcher_round"
+            android:text="@string/app_name"
+            android:textColor="@color/c_FF001208"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            />
+
+
+        <EditText
+            android:id="@+id/etv_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_lg"
+            android:layout_marginEnd="27dp"
+            android:layout_marginLeft="27dp"
+            android:layout_marginRight="27dp"
+            android:layout_marginStart="27dp"
+            android:layout_marginTop="45dp"
+            android:background="@drawable/green_line"
+            android:drawableLeft="@mipmap/email_ic"
+            android:drawablePadding="16dp"
+            android:drawableStart="@mipmap/email_ic"
+            android:hint="@string/input_email"
+            android:inputType="textEmailAddress"
+            android:maxLength="30"
+            android:maxLines="1"
+            android:paddingBottom="10dp"
+            android:textAlignment="viewStart"
+            android:textColor="@color/c_FF001208"
+            android:textColorHint="@color/c_4D001208"
+            android:textSize="15sp"/>
+
+        <RelativeLayout
+            android:id="@+id/rl_code"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/etv_email"
+            android:layout_marginEnd="27dp"
+            android:layout_marginLeft="27dp"
+            android:layout_marginRight="27dp"
+            android:layout_marginStart="27dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/green_line"
+            android:paddingBottom="10dp">
+
+            <EditText
+                android:id="@+id/etv_code"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@id/tv_time"
+                android:layout_toStartOf="@id/tv_time"
+                android:background="@color/bg_no"
+                android:inputType="number"
+                android:maxLength="10"
+                android:maxLines="1"
+                android:textAlignment="viewStart"
+                android:textColor="@color/c_FF001208"
+                android:textColorHint="@color/c_4D001208"
+                android:textSize="15sp"/>
+
+            <com.base.muslim.view.ArNumberTextView
+                android:id="@+id/tv_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:textColor="@color/c_80334139"
+                android:textSize="15sp"/>
+
+            <TextView
+                android:id="@+id/tv_get_code"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/get_code"
+                android:textAlignment="viewStart"
+                android:textColor="@color/c_FFFF5D03"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                />
+
+
+        </RelativeLayout>
+
+        <EditText
+            android:id="@+id/etv_psd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/rl_code"
+            android:layout_marginEnd="27dp"
+            android:layout_marginLeft="27dp"
+            android:layout_marginRight="27dp"
+            android:layout_marginStart="27dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/green_line"
+            android:drawableLeft="@mipmap/key_ic"
+            android:drawablePadding="16dp"
+            android:drawableStart="@mipmap/key_ic"
+            android:hint="@string/input_psd"
+            android:inputType="textPassword"
+            android:maxLength="16"
+            android:maxLines="1"
+            android:paddingBottom="10dp"
+            android:textAlignment="viewStart"
+            android:textColor="@color/c_FF001208"
+            android:textColorHint="@color/c_4D001208"
+            android:textSize="15sp"/>
+
+
+        <TextView
+            android:id="@+id/tv_sign_up"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/shape_btn_save"
+            android:gravity="center"
+            android:minHeight="44dp"
+            android:layout_alignParentBottom="true"
+            android:minWidth="180dp"
+            android:text="@string/sign_up"
+            android:textColor="@color/c_ffffff"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            />
+
+    </RelativeLayout>
+
+
+    <TextView
+        android:id="@+id/tv_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="36dp"
+        android:text="@string/LOGIN"
+        android:textColor="@color/c_FF0767FF"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        />
+
+
+</LinearLayout>

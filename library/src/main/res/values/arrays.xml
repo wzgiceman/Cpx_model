@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!--登录成功key-->
-    <string name="loginSuc">loginSuc</string>
-    <string name="facebook_log">NEED_TO_BIND</string>
-
     <!--埋点1期-->
     <string name="click_prayers">click_button_prayers</string>
     <string name="click_wallpaper">click_button_wallpaper</string>

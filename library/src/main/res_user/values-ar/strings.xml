@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+    <!--user模块-->
+    <string name="bind_user">إعداد  كلمة السر </string>
+    <string name="log">تسجيل الدخول</string>
+    <string name="signup">التسجيل</string>
+    <string name="log_facbook">قم بتسجيل الدخول باستخدام الفيسبوك</string>
+    <string name="input_email">أدخل عنوان بريد الإلكتروني</string>
+    <string name="input_psd">أدخل كلمة المرور الخاصة بك</string>
+    <string name="forgot_psd">هل نسيت كلمة المرور؟</string>
+    <string name="sign_up">التسجيل</string>
+    <string name="ok">حسنا</string>
+    <string name="tip_bind_user"> وجود الخبر٬الرجاء إعداد كلمة السر لربط البريد الإلكتروني</string>
+    <string name="login">تسجيل الدخول</string>
+    <string name="bind_suc"> قمت بربطه بنجاح </string>
+    <string name="LOGIN">تسجيل الدخول</string>
+    <string name="login_suc">تسجيل الدخول بنجاح</string>
+    <string name="enter_nikename">أدخل اسم المستخدم</string>
+    <string name="Nickname">كُنْيَة</string>
+    <string name="Photo">صورة</string>
+    <string name="Sign_Out">تسجيل الخروج</string>
+    <string name="person_infor">معلومات شخصية </string>
+    <string name="log_out_deter">تثبيت الخروج</string>
+    <string name="modify_user_suc">تم تحقق المستخدم بنجاح</string>
+    <string name="get_code">الحصول على رمز التحقق</string>
+    <string name="set_psd">إعادة إعداد كلمة المرور</string>
+    <string name="set_new_psd">إعداد  كلمة السر الجديدة</string>
+    <string name="set_psd_suc">تم إعداد كلمة المرور بنجاح</string>
+    <string name="reg_suc">تم التسجيل بنجاح</string>
+</resources>

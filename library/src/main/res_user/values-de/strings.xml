@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+    <!--user模块-->
+    <string name="bind_user">Passwort festlegen</string>
+    <string name="log">Login</string>
+    <string name="signup">Registrieren</string>
+    <string name="log_facbook">Mit Facebook anmelden</string>
+    <string name="input_email">Geben Sie Ihre E-Mail-Adresse ein</string>
+    <string name="input_psd">Geben Sie Ihr Passwort ein</string>
+    <string name="forgot_psd">Passwort vergessen?</string>
+    <string name="sign_up">REGISTRIEREN</string>
+    <string name="ok">OK</string>
+    <string name="tip_bind_user">Tipps:\n Diese Nachricht existiert bereits. Bitte legen Sie ein Passwort fest, um dies Mailbox zu binden</string>
+    <string name="login">Login</string>
+    <string name="bind_suc">Bindungserfolg</string>
+    <string name="LOGIN">Einloggen</string>
+    <string name="login_suc">Login erfolgreich</string>
+    <string name="enter_nikename">Geben Sie Ihren Spitznamen ein</string>
+    <string name="Nickname">Nickname</string>
+    <string name="Photo">Foto</string>
+    <string name="Sign_Out">Abmelden</string>
+    <string name="person_infor">Angaben zur Person </string>
+    <string name="log_out_deter">Das Ende bestimmen</string>
+    <string name="modify_user_suc">Benutzer erfolgreich modifiziert</string>
+    <string name="get_code">Verifizierungscode erhalten</string>
+    <string name="set_psd">Passwort zurücksetzen</string>
+    <string name="set_new_psd">Neues Passwort festlegen</string>
+    <string name="set_psd_suc">Passwort erfolgreich festgelegt</string>
+    <string name="reg_suc">Erfolgreich registriert</string>
+</resources>

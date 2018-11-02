@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--登录成功key-->
+    <string name="loginSuc">loginSuc</string>
+    <string name="facebook_log">NEED_TO_BIND</string>
+
+
+</resources>

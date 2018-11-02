@@ -112,6 +112,7 @@ public class WrapLayout extends ViewGroup {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec,heightMeasureSpec);
         final int paddingStart = Compat.getPaddingStart(this);
         final int paddingEnd = Compat.getPaddingEnd(this);
         final int paddingTop = getPaddingTop();

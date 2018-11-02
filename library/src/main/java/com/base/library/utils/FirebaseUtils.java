@@ -3,16 +3,23 @@ package com.base.library.utils;
 import android.os.Bundle;
 
 import com.base.library.retrofit_rx.RxRetrofitApp;
+import com.facebook.appevents.AppEventsLogger;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
 /**
- * firebase埋点统计
+ * firebase埋点统计 和facebook 事件统计
  * firebase utils
+ * @auth zhigang wei
  */
 public class FirebaseUtils {
 
     private static volatile FirebaseUtils intance;
     private static FirebaseAnalytics mFirebaseAnalytics;
+
+    /**
+     * Facebook 统计
+     */
+    private static AppEventsLogger mLogger;
 
     public static FirebaseUtils getInstance() {
         if (intance == null) {
@@ -23,6 +30,7 @@ public class FirebaseUtils {
 
     private FirebaseUtils() {
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(RxRetrofitApp.getApplication());
+        mLogger = AppEventsLogger.newLogger(RxRetrofitApp.getApplication());
     }
 
     /**
@@ -37,6 +45,7 @@ public class FirebaseUtils {
         }
         value.putInt(key, 1);
         mFirebaseAnalytics.logEvent(key, value);
+        mLogger.logEvent(key,value);
     }
 
     /**

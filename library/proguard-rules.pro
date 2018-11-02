@@ -258,6 +258,11 @@ public static java.lang.String TABLENAME;
 # If you do not use RxJava:
 -dontwarn rx.**
 
+### UCrop
+-dontwarn com.yalantis.ucrop**
+-keep class com.yalantis.ucrop** { *; }
+-keep interface com.yalantis.ucrop** { *; }
+
 
 #lib基础包混淆
 -keep class com.base.library.retrofit_rx.** { *; }
@@ -269,14 +274,13 @@ public static java.lang.String TABLENAME;
 -keep class com.prog.muslim.db.** { *; }
 -keep class com.prog.muslim.bean.resulte.** { *; }
 -keep class com.base.share_data.** { *; }
+-keep class com.base.muslim.user.common.** { *; }
 
 
 
 #social
-
-#需要反射的实体类
--keep class com.base.share_data.** { *; }
--keep class com.base.library.retrofit_rx.** { *; }
+-keep class com.muslim.pro.imuslim.azan.social.tasbih.commons.entities.** {*;}
+-keep class com.muslim.pro.imuslim.azan.social.wish.entities.** {*;}
 
 
 #greeting_cards

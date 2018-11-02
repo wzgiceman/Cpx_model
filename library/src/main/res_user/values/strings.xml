@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+    <!--user模块-->
+    <string name="bind_user">Set A Password</string>
+    <string name="log">Login</string>
+    <string name="signup">Sign Up</string>
+    <string name="log_facbook">Sign In with Facebook</string>
+    <string name="input_email">Enter your email address</string>
+    <string name="input_psd">Enter your password</string>
+    <string name="forgot_psd">Forgot Password ?</string>
+    <string name="sign_up">SIGN UP</string>
+    <string name="ok">OK</string>
+    <string name="tip_bind_user">Tips：\n This message already exists, please set a password to bind this mailbox</string>
+    <string name="login">Login</string>
+    <string name="bind_suc">Binding success</string>
+    <string name="LOGIN">LOGIN</string>
+    <string name="login_suc">Login successful</string>
+    <string name="enter_nikename">Enter your Nickname</string>
+    <string name="Nickname">Nickname</string>
+    <string name="Photo">Photo</string>
+    <string name="Sign_Out">Sign Out</string>
+    <string name="person_infor">Personal information </string>
+    <string name="log_out_deter">Determine to exit</string>
+    <string name="modify_user_suc">User modified successfully</string>
+    <string name="get_code">Get Verification Code</string>
+    <string name="set_psd">Reset Password</string>
+    <string name="set_new_psd">Set a new password</string>
+    <string name="set_psd_suc">Password set successfully</string>
+    <string name="reg_suc">Registered successfully</string>
+</resources>

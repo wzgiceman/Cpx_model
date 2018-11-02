@@ -2,6 +2,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'org.greenrobot.greendao'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+//apply plugin: 'io.fabric'
 
 
 android {
@@ -21,6 +22,9 @@ android {
             resValue "string", "app_name", "${appName}"
             resValue "string", "versionWeb", "${versionWeb}"
             resValue "string", "isDebug", "${false}"
+            resValue "string", "facebook_app_id", "${facebook_app_id}"
+            resValue "string", "fb_login_protocol_scheme", "${fb_login_protocol_scheme}"
+            resValue "string", "firebase_default_notification_channel_id", "${firebase_default_notification_channel_id}"
         }
         release {
             minifyEnabled false
@@ -30,6 +34,9 @@ android {
             resValue "string", "app_name", "${appName}"
             resValue "string", "versionWeb", "${versionWeb}"
             resValue "string", "isDebug", "${true}"
+            resValue "string", "facebook_app_id", "${facebook_app_id}"
+            resValue "string", "fb_login_protocol_scheme", "${fb_login_protocol_scheme}"
+            resValue "string", "firebase_default_notification_channel_id", "${firebase_default_notification_channel_id}"
         }
     }
 
@@ -43,6 +50,15 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    sourceSets {
+        main {
+            res.srcDirs = [
+                    'src/main/res',
+                    'src/main/res_user'
+            ]
+        }
     }
 
     lintOptions {
@@ -66,7 +82,6 @@ greendao {
 
 dependencies {
     api fileTree(include: ['*.jar'], dir: 'libs')
-
     api rootProject.ext.dependencies["rxjava"]
     api rootProject.ext.dependencies["rxandroid"]
     api rootProject.ext.dependencies["rxjava_adpater"]
@@ -77,12 +92,33 @@ dependencies {
     api(rootProject.ext.dependencies["glide"]){
         exclude group: "com.android.support"
     }
+    api rootProject.ext.dependencies["google-maps"]
     api rootProject.ext.dependencies["kotlin"]
-    api rootProject.ext.dependencies["support-v7"]
-    api rootProject.ext.dependencies["design"]
     api rootProject.ext.dependencies["firebase-core"]
+    api rootProject.ext.dependencies["support-v7"]
+    api rootProject.ext.dependencies["firebase-messaging"]
+    api rootProject.ext.dependencies["design"]
+
+    //facebook
+    api(rootProject.ext.dependencies["facebook-ays"])
+            {
+                exclude group: 'com.android.support', module: 'support-v4'
+                exclude group: 'com.android.support', module: 'appcompat-v7'
+                exclude group: 'com.android.support', module: 'customtabs'
+                exclude group: 'com.android.support', module: 'support-annotations'
+                exclude group: 'com.android.support', module: 'support-core-utils'
+            }
 
     /*leak 内存泄露检查*/
     debugApi rootProject.ext.dependencies["debugleakcanary"]
     releaseApi rootProject.ext.dependencies["releaseleakcanary"]
+
+    //图片裁剪
+    api(rootProject.ext.dependencies['ucrop']){
+        exclude group: "com.android.support"
+        exclude group: "com.squareup.okhttp3"
+    }
+
+
 }
+//apply plugin: 'com.google.gms.google-services'

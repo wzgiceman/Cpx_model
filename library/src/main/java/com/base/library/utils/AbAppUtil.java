@@ -82,7 +82,6 @@ public class AbAppUtil {
      * @param imgPath  图片路径，不分享图片则传null
      */
     public static void shareMsg(Context context, String msgTitle, String msgText, String imgPath) {
-        AbLogUtil.d("xc","imgPath:"+imgPath);
         Intent intent = new Intent(Intent.ACTION_SEND);
         if (imgPath == null || imgPath.equals("")) {
             intent.setType("text/plain"); // 纯文本
