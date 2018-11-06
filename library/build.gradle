@@ -2,7 +2,6 @@ apply plugin: 'com.android.library'
 apply plugin: 'org.greenrobot.greendao'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-//apply plugin: 'io.fabric'
 
 
 android {
@@ -92,11 +91,9 @@ dependencies {
     api(rootProject.ext.dependencies["glide"]){
         exclude group: "com.android.support"
     }
-    api rootProject.ext.dependencies["google-maps"]
     api rootProject.ext.dependencies["kotlin"]
     api rootProject.ext.dependencies["firebase-core"]
     api rootProject.ext.dependencies["support-v7"]
-    api rootProject.ext.dependencies["firebase-messaging"]
     api rootProject.ext.dependencies["design"]
 
     //facebook
@@ -121,4 +118,3 @@ dependencies {
 
 
 }
-//apply plugin: 'com.google.gms.google-services'
