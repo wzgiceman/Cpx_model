@@ -59,7 +59,6 @@ class RecyclerActivity : BaseFragmentActivity() {
                         override fun onNext(t: Long) {
                             adapter.add(RecyclerItemBean("位置xxx", System.currentTimeMillis().toInt(), false))
                             erc.setRefreshing(false)
-
                         }
                     })
 
