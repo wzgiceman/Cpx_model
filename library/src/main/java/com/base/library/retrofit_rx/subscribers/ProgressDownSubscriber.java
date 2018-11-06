@@ -8,7 +8,7 @@ import com.base.library.retrofit_rx.downlaod.DownLoadListener.DownloadProgressLi
 import com.base.library.retrofit_rx.downlaod.DownState;
 import com.base.library.retrofit_rx.downlaod.HttpDownManager;
 import com.base.library.retrofit_rx.listener.HttpDownOnNextListener;
-import com.base.library.retrofit_rx.utils.DbDwonUtil;
+import com.base.library.retrofit_rx.utils.DownDbUtil;
 
 import java.io.File;
 import java.lang.ref.SoftReference;
@@ -68,7 +68,7 @@ public class ProgressDownSubscriber<T>  implements Observer<T>, DownloadProgress
         }
         HttpDownManager.getInstance().remove(downInfo);
         downInfo.setState(DownState.FINISH);
-        DbDwonUtil.getInstance().update(downInfo);
+        DownDbUtil.getInstance().update(downInfo);
     }
 
     /**
@@ -85,7 +85,7 @@ public class ProgressDownSubscriber<T>  implements Observer<T>, DownloadProgress
 
         HttpDownManager.getInstance().remove(downInfo);
         downInfo.setState(DownState.ERROR);
-        DbDwonUtil.getInstance().update(downInfo);
+        DownDbUtil.getInstance().update(downInfo);
 
         File file = new File(downInfo.getSavePath());
         if (file.exists()) {

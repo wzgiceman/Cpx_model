@@ -13,12 +13,12 @@ import kotlinx.android.synthetic.main.activity_recycler.*
  *
  *Describe:EasyRecyclerView使用界面
  *
- * 地址:https://github.com/Jude95/EasyRecyclerView
- *
  *Created by zhigang wei
  *on 2018/8/30
  *
  *Company :cpx
+ *
+ * 更多复杂用法处理参考:https://github.com/Jude95/EasyRecyclerView
  */
 class RecyclerActivity : BaseFragmentActivity() {
     private val adapter by lazy { RecAdapter(this) }

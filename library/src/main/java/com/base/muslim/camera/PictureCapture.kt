@@ -29,7 +29,7 @@ object PictureCapture :OnPicturePathListener ,Serializable{
      * @param listener   未压缩的图片文件回掉接口
      * @param needCrop   是否需要剪裁
      */
-    fun getPicture(context: Context, listener: OnPicturePathListener, needCrop: Boolean) {
+    fun getPicture(context: Context, listener: OnPicturePathListener, needCrop: Boolean=false) {
         this.needCrop = needCrop
         weakReference = WeakReference(listener)
         listenerItem.listener = this
@@ -42,7 +42,7 @@ object PictureCapture :OnPicturePathListener ,Serializable{
      * @param listener   压缩过的图片文件回掉接口
      * @param needCrop   是否需要剪裁
      */
-    fun getCompressionPicture(context: Context, listener: OnPicturePathListener, needCrop: Boolean) {
+    fun getCompressionPicture(context: Context, listener: OnPicturePathListener, needCrop: Boolean=false) {
         this.needCrop = needCrop
         weakReference = WeakReference(listener)
         listenerItem.listener = this

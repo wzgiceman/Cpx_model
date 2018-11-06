@@ -9,7 +9,7 @@ import com.base.library.retrofit_rx.exception.HttpTimeException;
 import com.base.library.retrofit_rx.exception.RetryWhenNetworkException;
 import com.base.library.retrofit_rx.http.converter.RetrofitStringConverterFactory;
 import com.base.library.retrofit_rx.subscribers.ProgressDownSubscriber;
-import com.base.library.retrofit_rx.utils.DbDwonUtil;
+import com.base.library.retrofit_rx.utils.DownDbUtil;
 
 import java.io.File;
 import java.io.IOException;
@@ -45,14 +45,14 @@ public class HttpDownManager {
     /*单利对象*/
     private volatile static HttpDownManager INSTANCE;
     /*数据库类*/
-    private DbDwonUtil db;
+    private DownDbUtil db;
     /*下载进度回掉主线程*/
     private Handler handler;
 
     private HttpDownManager() {
         downInfos = new HashSet<>();
         subMap = new HashMap<>();
-        db = DbDwonUtil.getInstance();
+        db = DownDbUtil.getInstance();
         handler=new Handler(Looper.getMainLooper());
     }
 

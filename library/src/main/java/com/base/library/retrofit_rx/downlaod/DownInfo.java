@@ -7,7 +7,6 @@ import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Keep;
 import org.greenrobot.greendao.annotation.Transient;
-import org.greenrobot.greendao.annotation.Generated;
 
 /**
  * apk下载请求数据基础类
@@ -31,7 +30,7 @@ public class DownInfo {
     @Transient
     private HttpDownOnNextListener listener;
     /*超时设置 单位：秒*/
-    private int connectonTime = 6;
+    private int connectonTime = 15;
     /*state状态数据库保存*/
     private int stateInte;
     /*url*/
@@ -165,4 +164,6 @@ public class DownInfo {
     public void setConnectonTime(int connectonTime) {
         this.connectonTime = connectonTime;
     }
+
+
 }

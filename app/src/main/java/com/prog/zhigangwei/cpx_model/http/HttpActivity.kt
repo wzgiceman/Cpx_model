@@ -7,6 +7,7 @@ import com.base.muslim.base.activity.BaseFragmentActivity
 import com.prog.zhigangwei.cpx_model.R
 import com.prog.zhigangwei.cpx_model.http.api.notice.NoticePostApi
 import com.prog.zhigangwei.cpx_model.http.api.wallpaper.HomeWallApi
+import com.prog.zhigangwei.cpx_model.http.down.DownActivity
 import kotlinx.android.synthetic.main.activity_http.*
 
 /**
@@ -17,6 +18,8 @@ import kotlinx.android.synthetic.main.activity_http.*
  *on 2018/8/24
  *
  *Company :cpx
+ *
+ * 更复杂用例参考地址:https://github.com/wzgiceman/RxjavaRetrofitDemo-string-master/blob/master/app/src/main/java/com/example/retrofit/activity/DownLaodActivity.java
  */
 class HttpActivity : BaseFragmentActivity(), HttpOnNextListener {
     private val httpManager by lazy { HttpManager(this, this) }
@@ -36,6 +39,7 @@ class HttpActivity : BaseFragmentActivity(), HttpOnNextListener {
     override fun initWidget() {
         btn_get.setOnClickListener { httpManager.doHttpDeal(wallApi) }
         btn_post.setOnClickListener { httpManager.doHttpDeal(noticeApi) }
+        btn_down.setOnClickListener { jumpActivity(DownActivity::class.java)}
     }
 
 

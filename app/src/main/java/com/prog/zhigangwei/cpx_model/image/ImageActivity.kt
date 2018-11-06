@@ -39,7 +39,7 @@ class ImageActivity : BaseFragmentActivity(), OnPicturePathListener {
 
         btn_local.setOnClickListener {
             /*PictureCapture提供了很多本地图片都获取方法,点击详情查看*/
-            PictureCapture.getPicture(this, this, false)
+            PictureCapture.getPicture(this, this)
         }
 
     }

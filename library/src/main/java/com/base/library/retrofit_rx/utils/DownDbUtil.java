@@ -20,14 +20,14 @@ import java.util.List;
  * Created by WZG on 2016/10/25.
  */
 
-public class DbDwonUtil {
-    private static DbDwonUtil db;
+public class DownDbUtil {
+    private static DownDbUtil db;
     private final static String dbName = "lib";
     private DaoMaster.DevOpenHelper openHelper;
     private Context context;
 
 
-    public DbDwonUtil() {
+    public DownDbUtil() {
         context= RxRetrofitApp.getApplication();
         openHelper = new DaoMaster.DevOpenHelper(context, dbName, null);
     }
@@ -37,11 +37,11 @@ public class DbDwonUtil {
      * 获取单例
      * @return
      */
-    public static DbDwonUtil getInstance() {
+    public static DownDbUtil getInstance() {
         if (db == null) {
-            synchronized (DbDwonUtil.class) {
+            synchronized (DownDbUtil.class) {
                 if (db == null) {
-                    db = new DbDwonUtil();
+                    db = new DownDbUtil();
                 }
             }
         }
