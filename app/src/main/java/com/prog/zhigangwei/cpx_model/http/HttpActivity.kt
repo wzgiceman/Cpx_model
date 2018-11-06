@@ -19,8 +19,7 @@ import kotlinx.android.synthetic.main.activity_http.*
  *
  *Company :cpx
  *
- * 更复杂用例参考地址:https://github.com/wzgiceman/RxjavaRetrofitDemo-string-master/blob/master/app/src/main/java/com/example/retrofit/activity/DownLaodActivity.java
- */
+  */
 class HttpActivity : BaseFragmentActivity(), HttpOnNextListener {
     private val httpManager by lazy { HttpManager(this, this) }
 

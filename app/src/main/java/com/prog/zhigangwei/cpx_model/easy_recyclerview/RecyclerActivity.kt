@@ -1,12 +1,16 @@
 package com.prog.zhigangwei.cpx_model.easy_recyclerview
 
 import android.support.v7.widget.LinearLayoutManager
+import com.base.library.retrofit_rx.observer.AbsObserver
 import com.base.muslim.base.activity.BaseFragmentActivity
 import com.prog.zhigangwei.cpx_model.R
 import com.prog.zhigangwei.cpx_model.easy_recyclerview.test_adapter.RecAdapter
 import com.prog.zhigangwei.cpx_model.easy_recyclerview.test_adapter.footer.RcFooter
 import com.prog.zhigangwei.cpx_model.easy_recyclerview.test_adapter.head.RcHead
+import io.reactivex.Observable
+import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.activity_recycler.*
+import java.util.concurrent.TimeUnit
 
 
 /**
@@ -48,6 +52,21 @@ class RecyclerActivity : BaseFragmentActivity() {
         erc.adapter = adapter
         btn_head.setOnClickListener { initHead() }
         btn_footer.setOnClickListener { initFooter() }
+        /*下拉刷新*/
+        erc.setRefreshListener {
+            Observable.timer(2, TimeUnit.SECONDS).observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(object : AbsObserver<Long>() {
+                        override fun onNext(t: Long) {
+                            adapter.add(RecyclerItemBean("位置xxx", System.currentTimeMillis().toInt(), false))
+                            erc.setRefreshing(false)
+
+                        }
+                    })
+
+        }
+        /*加载更多*/
+//        void setMore(final int res,OnMoreListener listener);
+//        void setMore(final View view,OnMoreListener listener);
     }
 
     /**

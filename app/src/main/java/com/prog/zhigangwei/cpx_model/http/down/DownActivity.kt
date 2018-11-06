@@ -17,6 +17,8 @@ import java.io.File
  *on 2018/11/6
  *
  *Company :cpx
+ *
+ * * 更复杂用例参考地址:https://github.com/wzgiceman/RxjavaRetrofitDemo-string-master/blob/master/app/src/main/java/com/example/retrofit/activity/DownLaodActivity.java
  */
 class DownActivity : BaseFragmentActivity() {
     private var info: DownInfo? = DownDbUtil.getInstance().queryDownBy(10001)
