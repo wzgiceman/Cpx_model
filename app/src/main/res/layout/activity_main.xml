@@ -29,19 +29,30 @@
         android:id="@+id/btn_RxBus"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textAllCaps="false"
         android:text="RxBus"/>
 
     <Button
         android:id="@+id/btn_EasyRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textAllCaps="false"
         android:text="EasyRecyclerView"/>
 
     <Button
         android:id="@+id/btn_greendao"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="数据库greendao"/>
+        android:textAllCaps="false"
+        android:text="数据库GreenDao"/>
+
+    <Button
+        android:id="@+id/btn_rxjava"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="RxJava"
+        android:textAllCaps="false"
+        />
 
 
 </LinearLayout>

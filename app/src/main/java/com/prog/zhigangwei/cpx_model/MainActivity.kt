@@ -6,6 +6,7 @@ import com.prog.zhigangwei.cpx_model.http.HttpActivity
 import com.prog.zhigangwei.cpx_model.image.ImageActivity
 import com.prog.zhigangwei.cpx_model.permission.PermisssionActivity
 import com.prog.zhigangwei.cpx_model.rxbus.RxBusActivity
+import com.prog.zhigangwei.cpx_model.rxjava.RxJavaActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 /**
@@ -57,6 +58,7 @@ class MainActivity : BaseFragmentActivity() {
         btn_img.setOnClickListener { jumpActivity(ImageActivity::class.java) }
         btn_RxBus.setOnClickListener { jumpActivity(RxBusActivity::class.java) }
         btn_EasyRecyclerView.setOnClickListener { jumpActivity(RecyclerActivity::class.java) }
+        btn_rxjava.setOnClickListener { jumpActivityFinish(RxJavaActivity::class.java) }
     }
 
     override fun initComplexWidget() {

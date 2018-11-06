@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/c_FFFFFFFF"
+    tools:context="com.prog.zhigangwei.cpx_model.rxjava.RxJavaActivity">
+
+    <Button
+        android:id="@+id/btn_rx_default"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="默认"
+        />
+
+    <Button
+        android:id="@+id/btn_rx_scheduler"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="线程调度"
+        />
+
+    <Button
+        android:id="@+id/btn_rx_operator"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="操作符"
+        />
+
+
+</LinearLayout>
