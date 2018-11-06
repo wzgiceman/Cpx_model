@@ -18,15 +18,11 @@ import com.squareup.leakcanary.LeakCanary
  */
 class MApp : MultiDexApplication() {
 
-
     override fun onCreate() {
         super.onCreate()
         RxRetrofitApp.init(this, BuildConfig.DEBUG)
         initMAT()
     }
-
-
-
 
     /**
      * 表示应用程序正常运行，并且不会被杀掉。但是目前手机的内存已经非常低了，

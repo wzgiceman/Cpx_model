@@ -48,16 +48,6 @@ object ShareSparse {
 
 
     /**
-     * set全局变量
-     * @param key 关键key
-     * @param any 数据源
-     */
-    fun putValue(key: String, any: Any) {
-        putValue(key, any, false)
-    }
-
-
-    /**
      * set全局db变量
      * @param key 关键key
      * @param any 数据源
@@ -74,7 +64,7 @@ object ShareSparse {
      * @param any 数据源
      * @param saveLocal 是否需要缓冲处理
      */
-    fun putValue(key: String, any: Any, saveLocal: Boolean) {
+    fun putValue(key: String, any: Any, saveLocal: Boolean=false) {
         if (saveLocal) {
             putDbValue(key, any)
         }
