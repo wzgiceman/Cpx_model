@@ -12,12 +12,14 @@ import io.reactivex.functions.Consumer
 import io.reactivex.functions.Function
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_rx_java.*
+import org.reactivestreams.Subscription
 import java.util.concurrent.TimeUnit
 
 
 /**
  *
  * RxJava相关的Demo的Activity
+ * read <a href="https://maxwell-nc.github.io/android/rxjava2-1.html">RxJava2入门</a>
  * @author xuechao
  * @date 2018/11/6 下午3:39
  * @copyright cpx
@@ -42,6 +44,11 @@ class RxJavaActivity : BaseFragmentActivity() {
             defaultUse()
         }
 
+        //背压的使用方式
+        btn_rx_flowable.setOnClickListener {
+            testFlowable()
+        }
+
         //线程调度
         btn_rx_scheduler.setOnClickListener {
             testScheduler()
@@ -53,6 +60,48 @@ class RxJavaActivity : BaseFragmentActivity() {
         }
     }
 
+    /**
+     * 测试背压模式的观察者
+     */
+    private fun testFlowable() {
+        //1.创建Flowable
+        var flowable = Flowable.create(object:FlowableOnSubscribe<Int>{
+            override fun subscribe(emitter: FlowableEmitter<Int>) {
+                emitter.onNext(1)
+                emitter.onNext(2)
+                emitter.onNext(3)
+                emitter.onNext(4)
+                emitter.onNext(5)
+                emitter.onComplete()
+            }
+
+        },BackpressureStrategy.BUFFER)
+
+        //2.创建Subscriber
+        var subscriber = object:FlowableSubscriber<Int>{
+            override fun onComplete() {
+                AbLogUtil.d("xc","onComplete")
+            }
+
+            override fun onSubscribe(s: Subscription) {
+                AbLogUtil.d("xc","onSubscribe")
+                //订阅时候的操作,请求多少事件
+                s.request(Long.MAX_VALUE)
+            }
+
+            override fun onNext(t: Int?) {
+                AbLogUtil.d("xc","onNext $t")
+            }
+
+            override fun onError(t: Throwable?) {
+                AbLogUtil.d("xc","onNext ${t?.message}")
+            }
+
+        }
+        //3.订阅
+        flowable.subscribe(subscriber)
+
+    }
 
 
     /**
