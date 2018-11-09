@@ -9,33 +9,25 @@ android {
     defaultConfig {
         minSdkVersion rootProject.ext.android.minSdkVersion
         targetSdkVersion rootProject.ext.android.targetSdkVersion
+
+        resValue "string", "app_downloadUrl", "${app_downloadUrl}"
+        resValue "string", "feed_email", "${feed_email}"
+        resValue "string", "mapapikey", "${mapapikey}"
+        resValue "string", "app_name", "${appName}"
+        resValue "string", "versionWeb", "${versionWeb}"
+        resValue "string", "isDebug", "${false}"
+        resValue "string", "facebook_app_id", "${facebook_app_id}"
+        resValue "string", "fb_login_protocol_scheme", "${fb_login_protocol_scheme}"
+        resValue "string", "firebase_default_notification_channel_id", "${firebase_default_notification_channel_id}"
     }
 
 
     buildTypes {
         debug {
             minifyEnabled false
-            resValue "string", "app_downloadUrl", "${app_downloadUrl}"
-            resValue "string", "feed_email", "${feed_email}"
-            resValue "string", "mapapikey", "${mapapikey}"
-            resValue "string", "app_name", "${appName}"
-            resValue "string", "versionWeb", "${versionWeb}"
-            resValue "string", "isDebug", "${false}"
-            resValue "string", "facebook_app_id", "${facebook_app_id}"
-            resValue "string", "fb_login_protocol_scheme", "${fb_login_protocol_scheme}"
-            resValue "string", "firebase_default_notification_channel_id", "${firebase_default_notification_channel_id}"
         }
         release {
             minifyEnabled false
-            resValue "string", "app_downloadUrl", "${app_downloadUrl}"
-            resValue "string", "feed_email", "${feed_email}"
-            resValue "string", "mapapikey", "${mapapikey}"
-            resValue "string", "app_name", "${appName}"
-            resValue "string", "versionWeb", "${versionWeb}"
-            resValue "string", "isDebug", "${true}"
-            resValue "string", "facebook_app_id", "${facebook_app_id}"
-            resValue "string", "fb_login_protocol_scheme", "${fb_login_protocol_scheme}"
-            resValue "string", "firebase_default_notification_channel_id", "${firebase_default_notification_channel_id}"
         }
     }
 
