@@ -1,6 +1,6 @@
 package com.prog.zhigangwei.cpx_model.http.api.wallpaper
 
-import com.base.library.retrofit_rx.Api.BaseApi
+import com.base.library.rxRetrofit.api.BaseApi
 import com.prog.zhigangwei.cpx_model.http.api.ApiService
 import retrofit2.Retrofit
 import io.reactivex.Observable

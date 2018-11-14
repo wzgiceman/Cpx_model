@@ -1,9 +1,9 @@
 package com.prog.zhigangwei.cpx_model.http.down
 
-import com.base.library.retrofit_rx.downlaod.DownInfo
-import com.base.library.retrofit_rx.downlaod.HttpDownManager
-import com.base.library.retrofit_rx.listener.HttpDownOnNextListener
-import com.base.library.retrofit_rx.utils.DownDbUtil
+import com.base.library.rxRetrofit.downlaod.DownInfo
+import com.base.library.rxRetrofit.downlaod.HttpDownManager
+import com.base.library.rxRetrofit.listener.HttpDownOnNextListener
+import com.base.library.rxRetrofit.utils.DownDbUtil
 import com.base.muslim.base.activity.BaseFragmentActivity
 import com.prog.zhigangwei.cpx_model.R
 import kotlinx.android.synthetic.main.activity_http_down.*

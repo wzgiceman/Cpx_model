@@ -25,7 +25,7 @@ import com.prog.zhigangwei.cpx_model.easy_recyclerview.RecyclerItemBean
 class RecAdapter(context: Context) : RecyclerArrayAdapter<RecyclerItemBean>(context) {
 
 
-    override fun OnCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<*> {
+    override fun onCreateEasyViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<*> {
         /*弱引用防止泄露*/
         val adapter by Weak {
             this

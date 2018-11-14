@@ -1,8 +1,8 @@
 package com.prog.zhigangwei.cpx_model.http
 
-import com.base.library.retrofit_rx.exception.ApiException
-import com.base.library.retrofit_rx.http.HttpManager
-import com.base.library.retrofit_rx.listener.HttpOnNextListener
+import com.base.library.rxRetrofit.exception.ApiException
+import com.base.library.rxRetrofit.http.HttpManager
+import com.base.library.rxRetrofit.listener.HttpOnNextListener
 import com.base.muslim.base.activity.BaseFragmentActivity
 import com.prog.zhigangwei.cpx_model.R
 import com.prog.zhigangwei.cpx_model.http.api.notice.NoticePostApi

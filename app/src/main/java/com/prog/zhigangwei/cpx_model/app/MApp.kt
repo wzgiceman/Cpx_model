@@ -2,7 +2,7 @@ package com.prog.zhigangwei.cpx_model.app
 
 import android.content.ComponentCallbacks2
 import android.support.multidex.MultiDexApplication
-import com.base.library.retrofit_rx.RxRetrofitApp
+import com.base.library.rxRetrofit.RxRetrofitApp
 import com.bumptech.glide.Glide
 import com.prog.zhigangwei.cpx_model.BuildConfig
 import com.squareup.leakcanary.LeakCanary

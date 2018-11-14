@@ -1,7 +1,7 @@
 package com.prayer.time.muslim.social_contact.app
 
 import android.support.multidex.MultiDexApplication
-import com.base.library.retrofit_rx.RxRetrofitApp
+import com.base.library.rxRetrofit.RxRetrofitApp
 import com.prayer.time.muslim.social_contact.BuildConfig
 import com.squareup.leakcanary.LeakCanary
 

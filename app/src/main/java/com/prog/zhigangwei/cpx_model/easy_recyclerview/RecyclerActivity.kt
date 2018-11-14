@@ -1,7 +1,7 @@
 package com.prog.zhigangwei.cpx_model.easy_recyclerview
 
 import android.support.v7.widget.LinearLayoutManager
-import com.base.library.retrofit_rx.observer.AbsObserver
+import com.base.library.rxRetrofit.observer.AbsObserver
 import com.base.muslim.base.activity.BaseFragmentActivity
 import com.prog.zhigangwei.cpx_model.R
 import com.prog.zhigangwei.cpx_model.easy_recyclerview.test_adapter.RecAdapter

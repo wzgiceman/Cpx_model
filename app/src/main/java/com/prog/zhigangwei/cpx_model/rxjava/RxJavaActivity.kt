@@ -1,6 +1,6 @@
 package com.prog.zhigangwei.cpx_model.rxjava
 
-import com.base.library.retrofit_rx.observer.AbsObserver
+import com.base.library.rxRetrofit.observer.AbsObserver
 import com.base.library.utils.AbLogUtil
 import com.base.muslim.base.activity.BaseFragmentActivity
 import com.prog.zhigangwei.cpx_model.R
