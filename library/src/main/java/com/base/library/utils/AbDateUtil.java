@@ -15,7 +15,7 @@
  */
 package com.base.library.utils;
 
-import com.base.library.retrofit_rx.RxRetrofitApp;
+import com.base.library.rxRetrofit.RxRetrofitApp;
 
 import java.text.DateFormat;
 import java.text.ParseException;

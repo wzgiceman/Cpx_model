@@ -16,7 +16,7 @@ public class RouterList {
     /**
      * 登录界面
      */
-    public static final String LOGINT_ACTIVITY = "com.base.muslim.user.login.LoginActivity";
+    public static final String LOGINT_ACTIVITY = "com.base.muslim.user.login.LoginEmailActivity";
     /**
      * 念珠界面
      */

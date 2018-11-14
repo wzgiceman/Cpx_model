@@ -387,4 +387,20 @@
             <enum name="aswave" value="4"/>
         </attr>
     </declare-styleable>
+
+    <declare-styleable name="ClearEditText">
+        <attr name="clearSrc" format="reference|color" />
+        <attr name="clearSrcWidth" format="dimension" />
+        <attr name="clearSrcHeight" format="dimension" />
+
+    </declare-styleable>
+
+    <declare-styleable name="PasswordEditText">
+        <attr name="hiddenPasswordSrc" format="reference|color" />
+        <attr name="showPasswordSrc" format="reference|color" />
+        <attr name="passwordSrcWidth" format="dimension" />
+        <attr name="passwordSrcHeight" format="dimension" />
+        <attr name="isShowPassword" format="boolean" />
+    </declare-styleable>
+
 </resources>

@@ -2,7 +2,7 @@ package com.base.library.utils;
 
 import android.os.Bundle;
 
-import com.base.library.retrofit_rx.RxRetrofitApp;
+import com.base.library.rxRetrofit.RxRetrofitApp;
 import com.facebook.appevents.AppEventsLogger;
 import com.google.firebase.analytics.FirebaseAnalytics;
 

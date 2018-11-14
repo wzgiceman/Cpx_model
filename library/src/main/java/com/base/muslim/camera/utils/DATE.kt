@@ -303,11 +303,7 @@ object DATE {
      * @return boolean 是否为闰年
      */
     fun isLeapYear(year: Int): Boolean {
-        return if (year % 4 == 0 && year % 400 != 0 || year % 400 == 0) {
-            true
-        } else {
-            false
-        }
+        return year % 4 == 0 && year % 400 != 0 || year % 400 == 0
     }
 
     /**

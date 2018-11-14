@@ -272,5 +272,5 @@ public static java.lang.String TABLENAME;
 #---------------------------------app忽略实体类文件---------------------------------
 #moudle包
 -keep class com.prog.muslim.db.** { *; }
--keep class com.prog.muslim.bean.resulte.** { *; }
+-keep class com.prog.muslim.bean.result.** { *; }
 -keep class com.base.share_data.** { *; }

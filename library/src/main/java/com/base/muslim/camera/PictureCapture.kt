@@ -3,7 +3,7 @@ package com.base.muslim.camera
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import com.base.library.retrofit_rx.RxRetrofitApp
+import com.base.library.rxRetrofit.RxRetrofitApp
 import com.base.muslim.camera.capturedialog.ListenerItem
 import com.base.muslim.camera.capturedialog.PictureCaptureDialog
 import com.base.muslim.camera.utils.Photo
@@ -29,7 +29,7 @@ object PictureCapture :OnPicturePathListener ,Serializable{
      * @param listener   未压缩的图片文件回掉接口
      * @param needCrop   是否需要剪裁
      */
-    fun getPicture(context: Context, listener: OnPicturePathListener, needCrop: Boolean=false) {
+    fun getPicture(context: Context, listener: OnPicturePathListener, needCrop: Boolean = false) {
         this.needCrop = needCrop
         weakReference = WeakReference(listener)
         listenerItem.listener = this
@@ -42,7 +42,7 @@ object PictureCapture :OnPicturePathListener ,Serializable{
      * @param listener   压缩过的图片文件回掉接口
      * @param needCrop   是否需要剪裁
      */
-    fun getCompressionPicture(context: Context, listener: OnPicturePathListener, needCrop: Boolean=false) {
+    fun getCompressionPicture(context: Context, listener: OnPicturePathListener, needCrop: Boolean = false) {
         this.needCrop = needCrop
         weakReference = WeakReference(listener)
         listenerItem.listener = this

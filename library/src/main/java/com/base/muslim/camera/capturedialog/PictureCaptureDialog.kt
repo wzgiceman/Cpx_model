@@ -78,16 +78,16 @@ class PictureCaptureDialog : BaseFragmentActivity() {
     }
 
     private fun setWidgetClick() {
-        Camera_btn.setOnClickListener {
+        tv_camera.setOnClickListener {
             takePicture()
             setVisible()
         }
 
-        Album_btn.setOnClickListener {
+        tv_album.setOnClickListener {
             getPictureFromAlbum()
             setVisible()
         }
-        Select_Cancel.setOnClickListener { finish() }
+        tv_cancel.setOnClickListener { finish() }
     }
 
     private fun setVisible() {
@@ -99,8 +99,6 @@ class PictureCaptureDialog : BaseFragmentActivity() {
                 .subscribe {
                     if (it) { //有权限
                         layout.visibility = View.VISIBLE
-                    } else {
-
                     }
                 }
     }
@@ -133,11 +131,10 @@ class PictureCaptureDialog : BaseFragmentActivity() {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         try {
             val result = PermissionHelper.onRequestPermissionsResult(requestCode, permissions, grantResults)
-            if (result) {
-                when (requestCode) {
-                    PermissionHelper.REQUESTCODE_CAMERA -> takePicture()
-                    PermissionHelper.REQUESTCODE_ALBUM -> getPictureFromAlbum()
-                }
+            if (!result) return
+            when (requestCode) {
+                PermissionHelper.REQUESTCODE_CAMERA -> takePicture()
+                PermissionHelper.REQUESTCODE_ALBUM -> getPictureFromAlbum()
             }
         } catch (e: Exception) {
             e.printStackTrace()
@@ -221,14 +218,12 @@ class PictureCaptureDialog : BaseFragmentActivity() {
      */
     private fun dealWithCropPicture(data: Intent?) {
         try {
-            val uri: Uri? = if (data != null && data.data != null) {
+            val uri: Uri = if (data != null && data.data != null) {
                 data.data
             } else {
                 Uri.fromFile(pictureFile)
             }
-            if (uri != null) {
-                sendImagePath(uri, PictureType.CROP)
-            }
+            sendImagePath(uri, PictureType.CROP)
         } catch (e: Exception) {
             e.printStackTrace()
         }

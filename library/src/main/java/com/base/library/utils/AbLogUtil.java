@@ -18,7 +18,7 @@ package com.base.library.utils;
 import android.content.Context;
 import android.util.Log;
 
-import com.base.library.retrofit_rx.RxRetrofitApp;
+import com.base.library.rxRetrofit.RxRetrofitApp;
 
 // TODO: Auto-generated Javadoc
 

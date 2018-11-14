@@ -63,6 +63,7 @@ abstract public class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
 
     protected OnItemClickListener mItemClickListener;
     protected OnItemLongClickListener mItemLongClickListener;
+    protected OnItemChildClickListener mItemChildClickListener;
 
     protected RecyclerView mRecyclerView;
 
@@ -345,7 +346,6 @@ abstract public class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
      * @param object The object to add at the end of the array.
      */
     public void add(T object) {
-
         if (mEventDelegate != null) mEventDelegate.addData(object == null ? 0 : 1);
         if (object != null) {
             synchronized (mLock) {
@@ -609,7 +609,7 @@ abstract public class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
             return new StateViewHolder(view);
         }
 
-        final BaseViewHolder viewHolder = OnCreateViewHolder(parent, viewType);
+        final BaseViewHolder viewHolder = onCreateEasyViewHolder(parent, viewType);
 
         //itemView 的点击事件
         if (mItemClickListener != null) {
@@ -629,10 +629,11 @@ abstract public class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
                 }
             });
         }
+        viewHolder.setAdapter(this);
         return viewHolder;
     }
 
-    abstract public BaseViewHolder OnCreateViewHolder(ViewGroup parent, int viewType);
+    public abstract BaseViewHolder onCreateEasyViewHolder(ViewGroup parent, int viewType);
 
 
     @Override
@@ -733,12 +734,24 @@ abstract public class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
         boolean onItemLongClick(int position);
     }
 
+    public interface OnItemChildClickListener {
+        void onChildItemClick(int position, int id);
+    }
+
     public void setOnItemClickListener(OnItemClickListener listener) {
         this.mItemClickListener = listener;
     }
 
     public void setOnItemLongClickListener(OnItemLongClickListener listener) {
         this.mItemLongClickListener = listener;
+    }
+
+    public OnItemChildClickListener getOnItemChildClickListener() {
+        return mItemChildClickListener;
+    }
+
+    public void setOnItemChildClickListener(OnItemChildClickListener listener) {
+        this.mItemChildClickListener = listener;
     }
 
     private static void log(String content) {

@@ -23,6 +23,9 @@ import java.lang.reflect.Field;
  * @param <M>
  */
 abstract public class BaseViewHolder<M> extends RecyclerView.ViewHolder {
+
+    private RecyclerArrayAdapter adapter;
+
     public BaseViewHolder(View itemView) {
         super(itemView);
     }
@@ -32,6 +35,24 @@ abstract public class BaseViewHolder<M> extends RecyclerView.ViewHolder {
     }
 
     public void setData(M data) {
+    }
+
+    public void setAdapter(RecyclerArrayAdapter adapter) {
+        this.adapter = adapter;
+    }
+
+    public void addOnClickListener(int viewId) {
+        View v = itemView.findViewById(viewId);
+        if (v != null) {
+            v.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (adapter != null && adapter.getOnItemChildClickListener() != null) {
+                        adapter.getOnItemChildClickListener().onChildItemClick(getDataPosition(), viewId);
+                    }
+                }
+            });
+        }
     }
 
     protected <T extends View> T $(@IdRes int id) {

@@ -45,7 +45,7 @@ import android.view.View.MeasureSpec;
 import android.widget.ImageView;
 
 import com.base.library.R;
-import com.base.library.retrofit_rx.RxRetrofitApp;
+import com.base.library.rxRetrofit.RxRetrofitApp;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.Target;
 
@@ -1044,6 +1044,28 @@ public class AbImageUtil {
             view.draw(canvas);
             view.setTag(R.id.CACHE_BITMAP_DIRTY_KEY, false);
         }
+        return bitmap;
+    }
+
+    /**
+     * 在垂直方向合并图片
+     * @param topBitmap
+     * @param bottomBitmap
+     * @return
+     */
+    public static Bitmap mergeBitmapInVertical(Bitmap topBitmap,Bitmap bottomBitmap){
+        int width = topBitmap.getWidth();
+        int bottomWidth = bottomBitmap.getWidth();
+        if (bottomWidth > width) {
+            width = bottomWidth;
+        }
+        int height = topBitmap.getHeight() + bottomBitmap.getHeight();
+        //创建一个空的Bitmap(内存区域),宽度等于第一张图片的宽度，高度等于两张图片高度总和
+        Bitmap bitmap = Bitmap.createBitmap(width,height,Config.RGB_565);
+        //将bitmap放置到绘制区域,并将要拼接的图片绘制到指定内存区域
+        Canvas canvas = new Canvas(bitmap);
+        canvas.drawBitmap(topBitmap,0,0,null);
+        canvas.drawBitmap(bottomBitmap,0,topBitmap.getHeight(),null);
         return bitmap;
     }
 

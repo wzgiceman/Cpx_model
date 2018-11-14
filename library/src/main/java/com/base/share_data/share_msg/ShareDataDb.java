@@ -8,7 +8,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.base.dao.DaoMaster;
 import com.base.dao.DaoSession;
 import com.base.dao.ShareDataDao;
-import com.base.library.retrofit_rx.RxRetrofitApp;
+import com.base.library.rxRetrofit.RxRetrofitApp;
 import com.base.library.utils.AbStrUtil;
 import com.base.share_data.ShareSparse;
 import com.base.share_data.user.User;

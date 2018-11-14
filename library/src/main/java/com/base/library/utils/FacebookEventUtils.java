@@ -4,7 +4,7 @@ import android.app.Application;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
-import com.base.library.retrofit_rx.RxRetrofitApp;
+import com.base.library.rxRetrofit.RxRetrofitApp;
 import com.facebook.appevents.AppEventsLogger;
 
 /**

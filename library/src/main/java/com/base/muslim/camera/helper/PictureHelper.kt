@@ -25,11 +25,10 @@ object PictureHelper {
      * @param activity    当前activity
      */
     fun takePicture(activity: Activity, file: File) {
-        val imageUri: Uri
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            imageUri = FileProvider.getUriForFile(activity, activity.packageName + ".provider", file)
+        val imageUri: Uri = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            FileProvider.getUriForFile(activity, activity.packageName + ".provider", file)
         } else {
-            imageUri = Uri.fromFile(file)
+            Uri.fromFile(file)
         }
         //调用系统相机
         val intentCamera = Intent()
@@ -47,7 +46,7 @@ object PictureHelper {
 //        photoPickerIntent.type = "image/*"
 //        activity.startActivityForResult(photoPickerIntent, REQUESTCODE_ALBUM)
         val intent = Intent(Intent.ACTION_PICK)
-        intent.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        intent.data = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
         activity.startActivityForResult(intent, REQUESTCODE_ALBUM)
     }
 
@@ -59,7 +58,6 @@ object PictureHelper {
      * @param aspectY     Y方向的比例
      * @param width       剪裁图片的宽度
      * @param height      剪裁图片高度
-     * @param requestCode 剪裁图片的请求码
      */
     fun cropImageUri(activity: Activity, orgUri: Uri, desUri: Uri, aspectX: Int, aspectY: Int, width: Int, height: Int) {
         val intent = Intent("com.android.camera.action.CROP")
