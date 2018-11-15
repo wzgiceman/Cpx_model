@@ -1,8 +1,6 @@
 package com.base.muslim.base.dialog;
 
-import android.app.Activity;
 import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,7 +11,6 @@ import android.view.View.OnClickListener;
 import android.view.Window;
 
 import com.base.library.R;
-import com.base.library.utils.AbStrUtil;
 import com.base.library.utils.AbToastUtil;
 import com.base.library.utils.FirebaseUtils;
 
@@ -26,7 +23,6 @@ import com.base.library.utils.FirebaseUtils;
 public abstract class BaseDialog extends Dialog implements OnClickListener {
 
 
-    private ProgressDialog loadingDialog;
 
     public BaseDialog(Context context) {
         super(context);
@@ -121,26 +117,6 @@ public abstract class BaseDialog extends Dialog implements OnClickListener {
 
 
 
-    /**
-     * 显示统一的加载框
-     *
-     * @param cancel 是否可以取消
-     * @param title 显示的标题
-     */
-    protected void showLoading(boolean cancel, String title) {
-        if (!isValidActivity()) {
-            return;
-        }
-        String message = AbStrUtil.isEmpty(title) ? getString(R.string.Loading) : title;
-        if (loadingDialog == null) {
-            loadingDialog = ProgressDialog.show(getContext(), null, message);
-            loadingDialog.setCancelable(cancel);
-        } else if (loadingDialog != null && !loadingDialog.isShowing()) {
-            loadingDialog.setMessage(message);
-            loadingDialog.setCancelable(cancel);
-            loadingDialog.show();
-        }
-    }
 
     /**
      * 获取String.xml 中字符串
@@ -161,33 +137,6 @@ public abstract class BaseDialog extends Dialog implements OnClickListener {
         return getContext().getResources().getString(id,formatArgs);
     }
 
-
-    /**
-     * 关闭加载框
-     */
-    protected void closeLoading() {
-        if (!isValidActivity()) {
-            return;
-        }
-        if (loadingDialog != null && loadingDialog.isShowing()) {
-            loadingDialog.dismiss();
-        }
-    }
-
-    /**
-     * 判断Activity是否是合法
-     * @return
-     */
-    private boolean isValidActivity(){
-        Activity activity = getOwnerActivity();
-        if(null == activity){
-            return false;
-        }
-        if (activity.isDestroyed() || activity.isFinishing()) {
-            return false;
-        }
-        return true;
-    }
 
     /**
      * 统计埋点
