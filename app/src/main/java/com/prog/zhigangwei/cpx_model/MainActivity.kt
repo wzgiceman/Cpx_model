@@ -58,7 +58,7 @@ class MainActivity : BaseFragmentActivity() {
         btn_img.setOnClickListener { jumpActivity(ImageActivity::class.java) }
         btn_RxBus.setOnClickListener { jumpActivity(RxBusActivity::class.java) }
         btn_EasyRecyclerView.setOnClickListener { jumpActivity(RecyclerActivity::class.java) }
-        btn_rxjava.setOnClickListener { jumpActivityFinish(RxJavaActivity::class.java) }
+        btn_rxjava.setOnClickListener { jumpActivity(RxJavaActivity::class.java) }
     }
 
     override fun initComplexWidget() {
