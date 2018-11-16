@@ -24,6 +24,7 @@
         <activity android:name=".easyRecyclerview.RecyclerActivity" />
         <activity android:name=".http.down.DownActivity" />
         <activity android:name=".rxjava.RxJavaActivity"></activity>
+        <activity android:name=".greendao.GreendaoActivity"></activity>
     </application>
 
 </manifest>

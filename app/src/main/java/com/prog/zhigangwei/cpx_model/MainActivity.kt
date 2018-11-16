@@ -2,6 +2,7 @@ package com.prog.zhigangwei.cpx_model
 
 import com.base.muslim.base.activity.BaseFragmentActivity
 import com.prog.zhigangwei.cpx_model.easyRecyclerview.RecyclerActivity
+import com.prog.zhigangwei.cpx_model.greendao.GreendaoActivity
 import com.prog.zhigangwei.cpx_model.http.HttpActivity
 import com.prog.zhigangwei.cpx_model.image.ImageActivity
 import com.prog.zhigangwei.cpx_model.permission.PermisssionActivity
@@ -58,6 +59,7 @@ class MainActivity : BaseFragmentActivity() {
         btn_img.setOnClickListener { jumpActivity(ImageActivity::class.java) }
         btn_RxBus.setOnClickListener { jumpActivity(RxBusActivity::class.java) }
         btn_EasyRecyclerView.setOnClickListener { jumpActivity(RecyclerActivity::class.java) }
+        btn_greendao.setOnClickListener { jumpActivity(GreendaoActivity::class.java) }
         btn_rxjava.setOnClickListener { jumpActivity(RxJavaActivity::class.java) }
     }
 

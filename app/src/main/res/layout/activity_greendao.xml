@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
+    android:orientation="vertical"
+    >
+
+    <TextView
+        android:id="@+id/tv_msg"
+        android:layout_margin="20dp"
+        android:textSize="19sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+
+    <Button
+        android:id="@+id/btn_add"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="add"/>
+
+    <Button
+        android:id="@+id/btn_update"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="update"/>
+    <Button
+        android:id="@+id/btn_addorupdate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="add or update"/>
+
+    <Button
+        android:id="@+id/btn_query"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="query"/>
+    <Button
+        android:id="@+id/btn_query_all"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="query all"/>
+
+    <Button
+        android:id="@+id/btn_del"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="del"/>
+    <Button
+        android:id="@+id/btn_del_all"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="del All"/>
+
+
+
+</LinearLayout>
