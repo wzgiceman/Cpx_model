@@ -1,4 +1,4 @@
-package com.prog.zhigangwei.cpx_model.http.api
+package com.prog.zhigangwei.cpx_model.http.common.api
 
 import io.reactivex.Observable
 import retrofit2.http.*

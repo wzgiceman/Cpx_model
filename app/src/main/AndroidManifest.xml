@@ -21,7 +21,7 @@
         <activity android:name=".permission.PermisssionActivity" />
         <activity android:name=".image.ImageActivity" />
         <activity android:name=".rxbus.RxBusActivity" />
-        <activity android:name=".easy_recyclerview.RecyclerActivity" />
+        <activity android:name=".easyRecyclerview.RecyclerActivity" />
         <activity android:name=".http.down.DownActivity" />
         <activity android:name=".rxjava.RxJavaActivity"></activity>
     </application>

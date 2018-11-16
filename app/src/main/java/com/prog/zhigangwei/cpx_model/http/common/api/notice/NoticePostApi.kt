@@ -1,8 +1,8 @@
-package com.prog.zhigangwei.cpx_model.http.api.notice
+package com.prog.zhigangwei.cpx_model.http.common.api.notice
 
 import com.base.library.rxRetrofit.api.BaseApi
 import com.base.library.utils.AbAppUtil
-import com.prog.zhigangwei.cpx_model.http.api.ApiService
+import com.prog.zhigangwei.cpx_model.http.common.api.ApiService
 import io.reactivex.Observable
 
 /**

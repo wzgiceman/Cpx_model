@@ -5,7 +5,7 @@ import com.base.library.rxbus.annotation.Subscribe
 import com.base.library.rxbus.thread.EventThread
 import com.base.muslim.base.activity.BaseFragmentActivity
 import com.prog.zhigangwei.cpx_model.R
-import com.prog.zhigangwei.cpx_model.rxbus.event.SendEvent
+import com.prog.zhigangwei.cpx_model.rxbus.common.event.SendEvent
 import kotlinx.android.synthetic.main.activity_rxbus.*
 
 /**

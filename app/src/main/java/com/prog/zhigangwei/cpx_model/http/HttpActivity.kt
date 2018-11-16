@@ -5,8 +5,8 @@ import com.base.library.rxRetrofit.http.HttpManager
 import com.base.library.rxRetrofit.listener.HttpOnNextListener
 import com.base.muslim.base.activity.BaseFragmentActivity
 import com.prog.zhigangwei.cpx_model.R
-import com.prog.zhigangwei.cpx_model.http.api.notice.NoticePostApi
-import com.prog.zhigangwei.cpx_model.http.api.wallpaper.HomeWallApi
+import com.prog.zhigangwei.cpx_model.http.common.api.notice.NoticePostApi
+import com.prog.zhigangwei.cpx_model.http.common.api.wallpaper.HomeWallApi
 import com.prog.zhigangwei.cpx_model.http.down.DownActivity
 import kotlinx.android.synthetic.main.activity_http.*
 

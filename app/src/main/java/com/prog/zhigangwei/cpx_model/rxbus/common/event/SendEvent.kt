@@ -1,4 +1,4 @@
-package com.prog.zhigangwei.cpx_model.rxbus.event
+package com.prog.zhigangwei.cpx_model.rxbus.common.event
 
 
 /**

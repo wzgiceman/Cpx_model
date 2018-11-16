@@ -1,4 +1,4 @@
-package com.prog.zhigangwei.cpx_model.easy_recyclerview.test_adapter.footer
+package com.prog.zhigangwei.cpx_model.easyRecyclerview.easyRecyclerview.footer
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import com.base.library.easyrecyclerview.adapter.RecyclerArrayAdapter
 import com.prog.zhigangwei.cpx_model.R
-import com.prog.zhigangwei.cpx_model.easy_recyclerview.RecyclerItemBean
+import com.prog.zhigangwei.cpx_model.easyRecyclerview.common.bean.RecyclerItemBean
 
 /**
  * Describe:RcFooter
