@@ -81,27 +81,6 @@
             android:name="com.base.muslim.webview.WebPlayActivity"
             android:screenOrientation="portrait" />
 
-        <activity
-            android:name="com.base.muslim.user.login.BindUserActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.base.muslim.user.login.LoginActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.base.muslim.user.login.ModifyUserActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.base.muslim.user.login.ResetPsdActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.base.muslim.user.login.SignUpActivity"
-            android:screenOrientation="portrait" />
-        <!--图片裁剪-->
-        <activity
-            android:name="com.yalantis.ucrop.UCropActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
-
     </application>
 
 </manifest>

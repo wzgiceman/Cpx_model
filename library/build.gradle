@@ -86,6 +86,7 @@ dependencies {
     api rootProject.ext.dependencies["firebase-core"]
     api rootProject.ext.dependencies["support-v7"]
     api rootProject.ext.dependencies["design"]
+    api rootProject.ext.dependencies["constraint-layout"]
 
     //facebook
     api(rootProject.ext.dependencies["facebook-ays"])
@@ -100,12 +101,5 @@ dependencies {
     /*leak 内存泄露检查*/
     debugApi rootProject.ext.dependencies["debugleakcanary"]
     releaseApi rootProject.ext.dependencies["releaseleakcanary"]
-
-    //图片裁剪
-    api(rootProject.ext.dependencies['ucrop']){
-        exclude group: "com.android.support"
-        exclude group: "com.squareup.okhttp3"
-    }
-
 
 }
