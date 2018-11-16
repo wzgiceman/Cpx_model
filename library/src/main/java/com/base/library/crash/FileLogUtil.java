@@ -1,7 +1,6 @@
 package com.base.library.crash;
 
 import android.content.Context;
-import android.os.Environment;
 
 import com.base.library.utils.AbDateUtil;
 
@@ -19,21 +18,6 @@ import java.io.UnsupportedEncodingException;
  * @author wzg
  */
 public class FileLogUtil {
-    /**
-     * sdcard路径
-     */
-    public static final String SDCARD_PATH = Environment.getExternalStorageDirectory() + File.separator;
-
-    /**
-     * 文件存储路径
-     */
-    public static final String FILE_SAVE_DIR = "Android/data/cpx/log/";
-
-    /**
-     * 文件存储全路径
-     */
-    public static final String FULL_CACHE_DIR = SDCARD_PATH + FILE_SAVE_DIR;
-
     /**
      * 写下日志
      *
