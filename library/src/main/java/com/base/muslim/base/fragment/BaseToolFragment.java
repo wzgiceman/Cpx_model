@@ -16,7 +16,7 @@ public class BaseToolFragment extends BaseFragmentManagerFragment {
     /**
      * 加载动画
      */
-    private ProgressDialog loadingDailog;
+    private ProgressDialog loadingDialog;
 
     /**
      * 显示统一的加载框
@@ -30,13 +30,13 @@ public class BaseToolFragment extends BaseFragmentManagerFragment {
             return;
         }
         String message = AbStrUtil.isEmpty(title) ? getString(R.string.Loading) : title;
-        if (loadingDailog == null) {
-            loadingDailog = ProgressDialog.show(activity, null, message);
-            loadingDailog.setCancelable(cancel);
-        } else if (loadingDailog != null && !loadingDailog.isShowing()) {
-            loadingDailog.setMessage(message);
-            loadingDailog.setCancelable(cancel);
-            loadingDailog.show();
+        if (loadingDialog == null) {
+            loadingDialog = ProgressDialog.show(activity, null, message);
+            loadingDialog.setCancelable(cancel);
+        } else if (!loadingDialog.isShowing()) {
+            loadingDialog.setMessage(message);
+            loadingDialog.setCancelable(cancel);
+            loadingDialog.show();
         }
     }
 
@@ -48,8 +48,8 @@ public class BaseToolFragment extends BaseFragmentManagerFragment {
         if (!ActivityExtensionKt.isValidActivity(activity)) {
             return;
         }
-        if (loadingDailog != null && loadingDailog.isShowing()) {
-            loadingDailog.dismiss();
+        if (loadingDialog != null && loadingDialog.isShowing()) {
+            loadingDialog.dismiss();
         }
     }
 
@@ -61,8 +61,8 @@ public class BaseToolFragment extends BaseFragmentManagerFragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (null != loadingDailog) {
-            loadingDailog.dismiss();
+        if (null != loadingDialog) {
+            loadingDialog.dismiss();
         }
     }
 }

@@ -25,7 +25,7 @@ public class BaseFragmentToolsActivity extends BaseFragmentManagerActivity {
      * 上个界面传入的数据
      */
     protected Bundle bundle;
-    private ProgressDialog loadingDailog;
+    private ProgressDialog loadingDialog;
 
 
     /**
@@ -39,13 +39,13 @@ public class BaseFragmentToolsActivity extends BaseFragmentManagerActivity {
             return;
         }
         String message = AbStrUtil.isEmpty(title) ? getString(R.string.Loading) : title;
-        if (loadingDailog == null) {
-            loadingDailog = ProgressDialog.show(this, null, message);
-            loadingDailog.setCancelable(cancel);
-        } else if (loadingDailog != null && !loadingDailog.isShowing()) {
-            loadingDailog.setMessage(message);
-            loadingDailog.setCancelable(cancel);
-            loadingDailog.show();
+        if (loadingDialog == null) {
+            loadingDialog = ProgressDialog.show(this, null, message);
+            loadingDialog.setCancelable(cancel);
+        } else if (!loadingDialog.isShowing()) {
+            loadingDialog.setMessage(message);
+            loadingDialog.setCancelable(cancel);
+            loadingDialog.show();
         }
     }
 
@@ -57,8 +57,8 @@ public class BaseFragmentToolsActivity extends BaseFragmentManagerActivity {
         if (!ActivityExtensionKt.isValidActivity(this)) {
             return;
         }
-        if (loadingDailog != null && loadingDailog.isShowing()) {
-            loadingDailog.dismiss();
+        if (loadingDialog != null && loadingDialog.isShowing()) {
+            loadingDialog.dismiss();
         }
     }
 
@@ -106,8 +106,8 @@ public class BaseFragmentToolsActivity extends BaseFragmentManagerActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        if (isFinishing() && null != loadingDailog) {
-            loadingDailog.dismiss();
+        if (isFinishing() && null != loadingDialog) {
+            loadingDialog.dismiss();
         }
     }
 
