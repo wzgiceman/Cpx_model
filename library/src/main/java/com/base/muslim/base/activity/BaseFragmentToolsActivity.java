@@ -1,14 +1,11 @@
 package com.base.muslim.base.activity;
 
-import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 
-import com.base.library.R;
 import com.base.library.utils.AbAppUtil;
-import com.base.library.utils.AbStrUtil;
 import com.base.muslim.base.extension.ActivityExtensionKt;
 
 
@@ -25,42 +22,6 @@ public class BaseFragmentToolsActivity extends BaseFragmentManagerActivity {
      * 上个界面传入的数据
      */
     protected Bundle bundle;
-    private ProgressDialog loadingDialog;
-
-
-    /**
-     * 显示统一的加载框
-     *
-     * @param cancel 是否可以取消
-     * @param title 显示的标题
-     */
-    protected void showLoading(boolean cancel, String title) {
-        if (!ActivityExtensionKt.isValidActivity(this)) {
-            return;
-        }
-        String message = AbStrUtil.isEmpty(title) ? getString(R.string.Loading) : title;
-        if (loadingDialog == null) {
-            loadingDialog = ProgressDialog.show(this, null, message);
-            loadingDialog.setCancelable(cancel);
-        } else if (!loadingDialog.isShowing()) {
-            loadingDialog.setMessage(message);
-            loadingDialog.setCancelable(cancel);
-            loadingDialog.show();
-        }
-    }
-
-
-    /**
-     * 关闭加载框
-     */
-    protected void closeLoading() {
-        if (!ActivityExtensionKt.isValidActivity(this)) {
-            return;
-        }
-        if (loadingDialog != null && loadingDialog.isShowing()) {
-            loadingDialog.dismiss();
-        }
-    }
 
 
     /**
@@ -106,8 +67,8 @@ public class BaseFragmentToolsActivity extends BaseFragmentManagerActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        if (isFinishing() && null != loadingDialog) {
-            loadingDialog.dismiss();
+        if (isFinishing() && ActivityExtensionKt.getLoadingDialog(this).isShowing()) {
+            ActivityExtensionKt.getLoadingDialog(this).dismiss();
         }
     }
 
