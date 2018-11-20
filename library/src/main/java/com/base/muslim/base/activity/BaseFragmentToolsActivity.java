@@ -1,9 +1,7 @@
 package com.base.muslim.base.activity;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
@@ -11,8 +9,7 @@ import android.widget.EditText;
 import com.base.library.R;
 import com.base.library.utils.AbAppUtil;
 import com.base.library.utils.AbStrUtil;
-import com.base.library.utils.AbToastUtil;
-import com.base.library.utils.DataReportUtils;
+import com.base.muslim.base.extension.ActivityExtensionKt;
 
 
 /**
@@ -28,7 +25,7 @@ public class BaseFragmentToolsActivity extends BaseFragmentManagerActivity {
      * 上个界面传入的数据
      */
     protected Bundle bundle;
-    private ProgressDialog loadingDailog;
+    private ProgressDialog loadingDialog;
 
 
     /**
@@ -38,17 +35,17 @@ public class BaseFragmentToolsActivity extends BaseFragmentManagerActivity {
      * @param title 显示的标题
      */
     protected void showLoading(boolean cancel, String title) {
-        if (!isValidActivity()) {
+        if (!ActivityExtensionKt.isValidActivity(this)) {
             return;
         }
         String message = AbStrUtil.isEmpty(title) ? getString(R.string.Loading) : title;
-        if (loadingDailog == null) {
-            loadingDailog = ProgressDialog.show(this, null, message);
-            loadingDailog.setCancelable(cancel);
-        } else if (loadingDailog != null && !loadingDailog.isShowing()) {
-            loadingDailog.setMessage(message);
-            loadingDailog.setCancelable(cancel);
-            loadingDailog.show();
+        if (loadingDialog == null) {
+            loadingDialog = ProgressDialog.show(this, null, message);
+            loadingDialog.setCancelable(cancel);
+        } else if (!loadingDialog.isShowing()) {
+            loadingDialog.setMessage(message);
+            loadingDialog.setCancelable(cancel);
+            loadingDialog.show();
         }
     }
 
@@ -57,104 +54,12 @@ public class BaseFragmentToolsActivity extends BaseFragmentManagerActivity {
      * 关闭加载框
      */
     protected void closeLoading() {
-        if (!isValidActivity()) {
+        if (!ActivityExtensionKt.isValidActivity(this)) {
             return;
         }
-        if (loadingDailog != null && loadingDailog.isShowing()) {
-            loadingDailog.dismiss();
+        if (loadingDialog != null && loadingDialog.isShowing()) {
+            loadingDialog.dismiss();
         }
-    }
-
-    /**
-     * 判断Activity是否是合法
-     * @return
-     */
-    private boolean isValidActivity(){
-        if (isDestroyed() || isFinishing()) {
-            return false;
-        }
-        return true;
-    }
-
-    /**
-     * 显示toast提示信息
-     *
-     * @param content
-     */
-    protected void showToast(String content) {
-        AbToastUtil.showToast(this,content);
-    }
-
-    /**
-     * 显示toast提示信息
-     *
-     * @param content
-     */
-    protected void showToast(int content) {
-        AbToastUtil.showToast(this,content);
-    }
-
-
-    /**
-     * 跳转到指定的activity
-     *
-     * @param cls
-     */
-    protected void jumpActivity(Class<?> cls) {
-        Intent intent = new Intent(this, cls);
-        startActivity(intent);
-    }
-
-    protected void jumpActivityFinish(Class<?> cls) {
-        Intent intent = new Intent(this, cls);
-        startActivity(intent);
-        finish();
-    }
-
-    /**
-     * 带参数跳转到指定的activity
-     *
-     * @param cls
-     * @param bundle
-     */
-    protected void jumpActivity(Class<?> cls, Bundle bundle) {
-        Intent intent = new Intent(this, cls);
-        intent.putExtras(bundle);
-        startActivity(intent);
-    }
-
-    protected void jumpActivityFinish(Class<?> cls, Bundle bundle) {
-        Intent intent = new Intent(this, cls);
-        intent.putExtras(bundle);
-        startActivity(intent);
-        finish();
-    }
-
-    /**
-     * 统计埋点
-     *
-     * @param key
-     */
-    public void collectionFireabse(@NonNull int key) {
-        collectionFireabse(getString(key));
-    }
-
-    public void collectionFireabse(@NonNull String key) {
-        DataReportUtils.getInstance().report(key);
-    }
-
-    /**
-     * 统计埋点
-     *
-     * @param key
-     * @param bundle
-     */
-    public void collectionFireabse(@NonNull int key, Bundle bundle) {
-        collectionFireabse(getString(key), bundle);
-    }
-
-    public void collectionFireabse(@NonNull String key, Bundle bundle) {
-        DataReportUtils.getInstance().report(key, bundle);
     }
 
 
@@ -201,8 +106,8 @@ public class BaseFragmentToolsActivity extends BaseFragmentManagerActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        if (isFinishing() && null != loadingDailog) {
-            loadingDailog.dismiss();
+        if (isFinishing() && null != loadingDialog) {
+            loadingDialog.dismiss();
         }
     }
 

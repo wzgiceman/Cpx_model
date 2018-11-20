@@ -1,6 +1,7 @@
 package com.prog.zhigangwei.cpx_model
 
 import com.base.muslim.base.activity.BaseFragmentActivity
+import com.base.muslim.base.extension.jumpActivity
 import com.prog.zhigangwei.cpx_model.easyRecyclerview.RecyclerActivity
 import com.prog.zhigangwei.cpx_model.greendao.GreendaoActivity
 import com.prog.zhigangwei.cpx_model.http.HttpActivity
