@@ -35,6 +35,7 @@ public class CrashHandler implements UncaughtExceptionHandler {
     private Context mContext;
     // 重启界面
     private Class startCls;
+
     /**
      * 保证只有一个CrashHandler实例
      */
@@ -74,6 +75,7 @@ public class CrashHandler implements UncaughtExceptionHandler {
         } else {
             // 重启程序
             AlarmManager mgr = (AlarmManager) mContext.getSystemService(Context.ALARM_SERVICE);
+            if (mgr == null) return;
             Intent intent = new Intent(mContext, startCls);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             intent.putExtra("crash", true);

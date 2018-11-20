@@ -15,8 +15,9 @@ CPX Model
 
 ## 模块分包说明
 
-* [app](https://github.com/wzgiceman/Cpx_model/tree/master/app) 示例
+* [app](https://github.com/wzgiceman/Cpx_model/tree/master/app) Demo
 * [library](https://github.com/wzgiceman/Cpx_model/tree/master/library) 工具、依赖库模块
+* [social_contact](https://github.com/wzgiceman/Cpx_model/tree/master/social_contact) 功能模块示例
 
 ## 技术要点
 

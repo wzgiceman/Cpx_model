@@ -4,6 +4,7 @@ import android.content.ComponentCallbacks2
 import android.support.multidex.MultiDexApplication
 import com.base.library.crash.CrashHandler
 import com.base.library.rxRetrofit.RxRetrofitApp
+import com.base.library.utils.utilcode.util.Utils
 import com.bumptech.glide.Glide
 import com.prog.zhigangwei.cpx_model.BuildConfig
 import com.prog.zhigangwei.cpx_model.MainActivity
@@ -33,6 +34,8 @@ class MApp : MultiDexApplication() {
     private fun initApp() {
         RxRetrofitApp.init(this, BuildConfig.DEBUG)
         CrashHandler.getInstance().init(this, MainActivity::class.java)
+        /**初始化UtilCode*/
+        Utils.init(this)
     }
 
     /**
