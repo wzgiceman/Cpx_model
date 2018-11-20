@@ -3,10 +3,9 @@ package com.prog.zhigangwei.cpx_model.http
 import com.base.library.rxRetrofit.exception.ApiException
 import com.base.library.rxRetrofit.http.HttpManager
 import com.base.library.rxRetrofit.listener.HttpOnNextListener
-import com.base.library.utils.AbLogUtil
 import com.base.muslim.base.activity.BaseFragmentActivity
 import com.prog.zhigangwei.cpx_model.R
-import com.prog.zhigangwei.cpx_model.R.id.*
+import com.prog.zhigangwei.cpx_model.http.common.api.LanguageApi.LanguagesApi
 import com.prog.zhigangwei.cpx_model.http.common.api.notice.NoticePostApi
 import com.prog.zhigangwei.cpx_model.http.common.api.wallpaper.HomeWallApi
 import com.prog.zhigangwei.cpx_model.http.down.DownActivity
@@ -21,11 +20,12 @@ import kotlinx.android.synthetic.main.activity_http.*
  *
  *Company :cpx
  *
-  */
+ */
 class HttpActivity : BaseFragmentActivity(), HttpOnNextListener {
     private val httpManager by lazy { HttpManager(this, this) }
 
     private val wallApi by lazy { HomeWallApi() }
+    private val languagesApi by lazy { LanguagesApi() }
     private val noticeApi by lazy { NoticePostApi("test") }
 
 
@@ -40,18 +40,24 @@ class HttpActivity : BaseFragmentActivity(), HttpOnNextListener {
     override fun initWidget() {
         btn_get.setOnClickListener { httpManager.doHttpDeal(wallApi) }
         btn_post.setOnClickListener { httpManager.doHttpDeal(noticeApi) }
-        btn_down.setOnClickListener { jumpActivity(DownActivity::class.java)}
+
+        /*可以提前将网络关闭测试，永远不会失败*/
+        btn_pre_gson.setOnClickListener { httpManager.doHttpDeal(languagesApi) }
+
+        btn_down.setOnClickListener { jumpActivity(DownActivity::class.java) }
     }
 
 
     override fun onNext(resulte: String, method: String) {
         when (method) {
             wallApi.method -> {
-                AbLogUtil.e("--->onNext")
                 tv_msg.text = "suc:wallApi->${resulte}"
             }
             noticeApi.method -> {
                 tv_msg.text = "suc:noticeApi->${resulte}"
+            }
+            languagesApi.method -> {
+                tv_msg.text = "suc:languagesApi->${resulte}"
             }
         }
     }
@@ -64,6 +70,9 @@ class HttpActivity : BaseFragmentActivity(), HttpOnNextListener {
             }
             noticeApi.method -> {
                 tv_msg.text = "error:noticeApi->${e.displayMessage}"
+            }
+            languagesApi.method -> {
+                tv_msg.text = "error:languagesApi->${e.displayMessage}"
             }
         }
     }

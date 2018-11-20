@@ -25,6 +25,11 @@
         android:layout_height="wrap_content"
         android:text="post-网络请求"/>
 
+    <Button
+        android:id="@+id/btn_pre_gson"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="提前预置数据（保证肯定成功））"/>
 
     <TextView
         android:id="@+id/tv_msg"

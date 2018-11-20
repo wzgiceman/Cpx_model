@@ -1,7 +1,7 @@
 package com.prog.zhigangwei.cpx_model.easyRecyclerview
 
 import android.support.v7.widget.LinearLayoutManager
-import com.base.library.rxRetrofit.observer.AbsObserver
+import com.base.library.observer.AbsObserver
 import com.base.muslim.base.activity.BaseFragmentActivity
 import com.prog.zhigangwei.cpx_model.R
 import com.prog.zhigangwei.cpx_model.easyRecyclerview.common.bean.RecyclerItemBean
@@ -10,9 +10,8 @@ import com.prog.zhigangwei.cpx_model.easyRecyclerview.easyRecyclerview.footer.Rc
 import com.prog.zhigangwei.cpx_model.easyRecyclerview.easyRecyclerview.head.RcHead
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
-import kotlinx.android.synthetic.main.activity_recycler.*
 import java.util.concurrent.TimeUnit
-
+import kotlinx.android.synthetic.main.activity_recycler.*
 
 /**
  *
