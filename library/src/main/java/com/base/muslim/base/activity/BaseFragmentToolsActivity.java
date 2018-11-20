@@ -2,7 +2,6 @@ package com.base.muslim.base.activity;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
@@ -10,7 +9,7 @@ import android.widget.EditText;
 import com.base.library.R;
 import com.base.library.utils.AbAppUtil;
 import com.base.library.utils.AbStrUtil;
-import com.base.library.utils.DataReportUtils;
+import com.base.muslim.base.extension.ActivityExtensionKt;
 
 
 /**
@@ -36,7 +35,7 @@ public class BaseFragmentToolsActivity extends BaseFragmentManagerActivity {
      * @param title 显示的标题
      */
     protected void showLoading(boolean cancel, String title) {
-        if (!isValidActivity()) {
+        if (!ActivityExtensionKt.isValidActivity(this)) {
             return;
         }
         String message = AbStrUtil.isEmpty(title) ? getString(R.string.Loading) : title;
@@ -55,85 +54,12 @@ public class BaseFragmentToolsActivity extends BaseFragmentManagerActivity {
      * 关闭加载框
      */
     protected void closeLoading() {
-        if (!isValidActivity()) {
+        if (!ActivityExtensionKt.isValidActivity(this)) {
             return;
         }
         if (loadingDailog != null && loadingDailog.isShowing()) {
             loadingDailog.dismiss();
         }
-    }
-
-    /**
-     * 判断Activity是否是合法
-     * @return
-     */
-    private boolean isValidActivity(){
-        if (isDestroyed() || isFinishing()) {
-            return false;
-        }
-        return true;
-    }
-
-//    /**
-//     * 跳转到指定的activity
-//     *
-//     * @param cls
-//     */
-//    protected void jumpActivity(Class<?> cls) {
-//        Intent intent = new Intent(this, cls);
-//        startActivity(intent);
-//    }
-//
-//    protected void jumpActivityFinish(Class<?> cls) {
-//        Intent intent = new Intent(this, cls);
-//        startActivity(intent);
-//        finish();
-//    }
-//
-//    /**
-//     * 带参数跳转到指定的activity
-//     *
-//     * @param cls
-//     * @param bundle
-//     */
-//    protected void jumpActivity(Class<?> cls, Bundle bundle) {
-//        Intent intent = new Intent(this, cls);
-//        intent.putExtras(bundle);
-//        startActivity(intent);
-//    }
-//
-//    protected void jumpActivityFinish(Class<?> cls, Bundle bundle) {
-//        Intent intent = new Intent(this, cls);
-//        intent.putExtras(bundle);
-//        startActivity(intent);
-//        finish();
-//    }
-
-    /**
-     * 统计埋点
-     *
-     * @param key
-     */
-    public void collectionFireabse(@NonNull int key) {
-        collectionFireabse(getString(key));
-    }
-
-    public void collectionFireabse(@NonNull String key) {
-        DataReportUtils.getInstance().report(key);
-    }
-
-    /**
-     * 统计埋点
-     *
-     * @param key
-     * @param bundle
-     */
-    public void collectionFireabse(@NonNull int key, Bundle bundle) {
-        collectionFireabse(getString(key), bundle);
-    }
-
-    public void collectionFireabse(@NonNull String key, Bundle bundle) {
-        DataReportUtils.getInstance().report(key, bundle);
     }
 
 

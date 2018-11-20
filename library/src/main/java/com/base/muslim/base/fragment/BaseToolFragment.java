@@ -1,14 +1,11 @@
 package com.base.muslim.base.fragment;
 
 import android.app.ProgressDialog;
-import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.FragmentActivity;
 
 import com.base.library.R;
 import com.base.library.rxlifecycle.components.support.RxAppCompatActivity;
 import com.base.library.utils.AbStrUtil;
-import com.base.library.utils.DataReportUtils;
+import com.base.muslim.base.extension.ActivityExtensionKt;
 
 
 /**
@@ -29,7 +26,7 @@ public class BaseToolFragment extends BaseFragmentManagerFragment {
      */
     protected void showLoading(boolean cancel, String title) {
         RxAppCompatActivity activity = getRxActivity();
-        if (!isValidActivity(activity)) {
+        if (!ActivityExtensionKt.isValidActivity(activity)) {
             return;
         }
         String message = AbStrUtil.isEmpty(title) ? getString(R.string.Loading) : title;
@@ -48,52 +45,12 @@ public class BaseToolFragment extends BaseFragmentManagerFragment {
      */
     protected void closeLoading() {
         RxAppCompatActivity activity = getRxActivity();
-        if (!isValidActivity(activity)) {
+        if (!ActivityExtensionKt.isValidActivity(activity)) {
             return;
         }
         if (loadingDailog != null && loadingDailog.isShowing()) {
             loadingDailog.dismiss();
         }
-    }
-
-    /**
-     * 判断Activity是否是合法
-     *
-     * @param activity
-     * @return
-     */
-    private boolean isValidActivity(FragmentActivity activity) {
-        if (activity.isDestroyed() || activity.isFinishing()) {
-            return false;
-        }
-        return true;
-    }
-
-    /**
-     * 统计埋点
-     *
-     * @param key
-     */
-    public void collectionFireabse(@NonNull int key) {
-        collectionFireabse(getString(key));
-    }
-
-    public void collectionFireabse(@NonNull String key) {
-        DataReportUtils.getInstance().report(key);
-    }
-
-    /**
-     * 统计埋点
-     *
-     * @param key
-     * @param bundle
-     */
-    public void collectionFireabse(@NonNull int key, Bundle bundle) {
-        collectionFireabse(getString(key), bundle);
-    }
-
-    public void collectionFireabse(@NonNull String key, Bundle bundle) {
-        DataReportUtils.getInstance().report(key, bundle);
     }
 
     protected RxAppCompatActivity getRxActivity() {
@@ -107,7 +64,5 @@ public class BaseToolFragment extends BaseFragmentManagerFragment {
         if (null != loadingDailog) {
             loadingDailog.dismiss();
         }
-
     }
-
 }
