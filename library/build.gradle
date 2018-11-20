@@ -78,13 +78,11 @@ dependencies {
     api rootProject.ext.dependencies["retrofit"]
     api rootProject.ext.dependencies["greenDao"]
     api rootProject.ext.dependencies["fastjson"]
-    api rootProject.ext.dependencies["recyclerview"]
     api(rootProject.ext.dependencies["glide"]){
         exclude group: "com.android.support"
     }
     api rootProject.ext.dependencies["kotlin"]
     api rootProject.ext.dependencies["firebase-core"]
-    api rootProject.ext.dependencies["support-v7"]
     api rootProject.ext.dependencies["design"]
     api rootProject.ext.dependencies["constraint-layout"]
 
@@ -101,5 +99,4 @@ dependencies {
     /*leak 内存泄露检查*/
     debugApi rootProject.ext.dependencies["debugleakcanary"]
     releaseApi rootProject.ext.dependencies["releaseleakcanary"]
-
 }

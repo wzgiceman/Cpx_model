@@ -80,7 +80,6 @@ ext {
             "gson"                 : 'com.google.code.gson:gson:2.8.2',
             "facebook-ads"         : 'com.facebook.android:audience-network-sdk:4.+',
             "facebook-ays"         : 'com.facebook.android:facebook-android-sdk:4.31.0',
-            "multidex"             : 'com.android.support:multidex:+',
             /*google map*/
             "google-maps"          : 'com.google.android.gms:play-services-maps:16.0.0',
             "google-service"       : 'com.google.android.gms:play-services:16.0.0',
