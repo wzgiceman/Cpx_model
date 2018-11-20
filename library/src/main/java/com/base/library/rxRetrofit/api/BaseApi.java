@@ -11,7 +11,6 @@ import com.base.library.utils.AbStrUtil;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
-import io.reactivex.disposables.Disposable;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
@@ -57,8 +56,8 @@ public abstract class BaseApi {
     private transient boolean ignoreJudge;
     /*retrofit控制器*/
     private Retrofit retrofit;
-
-    private Disposable mDisposable;
+    /*有缓存下时间过期是否先显示缓存数据在拉取最新的更新界面*/
+    private transient boolean advanceLoadCache;
 
 
     /**
@@ -169,6 +168,13 @@ public abstract class BaseApi {
         this.ignoreJudge = ignoreJudge;
     }
 
+    public boolean isAdvanceLoadCache() {
+        return advanceLoadCache;
+    }
+
+    public void setAdvanceLoadCache(boolean advanceLoadCache) {
+        this.advanceLoadCache = advanceLoadCache;
+    }
 
     public String getCacheUrl() {
         if (AbStrUtil.isEmpty(cacheUrl)) {
@@ -193,13 +199,6 @@ public abstract class BaseApi {
         BaseApi.config = config;
     }
 
-    public Disposable getDisposable() {
-        return mDisposable;
-    }
-
-    public void setDisposable(Disposable mDisposable) {
-        this.mDisposable = mDisposable;
-    }
 
     /**
      * 获取Retrofit对象

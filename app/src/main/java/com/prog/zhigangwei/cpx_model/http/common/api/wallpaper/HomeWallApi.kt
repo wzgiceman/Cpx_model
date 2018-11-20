@@ -19,6 +19,7 @@ class HomeWallApi : BaseApi() {
     init {
         method = "index_wallpapers"
         cache = true
+        cookieNetWorkTime=20
     }
 
     override fun getObservable(): Observable<*> {

@@ -3,6 +3,7 @@ package com.prog.zhigangwei.cpx_model.http
 import com.base.library.rxRetrofit.exception.ApiException
 import com.base.library.rxRetrofit.http.HttpManager
 import com.base.library.rxRetrofit.listener.HttpOnNextListener
+import com.base.library.utils.AbLogUtil
 import com.base.muslim.base.activity.BaseFragmentActivity
 import com.prog.zhigangwei.cpx_model.R
 import com.prog.zhigangwei.cpx_model.http.common.api.notice.NoticePostApi
@@ -45,6 +46,7 @@ class HttpActivity : BaseFragmentActivity(), HttpOnNextListener {
     override fun onNext(resulte: String, method: String) {
         when (method) {
             wallApi.method -> {
+                AbLogUtil.e("--->onNext")
                 tv_msg.text = "suc:wallApi->${resulte}"
             }
             noticeApi.method -> {
