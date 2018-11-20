@@ -31,25 +31,18 @@ import io.reactivex.disposables.Disposable;
  * Created by WZG on 2016/7/16.
  */
 public class ProgressSubscriber<T> implements Observer<T> {
-    //    回调接口
+    /*回调接口*/
     private SoftReference<HttpOnNextListener> mSubscriberOnNextListener;
-    //    软引用反正内存泄露
+    /* 软引用反正内存泄露*/
     private SoftReference<RxAppCompatActivity> mActivity;
-    //    加载框可自己定义
+    /*加载框可自己定义*/
     private ProgressDialog pd;
     /*请求数据*/
     private BaseApi api;
-
-
-    /**
-     * 缓存数据的的文件夹名称
-     */
-    private static final String CACHE_DATA_DIR_NAME = "gson/";
-
-    /**
-     * json 后缀
-     */
-    private static final String JSON_SUFFIX = ".json";
+    /*缓存数据的的文件夹名称*/
+    private final String CACHE_DATA_DIR_NAME = "gson/";
+    /*json 后缀*/
+    private final String JSON_SUFFIX = ".json";
 
     /**
      * 构造
@@ -72,20 +65,23 @@ public class ProgressSubscriber<T> implements Observer<T> {
     public void onSubscribe(Disposable d) {
         if (api.isCache()) {
             /*获取缓存数据*/
+            CookieResult cookieResult = CookieDbUtil.getInstance().queryCookieBy(api.getCacheUrl());
             int duration = AppUtil.isNetworkAvailable(RxRetrofitApp.getApplication()) ? api.getCookieNetWorkTime() : api
                     .getCookieNoNetWorkTime();
-            CookieResult cookieResult = CookieDbUtil.getInstance().queryCookieBy(api.getCacheUrl());
-            if (cookieResult != null && (System.currentTimeMillis() - cookieResult.getTime()) / 1000 < duration) {
+            if (null != cookieResult && (System.currentTimeMillis() - cookieResult.getTime()) / 1000 < duration) {
                 onComplete();
                 d.dispose();
                 resultOnNext(cookieResult.getResult());
                 return;
             }
+
+            if (null != cookieResult && api.isAdvanceLoadCache()) {
+                resultOnNext(cookieResult.getResult());
+            }
         }
 
         if (api.isShowProgress()) {
-            api.setDisposable(d);
-            initProgressDialog(api.isCancel());
+            initProgressDialog(api.isCancel(), d);
         }
     }
 
@@ -93,8 +89,8 @@ public class ProgressSubscriber<T> implements Observer<T> {
     /**
      * 初始化加载框
      */
-    private void initProgressDialog(boolean cancel) {
-        if (!api.isShowProgress()){
+    private void initProgressDialog(boolean cancel, Disposable d) {
+        if (!api.isShowProgress()) {
             return;
         }
         Context context = mActivity.get();
@@ -102,7 +98,7 @@ public class ProgressSubscriber<T> implements Observer<T> {
             pd = ProgressDialog.show(context, null, context.getString(R.string.Loading));
             pd.setCancelable(cancel);
             if (cancel) {
-                pd.setOnCancelListener(dialogInterface -> onCancelProgress());
+                pd.setOnCancelListener(dialogInterface -> onCancelProgress(d));
             }
         } else if (pd != null && context != null) {
             pd.show();
@@ -136,7 +132,7 @@ public class ProgressSubscriber<T> implements Observer<T> {
      */
     @Override
     public void onError(Throwable e) {
-        if (null == mActivity || null == mActivity.get() || mActivity.get().isFinishing()){
+        if (null == mActivity || null == mActivity.get() || mActivity.get().isFinishing()) {
             return;
         }
         /*需要緩存并且本地有缓存才返回*/
@@ -169,11 +165,12 @@ public class ProgressSubscriber<T> implements Observer<T> {
 
     /**
      * 获取预制的缓存文件名
+     *
      * @return
      */
-    private String getPreCacheFileName(){
+    private String getPreCacheFileName() {
         String fileName = CACHE_DATA_DIR_NAME + api.getMethod();
-        if(!api.getMethod().endsWith(JSON_SUFFIX)){
+        if (!api.getMethod().endsWith(JSON_SUFFIX)) {
             fileName += JSON_SUFFIX;
         }
         return fileName;
@@ -209,9 +206,8 @@ public class ProgressSubscriber<T> implements Observer<T> {
     /**
      * 取消ProgressDialog的时候，取消对observable的订阅，同时也取消了http请求
      */
-    public void onCancelProgress() {
-        Disposable disposable = api.getDisposable();
-        if(disposable!=null && !disposable.isDisposed()){
+    public void onCancelProgress(Disposable disposable) {
+        if (disposable != null && !disposable.isDisposed()) {
             disposable.dispose();
             if (api.isCache()) {
                 getCache(null);
@@ -219,7 +215,6 @@ public class ProgressSubscriber<T> implements Observer<T> {
                 errorDo(new ApiException(new Throwable(), HttpTimeException.HTTP_CANCEL, RxRetrofitApp.getApplication()
                         .getString(R.string.http_cancel)));
             }
-            api.setDisposable(null);
         }
     }
 

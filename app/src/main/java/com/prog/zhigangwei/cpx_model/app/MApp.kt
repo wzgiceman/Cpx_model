@@ -32,7 +32,7 @@ class MApp : MultiDexApplication() {
      */
     private fun initApp() {
         RxRetrofitApp.init(this, BuildConfig.DEBUG)
-        CrashHandler.getInstance().init(this,MainActivity::class.java)
+        CrashHandler.getInstance().init(this, MainActivity::class.java)
     }
 
     /**
