@@ -3,7 +3,6 @@ apply plugin: 'org.greenrobot.greendao'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
-
 android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
     defaultConfig {
@@ -21,7 +20,6 @@ android {
         resValue "string", "firebase_default_notification_channel_id", "${firebase_default_notification_channel_id}"
     }
 
-
     buildTypes {
         debug {
             minifyEnabled false
@@ -36,7 +34,6 @@ android {
             dirs 'libs' //this way we can find the .aar file in libs folder
         }
     }
-
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -57,7 +54,6 @@ android {
         // but continue the build even when errors are found:
         abortOnError false
     }
-
 }
 
 greendao {

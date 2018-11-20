@@ -15,12 +15,7 @@ import kotlinx.android.synthetic.main.social_contact_activity_main.*
  *Company :cpx
  */
 class TestActivity : BaseFragmentActivity() {
-
-
-    override fun setContentViews() {
-        setContentView(R.layout.social_contact_activity_main)
-        super.setContentViews()
-    }
+    override fun layoutId() = R.layout.social_contact_activity_main
 
     override fun initData() {
     }

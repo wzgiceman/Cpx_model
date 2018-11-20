@@ -96,5 +96,4 @@ ext {
             "ucrop"                : 'com.github.yalantis:ucrop:2.2.2',
             "constraint-layout"    : 'com.android.support.constraint:constraint-layout:1.1.3'
     ]
-
 }

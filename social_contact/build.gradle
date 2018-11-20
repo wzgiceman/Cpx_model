@@ -67,5 +67,4 @@ greendao {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     api project(':library')
-
 }

@@ -58,7 +58,6 @@ android {
         //设置DaoMaster、DaoSession、Dao目录
         targetGenDir 'src/main/java'
     }
-
 }
 
 dependencies {
