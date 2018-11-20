@@ -4,6 +4,7 @@ import com.base.library.rxRetrofit.exception.ApiException
 import com.base.library.rxRetrofit.http.HttpManager
 import com.base.library.rxRetrofit.listener.HttpOnNextListener
 import com.base.muslim.base.activity.BaseFragmentActivity
+import com.base.muslim.base.extension.showToast
 import com.prog.zhigangwei.cpx_model.R
 import com.prog.zhigangwei.cpx_model.http.common.api.LanguageApi.LanguagesApi
 import com.prog.zhigangwei.cpx_model.http.common.api.notice.NoticePostApi

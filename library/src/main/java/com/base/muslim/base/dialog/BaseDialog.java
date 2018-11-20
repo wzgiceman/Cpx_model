@@ -2,7 +2,6 @@ package com.base.muslim.base.dialog;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
@@ -93,27 +92,27 @@ public abstract class BaseDialog extends Dialog implements OnClickListener {
     public void onClick(View v) {
     }
 
-    /**
-     * 跳转到指定的activity
-     *
-     * @param cls
-     */
-    public void jumpActivity(Class cls) {
-        Intent intent = new Intent(getContext(), cls);
-        getContext().startActivity(intent);
-    }
-
-    /**
-     * 带参数跳转到指定的activity
-     *
-     * @param cls
-     * @param bundle
-     */
-    public void jumpActivity(Class cls, Bundle bundle) {
-        Intent intent = new Intent(getContext(), cls);
-        intent.putExtras(bundle);
-        getContext().startActivity(intent);
-    }
+//    /**
+//     * 跳转到指定的activity
+//     *
+//     * @param cls
+//     */
+//    public void jumpActivity(Class cls) {
+//        Intent intent = new Intent(getContext(), cls);
+//        getContext().startActivity(intent);
+//    }
+//
+//    /**
+//     * 带参数跳转到指定的activity
+//     *
+//     * @param cls
+//     * @param bundle
+//     */
+//    public void jumpActivity(Class cls, Bundle bundle) {
+//        Intent intent = new Intent(getContext(), cls);
+//        intent.putExtras(bundle);
+//        getContext().startActivity(intent);
+//    }
 
 
 

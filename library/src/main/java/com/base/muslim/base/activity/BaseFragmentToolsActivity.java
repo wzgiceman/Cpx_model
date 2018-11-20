@@ -1,7 +1,6 @@
 package com.base.muslim.base.activity;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.view.MotionEvent;
@@ -11,7 +10,6 @@ import android.widget.EditText;
 import com.base.library.R;
 import com.base.library.utils.AbAppUtil;
 import com.base.library.utils.AbStrUtil;
-import com.base.library.utils.AbToastUtil;
 import com.base.library.utils.DataReportUtils;
 
 
@@ -76,59 +74,40 @@ public class BaseFragmentToolsActivity extends BaseFragmentManagerActivity {
         return true;
     }
 
-    /**
-     * 显示toast提示信息
-     *
-     * @param content
-     */
-    protected void showToast(String content) {
-        AbToastUtil.showToast(this,content);
-    }
-
-    /**
-     * 显示toast提示信息
-     *
-     * @param content
-     */
-    protected void showToast(int content) {
-        AbToastUtil.showToast(this,content);
-    }
-
-
-    /**
-     * 跳转到指定的activity
-     *
-     * @param cls
-     */
-    protected void jumpActivity(Class<?> cls) {
-        Intent intent = new Intent(this, cls);
-        startActivity(intent);
-    }
-
-    protected void jumpActivityFinish(Class<?> cls) {
-        Intent intent = new Intent(this, cls);
-        startActivity(intent);
-        finish();
-    }
-
-    /**
-     * 带参数跳转到指定的activity
-     *
-     * @param cls
-     * @param bundle
-     */
-    protected void jumpActivity(Class<?> cls, Bundle bundle) {
-        Intent intent = new Intent(this, cls);
-        intent.putExtras(bundle);
-        startActivity(intent);
-    }
-
-    protected void jumpActivityFinish(Class<?> cls, Bundle bundle) {
-        Intent intent = new Intent(this, cls);
-        intent.putExtras(bundle);
-        startActivity(intent);
-        finish();
-    }
+//    /**
+//     * 跳转到指定的activity
+//     *
+//     * @param cls
+//     */
+//    protected void jumpActivity(Class<?> cls) {
+//        Intent intent = new Intent(this, cls);
+//        startActivity(intent);
+//    }
+//
+//    protected void jumpActivityFinish(Class<?> cls) {
+//        Intent intent = new Intent(this, cls);
+//        startActivity(intent);
+//        finish();
+//    }
+//
+//    /**
+//     * 带参数跳转到指定的activity
+//     *
+//     * @param cls
+//     * @param bundle
+//     */
+//    protected void jumpActivity(Class<?> cls, Bundle bundle) {
+//        Intent intent = new Intent(this, cls);
+//        intent.putExtras(bundle);
+//        startActivity(intent);
+//    }
+//
+//    protected void jumpActivityFinish(Class<?> cls, Bundle bundle) {
+//        Intent intent = new Intent(this, cls);
+//        intent.putExtras(bundle);
+//        startActivity(intent);
+//        finish();
+//    }
 
     /**
      * 统计埋点

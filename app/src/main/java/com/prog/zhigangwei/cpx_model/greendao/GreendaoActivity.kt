@@ -1,6 +1,7 @@
 package com.prog.zhigangwei.cpx_model.greendao
 
 import com.base.muslim.base.activity.BaseFragmentActivity
+import com.base.muslim.base.extension.showToast
 import com.prog.zhigangwei.cpx_model.R
 import com.prog.zhigangwei.cpx_model.greendao.greendao.DbBean
 import com.prog.zhigangwei.cpx_model.greendao.greendao.DealDb

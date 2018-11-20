@@ -1,16 +1,14 @@
 package com.base.muslim.base.fragment;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
 
 import com.base.library.R;
-import com.base.library.utils.AbStrUtil;
-import com.base.library.utils.AbToastUtil;
-import com.base.library.utils.DataReportUtils;
 import com.base.library.rxlifecycle.components.support.RxAppCompatActivity;
+import com.base.library.utils.AbStrUtil;
+import com.base.library.utils.DataReportUtils;
 
 
 /**
@@ -27,11 +25,11 @@ public class BaseToolFragment extends BaseFragmentManagerFragment {
      * 显示统一的加载框
      *
      * @param cancel 是否可以取消
-     * @param title 显示的标题
+     * @param title  显示的标题
      */
     protected void showLoading(boolean cancel, String title) {
         RxAppCompatActivity activity = getRxActivity();
-        if(!isValidActivity(activity)){
+        if (!isValidActivity(activity)) {
             return;
         }
         String message = AbStrUtil.isEmpty(title) ? getString(R.string.Loading) : title;
@@ -50,7 +48,7 @@ public class BaseToolFragment extends BaseFragmentManagerFragment {
      */
     protected void closeLoading() {
         RxAppCompatActivity activity = getRxActivity();
-        if(!isValidActivity(activity)){
+        if (!isValidActivity(activity)) {
             return;
         }
         if (loadingDailog != null && loadingDailog.isShowing()) {
@@ -60,57 +58,16 @@ public class BaseToolFragment extends BaseFragmentManagerFragment {
 
     /**
      * 判断Activity是否是合法
+     *
      * @param activity
      * @return
      */
-    private boolean isValidActivity(FragmentActivity activity){
+    private boolean isValidActivity(FragmentActivity activity) {
         if (activity.isDestroyed() || activity.isFinishing()) {
             return false;
         }
         return true;
     }
-
-
-    /**
-     * 显示基本信息
-     *
-     * @param msg
-     */
-    protected void showToast(int msg) {
-        AbToastUtil.showToast(getActivity(),msg);
-    }
-
-    /**
-     * 显示基本信息
-     *
-     * @param msg
-     */
-    protected void showToast(String msg) {
-        AbToastUtil.showToast(getActivity(),msg);
-    }
-
-    /**
-     * 跳转到指定的activity
-     *
-     * @param cls
-     */
-    public void jumpActivity(Class cls) {
-        Intent intent = new Intent(getActivity(), cls);
-        startActivity(intent);
-    }
-
-    /**
-     * 带参数跳转到指定的activity
-     *
-     * @param cls
-     * @param bundle
-     */
-    public void jumpActivity(Class cls, Bundle bundle) {
-        Intent intent = new Intent(getActivity(), cls);
-        intent.putExtras(bundle);
-        startActivity(intent);
-    }
-
 
     /**
      * 统计埋点
