@@ -3,20 +3,20 @@ package com.base.library.rxRetrofit.subscribers;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 
 import com.base.library.R;
-import com.base.library.rxRetrofit.api.BaseApi;
 import com.base.library.rxRetrofit.RxRetrofitApp;
+import com.base.library.rxRetrofit.api.BaseApi;
 import com.base.library.rxRetrofit.exception.ApiException;
 import com.base.library.rxRetrofit.exception.HttpTimeException;
 import com.base.library.rxRetrofit.http.cookie.CookieResult;
 import com.base.library.rxRetrofit.listener.HttpOnNextListener;
-import com.base.library.rxRetrofit.utils.AppUtil;
 import com.base.library.rxRetrofit.utils.CookieDbUtil;
 import com.base.library.rxlifecycle.components.support.RxAppCompatActivity;
 import com.base.library.utils.AbLogUtil;
 import com.base.library.utils.AbStrUtil;
-
 
 import java.lang.ref.SoftReference;
 
@@ -66,7 +66,7 @@ public class ProgressSubscriber<T> implements Observer<T> {
         if (api.isCache()) {
             /*获取缓存数据*/
             CookieResult cookieResult = CookieDbUtil.getInstance().queryCookieBy(api.getCacheUrl());
-            int duration = AppUtil.isNetworkAvailable(RxRetrofitApp.getApplication()) ? api.getCookieNetWorkTime() : api
+            int duration = isNetworkAvailable(RxRetrofitApp.getApplication()) ? api.getCookieNetWorkTime() : api
                     .getCookieNoNetWorkTime();
             if (null != cookieResult && (System.currentTimeMillis() - cookieResult.getTime()) / 1000 < duration) {
                 onComplete();
@@ -248,5 +248,29 @@ public class ProgressSubscriber<T> implements Observer<T> {
                 mActivity.get() && !mActivity.get().isFinishing()) {
             mSubscriberOnNextListener.get().onNext(result, api.getMethod());
         }
+    }
+
+
+    /**
+     * 是否有网络
+     * @param context
+     * @return
+     */
+    private boolean isNetworkAvailable(Context context) {
+        try {
+            ConnectivityManager connectivity = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+            if (connectivity != null) {
+                NetworkInfo info = connectivity.getActiveNetworkInfo();
+                if (info != null && info.isConnected()) {
+                    if (info.getState() == NetworkInfo.State.CONNECTED) {
+                        return true;
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return false;
     }
 }

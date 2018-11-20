@@ -30,8 +30,6 @@ import okhttp3.ResponseBody;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
-import static com.base.library.rxRetrofit.utils.AppUtil.getBasUrl;
-
 
 /**
  * http下载处理类
@@ -252,5 +250,26 @@ public class HttpDownManager {
         } catch (IOException e) {
             throw new HttpTimeException(HttpTimeException.CACHE_DOWN_ERROR, e.getMessage());
         }
+    }
+
+
+    /**
+     * 读取baseurl
+     *
+     * @param url
+     * @return
+     */
+    private  String getBasUrl(String url) {
+        String head = "";
+        int index = url.indexOf("://");
+        if (index != -1) {
+            head = url.substring(0, index + 3);
+            url = url.substring(index + 3);
+        }
+        index = url.indexOf("/");
+        if (index != -1) {
+            url = url.substring(0, index + 1);
+        }
+        return head + url;
     }
 }

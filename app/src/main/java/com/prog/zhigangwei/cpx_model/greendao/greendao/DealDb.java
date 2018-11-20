@@ -83,7 +83,7 @@ public class DealDb {
         DaoMaster daoMaster = new DaoMaster(getWritableDatabase());
         DaoSession daoSession = daoMaster.newSession();
         DbBeanDao dao = daoSession.getDbBeanDao();
-        dao.insert(info);
+        dao.insertOrReplace(info);
     }
 
     /**

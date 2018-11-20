@@ -1,4 +1,4 @@
-package com.base.library.rxRetrofit.observer;
+package com.base.library.observer;
 
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;

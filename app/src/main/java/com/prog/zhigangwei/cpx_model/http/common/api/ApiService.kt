@@ -1,7 +1,10 @@
 package com.prog.zhigangwei.cpx_model.http.common.api
 
 import io.reactivex.Observable
-import retrofit2.http.*
+import retrofit2.http.Field
+import retrofit2.http.FormUrlEncoded
+import retrofit2.http.GET
+import retrofit2.http.POST
 
 
 /**
@@ -14,6 +17,13 @@ import retrofit2.http.*
  *Company :cpx
  */
 interface ApiService {
+
+    /**
+     *获取经文语言数据
+     */
+    @GET("languages")
+    fun loadLg(): Observable<String>
+
     /**
      *获取首页壁纸
      */

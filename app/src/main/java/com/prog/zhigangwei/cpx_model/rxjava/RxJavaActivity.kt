@@ -1,6 +1,6 @@
 package com.prog.zhigangwei.cpx_model.rxjava
 
-import com.base.library.rxRetrofit.observer.AbsObserver
+import com.base.library.observer.AbsObserver
 import com.base.library.utils.AbLogUtil
 import com.base.muslim.base.activity.BaseFragmentActivity
 import com.prog.zhigangwei.cpx_model.R
@@ -8,12 +8,12 @@ import io.reactivex.*
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.functions.BiFunction
-import io.reactivex.functions.Consumer
 import io.reactivex.functions.Function
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_rx_java.*
 import org.reactivestreams.Subscription
 import java.util.concurrent.TimeUnit
+
 
 
 /**
