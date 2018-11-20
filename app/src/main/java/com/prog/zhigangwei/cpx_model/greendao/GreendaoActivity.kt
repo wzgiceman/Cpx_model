@@ -32,34 +32,34 @@ class GreendaoActivity : BaseFragmentActivity() {
 
     override fun initWidget() {
         btn_add.setOnClickListener {
-            DealDb.getInstance().insert(dbBean)
+            DealDb.instance.insert(dbBean)
             showMsg(dbBean.id.toString())
         }
         btn_update.setOnClickListener {
             dbBean.name = "${dbBean.name} hello"
-            DealDb.getInstance().update(dbBean)
+            DealDb.instance.update(dbBean)
             showMsg(dbBean.name.toString())
         }
 
         btn_addorupdate.setOnClickListener {
             dbBean.name = "${dbBean.name} world"
-            DealDb.getInstance().savrOrUpdate(dbBean)
+            DealDb.instance.savrOrUpdate(dbBean)
             showMsg(dbBean.name)
         }
         btn_query.setOnClickListener {
-            DealDb.getInstance().queryBy(dbBean.myId)
+            DealDb.instance.queryBy(dbBean.myId)
             showMsg(dbBean.name)
         }
         btn_del.setOnClickListener {
-            DealDb.getInstance().delete(dbBean.id)
+            DealDb.instance.delete(dbBean.id)
             showMsg("del->${dbBean.id}")
         }
         btn_del_all.setOnClickListener {
-            DealDb.getInstance().deleteAll()
+            DealDb.instance.deleteAll()
             showMsg("del->all")
         }
         btn_query_all.setOnClickListener {
-            showMsg("btn_query_all->${DealDb.getInstance().queryAll().size}")
+            showMsg("btn_query_all->${DealDb.instance.queryAll().size}")
         }
     }
 
