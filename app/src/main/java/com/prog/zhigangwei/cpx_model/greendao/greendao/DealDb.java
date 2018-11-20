@@ -120,20 +120,28 @@ public class DealDb {
      * @param id
      */
     public void delete(Long id) {
-        DaoMaster daoMaster = new DaoMaster(getWritableDatabase());
-        DaoSession daoSession = daoMaster.newSession();
-        DbBeanDao dao = daoSession.getDbBeanDao();
-        dao.deleteByKey(id);
+        try{
+            DaoMaster daoMaster = new DaoMaster(getWritableDatabase());
+            DaoSession daoSession = daoMaster.newSession();
+            DbBeanDao dao = daoSession.getDbBeanDao();
+            dao.deleteByKey(id);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     /**
      * del all
      */
     public void deleteAll() {
-        DaoMaster daoMaster = new DaoMaster(getWritableDatabase());
-        DaoSession daoSession = daoMaster.newSession();
-        DbBeanDao dao = daoSession.getDbBeanDao();
-        dao.deleteAll();
+        try{
+            DaoMaster daoMaster = new DaoMaster(getWritableDatabase());
+            DaoSession daoSession = daoMaster.newSession();
+            DbBeanDao dao = daoSession.getDbBeanDao();
+            dao.deleteAll();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
 

@@ -132,7 +132,6 @@ public class CrashHandler implements UncaughtExceptionHandler {
      * 保存错误信息到文件中
      *
      * @param ex
-     * @return 返回文件名称, 便于将文件传送到服务器
      */
     private void saveCrashInfo2File(Throwable ex, LinkedHashMap<String, String> infos) {
         StringBuffer sb = new StringBuffer();
@@ -153,6 +152,7 @@ public class CrashHandler implements UncaughtExceptionHandler {
         printWriter.close();
         String result = writer.toString();
         sb.append(result);
+        /*存入到本地文件中*/
         FileLogUtil.log(sb.toString(), mContext);
     }
 
