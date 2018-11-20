@@ -6,6 +6,7 @@ import com.base.library.rxRetrofit.listener.HttpOnNextListener
 import com.base.library.utils.AbLogUtil
 import com.base.muslim.base.activity.BaseFragmentActivity
 import com.prog.zhigangwei.cpx_model.R
+import com.prog.zhigangwei.cpx_model.R.id.*
 import com.prog.zhigangwei.cpx_model.http.common.api.notice.NoticePostApi
 import com.prog.zhigangwei.cpx_model.http.common.api.wallpaper.HomeWallApi
 import com.prog.zhigangwei.cpx_model.http.down.DownActivity
