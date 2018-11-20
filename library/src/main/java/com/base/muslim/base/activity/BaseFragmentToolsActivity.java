@@ -7,13 +7,12 @@ import android.support.annotation.NonNull;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.base.library.R;
 import com.base.library.utils.AbAppUtil;
 import com.base.library.utils.AbStrUtil;
 import com.base.library.utils.AbToastUtil;
-import com.base.library.utils.FirebaseUtils;
+import com.base.library.utils.DataReportUtils;
 
 
 /**
@@ -141,7 +140,7 @@ public class BaseFragmentToolsActivity extends BaseFragmentManagerActivity {
     }
 
     public void collectionFireabse(@NonNull String key) {
-        FirebaseUtils.getInstance().report(key);
+        DataReportUtils.getInstance().report(key);
     }
 
     /**
@@ -155,7 +154,7 @@ public class BaseFragmentToolsActivity extends BaseFragmentManagerActivity {
     }
 
     public void collectionFireabse(@NonNull String key, Bundle bundle) {
-        FirebaseUtils.getInstance().report(key, bundle);
+        DataReportUtils.getInstance().report(key, bundle);
     }
 
 

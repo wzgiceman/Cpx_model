@@ -11,9 +11,9 @@ import com.google.firebase.analytics.FirebaseAnalytics;
  * firebase utils
  * @auth zhigang wei
  */
-public class FirebaseUtils {
+public class DataReportUtils {
 
-    private static volatile FirebaseUtils intance;
+    private static volatile DataReportUtils intance;
     private static FirebaseAnalytics mFirebaseAnalytics;
 
     /**
@@ -21,14 +21,14 @@ public class FirebaseUtils {
      */
     private static AppEventsLogger mLogger;
 
-    public static FirebaseUtils getInstance() {
+    public static DataReportUtils getInstance() {
         if (intance == null) {
-            intance = new FirebaseUtils();
+            intance = new DataReportUtils();
         }
         return intance;
     }
 
-    private FirebaseUtils() {
+    private DataReportUtils() {
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(RxRetrofitApp.getApplication());
         mLogger = AppEventsLogger.newLogger(RxRetrofitApp.getApplication());
     }

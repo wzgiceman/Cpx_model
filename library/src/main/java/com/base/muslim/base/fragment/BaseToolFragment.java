@@ -1,17 +1,15 @@
 package com.base.muslim.base.fragment;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
-import android.widget.Toast;
 
 import com.base.library.R;
 import com.base.library.utils.AbStrUtil;
 import com.base.library.utils.AbToastUtil;
-import com.base.library.utils.FirebaseUtils;
+import com.base.library.utils.DataReportUtils;
 import com.base.library.rxlifecycle.components.support.RxAppCompatActivity;
 
 
@@ -124,7 +122,7 @@ public class BaseToolFragment extends BaseFragmentManagerFragment {
     }
 
     public void collectionFireabse(@NonNull String key) {
-        FirebaseUtils.getInstance().report(key);
+        DataReportUtils.getInstance().report(key);
     }
 
     /**
@@ -138,7 +136,7 @@ public class BaseToolFragment extends BaseFragmentManagerFragment {
     }
 
     public void collectionFireabse(@NonNull String key, Bundle bundle) {
-        FirebaseUtils.getInstance().report(key, bundle);
+        DataReportUtils.getInstance().report(key, bundle);
     }
 
     protected RxAppCompatActivity getRxActivity() {

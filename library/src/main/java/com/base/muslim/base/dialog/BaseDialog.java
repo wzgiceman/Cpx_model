@@ -12,7 +12,7 @@ import android.view.Window;
 
 import com.base.library.R;
 import com.base.library.utils.AbToastUtil;
-import com.base.library.utils.FirebaseUtils;
+import com.base.library.utils.DataReportUtils;
 
 
 /**
@@ -148,7 +148,7 @@ public abstract class BaseDialog extends Dialog implements OnClickListener {
     }
 
     public void collectionFireabse(@NonNull String key) {
-        FirebaseUtils.getInstance().report(key);
+        DataReportUtils.getInstance().report(key);
     }
 
     /**
@@ -162,6 +162,6 @@ public abstract class BaseDialog extends Dialog implements OnClickListener {
     }
 
     public void collectionFireabse(@NonNull String key, Bundle bundle) {
-        FirebaseUtils.getInstance().report(key, bundle);
+        DataReportUtils.getInstance().report(key, bundle);
     }
 }

@@ -11,7 +11,7 @@ import com.facebook.appevents.AppEventsLogger;
  * facebook 统计事件的工具类
  *
  * 统计事件和FirebaseUtils和并了
- * @see FirebaseUtils
+ * @see DataReportUtils
  * @author xuechao
  * @date 2018/11/2 上午9:26
  * @copyright cpx
