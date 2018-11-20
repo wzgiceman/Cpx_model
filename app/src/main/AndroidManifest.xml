@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.prog.zhigangwei.cpx_model">
 
     <application
@@ -9,7 +10,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".MainActivity" android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,8 +25,8 @@
         <activity android:name=".rxbus.RxBusActivity" />
         <activity android:name=".easyRecyclerview.RecyclerActivity" />
         <activity android:name=".http.down.DownActivity" />
-        <activity android:name=".rxjava.RxJavaActivity"></activity>
-        <activity android:name=".greendao.GreendaoActivity"></activity>
+        <activity android:name=".rxjava.RxJavaActivity" />
+        <activity android:name=".greendao.GreendaoActivity" />
     </application>
 
 </manifest>
