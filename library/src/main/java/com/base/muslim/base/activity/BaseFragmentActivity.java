@@ -2,13 +2,15 @@ package com.base.muslim.base.activity;
 
 import android.os.Bundle;
 
+import com.base.muslim.base.IBase;
+
 /**
  * fangmentactivity 自定义基础类
  * 可滑动销毁父类
  *
  * @author WZG
  */
-public abstract class BaseFragmentActivity extends BaseFragmentToolsActivity {
+public abstract class BaseFragmentActivity extends BaseFragmentToolsActivity implements IBase {
 
     protected boolean beforUi = true;
 
@@ -28,27 +30,12 @@ public abstract class BaseFragmentActivity extends BaseFragmentToolsActivity {
      */
 
     protected void initActivity() {
-        setContentViews();
-        initResource();
-        initWidget();
+        if (layoutId() != NO_LAYOUT) {
+            setContentView(layoutId());
+        }
+        initData();
+        initView();
     }
-
-
-    /**
-     * 设置绑定view
-     */
-    protected void setContentViews() {
-    }
-
-    /**
-     * 初始化数据
-     */
-    protected abstract void initResource();
-
-    /**
-     * 基本控件初始化
-     */
-    protected abstract void initWidget();
 
     /**
      * 其他第三方复杂控件初始化
@@ -64,7 +51,6 @@ public abstract class BaseFragmentActivity extends BaseFragmentToolsActivity {
     protected void initBeforFaild() {
 
     }
-
 
 
 }

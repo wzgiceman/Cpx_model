@@ -22,10 +22,10 @@ class TestActivity : BaseFragmentActivity() {
         super.setContentViews()
     }
 
-    override fun initResource() {
+    override fun initData() {
     }
 
-    override fun initWidget() {
+    override fun initView() {
         tv_ma.text="hello"
     }
 }

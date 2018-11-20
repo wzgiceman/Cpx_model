@@ -21,20 +21,14 @@ import kotlinx.android.synthetic.main.activity_main.*
  *Company :cpx
  */
 class MainActivity : BaseFragmentActivity() {
-
-
     override fun initActivity() {
         super.initActivity()
         initComplexWidget()
     }
 
-    override fun setContentViews() {
-        setContentView(R.layout.activity_main)
-        /*放在设置的下面,有利于super处理*/
-        super.setContentViews()
-    }
+    override fun layoutId() = R.layout.activity_main
 
-    override fun initResource() {
+    override fun initData() {
         initResourceA()
         initResourceB()
     }
@@ -54,7 +48,7 @@ class MainActivity : BaseFragmentActivity() {
 
     }
 
-    override fun initWidget() {
+    override fun initView() {
         btn_http.setOnClickListener { jumpActivity(HttpActivity::class.java) }
         btn_permission.setOnClickListener { jumpActivity(PermisssionActivity::class.java) }
         btn_img.setOnClickListener { jumpActivity(ImageActivity::class.java) }

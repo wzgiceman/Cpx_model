@@ -24,22 +24,19 @@ import kotlinx.android.synthetic.main.activity_http.*
  *
  */
 class HttpActivity : BaseFragmentActivity(), HttpOnNextListener {
+
     private val httpManager by lazy { HttpManager(this, this) }
 
     private val wallApi by lazy { HomeWallApi() }
     private val languagesApi by lazy { LanguagesApi() }
     private val noticeApi by lazy { NoticePostApi("test") }
 
+    override fun layoutId() = R.layout.activity_http
 
-    override fun setContentViews() {
-        setContentView(R.layout.activity_http)
-        super.setContentViews()
+    override fun initData() {
     }
 
-    override fun initResource() {
-    }
-
-    override fun initWidget() {
+    override fun initView() {
         btn_get.setOnClickListener { httpManager.doHttpDeal(wallApi) }
         btn_post.setOnClickListener { httpManager.doHttpDeal(noticeApi) }
 

@@ -21,17 +21,13 @@ import kotlinx.android.synthetic.main.activity_rxbus.*
  */
 class RxBusActivity : BaseFragmentActivity() {
 
+    override fun layoutId() = R.layout.activity_rxbus
 
-    override fun setContentViews() {
-        setContentView(R.layout.activity_rxbus)
-        super.setContentViews()
-    }
-
-    override fun initResource() {
+    override fun initData() {
         RxBus.get().register(this)
     }
 
-    override fun initWidget() {
+    override fun initView() {
         btn_send.setOnClickListener {
             RxBus.get().post(SendEvent("发送消息"))
         }
@@ -47,7 +43,7 @@ class RxBusActivity : BaseFragmentActivity() {
 
     override fun onStop() {
         super.onStop()
-        if(isFinishing){
+        if (isFinishing) {
             RxBus.get().unregister(this)
         }
     }

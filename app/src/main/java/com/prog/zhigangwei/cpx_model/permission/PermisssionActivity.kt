@@ -16,16 +16,12 @@ import kotlinx.android.synthetic.main.activity_permission.*
  */
 class PermisssionActivity : BaseFragmentActivity() {
 
+    override fun layoutId() = R.layout.activity_permission
 
-    override fun setContentViews() {
-        setContentView(R.layout.activity_permission)
-        super.setContentViews()
+    override fun initData() {
     }
 
-    override fun initResource() {
-    }
-
-    override fun initWidget() {
+    override fun initView() {
         btn_get.setOnClickListener {
             RxPermissions.getInstance(this).request(android.Manifest.permission.CAMERA, android.Manifest.permission.READ_EXTERNAL_STORAGE)
                     .subscribe {

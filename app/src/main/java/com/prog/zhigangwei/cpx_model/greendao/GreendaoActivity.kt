@@ -17,21 +17,19 @@ import kotlinx.android.synthetic.main.activity_greendao.*
  *Company :cpx
  */
 class GreendaoActivity : BaseFragmentActivity() {
+
     private lateinit var dbBean: DbBean
 
-    override fun setContentViews() {
-        setContentView(R.layout.activity_greendao)
-        super.setContentViews()
-    }
+    override fun layoutId() = R.layout.activity_greendao
 
-    override fun initResource() {
+    override fun initData() {
         dbBean = DbBean()
         dbBean.mail = "wzgiceman@gmail.com"
         dbBean.myId = "wzgiceman"
         dbBean.name = "zhigangwei"
     }
 
-    override fun initWidget() {
+    override fun initView() {
         btn_add.setOnClickListener {
             DealDb.getInstance().insert(dbBean)
             showMsg(dbBean.id.toString())

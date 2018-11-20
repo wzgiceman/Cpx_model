@@ -17,15 +17,13 @@ public class LoadingDailog extends BaseDialog {
 
     public LoadingDailog(Context context) {
         super(context, R.style.progress_dialog, false);
-        init(R.layout.view_load_more);
+        init();
     }
 
-    @Override
-    protected void initResource() {
-    }
 
     @Override
-    protected void initWidget() {
+    public void initView() {
+        super.initView();
         tv = findViewById(R.id.tv_load);
     }
 
@@ -38,4 +36,8 @@ public class LoadingDailog extends BaseDialog {
         }
     }
 
+    @Override
+    public int layoutId() {
+        return R.layout.view_load_more;
+    }
 }

@@ -22,15 +22,11 @@ import java.io.File
  * * 更复杂用例参考地址:https://github.com/wzgiceman/RxjavaRetrofitDemo-string-master/blob/master/app/src/main/java/com/example/retrofit/activity/DownLaodActivity.java
  */
 class DownActivity : BaseFragmentActivity() {
+    override fun layoutId() = R.layout.activity_http_down
+
     private var info: DownInfo? = DownDbUtil.getInstance().queryDownBy(10001)
 
-
-    override fun setContentViews() {
-        setContentView(R.layout.activity_http_down)
-        super.setContentViews()
-    }
-
-    override fun initResource() {
+    override fun initData() {
         /*默认会存储在数据库中,所以需要读取历史纪录可以通过key:id获取*/
         if (null == info) {
             info = DownInfo()
@@ -64,7 +60,7 @@ class DownActivity : BaseFragmentActivity() {
 
     }
 
-    override fun initWidget() {
+    override fun initView() {
         btn_down.setOnClickListener {
             HttpDownManager.getInstance().startDown(info!!)
         }

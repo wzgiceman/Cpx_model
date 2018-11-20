@@ -10,8 +10,8 @@ import com.prog.zhigangwei.cpx_model.easyRecyclerview.easyRecyclerview.footer.Rc
 import com.prog.zhigangwei.cpx_model.easyRecyclerview.easyRecyclerview.head.RcHead
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
-import java.util.concurrent.TimeUnit
 import kotlinx.android.synthetic.main.activity_recycler.*
+import java.util.concurrent.TimeUnit
 
 /**
  *
@@ -25,21 +25,18 @@ import kotlinx.android.synthetic.main.activity_recycler.*
  * 更多复杂用法处理参考:https://github.com/Jude95/EasyRecyclerView
  */
 class RecyclerActivity : BaseFragmentActivity() {
+
     private val adapter by lazy { RecAdapter(this) }
 
+    override fun layoutId() = R.layout.activity_recycler
 
-    override fun setContentViews() {
-        setContentView(R.layout.activity_recycler)
-        super.setContentViews()
-    }
-
-    override fun initResource() {
+    override fun initData() {
         for (item in 0..3) {
             adapter.add(RecyclerItemBean("位置$item", item, false))
         }
     }
 
-    override fun initWidget() {
+    override fun initView() {
         initComplexWidget()
         initHead()
         initFooter()

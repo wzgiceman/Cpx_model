@@ -6,7 +6,6 @@ import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.net.http.SslError
 import android.os.Build
-import android.os.PatternMatcher
 import android.support.annotation.ColorInt
 import android.text.TextUtils
 import android.view.KeyEvent
@@ -14,7 +13,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.webkit.*
 import com.base.library.R
-import com.base.library.R.id.*
 import com.base.library.utils.AbLogUtil
 import com.base.muslim.base.activity.BaseFragmentActivity
 import kotlinx.android.synthetic.main.activity_web_play.*
@@ -50,14 +48,9 @@ open class WebPlayActivity : BaseFragmentActivity() {
         initErrorPageEvent()
     }
 
+    override fun layoutId() = R.layout.activity_web_play
 
-    override fun setContentViews() {
-        setContentView(R.layout.activity_web_play)
-        super.setContentViews()
-    }
-
-
-    override fun initResource() {
+    override fun initData() {
         if (bundle.containsKey(URL)) {
             url = bundle.getString(URL)
         }
@@ -67,7 +60,7 @@ open class WebPlayActivity : BaseFragmentActivity() {
 
     }
 
-    override fun initWidget() {
+    override fun initView() {
         initToolbar()
         setWebSettings()
         setWebViewClient()

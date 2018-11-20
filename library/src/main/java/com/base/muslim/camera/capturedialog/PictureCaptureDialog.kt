@@ -4,8 +4,11 @@ import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Build
+import android.provider.MediaStore
 import android.support.v4.content.FileProvider
 import android.view.View
+import android.widget.FrameLayout
+import android.widget.Toast
 import com.base.library.R
 import com.base.library.rxPermissions.RxPermissions
 import com.base.muslim.base.activity.BaseFragmentActivity
@@ -14,13 +17,10 @@ import com.base.muslim.camera.PictureCapture
 import com.base.muslim.camera.helper.PermissionHelper
 import com.base.muslim.camera.helper.PictureHelper
 import com.base.muslim.camera.utils.PATH
+import com.base.muslim.camera.utils.Photo
 import com.base.muslim.camera.utils.PictureType
 import kotlinx.android.synthetic.main.dialog_picture_capture.*
 import java.io.File
-import android.provider.MediaStore
-import android.widget.FrameLayout
-import android.widget.Toast
-import com.base.muslim.camera.utils.Photo
 
 /**
  * 选择相机或相册的弹窗，同时处理权限申请以及拍照或选择照片结果
@@ -51,13 +51,9 @@ class PictureCaptureDialog : BaseFragmentActivity() {
                     }
                 }
     }
+    override fun layoutId() =R.layout.dialog_picture_capture
 
-    override fun setContentViews() {
-        setContentView(R.layout.dialog_picture_capture)
-        super.setContentViews()
-    }
-
-    override fun initResource() {
+    override fun initData() {
         PATH.initialize(this)
         val intent = intent
         val bundle = intent.extras
@@ -65,7 +61,7 @@ class PictureCaptureDialog : BaseFragmentActivity() {
         listener = listenerItem.listener
     }
 
-    override fun initWidget() {
+    override fun initView() {
         setWidgetClick()
         setLayoutParams()
     }

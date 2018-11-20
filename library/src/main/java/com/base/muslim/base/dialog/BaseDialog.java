@@ -7,6 +7,7 @@ import android.view.View.OnClickListener;
 import android.view.Window;
 
 import com.base.library.R;
+import com.base.muslim.base.IBase;
 
 
 /**
@@ -14,7 +15,7 @@ import com.base.library.R;
  *
  * @author WZG
  */
-public abstract class BaseDialog extends Dialog implements OnClickListener {
+public abstract class BaseDialog extends Dialog implements OnClickListener, IBase {
 
     public BaseDialog(Context context) {
         super(context);
@@ -43,21 +44,23 @@ public abstract class BaseDialog extends Dialog implements OnClickListener {
     /**
      * 初始化
      */
-    protected void init(int layout) {
-        setContentView(layout);
-        initResource();
-        initWidget();
+    protected void init() {
+        if (NO_LAYOUT != layoutId()) {
+            setContentView(layoutId());
+        }
+        initData();
+        initView();
     }
 
-    /**
-     * 初始化数据
-     */
-    protected abstract void initResource();
+    @Override
+    public void initView() {
 
-    /**
-     * 初始化控件
-     */
-    protected abstract void initWidget();
+    }
+
+    @Override
+    public void initData() {
+
+    }
 
     /**
      * 初始化固有控件

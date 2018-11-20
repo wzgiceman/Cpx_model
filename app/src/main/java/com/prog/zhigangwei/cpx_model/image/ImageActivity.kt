@@ -21,18 +21,14 @@ class ImageActivity : BaseFragmentActivity(), OnPicturePathListener {
 
     private lateinit var path: String
 
+    override fun layoutId() = R.layout.activity_image
 
-    override fun setContentViews() {
-        setContentView(R.layout.activity_image)
-        super.setContentViews()
-    }
-
-    override fun initResource() {
+    override fun initData() {
         path = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1535091121218&di=32c9e8ae26cf5b3ac60ab3312a435233&imgtype=0&src=http%3A%2F%2Fb.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F8718367adab44aedb794e128bf1c8701a08bfb20.jpg"
     }
 
 
-    override fun initWidget() {
+    override fun initView() {
         btn_glide.setOnClickListener {
             Glide.with(this).asBitmap().load(path).into(iv_user)
         }

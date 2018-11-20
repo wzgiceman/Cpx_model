@@ -1,7 +1,12 @@
 package com.base.muslim.base.fragment;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+
+import com.base.muslim.base.IBase;
 
 
 /**
@@ -9,11 +14,20 @@ import android.view.View;
  *
  * @author WZG
  */
-public abstract class BaseFragment extends BaseSaveFragment {
+public abstract class BaseFragment extends BaseSaveFragment implements IBase {
     /**
      * 是否加载完成的标识
      */
     protected boolean createFinish = false;
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        if (layoutId() == NO_LAYOUT) {
+            return null;
+        }
+        return View.inflate(getContext(), layoutId(), null);
+    }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -27,20 +41,9 @@ public abstract class BaseFragment extends BaseSaveFragment {
      * 初始化fragment的根方法
      */
     protected void initFragment() {
-        initResource();
-        initWidget();
+        initData();
+        initView();
     }
-
-
-    /**
-     * 初始化数据
-     */
-    protected abstract void initResource();
-
-    /**
-     * 初始化基础控件
-     */
-    protected abstract void initWidget();
 
     /**
      * 其他第三方复杂控件初始化
@@ -55,8 +58,6 @@ public abstract class BaseFragment extends BaseSaveFragment {
      * @param object
      */
     public void setData(Object... object) {
-
     }
-
 
 }

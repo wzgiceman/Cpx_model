@@ -27,7 +27,7 @@ class TipsDialog : BaseDialog {
     constructor(context: Context, listener: OnDropBtnClickListener) : super(context) {
         this.listener = listener
         setDialogSystemLine()
-        init(R.layout.dialog_tips)
+        init()
     }
 
     /**
@@ -39,7 +39,7 @@ class TipsDialog : BaseDialog {
     constructor(context: Context, listener: OnBtnClickListener) : super(context) {
         this.listener1 = listener
         setDialogSystemLine()
-        init(R.layout.dialog_tips)
+        init()
     }
 
     /**
@@ -47,20 +47,22 @@ class TipsDialog : BaseDialog {
      */
     private fun setDialogSystemLine() {
         try {
-            var divierId = context.resources.getIdentifier("android:id/titleDivider", null, null)
-            val divider: View = this.findViewById(divierId)
+            var dividerId = context.resources.getIdentifier("android:id/titleDivider", null, null)
+            val divider: View = this.findViewById(dividerId)
             divider.setBackgroundColor(Color.TRANSPARENT) //横线透明色
         } catch (e: Exception) {
             e.printStackTrace()
         }
     }
 
-    override fun initResource() {
+    override fun layoutId() = R.layout.dialog_tips
+
+    override fun initData() {
         setCancelable(false)
         setCanceledOnTouchOutside(false)
     }
 
-    override fun initWidget() {
+    override fun initView() {
         Cancel_btn.setOnClickListener(this)
         Drop_btn.setOnClickListener(this)
     }
