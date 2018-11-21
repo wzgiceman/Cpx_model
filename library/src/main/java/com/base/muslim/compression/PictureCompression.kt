@@ -1,5 +1,6 @@
 package com.base.muslim.compression
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.net.Uri
 import android.text.TextUtils
@@ -20,6 +21,7 @@ import java.io.File
 /**
  * 图片压缩类
  */
+@SuppressLint("CheckResult")
 object PictureCompression {
 
     private fun initialize(context: Context) {
@@ -205,7 +207,7 @@ object PictureCompression {
      * @param listener 回掉接口
      */
     fun compressionPictureRx(context: Context, photo: Photo, listener: OnPicturePathListener) {
-        if (photo.pictureType == PictureType.CROP){
+        if (photo.pictureType == PictureType.CROP) {
             photo.compressionFile = photo.cropFile
             listener.onPhoto(photo)
             return
@@ -224,7 +226,6 @@ object PictureCompression {
                     for (file in it)
                         photo.compressionFile = file
                     listener.onPhoto(photo)
-
                 }
     }
 

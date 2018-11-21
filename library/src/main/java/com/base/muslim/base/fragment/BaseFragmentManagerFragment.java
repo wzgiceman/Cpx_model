@@ -23,7 +23,7 @@ public class BaseFragmentManagerFragment extends RxFragment {
     /**当前显示的位置*/
     protected int show = 0;
     /**tab页*/
-    private List<BaseFragment> ltFragment;
+    private List<BaseFragment> fragmentList;
     /**布局*/
     private int layout;
 
@@ -57,17 +57,17 @@ public class BaseFragmentManagerFragment extends RxFragment {
      * 初始化fragment显示界面
      *
      * @param layout
-     * @param ltFragment
+     * @param fragmentList
      */
-    protected void initFragment(int layout, List<BaseFragment> ltFragment) {
-        this.ltFragment = ltFragment;
+    protected void initFragment(int layout, List<BaseFragment> fragmentList) {
+        this.fragmentList = fragmentList;
         this.layout = layout;
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.setCustomAnimations(R.anim.fragment_enter, R.anim.fade_out);
-        for (BaseFragment fragment : ltFragment) {
+        for (BaseFragment fragment : fragmentList) {
             transaction.add(layout, fragment).hide(fragment);
         }
-        transaction.show(ltFragment.get(show)).commit();
+        transaction.show(fragmentList.get(show)).commit();
     }
 
     /**
@@ -78,8 +78,8 @@ public class BaseFragmentManagerFragment extends RxFragment {
     protected void showFragment(int index) {
         if (show != index) {
             FragmentTransaction transaction = fragmentManager.beginTransaction();
-            transaction.hide(ltFragment.get(show));
-            BaseFragment fragment = ltFragment.get(index);
+            transaction.hide(fragmentList.get(show));
+            BaseFragment fragment = fragmentList.get(index);
             if (fragment.isAdded()) {
                 transaction.show(fragment).commit();
             } else {

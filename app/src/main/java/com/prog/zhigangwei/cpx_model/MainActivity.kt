@@ -29,14 +29,14 @@ class MainActivity : BaseFragmentActivity() {
     override fun layoutId() = R.layout.activity_main
 
     override fun initData() {
-        initResourceA()
-        initResourceB()
+        initDataA()
+        initDataB()
     }
 
     /**
      * 数据处理A
      */
-    private fun initResourceA() {
+    private fun initDataA() {
 
     }
 
@@ -44,7 +44,7 @@ class MainActivity : BaseFragmentActivity() {
     /**
      * 数据处理B
      */
-    private fun initResourceB() {
+    private fun initDataB() {
 
     }
 
@@ -60,15 +60,15 @@ class MainActivity : BaseFragmentActivity() {
 
     override fun initComplexWidget() {
         /*其他控件处理*/
-        initWidgetA()
-        initWidgetB()
+        initViewA()
+        initViewB()
     }
 
 
     /**
      * 界面处理A
      */
-    private fun initWidgetA() {
+    private fun initViewA() {
 
     }
 
@@ -76,7 +76,7 @@ class MainActivity : BaseFragmentActivity() {
     /**
      * 界面处理B
      */
-    private fun initWidgetB() {
+    private fun initViewB() {
 
     }
 }

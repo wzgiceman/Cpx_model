@@ -63,8 +63,7 @@ public class BaseSaveFragment extends BaseToolFragment {
             bundle = saveState();
         if (bundle != null) {
             Bundle b = getArguments();
-            if (b != null)
-                b.putBundle("internalSavedViewState8954201239547", bundle);
+            if (b != null) b.putBundle("internalSavedViewState8954201239547", bundle);
         }
     }
 

@@ -28,24 +28,3 @@ fun Fragment.getRxActivity(): RxAppCompatActivity? {
     }
     return null
 }
-
-/**
- * 显示统一的加载框
- *
- * @param cancel 是否可以取消
- * @param title  显示的标题
- */
-fun Fragment.showLoading(cancel: Boolean, title: String) {
-    if (isValidActivity()) {
-        activity.showLoading(cancel, title)
-    }
-}
-
-/**
- * 关闭加载框
- */
-fun Fragment.closeLoading() {
-    if (isValidActivity()) {
-        activity.closeLoading()
-    }
-}

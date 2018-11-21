@@ -33,8 +33,7 @@ open class WebPlayActivity : BaseFragmentActivity() {
 
     private var url: String = ""
     private var title: String = ""
-    private var exitUrlRegexSet:MutableSet<String> = mutableSetOf() //拦截url，当拦截到时，退出Activity
-
+    private var exitUrlRegexSet: MutableSet<String> = mutableSetOf() //拦截url，当拦截到时，退出Activity
 
     companion object {
         const val URL: String = "url"
@@ -51,13 +50,13 @@ open class WebPlayActivity : BaseFragmentActivity() {
     override fun layoutId() = R.layout.activity_web_play
 
     override fun initData() {
+        val bundle = this.bundle ?: return
         if (bundle.containsKey(URL)) {
             url = bundle.getString(URL)
         }
         if (bundle.containsKey(TITLE)) {
             title = bundle.getString(TITLE)
         }
-
     }
 
     override fun initView() {
@@ -122,7 +121,7 @@ open class WebPlayActivity : BaseFragmentActivity() {
     /**
      * 设置错误页面
      */
-    fun setErrorPage(errorView:View){
+    fun setErrorPage(errorView: View) {
         ll_error_page.removeAllViews()
         ll_error_page.addView(errorView)
     }
@@ -241,19 +240,19 @@ open class WebPlayActivity : BaseFragmentActivity() {
      * 处理拦截的url
      */
     private fun handleInterceptUrl(url: String): WebResourceResponse? {
-        if(exitUrlRegexSet.isEmpty()){
+        if (exitUrlRegexSet.isEmpty()) {
             return null
         }
         var isFind = false
-        for (regex in exitUrlRegexSet){
+        for (regex in exitUrlRegexSet) {
             var pattern = Pattern.compile(regex)
             isFind = pattern.matcher(url).find()
-            if(isFind){
+            if (isFind) {
                 break
             }
         }
-        if(isFind){
-            if(!isHandleUrl){
+        if (isFind) {
+            if (!isHandleUrl) {
                 isHandleUrl = true
                 finish()
             }
@@ -265,14 +264,14 @@ open class WebPlayActivity : BaseFragmentActivity() {
     /**
      * 添加退出url的正则
      */
-    fun addExitUrlRegex(regex:String){
+    fun addExitUrlRegex(regex: String) {
         this.exitUrlRegexSet.add(regex)
     }
 
     /**
      * 添加退出url的正则
      */
-    fun addExitUrlRegexs(regexList:MutableList<String>){
+    fun addExitUrlRegexs(regexList: MutableList<String>) {
         regexList.forEach {
             addExitUrlRegex(it)
         }
@@ -281,7 +280,7 @@ open class WebPlayActivity : BaseFragmentActivity() {
     /**
      * 删除退出url的正则
      */
-    fun removeExitUrlRegex(regex:String){
+    fun removeExitUrlRegex(regex: String) {
         this.exitUrlRegexSet.remove(regex)
     }
 

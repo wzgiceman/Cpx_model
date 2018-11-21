@@ -13,7 +13,6 @@ import com.base.muslim.base.IBase;
 public abstract class BaseFragmentActivity extends BaseFragmentToolsActivity implements IBase {
 
     protected boolean beforeUi = true;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,7 +27,6 @@ public abstract class BaseFragmentActivity extends BaseFragmentToolsActivity imp
     /**
      * 初始化Activity的根方法
      */
-
     protected void initActivity() {
         if (layoutId() != NO_LAYOUT) {
             setContentView(layoutId());
@@ -51,6 +49,5 @@ public abstract class BaseFragmentActivity extends BaseFragmentToolsActivity imp
     protected void initBeforeFailed() {
 
     }
-
 
 }
