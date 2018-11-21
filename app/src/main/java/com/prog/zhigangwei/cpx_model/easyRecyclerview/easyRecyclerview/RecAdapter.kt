@@ -39,20 +39,20 @@ class RecAdapter(context: Context) : RecyclerArrayAdapter<RecyclerItemBean>(cont
 
     /**
      * item里面处理的事件具体处理位置亦可以放入到adapter的实现层,保证处理逻辑在外部统一处理(activity或者fragment等)
-     * @param positon处理完数据后刷新的位置
+     * @param position 处理完数据后刷新的位置
      */
-    fun doSomthing(positon: Int) {
+    fun doSomething(position: Int) {
         /*这里如果存在head或者footer在获取数据的时候需要减去head的位置量*/
-        getItem(positon - headerCount).choose = true
+        getItem(position - headerCount).choose = true
         /*处理完数据以后更新位置数据*/
-        notifyItemChanged(positon)
+        notifyItemChanged(position)
 
         /*手动刷新需要刷新的位置,避免全局刷新耗时*/
-        if (olderPosition != -1) {
+        if (olderPosition != -1 && olderPosition != position) {
             getItem(olderPosition - headerCount).choose = false
             notifyItemChanged(olderPosition)
+            olderPosition = position
         }
-        olderPosition = positon
     }
 
 
@@ -70,7 +70,7 @@ class RecAdapter(context: Context) : RecyclerArrayAdapter<RecyclerItemBean>(cont
             tv.setTextColor(if (data.choose) context.resources.getColor(R.color.c_008000) else context.resources.getColor(R.color
                     .c_0571FA))
             tv.text = data.name
-            btn.setOnClickListener { adapter.doSomthing(adapterPosition) }
+            btn.setOnClickListener { adapter.doSomething(adapterPosition) }
         }
     }
 }
