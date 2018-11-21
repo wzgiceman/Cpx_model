@@ -6,6 +6,7 @@ import android.widget.Button
 import android.widget.TextView
 import com.base.library.easyrecyclerview.adapter.BaseViewHolder
 import com.base.library.easyrecyclerview.adapter.RecyclerArrayAdapter
+import com.base.library.utils.utilcode.util.LogUtils
 import com.base.muslim.base.adapter.BaseHolder
 import com.base.muslim.weak.Weak
 import com.prog.zhigangwei.cpx_model.R
@@ -42,6 +43,7 @@ class RecAdapter(context: Context) : RecyclerArrayAdapter<RecyclerItemBean>(cont
      * @param position 处理完数据后刷新的位置
      */
     fun doSomething(position: Int) {
+        LogUtils.d("position = $position, olderPosition = $olderPosition")
         /*这里如果存在head或者footer在获取数据的时候需要减去head的位置量*/
         getItem(position - headerCount).choose = true
         /*处理完数据以后更新位置数据*/
@@ -51,20 +53,28 @@ class RecAdapter(context: Context) : RecyclerArrayAdapter<RecyclerItemBean>(cont
         if (olderPosition != -1 && olderPosition != position) {
             getItem(olderPosition - headerCount).choose = false
             notifyItemChanged(olderPosition)
-            olderPosition = position
         }
+        olderPosition = position
     }
 
+    /**
+     * 新增了header之后调用，保证item更新时位置正确
+     */
+    fun increaseOlderPosition() {
+        if (olderPosition != -1) {
+            olderPosition++
+        }
+    }
 
     /**
      * holder里面只能做和显示相关的处理
      * 操作的逻辑必须踢出到外层处理
      */
-    internal class WaterHolder(parent: ViewGroup, val adapter: RecAdapter) : BaseHolder<RecyclerItemBean>(parent, R.layout
+    internal class WaterHolder(parent: ViewGroup, private val adapter: RecAdapter) : BaseHolder<RecyclerItemBean>(parent, R.layout
             .recycler_item_holder_recycler) {
 
-        var tv: TextView = `$`(R.id.tv_msg)
-        var btn: Button = `$`(R.id.btn_test)
+        private var tv: TextView = `$`(R.id.tv_msg)
+        private var btn: Button = `$`(R.id.btn_test)
 
         override fun setData(data: RecyclerItemBean) {
             tv.setTextColor(if (data.choose) context.resources.getColor(R.color.c_008000) else context.resources.getColor(R.color

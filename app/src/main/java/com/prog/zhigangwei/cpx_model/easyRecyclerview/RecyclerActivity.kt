@@ -70,6 +70,7 @@ class RecyclerActivity : BaseFragmentActivity() {
      */
     private fun initHead() {
         adapter.addHeader(RcHead(RecyclerItemBean("header", 0, false)))
+        adapter.increaseOlderPosition()
     }
 
     /**
