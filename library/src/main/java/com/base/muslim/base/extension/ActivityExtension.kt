@@ -17,10 +17,6 @@ import android.widget.EditText
  * Date:    2018/11/20
  */
 
-/**
- * Activity扩展属性loadingDialog
- */
-
 @JvmOverloads
 fun Activity.jumpActivityFinish(cls: Class<*>, bundle: Bundle = Bundle()) {
     jumpActivity(cls, bundle)

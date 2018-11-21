@@ -35,7 +35,6 @@ public class BaseSaveFragment extends BaseToolFragment {
      * Called when the fragment is launched for the first time.
      * In the other words, fragment is now recreated.
      */
-
     protected void onFirstTimeLaunched() {
 
     }

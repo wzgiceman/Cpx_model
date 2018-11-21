@@ -1,5 +1,6 @@
 package com.base.muslim.base.extension
 
+import android.app.Activity
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import com.base.library.rxlifecycle.components.support.RxAppCompatActivity
@@ -15,11 +16,13 @@ import com.base.library.rxlifecycle.components.support.RxAppCompatActivity
 
 @JvmOverloads
 fun Fragment.jumpActivityFinish(cls: Class<*>, bundle: Bundle = Bundle()) {
-    activity.jumpActivityFinish(cls, bundle)
+    if (isValidActivity()) {
+        activity.jumpActivityFinish(cls, bundle)
+    }
 }
 
 fun Fragment.isValidActivity(): Boolean {
-    return activity != null && activity.isValidActivity()
+    return context != null && (context as Activity).isValidActivity()
 }
 
 fun Fragment.getRxActivity(): RxAppCompatActivity? {
