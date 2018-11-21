@@ -19,7 +19,7 @@ class LanguagesApi : BaseApi() {
     init {
         /*必须提前将数据放入到base、assets/gson 文件命名根据mehtod定义的方法命名*/
         method = "languages"
-        cache = true
+        isCache = true
         cookieNetWorkTime = 3600
         retryCount=0
         baseUrl = "http://ss.afr99.com/"

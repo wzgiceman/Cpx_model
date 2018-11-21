@@ -27,6 +27,7 @@
         <activity android:name=".http.down.DownActivity" />
         <activity android:name=".rxjava.RxJavaActivity" />
         <activity android:name=".greendao.GreendaoActivity" />
+        <activity android:name=".constraintLayout.ConstraintLayoutActivity" />
     </application>
 
 </manifest>

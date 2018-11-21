@@ -18,7 +18,7 @@ class HomeWallApi : BaseApi() {
 
     init {
         method = "index_wallpapers"
-        cache = true
+        isCache = true
         cookieNetWorkTime=20
     }
 
