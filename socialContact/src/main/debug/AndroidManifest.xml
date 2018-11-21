@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="com.prayer.time.muslim.social_contact"
+<manifest package="com.prayer.time.muslim.socialContact"
           xmlns:android="http://schemas.android.com/apk/res/android">
 
     <application
-        android:name=".app.SocialApp"
+        android:name="com.prayer.time.muslim.socialContact.app.SocialApp"
         android:allowBackup="false"
         android:icon="@mipmap/social_contact_ic_launcher"
         android:label="@string/social_contact_app_name"
@@ -11,7 +11,7 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name=".ui.TestActivity"
+            android:name="com.prayer.time.muslim.socialContact.ui.TestActivity"
             >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>

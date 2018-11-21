@@ -8,7 +8,7 @@ import org.greenrobot.greendao.database.Database;
 import org.greenrobot.greendao.identityscope.IdentityScopeType;
 import org.greenrobot.greendao.internal.DaoConfig;
 
-import com.base.share_data.share_msg.ShareData;
+import com.base.shareData.shareMsg.ShareData;
 import com.base.library.rxRetrofit.http.cookie.CookieResult;
 import com.base.library.rxRetrofit.downlaod.DownInfo;
 

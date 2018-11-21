@@ -1,7 +1,7 @@
-package com.prayer.time.muslim.social_contact.ui
+package com.prayer.time.muslim.socialContact.ui
 
 import com.base.muslim.base.activity.BaseFragmentActivity
-import com.prayer.time.muslim.social_contact.R
+import com.prayer.time.muslim.socialContact.R
 import kotlinx.android.synthetic.main.social_contact_activity_main.*
 
 

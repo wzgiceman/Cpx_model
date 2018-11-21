@@ -1,4 +1,4 @@
-package com.base.share_data.share_msg;
+package com.base.shareData.shareMsg;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -10,8 +10,8 @@ import com.base.dao.DaoSession;
 import com.base.dao.ShareDataDao;
 import com.base.library.rxRetrofit.RxRetrofitApp;
 import com.base.library.utils.AbStrUtil;
-import com.base.share_data.ShareSparse;
-import com.base.share_data.user.User;
+import com.base.shareData.ShareSparse;
+import com.base.shareData.user.User;
 
 
 /**

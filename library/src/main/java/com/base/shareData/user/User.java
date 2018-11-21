@@ -1,4 +1,4 @@
-package com.base.share_data.user;
+package com.base.shareData.user;
 
 import com.alibaba.fastjson.JSONObject;
 import com.base.library.rxRetrofit.api.BaseApi;

@@ -5,8 +5,8 @@ import android.content.Context
 import android.graphics.Typeface
 import android.util.AttributeSet
 import android.widget.TextView
-import com.base.share_data.ShareSparse
-import com.base.share_data.user.User
+import com.base.shareData.ShareSparse
+import com.base.shareData.user.User
 
 /**
  * Describe:古兰经设置字体

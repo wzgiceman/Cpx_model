@@ -1,1 +1,1 @@
-include ':app',':social_contact',":library"
+include ':app', ':socialContact',":library"
