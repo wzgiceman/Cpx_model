@@ -23,7 +23,6 @@ public class BaseFragmentToolsActivity extends BaseFragmentManagerActivity {
      */
     protected Bundle bundle;
 
-
     /**
      * 点击空白位置 隐藏软键盘
      */
@@ -47,7 +46,7 @@ public class BaseFragmentToolsActivity extends BaseFragmentManagerActivity {
      * @return
      */
     private boolean isShouldHideInput(View v, MotionEvent event) {
-        if (v != null && (v instanceof EditText)) {
+        if (v instanceof EditText) {
             int[] l = {0, 0};
             v.getLocationInWindow(l);
             int left = l[0], top = l[1], bottom = top + v.getHeight(), right = left
@@ -78,16 +77,15 @@ public class BaseFragmentToolsActivity extends BaseFragmentManagerActivity {
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-        resotreSaveState(savedInstanceState);
+        restoreSaveState(savedInstanceState);
     }
-
 
     /**
      * 复原数据
      *
      * @param savedInstanceState
      */
-    protected void resotreSaveState(Bundle savedInstanceState) {
+    protected void restoreSaveState(Bundle savedInstanceState) {
         bundle = getIntent().getExtras();
         if (bundle == null && savedInstanceState != null && savedInstanceState.containsKey("bundle")) {
             bundle = savedInstanceState.getBundle("bundle");
@@ -102,6 +100,5 @@ public class BaseFragmentToolsActivity extends BaseFragmentManagerActivity {
     }
 
     /*end------------------------bundle数据的恢复和保存-------------------------------*/
-
 
 }

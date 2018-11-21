@@ -66,8 +66,8 @@ public class ProgressSubscriber<T> implements Observer<T> {
         if (api.isCache()) {
             /*获取缓存数据*/
             CookieResult cookieResult = CookieDbUtil.getInstance().queryCookieBy(api.getCacheUrl());
-            int duration = isNetworkAvailable(RxRetrofitApp.getApplication()) ? api.getCookieNetWorkTime() : api
-                    .getCookieNoNetWorkTime();
+            int duration = isNetworkAvailable(RxRetrofitApp.getApplication()) ? api.getCookieNetWorkTime()
+                    : api.getCookieNoNetWorkTime();
             if (null != cookieResult && (System.currentTimeMillis() - cookieResult.getTime()) / 1000 < duration) {
                 onComplete();
                 d.dispose();
@@ -253,6 +253,7 @@ public class ProgressSubscriber<T> implements Observer<T> {
 
     /**
      * 是否有网络
+     *
      * @param context
      * @return
      */

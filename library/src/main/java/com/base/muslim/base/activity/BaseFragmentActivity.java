@@ -12,16 +12,16 @@ import com.base.muslim.base.IBase;
  */
 public abstract class BaseFragmentActivity extends BaseFragmentToolsActivity implements IBase {
 
-    protected boolean beforUi = true;
+    protected boolean beforeUi = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        resotreSaveState(savedInstanceState);
-        if (beforUi) {
+        restoreSaveState(savedInstanceState);
+        if (beforeUi) {
             initActivity();
         } else {
-            initBeforFaild();
+            initBeforeFailed();
         }
     }
 
@@ -48,7 +48,7 @@ public abstract class BaseFragmentActivity extends BaseFragmentToolsActivity imp
     /**
      * activity不初始化回掉处理
      */
-    protected void initBeforFaild() {
+    protected void initBeforeFailed() {
 
     }
 

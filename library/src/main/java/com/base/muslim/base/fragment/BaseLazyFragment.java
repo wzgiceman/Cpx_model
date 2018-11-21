@@ -109,7 +109,6 @@ public abstract class BaseLazyFragment extends BaseSaveFragment implements IBase
         }
     }
 
-
     /**
      * 重置加载状态
      * 数据懒加载取消/失败调用此方法，使得下次到达此页面时可以再次触发lazyLoadData刷新数据

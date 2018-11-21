@@ -6,8 +6,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 
 import com.base.library.R;
-import com.base.muslim.base.fragment.BaseFragment;
 import com.base.library.rxlifecycle.components.support.RxAppCompatActivity;
+import com.base.muslim.base.fragment.BaseFragment;
 
 import java.util.List;
 
@@ -19,18 +19,13 @@ import java.util.List;
  */
 public class BaseFragmentManagerActivity extends RxAppCompatActivity {
     protected FragmentManager fragmentManager;
-    /**
-     * 当前显示的位置
-     */
+    /**当前显示的位置*/
     protected int show = 0;
-    /**
-     * tab页
-     */
-    private List<BaseFragment> ltFragmetn;
-    /**
-     * 布局
-     */
+    /**tab页*/
+    private List<BaseFragment> ltFragment;
+    /**布局*/
     private int layout;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,26 +46,24 @@ public class BaseFragmentManagerActivity extends RxAppCompatActivity {
         ft.commit();
     }
 
-
     /**
      * 初始化fragment显示界面
      *
      * @param layout
-     * @param ltFragmetn
+     * @param ltFragment
      */
-    protected BaseFragment initFragment(int layout, List<BaseFragment> ltFragmetn) {
-        this.ltFragmetn = ltFragmetn;
+    protected BaseFragment initFragment(int layout, List<BaseFragment> ltFragment) {
+        this.ltFragment = ltFragment;
         this.layout = layout;
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.setCustomAnimations(R.anim.fragment_enter, R.anim.fade_out);
-        for (BaseFragment fragment : ltFragmetn) {
+        for (BaseFragment fragment : ltFragment) {
             transaction.add(layout, fragment).hide(fragment);
         }
-        BaseFragment fragment = ltFragmetn.get(show);
+        BaseFragment fragment = ltFragment.get(show);
         transaction.show(fragment).commit();
         return fragment;
     }
-
 
     /**
      * 指定显示的fragment位置
@@ -78,11 +71,11 @@ public class BaseFragmentManagerActivity extends RxAppCompatActivity {
      * @param index
      */
     protected BaseFragment showFragment(int index) {
-        if (ltFragmetn == null || ltFragmetn.size() == 0 || index >= ltFragmetn.size()) return null;
-        BaseFragment fragment = ltFragmetn.get(index);
+        if (ltFragment == null || ltFragment.size() == 0 || index >= ltFragment.size()) return null;
+        BaseFragment fragment = ltFragment.get(index);
         if (show != index) {
             FragmentTransaction transaction = fragmentManager.beginTransaction();
-            transaction.hide(ltFragmetn.get(show));
+            transaction.hide(ltFragment.get(show));
             if (fragment.isAdded()) {
                 transaction.show(fragment).commit();
             } else {

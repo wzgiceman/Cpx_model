@@ -20,23 +20,23 @@ import java.util.List;
  */
 public class BaseFragmentManagerFragment extends RxFragment {
     protected FragmentManager fragmentManager;
-    //    当前显示的位置
+    /**当前显示的位置*/
     protected int show = 0;
-    //    tab页
-    private List<BaseFragment> ltFragmetn;
-    //    布局
+    /**tab页*/
+    private List<BaseFragment> ltFragment;
+    /**布局*/
     private int layout;
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        fragmentManager=getChildFragmentManager();
+        fragmentManager = getChildFragmentManager();
     }
 
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        fragmentManager=getChildFragmentManager();
+        fragmentManager = getChildFragmentManager();
     }
 
     /**
@@ -57,17 +57,17 @@ public class BaseFragmentManagerFragment extends RxFragment {
      * 初始化fragment显示界面
      *
      * @param layout
-     * @param ltFragmetn
+     * @param ltFragment
      */
-    protected void initFragment(int layout, List<BaseFragment> ltFragmetn) {
-        this.ltFragmetn = ltFragmetn;
+    protected void initFragment(int layout, List<BaseFragment> ltFragment) {
+        this.ltFragment = ltFragment;
         this.layout = layout;
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.setCustomAnimations(R.anim.fragment_enter, R.anim.fade_out);
-        for (BaseFragment fragment : ltFragmetn) {
+        for (BaseFragment fragment : ltFragment) {
             transaction.add(layout, fragment).hide(fragment);
         }
-        transaction.show(ltFragmetn.get(show)).commit();
+        transaction.show(ltFragment.get(show)).commit();
     }
 
     /**
@@ -78,8 +78,8 @@ public class BaseFragmentManagerFragment extends RxFragment {
     protected void showFragment(int index) {
         if (show != index) {
             FragmentTransaction transaction = fragmentManager.beginTransaction();
-            transaction.hide(ltFragmetn.get(show));
-            BaseFragment fragment = ltFragmetn.get(index);
+            transaction.hide(ltFragment.get(show));
+            BaseFragment fragment = ltFragment.get(index);
             if (fragment.isAdded()) {
                 transaction.show(fragment).commit();
             } else {
@@ -88,5 +88,4 @@ public class BaseFragmentManagerFragment extends RxFragment {
             show = index;
         }
     }
-
 }

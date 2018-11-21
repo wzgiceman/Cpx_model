@@ -25,7 +25,6 @@ import com.prog.zhigangwei.cpx_model.easyRecyclerview.common.bean.RecyclerItemBe
  */
 class RecAdapter(context: Context) : RecyclerArrayAdapter<RecyclerItemBean>(context) {
 
-
     override fun onCreateEasyViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<*> {
         /*弱引用防止泄露*/
         val adapter by Weak {
@@ -34,8 +33,7 @@ class RecAdapter(context: Context) : RecyclerArrayAdapter<RecyclerItemBean>(cont
         return WaterHolder(parent, adapter!!)
     }
 
-
-    /*纪录历史位置信息-方便刷新*/
+    /*记录历史位置信息-方便刷新*/
     private var olderPosition = -1
 
     /**

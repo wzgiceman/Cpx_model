@@ -10,13 +10,13 @@ import android.os.Bundle;
  * <p>
  * Company :Sichuan Ziyan
  */
-public class BaseSaveFragment extends BaseToolFragment{
+public class BaseSaveFragment extends BaseToolFragment {
 
-   protected Bundle bundle;
+    protected Bundle bundle;
 
     public BaseSaveFragment() {
         super();
-        if (getArguments() == null){
+        if (getArguments() == null) {
             setArguments(new Bundle());
         }
     }
@@ -105,7 +105,7 @@ public class BaseSaveFragment extends BaseToolFragment{
      * and before {@link #onViewStateRestored(Bundle)}.
      *
      * @param savedInstanceState If the fragment is being re-created from
-     * a previous saved state, this is the state.
+     *                           a previous saved state, this is the state.
      */
 
     protected void onRestoreState(Bundle savedInstanceState) {
@@ -130,7 +130,7 @@ public class BaseSaveFragment extends BaseToolFragment{
      * restarted.  If a new instance of the fragment later needs to be
      * created, the data you place in the Bundle here will be available
      * in the Bundle given to {@link #onRestoreState(Bundle)}.
-     *
+     * <p>
      * Activity.onSaveInstanceState(Bundle)} and most of the discussion there
      * applies here as well.  Note however: <em>this method may be called
      * at any time before {@link #onDestroy()}</em>.  There are many situations
@@ -140,7 +140,6 @@ public class BaseSaveFragment extends BaseToolFragment{
      *
      * @param outState Bundle in which to place your saved state.
      */
-
     protected void onSaveState(Bundle outState) {
 
     }
