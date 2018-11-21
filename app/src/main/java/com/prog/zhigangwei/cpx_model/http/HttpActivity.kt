@@ -50,7 +50,6 @@ class HttpActivity : BaseFragmentActivity(), HttpOnNextListener {
     override fun onNext(resulte: String, method: String) {
         when (method) {
             wallApi.method -> {
-                tv_msg.text = "suc:wallApi->${resulte}"
             }
             noticeApi.method -> {
                 tv_msg.text = "suc:noticeApi->${resulte}"
