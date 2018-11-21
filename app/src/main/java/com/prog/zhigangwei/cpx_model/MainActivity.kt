@@ -22,10 +22,6 @@ import kotlinx.android.synthetic.main.activity_main.*
  *Company :cpx
  */
 class MainActivity : BaseFragmentActivity() {
-    override fun initActivity() {
-        super.initActivity()
-        initComplexWidget()
-    }
 
     override fun layoutId() = R.layout.activity_main
 
@@ -58,9 +54,10 @@ class MainActivity : BaseFragmentActivity() {
         btn_greendao.setOnClickListener { jumpActivity(GreendaoActivity::class.java) }
         btn_rxjava.setOnClickListener { jumpActivity(RxJavaActivity::class.java) }
         btn_constraintLayout.setOnClickListener { jumpActivity(ConstraintLayoutActivity::class.java) }
+        initComplexWidget()
     }
 
-    override fun initComplexWidget() {
+    private fun initComplexWidget() {
         /*其他控件处理*/
         initViewA()
         initViewB()

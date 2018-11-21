@@ -43,8 +43,7 @@ class RecyclerActivity : BaseFragmentActivity() {
     }
 
 
-    override fun initComplexWidget() {
-        super.initComplexWidget()
+    private fun initComplexWidget() {
         erc.setLayoutManager(LinearLayoutManager(this))
         erc.adapter = adapter
         btn_head.setOnClickListener { initHead() }
