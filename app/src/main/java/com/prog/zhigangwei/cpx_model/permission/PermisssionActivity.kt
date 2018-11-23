@@ -1,7 +1,7 @@
 package com.prog.zhigangwei.cpx_model.permission
 
 import com.base.library.rxPermissions.RxPermissions
-import com.base.muslim.base.activity.BaseFragmentActivity
+import com.base.muslim.base.activity.BaseActivity
 import com.prog.zhigangwei.cpx_model.R
 import kotlinx.android.synthetic.main.activity_permission.*
 
@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.activity_permission.*
  *
  *Company :cpx
  */
-class PermisssionActivity : BaseFragmentActivity() {
+class PermisssionActivity : BaseActivity() {
 
     override fun layoutId() = R.layout.activity_permission
 

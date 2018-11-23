@@ -1,6 +1,6 @@
 package com.prog.zhigangwei.cpx_model.greendao
 
-import com.base.muslim.base.activity.BaseFragmentActivity
+import com.base.muslim.base.activity.BaseActivity
 import com.base.muslim.base.extension.showToast
 import com.prog.zhigangwei.cpx_model.R
 import com.prog.zhigangwei.cpx_model.greendao.greendao.DbBean
@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.activity_greendao.*
  *
  *Company :cpx
  */
-class GreendaoActivity : BaseFragmentActivity() {
+class GreendaoActivity : BaseActivity() {
 
     private lateinit var dbBean: DbBean
 

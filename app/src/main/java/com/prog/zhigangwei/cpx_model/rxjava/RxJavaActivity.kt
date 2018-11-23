@@ -2,7 +2,7 @@ package com.prog.zhigangwei.cpx_model.rxjava
 
 import com.base.library.observer.AbsObserver
 import com.base.library.utils.AbLogUtil
-import com.base.muslim.base.activity.BaseFragmentActivity
+import com.base.muslim.base.activity.BaseActivity
 import com.prog.zhigangwei.cpx_model.R
 import io.reactivex.*
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -24,7 +24,7 @@ import java.util.concurrent.TimeUnit
  * @copyright cpx
  *
  */
-class RxJavaActivity : BaseFragmentActivity() {
+class RxJavaActivity : BaseActivity() {
 
     override fun layoutId() = R.layout.activity_rx_java
 

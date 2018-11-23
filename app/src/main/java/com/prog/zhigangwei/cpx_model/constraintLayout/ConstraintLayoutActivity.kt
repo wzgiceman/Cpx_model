@@ -1,6 +1,6 @@
 package com.prog.zhigangwei.cpx_model.constraintLayout
 
-import com.base.muslim.base.activity.BaseFragmentActivity
+import com.base.muslim.base.activity.BaseActivity
 import com.prog.zhigangwei.cpx_model.R
 
 /**
@@ -17,7 +17,7 @@ import com.prog.zhigangwei.cpx_model.R
  *
  *Company :cpx
  */
-class ConstraintLayoutActivity : BaseFragmentActivity() {
+class ConstraintLayoutActivity : BaseActivity() {
 
     override fun layoutId(): Int = R.layout.activity_constraintlayout
 

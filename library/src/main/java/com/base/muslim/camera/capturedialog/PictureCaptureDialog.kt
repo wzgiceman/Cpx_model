@@ -11,7 +11,7 @@ import android.widget.FrameLayout
 import android.widget.Toast
 import com.base.library.R
 import com.base.library.rxPermissions.RxPermissions
-import com.base.muslim.base.activity.BaseFragmentActivity
+import com.base.muslim.base.activity.BaseActivity
 import com.base.muslim.camera.OnPicturePathListener
 import com.base.muslim.camera.PictureCapture
 import com.base.muslim.camera.helper.PermissionHelper
@@ -25,7 +25,7 @@ import java.io.File
 /**
  * 选择相机或相册的弹窗，同时处理权限申请以及拍照或选择照片结果
  */
-class PictureCaptureDialog : BaseFragmentActivity() {
+class PictureCaptureDialog : BaseActivity() {
 
     private var cropWith = 480
     private var cropHeiht = 480

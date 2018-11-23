@@ -4,7 +4,7 @@ import com.base.library.rxRetrofit.exception.ApiException
 import com.base.library.rxRetrofit.http.HttpManager
 import com.base.library.rxRetrofit.listener.HttpOnNextListener
 import com.base.library.utils.utilcode.util.LogUtils
-import com.base.muslim.base.activity.BaseFragmentActivity
+import com.base.muslim.base.activity.BaseActivity
 import com.base.muslim.base.extension.jumpActivity
 import com.base.muslim.base.extension.showToast
 import com.prog.zhigangwei.cpx_model.R
@@ -24,7 +24,7 @@ import kotlinx.android.synthetic.main.activity_http.*
  *Company :cpx
  *
  */
-class HttpActivity : BaseFragmentActivity(), HttpOnNextListener {
+class HttpActivity : BaseActivity(), HttpOnNextListener {
 
     private val httpManager by lazy { HttpManager(this, this) }
 

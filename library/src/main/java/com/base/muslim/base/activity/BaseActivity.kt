@@ -10,7 +10,7 @@ import com.base.muslim.base.IBase
  *
  * @author WZG
  */
-abstract class BaseFragmentActivity : BaseSwipeBackActivity(), IBase {
+abstract class BaseActivity : BaseSwipeBackActivity(), IBase {
     /**上个界面传入的数据*/
     protected var bundle: Bundle? = null
     protected var beforeUi = true

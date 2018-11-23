@@ -2,7 +2,7 @@ package com.prog.zhigangwei.cpx_model.easyRecyclerview
 
 import android.support.v7.widget.LinearLayoutManager
 import com.base.library.observer.AbsObserver
-import com.base.muslim.base.activity.BaseFragmentActivity
+import com.base.muslim.base.activity.BaseActivity
 import com.prog.zhigangwei.cpx_model.R
 import com.prog.zhigangwei.cpx_model.easyRecyclerview.common.bean.RecyclerItemBean
 import com.prog.zhigangwei.cpx_model.easyRecyclerview.easyRecyclerview.RecAdapter
@@ -24,7 +24,7 @@ import java.util.concurrent.TimeUnit
  *
  * 更多复杂用法处理参考:https://github.com/Jude95/EasyRecyclerView
  */
-class RecyclerActivity : BaseFragmentActivity() {
+class RecyclerActivity : BaseActivity() {
 
     private val adapter by lazy { RecAdapter(this) }
 

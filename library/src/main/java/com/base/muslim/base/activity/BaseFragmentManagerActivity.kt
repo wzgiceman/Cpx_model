@@ -11,7 +11,7 @@ import com.base.muslim.base.fragment.BaseFragment
  * 系统方法
  * Created by WZG on 2016/1/28.
  */
-abstract class BaseFragmentManagerActivity : BaseFragmentToolsActivity() {
+abstract class BaseFragmentManagerActivity : BaseToolsActivity() {
     /**当前显示的位置 */
     protected var show = 0
     /**tab页 */

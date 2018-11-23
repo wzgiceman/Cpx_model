@@ -1,6 +1,6 @@
 package com.prog.zhigangwei.cpx_model.image
 
-import com.base.muslim.base.activity.BaseFragmentActivity
+import com.base.muslim.base.activity.BaseActivity
 import com.base.muslim.camera.OnPicturePathListener
 import com.base.muslim.camera.PictureCapture
 import com.base.muslim.camera.utils.Photo
@@ -17,7 +17,7 @@ import kotlinx.android.synthetic.main.activity_image.*
  *
  *Company :cpx
  */
-class ImageActivity : BaseFragmentActivity(), OnPicturePathListener {
+class ImageActivity : BaseActivity(), OnPicturePathListener {
 
     private lateinit var path: String
 

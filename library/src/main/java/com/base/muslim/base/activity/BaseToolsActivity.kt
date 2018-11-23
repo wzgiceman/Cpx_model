@@ -17,7 +17,7 @@ import com.base.muslim.base.extension.isValidActivity
  *
  * Company :Sichuan Ziyan
  */
-abstract class BaseFragmentToolsActivity : BaseFragmentActivity(), IBaseTool {
+abstract class BaseToolsActivity : BaseActivity(), IBaseTool {
     private var loadingDialog: ProgressDialog? = null
 
     /**

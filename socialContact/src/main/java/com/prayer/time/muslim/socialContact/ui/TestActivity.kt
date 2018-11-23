@@ -1,6 +1,6 @@
 package com.prayer.time.muslim.socialContact.ui
 
-import com.base.muslim.base.activity.BaseFragmentActivity
+import com.base.muslim.base.activity.BaseActivity
 import com.prayer.time.muslim.socialContact.R
 import kotlinx.android.synthetic.main.social_contact_activity_main.*
 
@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.social_contact_activity_main.*
  *
  *Company :cpx
  */
-class TestActivity : BaseFragmentActivity() {
+class TestActivity : BaseActivity() {
     override fun layoutId() = R.layout.social_contact_activity_main
 
     override fun initData() {

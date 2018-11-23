@@ -3,7 +3,7 @@ package com.prog.zhigangwei.cpx_model.rxbus
 import com.base.library.rxbus.RxBus
 import com.base.library.rxbus.annotation.Subscribe
 import com.base.library.rxbus.thread.EventThread
-import com.base.muslim.base.activity.BaseFragmentActivity
+import com.base.muslim.base.activity.BaseActivity
 import com.prog.zhigangwei.cpx_model.R
 import com.prog.zhigangwei.cpx_model.rxbus.common.event.SendEvent
 import kotlinx.android.synthetic.main.activity_rxbus.*
@@ -19,7 +19,7 @@ import kotlinx.android.synthetic.main.activity_rxbus.*
  *
  *Company :cpx
  */
-class RxBusActivity : BaseFragmentActivity() {
+class RxBusActivity : BaseActivity() {
 
     override fun layoutId() = R.layout.activity_rxbus
 

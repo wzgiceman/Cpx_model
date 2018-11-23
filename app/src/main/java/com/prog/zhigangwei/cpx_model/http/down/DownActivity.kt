@@ -4,7 +4,7 @@ import com.base.library.rxRetrofit.downlaod.DownInfo
 import com.base.library.rxRetrofit.downlaod.HttpDownManager
 import com.base.library.rxRetrofit.listener.HttpDownOnNextListener
 import com.base.library.rxRetrofit.utils.DownDbUtil
-import com.base.muslim.base.activity.BaseFragmentActivity
+import com.base.muslim.base.activity.BaseActivity
 import com.base.muslim.base.extension.showToast
 import com.prog.zhigangwei.cpx_model.R
 import kotlinx.android.synthetic.main.activity_http_down.*
@@ -21,7 +21,7 @@ import java.io.File
  *
  * * 更复杂用例参考地址:https://github.com/wzgiceman/RxjavaRetrofitDemo-string-master/blob/master/app/src/main/java/com/example/retrofit/activity/DownLaodActivity.java
  */
-class DownActivity : BaseFragmentActivity() {
+class DownActivity : BaseActivity() {
     override fun layoutId() = R.layout.activity_http_down
 
     private var info: DownInfo? = DownDbUtil.getInstance().queryDownBy(10001)

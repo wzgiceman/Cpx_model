@@ -14,7 +14,7 @@ import android.view.ViewGroup
 import android.webkit.*
 import com.base.library.R
 import com.base.library.utils.AbLogUtil
-import com.base.muslim.base.activity.BaseFragmentActivity
+import com.base.muslim.base.activity.BaseActivity
 import kotlinx.android.synthetic.main.activity_web_play.*
 import java.util.regex.Pattern
 
@@ -29,7 +29,7 @@ import java.util.regex.Pattern
  * @date 2018/9/6 上午11:05
  * @copyright cpx
  */
-open class WebPlayActivity : BaseFragmentActivity() {
+open class WebPlayActivity : BaseActivity() {
 
     private var url: String = ""
     private var title: String = ""

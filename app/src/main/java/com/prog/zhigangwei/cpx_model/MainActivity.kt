@@ -1,6 +1,6 @@
 package com.prog.zhigangwei.cpx_model
 
-import com.base.muslim.base.activity.BaseFragmentActivity
+import com.base.muslim.base.activity.BaseActivity
 import com.base.muslim.base.extension.jumpActivity
 import com.prog.zhigangwei.cpx_model.constraintLayout.ConstraintLayoutActivity
 import com.prog.zhigangwei.cpx_model.easyRecyclerview.RecyclerActivity
@@ -21,7 +21,7 @@ import kotlinx.android.synthetic.main.activity_main.*
  *
  *Company :cpx
  */
-class MainActivity : BaseFragmentActivity() {
+class MainActivity : BaseActivity() {
 
     override fun layoutId() = R.layout.activity_main
 
