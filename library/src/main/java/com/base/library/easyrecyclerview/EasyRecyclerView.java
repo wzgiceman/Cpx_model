@@ -333,7 +333,7 @@ public class EasyRecyclerView extends FrameLayout {
 
 
     /**
-     * Set the listener when refresh is triggered and enable the SwipeRefreshLayout
+     * Set the listener when refreshView is triggered and enable the SwipeRefreshLayout
      *
      * @param listener
      */

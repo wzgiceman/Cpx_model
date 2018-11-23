@@ -6,6 +6,8 @@ package com.base.muslim.base
  * 在BaseFragmentToolsActivity和BaseToolFragment中实现了此接口
  * 需要调用相应方法时，重载即可
  *
+ * 对于注释的方法，表示需要自己按需写
+ *
  * @author  Alpinist Wang
  * Company: Mobile CPX
  * Date:    2018/11/21
@@ -13,27 +15,27 @@ package com.base.muslim.base
 interface IBaseTool {
 
     /**
-     * 初始化RecyclerView，如果需要传参数，自己写带参数的方法
+     * 初始化RecyclerView，如果需要传参数，需要自己写带参数的方法
      */
     fun initRecyclerView()
 
     /**
-     * 初始化ViewPager，如果需要传参数，自己写带参数的方法
+     * 初始化ViewPager，如果需要传参数，需要自己写带参数的方法
      */
     fun initViewPager()
 
     /**
      * Http请求，XXX表示请求的数据类型
      */
-    fun requestXXX()
+//    fun requestXXX()
 
     /**
-     * 刷新数据
+     * 刷新界面
      */
-    fun refresh()
+    fun refreshView(data: Any?)
 
     /**
-     * 设置数据，如果需要传参数，自己写带参数的方法
+     * 设置数据，需要自己按需写参数类型
      */
-    fun setData()
+    fun setData(data: Any?)
 }

@@ -44,15 +44,15 @@ import android.widget.AbsListView;
 import android.widget.FrameLayout;
 
 /**
- * The SwipeRefreshLayout should be used whenever the user can refresh the
+ * The SwipeRefreshLayout should be used whenever the user can refreshView the
  * contents of a view via a vertical swipe gesture. The activity that
  * instantiates this view should add an OnRefreshListener to be notified
- * whenever the swipe to refresh gesture is completed. The SwipeRefreshLayout
+ * whenever the swipe to refreshView gesture is completed. The SwipeRefreshLayout
  * will notify the listener each and every time the gesture is completed again;
  * the listener is responsible for correctly determining when to actually
- * initiate a refresh of its content. If the listener determines there should
- * not be a refresh, it must call setRefreshing(false) to cancel any visual
- * indication of a refresh. If an activity wishes to show just the progress
+ * initiate a refreshView of its content. If the listener determines there should
+ * not be a refreshView, it must call setRefreshing(false) to cancel any visual
+ * indication of a refreshView. If an activity wishes to show just the progress
  * animation, it should call setRefreshing(true). To disable the gesture and
  * progress animation, call setEnabled(false) on the view.
  * <p>
@@ -61,7 +61,7 @@ import android.widget.FrameLayout;
  * also be made the target of the gesture and will be forced to match both the
  * width and the height supplied in this layout. The SwipeRefreshLayout does not
  * provide accessibility events; instead, a menu item must be provided to allow
- * refresh of the content wherever this gesture is used.
+ * refreshView of the content wherever this gesture is used.
  * </p>
  */
 public class SwipeRefreshLayout extends FrameLayout implements NestedScrollingParent,
@@ -129,7 +129,7 @@ public class SwipeRefreshLayout extends FrameLayout implements NestedScrollingPa
     boolean mScale;
 
     // Target is returning to its start offset because it was cancelled or a
-    // refresh was triggered.
+    // refreshView was triggered.
     private boolean mReturningToStart;
     private final DecelerateInterpolator mDecelerateInterpolator;
     private static final int[] LAYOUT_ATTRS = new int[] {
@@ -230,12 +230,12 @@ public class SwipeRefreshLayout extends FrameLayout implements NestedScrollingPa
     }
 
     /**
-     * The refresh indicator starting and resting position is always positioned
+     * The refreshView indicator starting and resting position is always positioned
      * near the top of the refreshing content. This position is a consistent
      * location, but can be adjusted in either direction based on whether or not
      * there is a toolbar or actionbar present.
      * <p>
-     * <strong>Note:</strong> Calling this will reset the position of the refresh indicator to
+     * <strong>Note:</strong> Calling this will reset the position of the refreshView indicator to
      * <code>start</code>.
      * </p>
      *
@@ -274,7 +274,7 @@ public class SwipeRefreshLayout extends FrameLayout implements NestedScrollingPa
     }
 
     /**
-     * The refresh indicator resting position is always positioned near the top
+     * The refreshView indicator resting position is always positioned near the top
      * of the refreshing content. This position is a consistent location, but
      * can be adjusted in either direction based on whether or not there is a
      * toolbar or actionbar present.
@@ -386,7 +386,7 @@ public class SwipeRefreshLayout extends FrameLayout implements NestedScrollingPa
     }
 
     /**
-     * Set the listener to be notified when a refresh is triggered via the swipe
+     * Set the listener to be notified when a refreshView is triggered via the swipe
      * gesture.
      */
     public void setOnRefreshListener(android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener listener) {
@@ -401,10 +401,10 @@ public class SwipeRefreshLayout extends FrameLayout implements NestedScrollingPa
     }
 
     /**
-     * Notify the widget that refresh state has changed. Do not call this when
-     * refresh is triggered by a swipe gesture.
+     * Notify the widget that refreshView state has changed. Do not call this when
+     * refreshView is triggered by a swipe gesture.
      *
-     * @param refreshing Whether or not the view should show refresh progress.
+     * @param refreshing Whether or not the view should show refreshView progress.
      */
     public void setRefreshing(boolean refreshing) {
         if (refreshing && mRefreshing != refreshing) {
@@ -579,7 +579,7 @@ public class SwipeRefreshLayout extends FrameLayout implements NestedScrollingPa
     }
 
     /**
-     * @return Whether the SwipeRefreshWidget is actively showing refresh
+     * @return Whether the SwipeRefreshWidget is actively showing refreshView
      *         progress.
      */
     public boolean isRefreshing() {
@@ -662,7 +662,7 @@ public class SwipeRefreshLayout extends FrameLayout implements NestedScrollingPa
 
     /**
      * Get the diameter of the progress circle that is displayed as part of the
-     * swipe to refresh layout.
+     * swipe to refreshView layout.
      *
      * @return Diameter in pixels of the progress circle view.
      */
@@ -979,7 +979,7 @@ public class SwipeRefreshLayout extends FrameLayout implements NestedScrollingPa
         if (overscrollTop > mTotalDragDistance) {
             setRefreshing(true, true /* notify */);
         } else {
-            // cancel refresh
+            // cancel refreshView
             mRefreshing = false;
             mProgress.setStartEndTrim(0f, 0f);
             AnimationListener listener = null;
@@ -1202,11 +1202,11 @@ public class SwipeRefreshLayout extends FrameLayout implements NestedScrollingPa
 
     /**
      * Classes that wish to be notified when the swipe gesture correctly
-     * triggers a refresh should implement this interface.
+     * triggers a refreshView should implement this interface.
      */
     public interface OnRefreshListener {
         /**
-         * Called when a swipe gesture triggers a refresh.
+         * Called when a swipe gesture triggers a refreshView.
          */
         void onRefresh();
     }
