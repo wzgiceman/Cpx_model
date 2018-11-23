@@ -63,7 +63,6 @@ class MainActivity : BaseFragmentActivity() {
         initViewB()
     }
 
-
     /**
      * 界面处理A
      */

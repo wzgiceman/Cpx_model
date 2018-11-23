@@ -46,7 +46,7 @@ fun Activity.checkKeyboard(ev: MotionEvent) {
 /**
  * 根据EditText所在坐标和用户点击的坐标相对比，来判断是否隐藏键盘，当用户点击EditText时不隐藏
  */
-fun isShouldHideKeyboard(v: View?, event: MotionEvent): Boolean {
+fun Activity.isShouldHideKeyboard(v: View?, event: MotionEvent): Boolean {
     if (v != null && v is EditText) {
         val l = intArrayOf(0, 0)
         v.getLocationInWindow(l)

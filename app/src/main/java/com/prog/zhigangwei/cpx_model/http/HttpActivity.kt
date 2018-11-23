@@ -3,6 +3,7 @@ package com.prog.zhigangwei.cpx_model.http
 import com.base.library.rxRetrofit.exception.ApiException
 import com.base.library.rxRetrofit.http.HttpManager
 import com.base.library.rxRetrofit.listener.HttpOnNextListener
+import com.base.library.utils.utilcode.util.LogUtils
 import com.base.muslim.base.activity.BaseFragmentActivity
 import com.base.muslim.base.extension.jumpActivity
 import com.base.muslim.base.extension.showToast
@@ -48,14 +49,16 @@ class HttpActivity : BaseFragmentActivity(), HttpOnNextListener {
 
 
     override fun onNext(resulte: String, method: String) {
+        LogUtils.d("method:$method\nresult:$resulte")
         when (method) {
             wallApi.method -> {
+                tv_msg.text = "suc:wallApi->$resulte"
             }
             noticeApi.method -> {
-                tv_msg.text = "suc:noticeApi->${resulte}"
+                tv_msg.text = "suc:noticeApi->$resulte"
             }
             languagesApi.method -> {
-                tv_msg.text = "suc:languagesApi->${resulte}"
+                tv_msg.text = "suc:languagesApi->$resulte"
             }
         }
     }

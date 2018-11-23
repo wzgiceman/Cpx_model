@@ -1,10 +1,10 @@
 package com.base.muslim.base.activity
 
 import android.app.ProgressDialog
-import android.os.Bundle
 import android.text.TextUtils
 import android.view.MotionEvent
 import com.base.library.R
+import com.base.muslim.base.IBaseTool
 import com.base.muslim.base.extension.checkKeyboard
 import com.base.muslim.base.extension.isValidActivity
 
@@ -17,9 +17,7 @@ import com.base.muslim.base.extension.isValidActivity
  *
  * Company :Sichuan Ziyan
  */
-open class BaseFragmentToolsActivity : BaseFragmentManagerActivity() {
-    /**上个界面传入的数据*/
-    protected var bundle: Bundle? = null
+abstract class BaseFragmentToolsActivity : BaseFragmentActivity(), IBaseTool {
     private var loadingDialog: ProgressDialog? = null
 
     /**
@@ -51,40 +49,30 @@ open class BaseFragmentToolsActivity : BaseFragmentManagerActivity() {
 
     override fun onStop() {
         super.onStop()
+        if (isFinishing) {
+            onRelease()
+        }
         if (isFinishing && loadingDialog != null && loadingDialog!!.isShowing) {
             loadingDialog?.dismiss()
         }
     }
 
-    /*start------------------------bundle数据的恢复和保存-------------------------------*/
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        bundle ?: return
-        outState.putBundle("bundle", bundle)
-    }
-
-    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
-        super.onRestoreInstanceState(savedInstanceState)
-        restoreSaveState(savedInstanceState)
-    }
-
     /**
-     * 复原数据
-     *
-     * @param savedInstanceState
+     * 在此回调中释放资源
      */
-    protected fun restoreSaveState(savedInstanceState: Bundle?) {
-        bundle = intent.extras
-        if (bundle == null && savedInstanceState != null && savedInstanceState.containsKey("bundle")) {
-            bundle = savedInstanceState.getBundle("bundle")
-        }
+    protected fun onRelease() {
+
     }
-    /*end------------------------bundle数据的恢复和保存-------------------------------*/
 
     override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
         /**点击空白位置 隐藏软键盘 */
         checkKeyboard(ev)
         return super.dispatchTouchEvent(ev)
+    }
+
+    override fun initRecyclerView() {
+    }
+
+    override fun initViewPager() {
     }
 }

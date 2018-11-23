@@ -2,7 +2,6 @@ package com.base.muslim.base.activity
 
 import android.support.v4.app.Fragment
 import com.base.library.R
-import com.base.library.rxlifecycle.components.support.RxAppCompatActivity
 import com.base.library.utils.utilcode.util.FragmentUtils
 import com.base.muslim.base.fragment.BaseFragment
 
@@ -12,7 +11,7 @@ import com.base.muslim.base.fragment.BaseFragment
  * 系统方法
  * Created by WZG on 2016/1/28.
  */
-open class BaseFragmentManagerActivity : RxAppCompatActivity() {
+abstract class BaseFragmentManagerActivity : BaseFragmentToolsActivity() {
     /**当前显示的位置 */
     protected var show = 0
     /**tab页 */
