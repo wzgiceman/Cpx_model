@@ -30,7 +30,7 @@ interface IBaseTool {
 //    fun requestXXX()
 
     /**
-     * 刷新界面
+     * 刷新界面，需要自己按需写参数类型
      */
     fun refreshView(data: Any?)
 
