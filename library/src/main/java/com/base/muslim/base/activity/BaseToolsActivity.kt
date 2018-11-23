@@ -75,4 +75,13 @@ abstract class BaseToolsActivity : BaseActivity(), IBaseTool {
 
     override fun initViewPager() {
     }
+
+    override fun requestXXX() {
+    }
+
+    override fun refresh() {
+    }
+
+    override fun setData() {
+    }
 }

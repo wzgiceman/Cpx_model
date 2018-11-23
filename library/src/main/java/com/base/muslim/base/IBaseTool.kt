@@ -12,7 +12,28 @@ package com.base.muslim.base
  */
 interface IBaseTool {
 
+    /**
+     * 初始化RecyclerView，如果需要传参数，自己写带参数的方法
+     */
     fun initRecyclerView()
 
+    /**
+     * 初始化ViewPager，如果需要传参数，自己写带参数的方法
+     */
     fun initViewPager()
+
+    /**
+     * Http请求，XXX表示请求的数据类型
+     */
+    fun requestXXX()
+
+    /**
+     * 刷新数据
+     */
+    fun refresh()
+
+    /**
+     * 设置数据，如果需要传参数，自己写带参数的方法
+     */
+    fun setData()
 }
