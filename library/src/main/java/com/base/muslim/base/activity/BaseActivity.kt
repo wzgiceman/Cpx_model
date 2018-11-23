@@ -5,8 +5,8 @@ import com.base.library.swipeBack.BaseSwipeBackActivity
 import com.base.muslim.base.IBase
 
 /**
- * fangmentactivity 自定义基础类
- * 可滑动销毁父类
+ * Activity 基础类
+ * Activity的模板方法，可滑动销毁父类
  *
  * @author WZG
  */

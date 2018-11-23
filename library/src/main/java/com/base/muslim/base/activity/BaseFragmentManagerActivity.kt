@@ -9,6 +9,7 @@ import com.base.muslim.base.fragment.BaseFragment
 /**
  * Fragment基础管理类
  * 系统方法
+ *
  * Created by WZG on 2016/1/28.
  */
 abstract class BaseFragmentManagerActivity : BaseToolsActivity() {
