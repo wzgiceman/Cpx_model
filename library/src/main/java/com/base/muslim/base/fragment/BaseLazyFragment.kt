@@ -12,7 +12,7 @@ import com.base.muslim.base.IBase
 /**
  * 懒加载的fragment
  * 使用方法：
- * 1.实现[.lazyLoadData]方法,在该方法中调用懒加载数据的方法，
+ * 1.实现[lazyLoadData]方法,在该方法中调用懒加载数据的方法，
  * 2.在懒加载数据请求成功后调用[.resetLoadingStatus]
  *
  * @author xuechao
@@ -20,7 +20,7 @@ import com.base.muslim.base.IBase
  * @copyright cpx
  */
 
-abstract class BaseLazyFragment : BaseSaveFragment(), IBase {
+abstract class BaseLazyFragment : BaseFragmentManagerFragment(), IBase {
     /**是否加载数据*/
     private var loading = false
     /**判断view是否创建*/
@@ -51,15 +51,6 @@ abstract class BaseLazyFragment : BaseSaveFragment(), IBase {
      * 懒加载数据
      */
     protected abstract fun lazyLoadData()
-
-    /**
-     * 设置数据
-     *
-     * @param object
-     */
-    fun setData(vararg `object`: Any) {
-
-    }
 
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
         super.setUserVisibleHint(isVisibleToUser)

@@ -2,8 +2,8 @@ package com.base.shareData
 
 import android.util.SparseArray
 import com.alibaba.fastjson.JSONObject
-import com.base.shareData.shareMsg.ShareData
-import com.base.shareData.shareMsg.ShareDataDb
+import com.base.shareData.message.ShareData
+import com.base.shareData.message.ShareDataDb
 
 /**
  *

@@ -12,7 +12,7 @@ import com.base.muslim.base.IBase
  */
 abstract class BaseActivity : BaseSwipeBackActivity(), IBase {
     /**上个界面传入的数据*/
-    protected var bundle: Bundle? = null
+    protected var bundle: Bundle = Bundle()
     protected var beforeUi = true
     /**是否启用滑动返回*/
     private var enableSwipeBack = false

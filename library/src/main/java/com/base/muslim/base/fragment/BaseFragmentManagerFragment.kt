@@ -2,7 +2,6 @@ package com.base.muslim.base.fragment
 
 import android.support.v4.app.Fragment
 import com.base.library.R
-import com.base.library.rxlifecycle.components.support.RxFragment
 import com.base.library.utils.utilcode.util.FragmentUtils
 
 
@@ -11,7 +10,7 @@ import com.base.library.utils.utilcode.util.FragmentUtils
  * 系统方法
  * Created by WZG on 2016/1/28.
  */
-open class BaseFragmentManagerFragment : RxFragment() {
+abstract class BaseFragmentManagerFragment : BaseToolFragment() {
     /**当前显示的位置 */
     protected var show = 0
     /**tab页 */

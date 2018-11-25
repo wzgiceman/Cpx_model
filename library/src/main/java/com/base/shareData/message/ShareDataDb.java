@@ -1,4 +1,4 @@
-package com.base.shareData.shareMsg;
+package com.base.shareData.message;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

@@ -2,6 +2,7 @@ package com.base.muslim.base.extension
 
 import android.app.Activity
 import android.os.Bundle
+import android.support.annotation.StringRes
 import android.support.v4.app.Fragment
 import com.base.library.rxlifecycle.components.support.RxAppCompatActivity
 
@@ -30,4 +31,9 @@ fun Fragment.getRxActivity(): RxAppCompatActivity? {
         return context as RxAppCompatActivity
     }
     return null
+}
+
+@JvmOverloads
+fun Fragment.report(@StringRes resId: Int, value: Bundle? = null) {
+    context.report(resId, value)
 }

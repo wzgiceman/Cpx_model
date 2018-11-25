@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
+import com.base.library.rxlifecycle.components.support.RxFragment
 import com.base.muslim.base.IBase
 import com.base.muslim.base.IBase.Companion.NO_LAYOUT
 
@@ -14,7 +14,7 @@ import com.base.muslim.base.IBase.Companion.NO_LAYOUT
  *
  * @author WZG
  */
-abstract class BaseFragment : BaseSaveFragment(), IBase {
+abstract class BaseFragment : RxFragment(), IBase {
     /**
      * 是否加载完成的标识
      */
@@ -33,16 +33,8 @@ abstract class BaseFragment : BaseSaveFragment(), IBase {
     /**
      * 初始化fragment的根方法
      */
-    protected fun initFragment() {
+    private fun initFragment() {
         initData()
         initView()
     }
-
-    /**
-     * 设置数据
-     *
-     * @param object
-     */
-    fun setData(vararg `object`: Any) {}
-
 }

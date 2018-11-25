@@ -1,9 +1,7 @@
 package com.base.router.empty;
 
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-
 import com.base.library.R;
+import com.base.muslim.base.activity.BaseActivity;
 
 /**
  * Describe:空的Activity
@@ -13,11 +11,20 @@ import com.base.library.R;
  * <p>
  * Company :cpx
  */
-public class EmptyActivity extends AppCompatActivity {
+public class EmptyActivity extends BaseActivity {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_empty);
+    public int layoutId() {
+        return R.layout.activity_empty;
+    }
+
+    @Override
+    public void initView() {
+
+    }
+
+    @Override
+    public void initData() {
+
     }
 }
