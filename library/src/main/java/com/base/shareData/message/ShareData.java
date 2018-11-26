@@ -3,6 +3,7 @@ package com.base.shareData.message;
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Keep;
+import org.greenrobot.greendao.annotation.Generated;
 
 /**
  * Describe:共享数据库

@@ -82,6 +82,6 @@ abstract class BaseToolsActivity : BaseActivity(), IBaseTool {
     override fun refreshView(data: Any?) {
     }
 
-    override fun setData(data: Any?) {
+    override fun setData(vararg `object`: Any?) {
     }
 }
