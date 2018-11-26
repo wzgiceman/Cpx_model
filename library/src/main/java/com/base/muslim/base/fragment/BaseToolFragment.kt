@@ -3,6 +3,7 @@ package com.base.muslim.base.fragment
 import android.app.ProgressDialog
 import android.text.TextUtils
 import com.base.library.R
+import com.base.muslim.base.IBaseTool
 import com.base.muslim.base.extension.isValidActivity
 
 
@@ -10,7 +11,8 @@ import com.base.muslim.base.extension.isValidActivity
  * fragment基础工具类
  * Created by WZG on 2016/1/28.
  */
-open class BaseToolFragment : BaseFragmentManagerFragment() {
+abstract class BaseToolFragment : BaseSaveFragment(), IBaseTool {
+
     private var loadingDialog: ProgressDialog? = null
 
     /**
@@ -45,5 +47,17 @@ open class BaseToolFragment : BaseFragmentManagerFragment() {
         if (loadingDialog != null && loadingDialog!!.isShowing) {
             loadingDialog?.dismiss()
         }
+    }
+
+    override fun initRecyclerView() {
+    }
+
+    override fun initViewPager() {
+    }
+
+    override fun refreshView(data: Any?) {
+    }
+
+    override fun setData(vararg `object`: Any?) {
     }
 }

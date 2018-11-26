@@ -1,5 +1,6 @@
 package com.prog.zhigangwei.cpx_model.rxjava
 
+import android.annotation.SuppressLint
 import com.base.library.observer.AbsObserver
 import com.base.library.utils.AbLogUtil
 import com.base.muslim.base.activity.BaseActivity
@@ -24,6 +25,7 @@ import java.util.concurrent.TimeUnit
  * @copyright cpx
  *
  */
+@SuppressLint("CheckResult")
 class RxJavaActivity : BaseActivity() {
 
     override fun layoutId() = R.layout.activity_rx_java
@@ -117,7 +119,7 @@ class RxJavaActivity : BaseActivity() {
 //                emitter.onError(NullPointerException("空指针"))
             }
 
-        });
+        })
         //2.创建Observer
         var observer: Observer<Int> = object : Observer<Int> {
             private var mDisposable: Disposable? = null
@@ -159,7 +161,6 @@ class RxJavaActivity : BaseActivity() {
         }
         //订阅
         observable.subscribe(myObserver)
-
 
     }
 

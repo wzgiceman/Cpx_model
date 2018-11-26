@@ -1,4 +1,4 @@
-package com.base.shareData.shareMsg;
+package com.base.shareData.message;
 
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;

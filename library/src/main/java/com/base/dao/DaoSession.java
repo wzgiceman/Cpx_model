@@ -10,7 +10,7 @@ import org.greenrobot.greendao.internal.DaoConfig;
 
 import com.base.library.rxRetrofit.http.cookie.CookieResult;
 import com.base.library.rxRetrofit.downlaod.DownInfo;
-import com.base.shareData.shareMsg.ShareData;
+import com.base.shareData.message.ShareData;
 
 import com.base.dao.CookieResultDao;
 import com.base.dao.DownInfoDao;

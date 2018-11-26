@@ -12,7 +12,7 @@ package com.base.muslim.base
  * Company: Mobile CPX
  * Date:    2018/11/21
  */
-interface IBaseTool {
+open interface IBaseTool {
 
     /**
      * 初始化RecyclerView，如果需要传参数，需要自己写带参数的方法
@@ -37,5 +37,5 @@ interface IBaseTool {
     /**
      * 设置数据，需要自己按需写参数类型
      */
-    fun setData(data: Any?)
+    open fun setData(vararg `object`: Any?)
 }
