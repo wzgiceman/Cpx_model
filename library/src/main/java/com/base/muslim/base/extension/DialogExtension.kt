@@ -1,6 +1,7 @@
 package com.base.muslim.base.extension
 
 import android.app.Dialog
+import android.os.Bundle
 import android.support.annotation.StringRes
 
 /**
@@ -14,4 +15,9 @@ import android.support.annotation.StringRes
 
 fun Dialog.getString(@StringRes resId: Int): String {
     return context.getString(resId)
+}
+
+
+fun Dialog.jumpActivity(cls: Class<*>, bundle: Bundle = Bundle()){
+    context.jumpActivity(cls, bundle)
 }
