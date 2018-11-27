@@ -26,18 +26,24 @@ class LoginContract {
         fun getVerificationCode(): String?
 
         /**Google登录*/
+        /**获取GoogleApiClient*/
         fun getGoogleApiClient(): GoogleApiClient
 
+        /**发起Google登录请求，在onActivityResult中收到登录结果*/
         fun startGoogleLoginActivityForResult(signInIntent: Intent)
 
         /**Facebook登录*/
-        fun createFacebookLoginButton(): LoginButton?
+        /**获取Facebook登录按钮*/
+        fun getFacebookLoginButton(): LoginButton?
 
-        fun createFacebookCallbackManager(): CallbackManager?
+        /**获取Facebook CallbackManager*/
+        fun getFacebookCallbackManager(): CallbackManager?
 
+        /**获取当前未过期的facebook token*/
         fun getCurrentNoExpiredToken(): String
 
         /**Twitter登录*/
+        /**获取Twitter登录按钮*/
         fun getTwitterLoginButton(): TwitterLoginButton?
 
         /**设置sendCode按钮是否可用*/
@@ -58,7 +64,7 @@ class LoginContract {
         fun loginByPhoneOrEmail()
 
         /**发送验证码*/
-        fun sendCode(type: String)
+        fun sendCode()
 
         /**Facebook登录*/
         fun loginByFacebook()
@@ -69,10 +75,11 @@ class LoginContract {
         /**Google登录*/
         fun loginByGoogle()
 
+        /**在Presenter中处理Google登录回调*/
         fun handleGoogleLoginResult(data: Intent?)
 
         /**Http onNext回调，到达Presenter层处理*/
-        fun onNext(resulte: String, method: String)
+        fun onNext(result: String, method: String)
 
         /**登录成功，关闭登录弹窗*/
         fun loginAndFinish(type: String, loginMethodToken: String?, account: String?, secret: String?)

@@ -20,6 +20,7 @@ class LoginActivity : BaseLoginDialogActivity() {
         btn_login_by_google.setOnClickListener { loginByGoogle() }
         btn_login_by_twitter.setOnClickListener { loginByTwitter() }
         btn_login_by_phone_or_email.setOnClickListener { loginByPhoneOrEmail() }
+        btn_send_code.setOnClickListener { sendCode() }
     }
 
     override fun initData() {

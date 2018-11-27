@@ -17,7 +17,7 @@
         android:id="@+id/btn_send_code"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Send Code"
+        android:text="@string/send_code"
         android:textAllCaps="false" />
 
     <EditText

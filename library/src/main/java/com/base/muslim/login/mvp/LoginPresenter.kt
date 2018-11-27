@@ -9,6 +9,12 @@ import com.base.library.utils.utilcode.util.LogUtils
 import com.base.library.utils.utilcode.util.ToastUtils
 import com.base.muslim.login.common.api.LoginApi
 import com.base.muslim.login.common.api.PostVerificationCodeApi
+import com.base.muslim.login.common.constants.LoginConstants.Companion.EMAIL
+import com.base.muslim.login.common.constants.LoginConstants.Companion.FACEBOOK
+import com.base.muslim.login.common.constants.LoginConstants.Companion.GOOGLE
+import com.base.muslim.login.common.constants.LoginConstants.Companion.PHONE
+import com.base.muslim.login.common.constants.LoginConstants.Companion.TWITTER
+import com.base.muslim.login.common.constants.LoginConstants.Companion.VERIFICATION_CODE_TIME
 import com.facebook.FacebookCallback
 import com.facebook.login.LoginResult
 import com.google.android.gms.auth.api.Auth
@@ -21,7 +27,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import java.text.MessageFormat
-import java.util.*
 import java.util.concurrent.TimeUnit
 
 /**
@@ -44,11 +49,11 @@ class LoginPresenter(private val httpManager: HttpManager) : BasePresenter<Login
     override fun loginByFacebook() {
         //如果facebookToken存在且没有过期
         if (!TextUtils.isEmpty(rootView?.getCurrentNoExpiredToken())) {
-            loginAndFinish("facebook", rootView?.getCurrentNoExpiredToken(), null, null)
+            loginAndFinish(FACEBOOK, rootView?.getCurrentNoExpiredToken(), null, null)
         } else {
             //使用模拟点击Facebook LoginButton实现登录，否则会出现很多弹窗，导致界面不整洁
-            rootView?.createFacebookLoginButton()?.registerCallback(rootView?.createFacebookCallbackManager(), rootView as FacebookCallback<LoginResult>)
-            rootView?.createFacebookLoginButton()?.callOnClick()
+            rootView?.getFacebookLoginButton()?.registerCallback(rootView?.getFacebookCallbackManager(), rootView as FacebookCallback<LoginResult>)
+            rootView?.getFacebookLoginButton()?.callOnClick()
         }
     }
 
@@ -66,18 +71,16 @@ class LoginPresenter(private val httpManager: HttpManager) : BasePresenter<Login
     override fun handleGoogleLoginResult(data: Intent?) {
         val result = Auth.GoogleSignInApi.getSignInResultFromIntent(data)
         val account = result.signInAccount ?: return//得到登录账户
-        loginAndFinish("google", account.idToken, null, null)
+        loginAndFinish(GOOGLE, account.idToken, null, null)
     }
 
     /**
      * twitter登录
      */
     override fun loginByTwitter() {
-        LogUtils.d("override fun loginByTwitter() {")
         rootView?.getTwitterLoginButton()?.callback = object : Callback<TwitterSession>() {
             override fun success(result: Result<TwitterSession>?) {
-                LogUtils.d("twitter success,token:${result?.data?.authToken?.token},secret:${result?.data?.authToken?.secret}")
-                loginAndFinish("twitter", result?.data?.authToken?.token, null, result?.data?.authToken?.secret)
+                loginAndFinish(TWITTER, result?.data?.authToken?.token, null, result?.data?.authToken?.secret)
             }
 
             override fun failure(exception: TwitterException?) {
@@ -93,7 +96,7 @@ class LoginPresenter(private val httpManager: HttpManager) : BasePresenter<Login
      */
     override fun loginByPhoneOrEmail() {
         val account = rootView?.getAccount()
-        if (TextUtils.isEmpty(account)) {
+        if (account == null || TextUtils.isEmpty(account)) {
             ToastUtils.showShort(R.string.account_cannot_be_empty)
             return
         }
@@ -102,36 +105,34 @@ class LoginPresenter(private val httpManager: HttpManager) : BasePresenter<Login
             ToastUtils.showShort(R.string.please_input_verification_code)
             return
         }
-        var type = "phone"
-        if (account!!.contains("@")) {
-            type = "email"
-        }
+        val type = if (account.contains("@")) EMAIL else PHONE
         loginAndFinish(type, verificationCode, account, null)
     }
 
     /**
      * 发送验证码
      */
-    override fun sendCode(type: String) {
+    override fun sendCode() {
         val account = rootView?.getAccount()
-        if (TextUtils.isEmpty(account)) {
+        if (account == null || TextUtils.isEmpty(account)) {
             ToastUtils.showShort(R.string.account_cannot_be_empty)
             return
         }
+        val type = if (account.contains("@")) EMAIL else PHONE
         rootView?.setBtnSendCodeEnabled(false)
         //发送验证码
-        postVerificationCodeApi = PostVerificationCodeApi(type, account!!)
+        postVerificationCodeApi = PostVerificationCodeApi(type, account)
         httpManager.doHttpDeal(postVerificationCodeApi)
         disposable = Observable.interval(1, 1, TimeUnit.SECONDS)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe {
-                    if (it >= 60L) {
+                    if (it >= VERIFICATION_CODE_TIME) {
                         rootView?.setBtnSendCodeText(R.string.send_code)
                         rootView?.setBtnSendCodeEnabled(true)
                         disposable?.dispose()
                     } else {
-                        rootView?.setBtnSendCodeText(MessageFormat.format("{0}s", 60 - it))
+                        rootView?.setBtnSendCodeText(MessageFormat.format("{0}s", VERIFICATION_CODE_TIME - it))
                     }
                 }
         if (disposable != null) {
@@ -143,36 +144,37 @@ class LoginPresenter(private val httpManager: HttpManager) : BasePresenter<Login
      * 登录，使用第三方的token请求我们服务器上的token
      */
     override fun loginAndFinish(type: String, loginMethodToken: String?, account: String?, secret: String?) {
-        val fields = HashMap<String, String>()
-        if (!TextUtils.isEmpty(loginMethodToken)) {
-            fields["token"] = loginMethodToken!!
-        }
-        if (!TextUtils.isEmpty(type)) {
-            fields["t"] = type
-        }
-        if (!TextUtils.isEmpty(account)) {
-            fields["account"] = account!!
-        }
-        if (!TextUtils.isEmpty(secret)) {
-            fields["tokenSecret"] = secret!!
-        }
-        //获取到token和用户信息后关闭页面
-        loginApi = LoginApi(fields)
-        httpManager.doHttpDeal(loginApi)
+        LogUtils.d("type:$type\nloginMethodToken：$loginMethodToken\naccount:$account\nsecret:$secret")
+//        val fields = HashMap<String, String>()
+//        if (!TextUtils.isEmpty(loginMethodToken)) {
+//            fields["token"] = loginMethodToken!!
+//        }
+//        if (!TextUtils.isEmpty(type)) {
+//            fields["t"] = type
+//        }
+//        if (!TextUtils.isEmpty(account)) {
+//            fields["account"] = account!!
+//        }
+//        if (!TextUtils.isEmpty(secret)) {
+//            fields["tokenSecret"] = secret!!
+//        }
+//        //获取到token和用户信息后关闭页面
+//        loginApi = LoginApi(fields)
+//        httpManager.doHttpDeal(loginApi)
     }
 
     /**
      * httpManager onNext回调，发送到Presenter层处理
      */
-    override fun onNext(resulte: String, method: String) {
-        when (method) {
-            loginApi?.method -> {
-//                val userInfo = JSONObject.parseObject(resulte, UserInfo::class.java) ?: return
+    override fun onNext(result: String, method: String) {
+//        when (method) {
+//            loginApi?.method -> {
+//                val userInfo = JSONObject.parseObject(result, UserInfo::class.java) ?: return
 //                if (!TextUtils.isEmpty(userInfo.token)) {
 //                    SPUtils.getInstance().put(Constants.TOKEN, userInfo.token)
 //                    BaseApi.setConfig(userInfo.token)
 //                }
-            }
-        }
+//            }
+//        }
     }
 }

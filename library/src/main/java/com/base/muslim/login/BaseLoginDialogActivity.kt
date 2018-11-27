@@ -31,7 +31,20 @@ import com.twitter.sdk.android.core.identity.TwitterLoginButton
 /**
  * Description:
  * 登录弹窗基类
+ * 通过[setScreenDisplay]设置弹窗宽高，默认占满屏幕
+ * 通过[window.setGravity(Gravity.CENTER)]设置位置，默认居中
  *
+ * Phone/Email
+ *
+ * Facebook登录，需要用浏览器打开 Facebook开发者平台：https://developers.facebook.com/apps/
+ * 1.创建应用，将应用编号赋值给 gradle.properties 的 facebook_app_id 变量
+ * 2.在Facebook开发者平台控制台的 设置->基本 中添加Android平台，填入Google Play包名、类名、密钥散列、隐私权政策
+ * 3.在Facebook开发者平台控制台 添加产品->Facebook登录， 按照步骤操作，在第五步中启用单点登录并保存（其他步骤此sdk中已做，无需更改）
+ * 4.在Facebook开发者平台控制台公开发布应用
+ * 5.Facebook登录成功回调：[onSuccess]，Facebook登录取消回调：[onCancel]，Facebook登录错误回调[onError]
+ * 6.在[LoginPresenter.loginAndFinish]方法中使用第三方的token进行登录，在[LoginPresenter.onNext]回调中获取登录api返回的数据，并保存用户信息、关闭窗口
+ *
+ * Google登录
  * @author  Alpinist Wang
  * Company: Mobile CPX
  * Date:    2018/9/18
@@ -48,8 +61,6 @@ abstract class BaseLoginDialogActivity : BaseToolsActivity(), LoginContract.View
      */
     private val signInOptions by lazy {
         GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-//                .requestIdToken(getString(R.string.web_client_id_google_login))
-//                .requestServerAuthCode(getString(R.string.web_client_id_google_login))
 //                .requestIdToken(getString(R.string.default_web_client_id))
 //                .requestServerAuthCode(getString(R.string.default_web_client_id))
                 .requestEmail()
@@ -76,7 +87,7 @@ abstract class BaseLoginDialogActivity : BaseToolsActivity(), LoginContract.View
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setScreenDisplay(1.0, 1.0)
-        window.setGravity(Gravity.BOTTOM)
+        window.setGravity(Gravity.CENTER)
         setFinishOnTouchOutside(false)
         loginPresenter = LoginPresenter(httpManager)
         loginPresenter?.attachView(this)
@@ -102,14 +113,14 @@ abstract class BaseLoginDialogActivity : BaseToolsActivity(), LoginContract.View
     }
 
 
-    override fun createFacebookLoginButton(): LoginButton? {
+    override fun getFacebookLoginButton(): LoginButton? {
         if (loginButton == null) {
             loginButton = LoginButton(this)
         }
         return loginButton
     }
 
-    override fun createFacebookCallbackManager(): CallbackManager? {
+    override fun getFacebookCallbackManager(): CallbackManager? {
         if (callbackManager == null) {
             callbackManager = CallbackManager.Factory.create()
         }
@@ -119,18 +130,22 @@ abstract class BaseLoginDialogActivity : BaseToolsActivity(), LoginContract.View
     override fun getCurrentNoExpiredToken(): String {
         var accessToken: AccessToken? = AccessToken.getCurrentAccessToken()
         var token = ""
-        if (accessToken != null && accessToken.isExpired) {
+        if (accessToken == null) return token
+        if (accessToken.isExpired) {
             //如果已经过期，退出登录
             var loginManager: LoginManager? = LoginManager.getInstance()
             loginManager?.logOut()
             loginManager = null
-        } else if (accessToken != null) {
-            token = accessToken.token
+            return token
         }
+        token = accessToken.token
         accessToken = null
         return token
     }
 
+    /**
+     * Facebook登录结果回调
+     */
     override fun onSuccess(loginResult: LoginResult) {
         //使用Facebook的token请求我们服务器上的token
         val token = loginResult.accessToken.token
@@ -142,7 +157,7 @@ abstract class BaseLoginDialogActivity : BaseToolsActivity(), LoginContract.View
     }
 
     override fun onError(error: FacebookException) {
-        LogUtils.d("facebook error:$error")
+        LogUtils.e("facebook error:$error")
     }
 
     override fun getGoogleApiClient(): GoogleApiClient {
@@ -156,22 +171,6 @@ abstract class BaseLoginDialogActivity : BaseToolsActivity(), LoginContract.View
         return twitterLoginButton
     }
 
-//    override fun getAccount(): String? {
-//        return null
-//    }
-//
-//    override fun getVerificationCode(): String? {
-//        return null
-//    }
-//
-//    override fun setBtnSendCodeEnabled(enabled: Boolean) {
-//
-//    }
-//
-//    override fun setBtnSendCodeText(text: String) {
-//
-//    }
-
     override fun setBtnSendCodeText(stringResId: Int) {
         if (null != resources) {
             setBtnSendCodeText(resources.getString(stringResId))
@@ -179,7 +178,7 @@ abstract class BaseLoginDialogActivity : BaseToolsActivity(), LoginContract.View
     }
 
     override fun onConnectionFailed(connectionResult: ConnectionResult) {
-        LogUtils.d("Google Login onConnectionFailed:$connectionResult")
+        LogUtils.e("Google Login onConnectionFailed:$connectionResult")
     }
 
     override fun startGoogleLoginActivityForResult(signInIntent: Intent) {
@@ -208,7 +207,6 @@ abstract class BaseLoginDialogActivity : BaseToolsActivity(), LoginContract.View
     }
 
     protected fun loginByTwitter() {
-        LogUtils.d("protected fun loginByTwitter() {")
         loginPresenter?.loginByTwitter()
     }
 
@@ -216,14 +214,14 @@ abstract class BaseLoginDialogActivity : BaseToolsActivity(), LoginContract.View
         loginPresenter?.loginByPhoneOrEmail()
     }
 
-    protected fun sendCode(type: String) {
-        loginPresenter?.sendCode(type)
+    protected fun sendCode() {
+        loginPresenter?.sendCode()
     }
 
     /**
      * 设置弹窗宽高百分比
      */
-    protected fun setScreenDisplay(widthPercent: Double, heightPercent: Double) {
+    private fun setScreenDisplay(widthPercent: Double, heightPercent: Double) {
         val params = window.attributes
         // 屏幕的宽度百分比
         if (widthPercent == WindowManager.LayoutParams.WRAP_CONTENT.toDouble() || widthPercent == WindowManager.LayoutParams.MATCH_PARENT.toDouble()) {
