@@ -16,6 +16,13 @@ import com.base.library.rxlifecycle.components.support.RxAppCompatActivity
  */
 
 @JvmOverloads
+fun Fragment.jumpActivity(cls: Class<*>, bundle: Bundle = Bundle()) {
+    if (isValidActivity()) {
+        activity.jumpActivity(cls, bundle)
+    }
+}
+
+@JvmOverloads
 fun Fragment.jumpActivityFinish(cls: Class<*>, bundle: Bundle = Bundle()) {
     if (isValidActivity()) {
         activity.jumpActivityFinish(cls, bundle)

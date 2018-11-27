@@ -94,6 +94,10 @@ ext {
             "luban-compression"    : 'top.zibin:Luban:1.1.7',
             /*图片裁剪*/
             "ucrop"                : 'com.github.yalantis:ucrop:2.2.2',
-            "constraint-layout"    : 'com.android.support.constraint:constraint-layout:1.1.3'
+            "constraint-layout"    : 'com.android.support.constraint:constraint-layout:1.1.3',
+            /*twitter登录*/
+            twitterAuth           : 'com.twitter.sdk.android:twitter:3.1.1',
+            googleAuth            : 'com.google.android.gms:play-services-auth:15.0.1',
+
     ]
 }

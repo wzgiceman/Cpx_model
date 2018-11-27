@@ -60,7 +60,7 @@ abstract class BaseToolsActivity : BaseActivity(), IBaseTool {
     /**
      * 在此回调中释放资源
      */
-    protected fun onRelease() {
+    open fun onRelease() {
 
     }
 

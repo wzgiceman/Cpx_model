@@ -18,6 +18,8 @@ android {
         resValue "string", "facebook_app_id", "${facebook_app_id}"
         resValue "string", "fb_login_protocol_scheme", "${fb_login_protocol_scheme}"
         resValue "string", "firebase_default_notification_channel_id", "${firebase_default_notification_channel_id}"
+        resValue "string", "twitter_consumer_key", "${twitter_consumer_key}"
+        resValue "string", "twitter_consumer_secret", "${twitter_consumer_secret}"
     }
 
     buildTypes {
@@ -81,7 +83,8 @@ dependencies {
     api rootProject.ext.dependencies["firebase-core"]
     api rootProject.ext.dependencies["design"]
     api rootProject.ext.dependencies["constraint-layout"]
-
+    api rootProject.ext.dependencies["twitterAuth"]
+    api rootProject.ext.dependencies["googleAuth"]
     //facebook
     api(rootProject.ext.dependencies["facebook-ays"])
             {

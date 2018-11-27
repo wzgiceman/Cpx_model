@@ -1,69 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:background="@color/colorPrimaryDark"
-    android:orientation="vertical">
+    tools:context=".login.LoginActivity">
 
-    <Button
-        android:id="@+id/btn_http"
+    <EditText
+        android:id="@+id/et_account"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="网络请求" />
+        android:hint="enter your phone/email" />
 
     <Button
-        android:id="@+id/btn_permission"
+        android:id="@+id/btn_send_code"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="权限申请" />
+        android:text="Send Code"
+        android:textAllCaps="false" />
+
+    <EditText
+        android:id="@+id/et_verification_code"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="enter your verification code" />
 
     <Button
-        android:id="@+id/btn_img"
+        android:id="@+id/btn_login_by_phone_or_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="图片加载" />
-
-    <Button
-        android:id="@+id/btn_RxBus"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="RxBus"
+        android:text="Login by phone/email"
         android:textAllCaps="false" />
 
     <Button
-        android:id="@+id/btn_EasyRecyclerView"
+        android:id="@+id/btn_login_by_facebook"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="EasyRecyclerView"
+        android:text="Login by facebook"
         android:textAllCaps="false" />
 
     <Button
-        android:id="@+id/btn_greendao"
+        android:id="@+id/btn_login_by_google"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="数据库GreenDao"
+        android:text="Login by google"
         android:textAllCaps="false" />
 
     <Button
-        android:id="@+id/btn_rxjava"
+        android:id="@+id/btn_login_by_twitter"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="RxJava"
+        android:text="Login by twitter"
         android:textAllCaps="false" />
-
-    <Button
-        android:id="@+id/btn_constraintLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="ConstraintLayout"
-        android:textAllCaps="false" />
-
-    <Button
-        android:id="@+id/btn_login"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Login"
-        android:textAllCaps="false" />
-
-
 </LinearLayout>

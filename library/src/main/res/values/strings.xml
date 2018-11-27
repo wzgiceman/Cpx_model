@@ -25,4 +25,11 @@
     <!-- 已经到底了 -->
     <string name="no_more">No more.</string>
 
+    <!--电话/邮箱登录 发送验证码-->
+    <string name="send_code">SEND CODE</string>
+    <string name="account_cannot_be_empty">Account cannot be empty.</string>
+    <string name="please_input_verification_code">Please input verification code</string>
+
+
+
 </resources>
