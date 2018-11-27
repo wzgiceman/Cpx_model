@@ -7,6 +7,7 @@ import com.prog.zhigangwei.cpx_model.easyRecyclerview.RecyclerActivity
 import com.prog.zhigangwei.cpx_model.greendao.GreendaoActivity
 import com.prog.zhigangwei.cpx_model.http.HttpActivity
 import com.prog.zhigangwei.cpx_model.image.ImageActivity
+import com.prog.zhigangwei.cpx_model.login.LoginActivity
 import com.prog.zhigangwei.cpx_model.permission.PermisssionActivity
 import com.prog.zhigangwei.cpx_model.rxbus.RxBusActivity
 import com.prog.zhigangwei.cpx_model.rxjava.RxJavaActivity
@@ -54,6 +55,7 @@ class MainActivity : BaseActivity() {
         btn_greendao.setOnClickListener { jumpActivity(GreendaoActivity::class.java) }
         btn_rxjava.setOnClickListener { jumpActivity(RxJavaActivity::class.java) }
         btn_constraintLayout.setOnClickListener { jumpActivity(ConstraintLayoutActivity::class.java) }
+        btn_login.setOnClickListener { jumpActivity(LoginActivity::class.java) }
         initComplexWidget()
     }
 

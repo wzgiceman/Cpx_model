@@ -12,7 +12,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-
         <meta-data
             android:name="android.max_aspect"
             android:value="2.1" />
@@ -35,6 +34,7 @@
         <activity android:name=".rxjava.RxJavaActivity" />
         <activity android:name=".greendao.GreendaoActivity" />
         <activity android:name=".constraintLayout.ConstraintLayoutActivity" />
+        <activity android:name=".login.LoginActivity"></activity>
     </application>
 
 </manifest>
