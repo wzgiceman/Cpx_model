@@ -65,7 +65,9 @@ abstract class BaseActivity : BaseSwipeBackActivity(), IBase {
      * @param savedInstanceState
      */
     protected fun restoreSaveState(savedInstanceState: Bundle?) {
-        bundle = intent.extras
+        if(null != intent.extras){
+            bundle = intent.extras
+        }
         if (bundle == null && savedInstanceState != null && savedInstanceState.containsKey("bundle")) {
             bundle = savedInstanceState.getBundle("bundle")
         }
