@@ -2,6 +2,8 @@ package com.base.muslim.base.dialog
 
 import android.app.Dialog
 import android.content.Context
+import android.view.View
+import android.view.View.OnClickListener
 import com.base.library.R
 import com.base.muslim.base.IBase
 
@@ -11,7 +13,7 @@ import com.base.muslim.base.IBase
  *
  * @author WZG
  */
-abstract class BaseDialog @JvmOverloads constructor(context: Context, style: Int = R.style.dialog_animstyle, animal: Boolean = true) : Dialog(context, style), IBase {
+abstract class BaseDialog @JvmOverloads constructor(context: Context, style: Int = R.style.dialog_animstyle, animal: Boolean = true) : Dialog(context, style), OnClickListener, IBase {
 
     init {
         if (animal) {
@@ -40,4 +42,5 @@ abstract class BaseDialog @JvmOverloads constructor(context: Context, style: Int
 
     }
 
+    override fun onClick(v: View) {}
 }
