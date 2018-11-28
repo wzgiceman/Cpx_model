@@ -4,7 +4,6 @@ import com.base.library.rxRetrofit.downlaod.DownInfo
 import com.base.library.rxRetrofit.downlaod.HttpDownManager
 import com.base.library.rxRetrofit.listener.HttpDownOnNextListener
 import com.base.library.rxRetrofit.utils.DownDbUtil
-import com.base.library.utils.utilcode.util.FileUtils
 import com.base.muslim.base.activity.BaseActivity
 import com.base.muslim.base.extension.showToast
 import com.prog.zhigangwei.cpx_model.R
@@ -23,23 +22,24 @@ import java.io.File
  * * 更复杂用例参考地址:https://github.com/wzgiceman/RxjavaRetrofitDemo-string-master/blob/master/app/src/main/java/com/example/retrofit/activity/DownLaodActivity.java
  */
 class DownActivity : BaseActivity() {
-
+    companion object {
+        const val ID = 14L
+    }
     override fun layoutId() = R.layout.activity_http_down
 
     private lateinit var info: DownInfo
 
     override fun initData() {
-        /*默认会存储在数据库中,所以需要读取历史纪录可以通过key:id获取*/
-        info = DownDbUtil.getInstance().queryDownBy(10001) ?: DownInfo().apply {
-            id = 10001
+        info = DownDbUtil.getInstance().queryDownBy(ID) ?: DownInfo().apply {
+            id = ID
             url = "http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4"
             isUpdateProgress = true
             savePath = File(getExternalFilesDir(null), System.currentTimeMillis().toString() + ".mp4").absolutePath
             DownDbUtil.getInstance().save(this)
         }
+
         /*显示上一次下载的位置*/
         tv_progress.text = String.format("%d / %d", info.readLength, info.countLength)
-
         info.listener = object : HttpDownOnNextListener<DownInfo>() {
 
             override fun onNext(t: DownInfo?) {
@@ -70,12 +70,16 @@ class DownActivity : BaseActivity() {
             HttpDownManager.getInstance().pause(info)
         }
 
+        btn_clear.setOnClickListener{
+            HttpDownManager.getInstance().remove(info)
+            DownDbUtil.getInstance().deleteDownInfo(info)
+            initData()
+        }
     }
 
 
     override fun onDestroy() {
         super.onDestroy()
-        FileUtils.delete(info.savePath)
         HttpDownManager.getInstance().remove(info)
     }
 

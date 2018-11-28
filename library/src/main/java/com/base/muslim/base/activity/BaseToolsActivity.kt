@@ -25,9 +25,9 @@ abstract class BaseToolsActivity : BaseActivity(), IBaseTool {
      * @param cancel 是否可以取消
      * @param title  显示的标题
      */
-    protected fun showLoading(cancel: Boolean=true, title: String? = "") {
+    protected fun showLoading(cancel: Boolean = true, title: String? = "") {
         if (!isValidActivity() || (loadingDialog != null && loadingDialog!!.isShowing)) return
-        val message = if(title.isNullOrEmpty()) getString(R.string.Loading) else title
+        val message = if (title.isNullOrEmpty()) getString(R.string.Loading) else title
         if (loadingDialog == null) {
             loadingDialog = ProgressDialog(this)
         }
