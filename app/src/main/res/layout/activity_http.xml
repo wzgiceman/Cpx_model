@@ -31,9 +31,21 @@
         android:layout_height="wrap_content"
         android:text="提前预置数据（保证肯定成功））"/>
 
-    <TextView
-        android:id="@+id/tv_msg"
+    <Button
+        android:id="@+id/btn_all"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:text="多接口合并"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tv_msg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </ScrollView>
 
 </LinearLayout>

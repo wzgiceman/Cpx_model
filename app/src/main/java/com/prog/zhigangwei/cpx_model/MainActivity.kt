@@ -47,6 +47,15 @@ class MainActivity : BaseActivity() {
     }
 
     override fun initView() {
+        initComplexWidget()
+        initViewA()
+        initViewB()
+    }
+
+    /**
+     * 基本控件处理
+     */
+    private fun initComplexWidget() {
         btn_http.setOnClickListener { jumpActivity(HttpActivity::class.java) }
         btn_permission.setOnClickListener { jumpActivity(PermisssionActivity::class.java) }
         btn_img.setOnClickListener { jumpActivity(ImageActivity::class.java) }
@@ -56,13 +65,6 @@ class MainActivity : BaseActivity() {
         btn_rxjava.setOnClickListener { jumpActivity(RxJavaActivity::class.java) }
         btn_constraintLayout.setOnClickListener { jumpActivity(ConstraintLayoutActivity::class.java) }
         btn_login.setOnClickListener { jumpActivity(LoginActivity::class.java) }
-        initComplexWidget()
-    }
-
-    private fun initComplexWidget() {
-        /*其他控件处理*/
-        initViewA()
-        initViewB()
     }
 
     /**
