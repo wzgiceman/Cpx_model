@@ -141,7 +141,7 @@ class LoginPresenter(private val httpManager: HttpManager) : BasePresenter<Login
     }
 
     /**
-     * 登录，使用第三方的token请求我们服务器上的token
+     * 登录，使用第三方的token请求我们服务器上的token，以及用户名、头像等数据
      */
     override fun loginAndFinish(type: String, loginMethodToken: String?, account: String?, secret: String?) {
         LogUtils.d("type:$type\nloginMethodToken：$loginMethodToken\naccount:$account\nsecret:$secret")
