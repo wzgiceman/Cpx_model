@@ -16,7 +16,7 @@ import io.reactivex.functions.Function;
  * Created by WZG on 2017/3/23.
  */
 
-public class ResultFunc implements Function<Object, Object> {
+public class ResultFunc implements Function<Object, String> {
     private BaseApi basePar;
 
     public ResultFunc(BaseApi basePar) {
@@ -24,7 +24,7 @@ public class ResultFunc implements Function<Object, Object> {
     }
 
     @Override
-    public Object apply(Object o) {
+    public String apply(Object o) {
         if (o == null || "".equals(o.toString())) {
             throw new HttpTimeException(HttpTimeException.CACHE_HTTP_ERROR, "error service");
         }

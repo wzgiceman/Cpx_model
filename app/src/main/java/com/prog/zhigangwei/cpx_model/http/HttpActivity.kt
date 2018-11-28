@@ -2,16 +2,22 @@ package com.prog.zhigangwei.cpx_model.http
 
 import com.base.library.rxRetrofit.exception.ApiException
 import com.base.library.rxRetrofit.http.HttpManager
+import com.base.library.rxRetrofit.http.func.ResultFunc
 import com.base.library.rxRetrofit.listener.HttpOnNextListener
 import com.base.library.utils.utilcode.util.LogUtils
-import com.base.muslim.base.activity.BaseActivity
+import com.base.muslim.base.activity.BaseToolsActivity
 import com.base.muslim.base.extension.jumpActivity
 import com.base.muslim.base.extension.showToast
 import com.prog.zhigangwei.cpx_model.R
 import com.prog.zhigangwei.cpx_model.http.common.api.LanguageApi.LanguagesApi
 import com.prog.zhigangwei.cpx_model.http.common.api.notice.NoticePostApi
 import com.prog.zhigangwei.cpx_model.http.common.api.wallpaper.HomeWallApi
+import com.prog.zhigangwei.cpx_model.http.common.bean.AllResulte
 import com.prog.zhigangwei.cpx_model.http.down.DownActivity
+import io.reactivex.Observer
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.Disposable
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_http.*
 
 /**
@@ -24,7 +30,7 @@ import kotlinx.android.synthetic.main.activity_http.*
  *Company :cpx
  *
  */
-class HttpActivity : BaseActivity(), HttpOnNextListener {
+class HttpActivity : BaseToolsActivity(), HttpOnNextListener {
 
     private val httpManager by lazy { HttpManager(this, this) }
 
@@ -45,6 +51,43 @@ class HttpActivity : BaseActivity(), HttpOnNextListener {
         btn_pre_gson.setOnClickListener { httpManager.doHttpDeal(languagesApi) }
 
         btn_down.setOnClickListener { jumpActivity(DownActivity::class.java) }
+
+
+
+        btn_all.setOnClickListener {
+            val allResulte = AllResulte()
+            languagesApi.observable.map(ResultFunc(languagesApi))
+                    .flatMap {
+                        allResulte.lgResulte = it
+                        wallApi.observable.map(ResultFunc(wallApi))
+                    }.flatMap {
+                        allResulte.wallResulte = it
+                        noticeApi.observable.map(ResultFunc(noticeApi))
+                    }
+                    .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(object : Observer<String> {
+                        override fun onComplete() {
+                            closeLoading()
+                        }
+
+                        override fun onSubscribe(d: Disposable) {
+                            showLoading()
+                        }
+
+                        override fun onNext(it: String) {
+                            allResulte.noticeResulte = it
+                            tv_msg.append("lg-->${allResulte.lgResulte}")
+                            tv_msg.append("\n\n wall-->${allResulte.wallResulte}")
+                            tv_msg.append("\n\n notice-->${allResulte.noticeResulte}")
+                        }
+
+                        override fun onError(it: Throwable) {
+                            showToast("${it.message}")
+                            closeLoading()
+                        }
+
+                    })
+        }
     }
 
 
