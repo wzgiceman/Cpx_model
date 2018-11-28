@@ -23,7 +23,6 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.OkHttpClient;
 import okhttp3.ResponseBody;
@@ -110,12 +109,9 @@ public class HttpDownManager {
                 /*失败后的retry配置*/
                 .retryWhen(new RetryWhenNetworkException())
                 /*读取下载写入文件*/
-                .map(new Function<ResponseBody, DownInfo>() {
-                    @Override
-                    public DownInfo apply(ResponseBody responseBody) {
-                        writeCache(responseBody, new File(info.getSavePath()), info);
-                        return info;
-                    }
+                .map(responseBody -> {
+                    writeCache(responseBody, new File(info.getSavePath()), info);
+                    return info;
                 })
                 /*指定线程*/
                 .subscribeOn(Schedulers.io())
