@@ -23,7 +23,7 @@ import io.reactivex.disposables.Disposable;
  * 调用者自己对请求数据进行处理
  * Created by WZG on 2016/7/16.
  */
-public class ProgressDownSubscriber<T>  implements Observer<T>, DownloadProgressListener {
+public class ProgressDownSubscriber<T> implements Observer<T>, DownloadProgressListener {
     //弱引用结果回调
     private SoftReference<HttpDownOnNextListener> mSubscriberOnNextListener;
     /*下载数据*/
@@ -118,7 +118,8 @@ public class ProgressDownSubscriber<T>  implements Observer<T>, DownloadProgress
         if (mSubscriberOnNextListener.get() == null || !downInfo.isUpdateProgress()) return;
         handler.post(() -> {
             /*如果暂停或者停止状态延迟，不需要继续发送回调，影响显示*/
-            if (downInfo.getState() == DownState.PAUSE || downInfo.getState() == DownState.STOP) return;
+            if (downInfo.getState() == DownState.PAUSE || downInfo.getState() == DownState.STOP)
+                return;
             downInfo.setState(DownState.DOWN);
             mSubscriberOnNextListener.get().updateProgress(downInfo.getReadLength(), downInfo.getCountLength());
         });
@@ -127,8 +128,8 @@ public class ProgressDownSubscriber<T>  implements Observer<T>, DownloadProgress
     /**
      * 取消订阅
      */
-    public void unsubscribe(){
-        if(disposable !=null && disposable.isDisposed()){
+    public void unsubscribe() {
+        if (disposable != null && !disposable.isDisposed()) {
             disposable.dispose();
         }
     }
