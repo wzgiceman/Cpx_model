@@ -22,24 +22,25 @@ import java.io.File
  * * 更复杂用例参考地址:https://github.com/wzgiceman/RxjavaRetrofitDemo-string-master/blob/master/app/src/main/java/com/example/retrofit/activity/DownLaodActivity.java
  */
 class DownActivity : BaseActivity() {
+    companion object {
+        const val ID = 14L
+    }
     override fun layoutId() = R.layout.activity_http_down
 
-    private var info: DownInfo? = DownDbUtil.getInstance().queryDownBy(10001)
+    private lateinit var info: DownInfo
 
     override fun initData() {
-        /*默认会存储在数据库中,所以需要读取历史纪录可以通过key:id获取*/
-        if (null == info) {
-            info = DownInfo()
-            info!!.id = 10001
-            info!!.url = "http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4"
-            info!!.isUpdateProgress = true
-            info!!.savePath = File(getExternalFilesDir(null), System.currentTimeMillis().toString() + ".mp4").absolutePath
-            DownDbUtil.getInstance().save(info!!)
+        info = DownDbUtil.getInstance().queryDownBy(ID) ?: DownInfo().apply {
+            id = ID
+            url = "http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4"
+            isUpdateProgress = true
+            savePath = File(getExternalFilesDir(null), System.currentTimeMillis().toString() + ".mp4").absolutePath
+            DownDbUtil.getInstance().save(this)
         }
-        /*显示上一次下载的位置*/
-        tv_progress.text = "${info!!.readLength}/${info!!.countLength}"
 
-        info!!.listener = object : HttpDownOnNextListener<DownInfo>() {
+        /*显示上一次下载的位置*/
+        tv_progress.text = String.format("%d / %d", info.readLength, info.countLength)
+        info.listener = object : HttpDownOnNextListener<DownInfo>() {
 
             override fun onNext(t: DownInfo?) {
                 showToast("下载成功路径:${t!!.savePath}")
@@ -54,7 +55,7 @@ class DownActivity : BaseActivity() {
             }
 
             override fun updateProgress(readLength: Long, countLength: Long) {
-                tv_progress.text = "${readLength}/${countLength}"
+                tv_progress.text = String.format("%d / %d", readLength, countLength)
             }
         }
 
@@ -62,18 +63,24 @@ class DownActivity : BaseActivity() {
 
     override fun initView() {
         btn_down.setOnClickListener {
-            HttpDownManager.getInstance().startDown(info!!)
+            HttpDownManager.getInstance().startDown(info)
         }
 
         btn_pause.setOnClickListener {
-            HttpDownManager.getInstance().pause(info!!)
+            HttpDownManager.getInstance().pause(info)
+        }
+
+        btn_clear.setOnClickListener{
+            HttpDownManager.getInstance().remove(info)
+            DownDbUtil.getInstance().deleteDownInfo(info)
+            initData()
         }
     }
 
 
     override fun onDestroy() {
         super.onDestroy()
-        HttpDownManager.getInstance().remove(info!!)
+        HttpDownManager.getInstance().remove(info)
     }
 
 }

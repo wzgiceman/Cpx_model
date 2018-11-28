@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Gravity
 import android.view.WindowManager
+import com.base.library.R
 import com.base.library.rxRetrofit.exception.ApiException
 import com.base.library.rxRetrofit.http.HttpManager
 import com.base.library.rxRetrofit.listener.HttpOnNextListener
@@ -44,7 +45,8 @@ import com.twitter.sdk.android.core.identity.TwitterLoginButton
  * 5.Facebook登录成功回调：[onSuccess]，Facebook登录取消回调：[onCancel]，Facebook登录错误回调[onError]
  * 6.在[LoginPresenter.loginAndFinish]方法中使用第三方的token进行登录，在[LoginPresenter.onNext]回调中获取登录api返回的数据，并保存用户信息、关闭窗口
  *
- * Google登录
+ * Google登录，需要用浏览器打开 Google云端平台：https://console.developers.google.com/apis/credentials?project=_
+ * 1.创建网页凭据
  * @author  Alpinist Wang
  * Company: Mobile CPX
  * Date:    2018/9/18
@@ -61,8 +63,8 @@ abstract class BaseLoginDialogActivity : BaseToolsActivity(), LoginContract.View
      */
     private val signInOptions by lazy {
         GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-//                .requestIdToken(getString(R.string.default_web_client_id))
-//                .requestServerAuthCode(getString(R.string.default_web_client_id))
+                .requestIdToken(getString(R.string.google_web_client_id))
+                .requestServerAuthCode(getString(R.string.google_web_client_id))
                 .requestEmail()
                 .build()
     }

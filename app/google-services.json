@@ -1,35 +1,35 @@
 {
   "project_info": {
-    "project_number": "114410019909",
-    "firebase_url": "https://muslim-plus.firebaseio.com",
-    "project_id": "muslim-plus",
-    "storage_bucket": "muslim-plus.appspot.com"
+    "project_number": "1070357864131",
+    "firebase_url": "https://cpxmodle.firebaseio.com",
+    "project_id": "cpxmodle",
+    "storage_bucket": "cpxmodle.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:114410019909:android:5bf0addd5a4d92ce",
+        "mobilesdk_app_id": "1:1070357864131:android:047132feed4abfad",
         "android_client_info": {
-          "package_name": "com.base.library"
+          "package_name": "com.prog.zhigangwei.cpx_model"
         }
       },
       "oauth_client": [
         {
-          "client_id": "114410019909-oi976ln2urcu7vsq35fqobuku67d5ufa.apps.googleusercontent.com",
-          "client_type": 3,
+          "client_id": "1070357864131-g7qncm3kfauk8kqci6ova46hhgdhcvf1.apps.googleusercontent.com",
+          "client_type": 1,
           "android_info": {
-            "package_name": "com.base.library",
-            "certificate_hash": "881dc65405b5d457349ccb2a680c6f4fbf2c3f92"
+            "package_name": "com.prog.zhigangwei.cpx_model",
+            "certificate_hash": "43e8963e2eb737f390b3ca70a43d0d963648f3a6"
           }
         },
         {
-          "client_id": "114410019909-oi976ln2urcu7vsq35fqobuku67d5ufa.apps.googleusercontent.com",
+          "client_id": "1070357864131-j3673uv535k0kq6akd816k3hdbgu3g2j.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBTTPsthyzF7hr_rjfYlWXzBLKJOEkeFqY"
+          "current_key": "AIzaSyAv8_QlLWb-IlaynqbMx2MXiZJKYec5Zvo"
         }
       ],
       "services": {
@@ -37,8 +37,13 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1070357864131-j3673uv535k0kq6akd816k3hdbgu3g2j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2

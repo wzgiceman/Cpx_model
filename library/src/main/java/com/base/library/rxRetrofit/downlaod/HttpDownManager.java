@@ -39,23 +39,24 @@ public class HttpDownManager {
     private Set<DownInfo> downInfos;
     /*回调sub队列*/
     private HashMap<String, ProgressDownSubscriber> subMap;
-    /*单利对象*/
+    /*单例对象*/
     private volatile static HttpDownManager INSTANCE;
     /*数据库类*/
     private DownDbUtil db;
-    /*下载进度回掉主线程*/
+    /*下载进度回调主线程*/
     private Handler handler;
 
     private HttpDownManager() {
         downInfos = new HashSet<>();
         subMap = new HashMap<>();
         db = DownDbUtil.getInstance();
-        handler=new Handler(Looper.getMainLooper());
+        handler = new Handler(Looper.getMainLooper());
     }
 
     /**
      * 获取单例
-     *a
+     * a
+     *
      * @return
      */
     public static HttpDownManager getInstance() {
@@ -80,7 +81,7 @@ public class HttpDownManager {
             return;
         }
         /*添加回调处理类*/
-        ProgressDownSubscriber subscriber = new ProgressDownSubscriber(info,handler);
+        ProgressDownSubscriber subscriber = new ProgressDownSubscriber(info, handler);
         /*记录回调sub*/
         subMap.put(info.getUrl(), subscriber);
         /*获取service，多次请求公用一个sercie*/
@@ -255,7 +256,7 @@ public class HttpDownManager {
      * @param url
      * @return
      */
-    private  String getBasUrl(String url) {
+    private String getBasUrl(String url) {
         String head = "";
         int index = url.indexOf("://");
         if (index != -1) {
