@@ -2,6 +2,7 @@ package com.base.muslim.base.dialog
 
 import android.app.Dialog
 import android.content.Context
+import android.os.Bundle
 import android.view.View
 import android.view.View.OnClickListener
 import com.base.library.R
@@ -20,6 +21,10 @@ abstract class BaseDialog @JvmOverloads constructor(context: Context, style: Int
             val window = this.window
             window?.setWindowAnimations(R.style.dialog_animstyle)
         }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         init()
     }
 

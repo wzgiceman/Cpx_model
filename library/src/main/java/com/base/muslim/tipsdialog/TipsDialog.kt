@@ -27,7 +27,6 @@ class TipsDialog : BaseDialog {
     constructor(context: Context, listener: OnDropBtnClickListener) : super(context) {
         this.listener = listener
         setDialogSystemLine()
-        init()
     }
 
     /**
@@ -39,7 +38,6 @@ class TipsDialog : BaseDialog {
     constructor(context: Context, listener: OnBtnClickListener) : super(context) {
         this.listener1 = listener
         setDialogSystemLine()
-        init()
     }
 
     /**

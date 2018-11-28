@@ -17,7 +17,6 @@ public class LoadingDailog extends BaseDialog {
 
     public LoadingDailog(Context context) {
         super(context, R.style.progress_dialog, false);
-        init();
     }
 
 

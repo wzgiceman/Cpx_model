@@ -3,10 +3,8 @@ package com.prog.zhigangwei.cpx_model.app
 import android.content.ComponentCallbacks2
 import android.support.multidex.MultiDexApplication
 import com.base.ModelApp
-import com.base.library.crash.CrashHandler
 import com.bumptech.glide.Glide
 import com.prog.zhigangwei.cpx_model.BuildConfig
-import com.prog.zhigangwei.cpx_model.MainActivity
 import com.squareup.leakcanary.LeakCanary
 
 /**
@@ -31,7 +29,7 @@ class MApp : MultiDexApplication() {
      * 初始化一些启动数据
      */
     private fun initApp() {
-        CrashHandler.getInstance().init(this, MainActivity::class.java)
+//        CrashHandler.getInstance().init(this, MainActivity::class.java)
         ModelApp.init(this,BuildConfig.DEBUG)
     }
 
