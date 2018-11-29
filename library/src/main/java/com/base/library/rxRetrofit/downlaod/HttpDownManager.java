@@ -79,7 +79,7 @@ public class HttpDownManager {
     public void startDown(final DownInfo info) {
         /*正在下载不处理*/
         if (info == null) return;
-        if (subMap.get(info.getUrl()) != null) {
+        if (subMap.containsKey(info.getUrl())) {
             LogUtils.d("subMap.get(info.getUrl()) != null");
             subMap.get(info.getUrl()).setDownInfo(info);
             return;
