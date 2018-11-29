@@ -14,7 +14,7 @@ import com.twitter.sdk.android.core.TwitterConfig
 
 /**
  * Description:
- *
+ * CPX Model中需要在Application中初始化的内容都在此类中初始化
  *
  * @author  Alpinist Wang
  * Company: Mobile CPX

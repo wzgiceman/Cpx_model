@@ -27,11 +27,11 @@ public class LoadingDailog extends BaseDialog {
     }
 
     public void showLoading(String title) {
-        if (tv != null) {
-            tv.setText(title);
-        }
         if (!isShowing()) {
             show();
+        }
+        if (tv != null) {
+            tv.setText(title);
         }
     }
 

@@ -31,6 +31,7 @@ public class DownInfoDao extends AbstractDao<DownInfo, Long> {
         public final static Property ConnectionTime = new Property(4, int.class, "connectionTime", false, "CONNECTION_TIME");
         public final static Property DownState = new Property(5, int.class, "downState", false, "DOWN_STATE");
         public final static Property Url = new Property(6, String.class, "url", false, "URL");
+        public final static Property UpdateProgress = new Property(7, boolean.class, "updateProgress", false, "UPDATE_PROGRESS");
     }
 
 
@@ -52,7 +53,8 @@ public class DownInfoDao extends AbstractDao<DownInfo, Long> {
                 "\"READ_LENGTH\" INTEGER," + // 3: readLength
                 "\"CONNECTION_TIME\" INTEGER NOT NULL ," + // 4: connectionTime
                 "\"DOWN_STATE\" INTEGER NOT NULL ," + // 5: downState
-                "\"URL\" TEXT);"); // 6: url
+                "\"URL\" TEXT," + // 6: url
+                "\"UPDATE_PROGRESS\" INTEGER NOT NULL );"); // 7: updateProgress
     }
 
     /** Drops the underlying database table. */
@@ -91,6 +93,7 @@ public class DownInfoDao extends AbstractDao<DownInfo, Long> {
         if (url != null) {
             stmt.bindString(7, url);
         }
+        stmt.bindLong(8, entity.getUpdateProgress() ? 1L: 0L);
     }
 
     @Override
@@ -123,6 +126,7 @@ public class DownInfoDao extends AbstractDao<DownInfo, Long> {
         if (url != null) {
             stmt.bindString(7, url);
         }
+        stmt.bindLong(8, entity.getUpdateProgress() ? 1L: 0L);
     }
 
     @Override
@@ -139,7 +143,8 @@ public class DownInfoDao extends AbstractDao<DownInfo, Long> {
             cursor.isNull(offset + 3) ? null : cursor.getLong(offset + 3), // readLength
             cursor.getInt(offset + 4), // connectionTime
             cursor.getInt(offset + 5), // downState
-            cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6) // url
+            cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // url
+            cursor.getShort(offset + 7) != 0 // updateProgress
         );
         return entity;
     }
@@ -153,6 +158,7 @@ public class DownInfoDao extends AbstractDao<DownInfo, Long> {
         entity.setConnectionTime(cursor.getInt(offset + 4));
         entity.setDownState(cursor.getInt(offset + 5));
         entity.setUrl(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
+        entity.setUpdateProgress(cursor.getShort(offset + 7) != 0);
      }
     
     @Override
