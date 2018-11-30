@@ -8,6 +8,7 @@ import com.base.dao.DaoSession;
 import com.base.dao.DownInfoDao;
 import com.base.library.rxRetrofit.RxRetrofitApp;
 import com.base.library.rxRetrofit.downlaod.DownInfo;
+import com.base.library.utils.AbLogUtil;
 
 import org.greenrobot.greendao.query.QueryBuilder;
 
@@ -84,6 +85,7 @@ public class DownDbUtil {
         DaoSession daoSession = daoMaster.newSession();
         DownInfoDao downInfoDao = daoSession.getDownInfoDao();
         downInfoDao.update(info);
+        AbLogUtil.e(info.getCountLength()+" <-----> "+info.getReadLength());
     }
 
     public void deleteDownInfo(DownInfo info){

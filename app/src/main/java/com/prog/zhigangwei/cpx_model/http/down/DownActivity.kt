@@ -73,7 +73,7 @@ class DownActivity : BaseActivity() {
         btn_clear.setOnClickListener{
             HttpDownManager.getInstance().remove(info)
             DownDbUtil.getInstance().deleteDownInfo(info)
-            initData()
+            File(info.savePath).delete()
         }
     }
 

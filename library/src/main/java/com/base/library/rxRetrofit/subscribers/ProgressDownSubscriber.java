@@ -128,7 +128,7 @@ public class ProgressDownSubscriber<T>  implements Observer<T>, DownloadProgress
      * 取消订阅
      */
     public void unsubscribe(){
-        if(disposable !=null && disposable.isDisposed()){
+        if(disposable !=null && !disposable.isDisposed()){
             disposable.dispose();
         }
     }

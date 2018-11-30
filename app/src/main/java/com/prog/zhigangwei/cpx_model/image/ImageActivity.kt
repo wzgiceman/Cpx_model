@@ -20,12 +20,19 @@ import kotlinx.android.synthetic.main.activity_image.*
 class ImageActivity : BaseActivity(), OnPicturePathListener {
 
     private lateinit var path: String
+    private lateinit var prePath: String
 
     override fun layoutId() = R.layout.activity_image
 
     override fun initData() {
-//        path = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1535091121218&di=32c9e8ae26cf5b3ac60ab3312a435233&imgtype=0&src=http%3A%2F%2Fb.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F8718367adab44aedb794e128bf1c8701a08bfb20.jpg"
-        path = "https://github.com/wzgiceman/Cpx_model/blob/master/app/src/main/ic_launcher-web.png"
+        prePath = "http://img.mp.sohu.com/upload/20170520/1ac53c2182bd4d6dac5abed5dc3cbe43.png"
+        path="http://tupian.qqjay.com/u/2017/1201/2_161641_2.jpg"
+
+
+        /*大图片需要在service中提前加载*/
+        Glide.with(this)
+                .load(prePath)
+                .preload()
     }
 
 
@@ -34,10 +41,18 @@ class ImageActivity : BaseActivity(), OnPicturePathListener {
             Glide.with(this).asBitmap().load(path).into(iv_user)
         }
 
+
+        btn_pre_local.setOnClickListener {
+            Glide.with(this)
+                    .load(prePath)
+                    .into(iv_gif)
+        }
+
         btn_local.setOnClickListener {
             /*PictureCapture提供了很多本地图片都获取方法,点击详情查看*/
             PictureCapture.getPicture(this, this)
         }
+
 
     }
 
