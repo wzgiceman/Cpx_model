@@ -10,7 +10,6 @@ import com.base.library.utils.utilcode.util.NetworkUtils
 import com.base.muslim.base.activity.BaseActivity
 import com.base.muslim.base.extension.showToast
 import com.prog.zhigangwei.cpx_model.R
-import com.prog.zhigangwei.cpx_model.http.down.down.NetWorkConnectChangeListener
 import com.prog.zhigangwei.cpx_model.http.down.down.NetworkConnectChangedReceiver
 import kotlinx.android.synthetic.main.activity_http_down.*
 import java.io.File
@@ -26,7 +25,7 @@ import java.io.File
  *
  * * 更复杂用例参考地址:https://github.com/wzgiceman/RxjavaRetrofitDemo-string-master/blob/master/app/src/main/java/com/example/retrofit/activity/DownLaodActivity.java
  */
-class DownActivity : BaseActivity(), NetWorkConnectChangeListener {
+class DownActivity : BaseActivity() {
 
     companion object {
         const val ID = 16L
@@ -35,7 +34,7 @@ class DownActivity : BaseActivity(), NetWorkConnectChangeListener {
     override fun layoutId() = R.layout.activity_http_down
 
     private lateinit var info: DownInfo
-    private var receiver : NetworkConnectChangedReceiver?=null
+    private var receiver: NetworkConnectChangedReceiver? = null
 
     override fun initData() {
         info = DownDbUtil.getInstance().queryDownBy(ID) ?: DownInfo().apply {
@@ -70,7 +69,13 @@ class DownActivity : BaseActivity(), NetWorkConnectChangeListener {
                     filter.addAction("android.net.conn.CONNECTIVITY_CHANGE")
                     filter.addAction("android.net.wifi.WIFI_STATE_CHANGED")
                     filter.addAction("android.net.wifi.STATE_CHANGE")
-                    receiver= NetworkConnectChangedReceiver(this@DownActivity)
+                    receiver = NetworkConnectChangedReceiver()
+                    receiver!!.setListener {
+                        if (it) {
+                            AbLogUtil.e("---->网络连接可用")
+                            HttpDownManager.getInstance().startDown(info)
+                        }
+                    }
                     registerReceiver(receiver, filter)
                 }
             }
@@ -101,20 +106,11 @@ class DownActivity : BaseActivity(), NetWorkConnectChangeListener {
     }
 
 
-    override fun networkChangeListener(connect: Boolean) {
-        if(connect){
-            AbLogUtil.e("---->网络连接可用")
-            HttpDownManager.getInstance().startDown(info)
-        }
-
-    }
-
-
     override fun onDestroy() {
         super.onDestroy()
         HttpDownManager.getInstance().pause(info)
         HttpDownManager.getInstance().remove(info)
-        if(null!=receiver){
+        if (null != receiver) {
             unregisterReceiver(receiver)
         }
     }
