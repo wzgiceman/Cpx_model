@@ -5,7 +5,7 @@ import com.base.library.rxRetrofit.downlaod.DownInfo
 import com.base.library.rxRetrofit.downlaod.HttpDownManager
 import com.base.library.rxRetrofit.listener.HttpDownOnNextListener
 import com.base.library.rxRetrofit.utils.DownDbUtil
-import com.base.library.utils.AbLogUtil
+import com.base.library.utils.utilcode.util.LogUtils
 import com.base.library.utils.utilcode.util.NetworkUtils
 import com.base.muslim.base.activity.BaseActivity
 import com.base.muslim.base.extension.showToast
@@ -64,20 +64,7 @@ class DownActivity : BaseActivity() {
 
             override fun onError(e: Throwable?) {
                 showToast("onError.........${e!!.message}")
-                if (!NetworkUtils.isConnected()) {
-                    val filter = IntentFilter()
-                    filter.addAction("android.net.conn.CONNECTIVITY_CHANGE")
-                    filter.addAction("android.net.wifi.WIFI_STATE_CHANGED")
-                    filter.addAction("android.net.wifi.STATE_CHANGE")
-                    receiver = NetworkConnectChangedReceiver()
-                    receiver!!.setListener {
-                        if (it) {
-                            AbLogUtil.e("---->网络连接可用")
-                            HttpDownManager.getInstance().startDown(info)
-                        }
-                    }
-                    registerReceiver(receiver, filter)
-                }
+                initWifiChangeListener()
             }
 
             override fun updateProgress(readLength: Long, countLength: Long) {
@@ -97,14 +84,32 @@ class DownActivity : BaseActivity() {
         }
 
         btn_clear.setOnClickListener {
-            HttpDownManager.getInstance().pause(info)
-            HttpDownManager.getInstance().remove(info)
             DownDbUtil.getInstance().deleteDownInfo(info)
             File(info.savePath).delete()
-            tv_progress.text = "0/0"
+            finish()
         }
     }
 
+
+    /**
+     * 监听网络变动处理
+     */
+    private fun initWifiChangeListener(){
+        if (!NetworkUtils.isConnected()) {
+            val filter = IntentFilter()
+            filter.addAction("android.net.conn.CONNECTIVITY_CHANGE")
+            filter.addAction("android.net.wifi.WIFI_STATE_CHANGED")
+            filter.addAction("android.net.wifi.STATE_CHANGE")
+            receiver = NetworkConnectChangedReceiver()
+            receiver!!.setListener {
+                if (it) {
+                    LogUtils.d("---->网络连接可用")
+                    HttpDownManager.getInstance().startDown(info)
+                }
+            }
+            registerReceiver(receiver, filter)
+        }
+    }
 
     override fun onDestroy() {
         super.onDestroy()
