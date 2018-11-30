@@ -6,7 +6,7 @@ import kotlinx.android.synthetic.main.activity_login.*
 
 /**
  * Description:
- * 登录页面Demo
+ * 第三方 登录页面Demo
  *
  * @author  Alpinist Wang
  * Company: Mobile CPX

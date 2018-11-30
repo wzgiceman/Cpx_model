@@ -115,11 +115,9 @@ public class ProgressDownSubscriber<T> implements Observer<T>, DownloadProgressL
         }
         downInfo.setReadLength(read);
 
-        if (mSubscriberOnNextListener.get() == null || !downInfo.isUpdateProgress()) return;
+        /*如果暂停或者停止状态延迟，不需要继续发送回调，影响显示*/
+        if (mSubscriberOnNextListener.get() == null || !downInfo.isUpdateProgress()||downInfo.getState() == DownState.PAUSE || downInfo.getState() == DownState.STOP) return;
         handler.post(() -> {
-            /*如果暂停或者停止状态延迟，不需要继续发送回调，影响显示*/
-            if (downInfo.getState() == DownState.PAUSE || downInfo.getState() == DownState.STOP)
-                return;
             downInfo.setState(DownState.DOWN);
             mSubscriberOnNextListener.get().updateProgress(downInfo.getReadLength(), downInfo.getCountLength());
         });
