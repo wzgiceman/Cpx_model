@@ -18,12 +18,7 @@ import com.base.library.utils.utilcode.util.NetworkUtils
  *Company :cpx
  */
 
-class NetworkConnectChangedReceiver() : BroadcastReceiver() {
-    private lateinit var listener: (connet: Boolean) -> Unit
-
-    fun setListener(listener: (connet: Boolean) -> Unit) {
-        this.listener = listener
-    }
+class NetworkConnectChangedReceiver(private val listener: (connet: Boolean) -> Unit) : BroadcastReceiver() {
 
     override fun onReceive(context: Context?, intent: Intent?) {
         listener(NetworkUtils.isConnected())

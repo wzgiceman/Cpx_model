@@ -100,8 +100,7 @@ class DownActivity : BaseActivity() {
             filter.addAction("android.net.conn.CONNECTIVITY_CHANGE")
             filter.addAction("android.net.wifi.WIFI_STATE_CHANGED")
             filter.addAction("android.net.wifi.STATE_CHANGE")
-            receiver = NetworkConnectChangedReceiver()
-            receiver!!.setListener {
+            receiver = NetworkConnectChangedReceiver{
                 if (it) {
                     LogUtils.d("---->网络连接可用")
                     HttpDownManager.getInstance().startDown(info)
