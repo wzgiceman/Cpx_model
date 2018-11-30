@@ -94,20 +94,18 @@ class DownActivity : BaseActivity() {
     /**
      * 监听网络变动处理
      */
-    private fun initWifiChangeListener(){
-        if (!NetworkUtils.isConnected()) {
-            val filter = IntentFilter()
-            filter.addAction("android.net.conn.CONNECTIVITY_CHANGE")
-            filter.addAction("android.net.wifi.WIFI_STATE_CHANGED")
-            filter.addAction("android.net.wifi.STATE_CHANGE")
-            receiver = NetworkConnectChangedReceiver{
-                if (it) {
-                    LogUtils.d("---->网络连接可用")
-                    HttpDownManager.getInstance().startDown(info)
-                }
-            }
-            registerReceiver(receiver, filter)
+    private fun initWifiChangeListener() {
+        if (NetworkUtils.isConnected()) return
+        val filter = IntentFilter()
+        filter.addAction("android.net.conn.CONNECTIVITY_CHANGE")
+        filter.addAction("android.net.wifi.WIFI_STATE_CHANGED")
+        filter.addAction("android.net.wifi.STATE_CHANGE")
+        receiver = NetworkConnectChangedReceiver {
+            if (!it) return@NetworkConnectChangedReceiver
+            LogUtils.d("---->网络连接可用")
+            HttpDownManager.getInstance().startDown(info)
         }
+        registerReceiver(receiver, filter)
     }
 
     override fun onDestroy() {
