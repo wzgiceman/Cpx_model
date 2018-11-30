@@ -10,6 +10,7 @@ import com.base.library.rxRetrofit.exception.RetryWhenNetworkException;
 import com.base.library.rxRetrofit.http.converter.RetrofitStringConverterFactory;
 import com.base.library.rxRetrofit.subscribers.ProgressDownSubscriber;
 import com.base.library.rxRetrofit.utils.DownDbUtil;
+import com.base.library.utils.utilcode.util.LogUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -76,7 +77,9 @@ public class HttpDownManager {
      */
     public void startDown(final DownInfo info) {
         /*正在下载不处理*/
-        if (info == null || subMap.get(info.getUrl()) != null) {
+        if (info == null) return;
+        if (subMap.containsKey(info.getUrl())) {
+            LogUtils.d("subMap.get(info.getUrl()) != null");
             subMap.get(info.getUrl()).setDownInfo(info);
             return;
         }
@@ -84,7 +87,7 @@ public class HttpDownManager {
         ProgressDownSubscriber subscriber = new ProgressDownSubscriber(info, handler);
         /*记录回调sub*/
         subMap.put(info.getUrl(), subscriber);
-        /*获取service，多次请求公用一个sercie*/
+        /*获取service，多次请求公用一个service*/
         HttpDownService httpService;
         if (downInfos.contains(info)) {
             httpService = info.getService();
@@ -232,7 +235,7 @@ public class HttpDownManager {
                     mappedBuffer.put(buffer, 0, len);
                 }
             } catch (IOException e) {
-                throw new HttpTimeException(HttpTimeException.CACHE_DOWN_ERROR, e.getMessage());
+//                throw new HttpTimeException(HttpTimeException.CACHE_DOWN_ERROR, e.getMessage());
             } finally {
                 if (inputStream != null) {
                     inputStream.close();

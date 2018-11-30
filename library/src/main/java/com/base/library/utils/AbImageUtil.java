@@ -1049,24 +1049,38 @@ public class AbImageUtil {
 
     /**
      * 在垂直方向合并图片
-     * @param topBitmap
-     * @param bottomBitmap
+     * @param topBitmap 上方的图片
+     * @param bottomBitmap 下方的图片
      * @return
      */
     public static Bitmap mergeBitmapInVertical(Bitmap topBitmap,Bitmap bottomBitmap){
         int width = topBitmap.getWidth();
         int bottomWidth = bottomBitmap.getWidth();
-        if (bottomWidth > width) {
-            width = bottomWidth;
-        }
-        int height = topBitmap.getHeight() + bottomBitmap.getHeight();
+        //根据宽等比缩放下面的图片
+        float ratio = width * 1.0f / bottomWidth;
+        Bitmap scaleBitmap = scaleBitmap(bottomBitmap,ratio);
+        int height = topBitmap.getHeight() + scaleBitmap.getHeight();
+
         //创建一个空的Bitmap(内存区域),宽度等于第一张图片的宽度，高度等于两张图片高度总和
         Bitmap bitmap = Bitmap.createBitmap(width,height,Config.RGB_565);
         //将bitmap放置到绘制区域,并将要拼接的图片绘制到指定内存区域
         Canvas canvas = new Canvas(bitmap);
         canvas.drawBitmap(topBitmap,0,0,null);
-        canvas.drawBitmap(bottomBitmap,0,topBitmap.getHeight(),null);
+        canvas.drawBitmap(scaleBitmap,0,topBitmap.getHeight(),null);
         return bitmap;
+    }
+
+    /**
+     * 等比例缩放图片
+     * @param bitmap 图片
+     * @param ratio 缩放比例
+     * @return
+     */
+    public static Bitmap scaleBitmap(Bitmap bitmap,float ratio){
+        int width = (int) (bitmap.getWidth() * ratio);
+        int height = (int) (bitmap.getHeight() * ratio);
+        return Bitmap.createScaledBitmap(bitmap,width,height,false);
+
     }
 
 

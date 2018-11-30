@@ -23,7 +23,7 @@ import java.io.File
  */
 class DownActivity : BaseActivity() {
     companion object {
-        const val ID = 14L
+        const val ID = 16L
     }
     override fun layoutId() = R.layout.activity_http_down
 
@@ -80,6 +80,7 @@ class DownActivity : BaseActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
+        HttpDownManager.getInstance().pause(info)
         HttpDownManager.getInstance().remove(info)
     }
 

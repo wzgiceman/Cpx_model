@@ -37,7 +37,6 @@ public class DownInfo {
     /*url*/
     private String url;
     /*是否需要实时更新下载进度,避免线程的多次切换*/
-    @Transient
     private boolean updateProgress;
 
 
@@ -59,6 +58,19 @@ public class DownInfo {
         setReadLength(0l);
         setCountLength(0l);
         setDownState(DownState.START.getState());
+    }
+
+    @Generated(hash = 150619839)
+    public DownInfo(Long id, String savePath, Long countLength, Long readLength,
+            int connectionTime, int downState, String url, boolean updateProgress) {
+        this.id = id;
+        this.savePath = savePath;
+        this.countLength = countLength;
+        this.readLength = readLength;
+        this.connectionTime = connectionTime;
+        this.downState = downState;
+        this.url = url;
+        this.updateProgress = updateProgress;
     }
 
     public DownState getState() {
@@ -164,5 +176,9 @@ public class DownInfo {
 
     public void setConnectionTime(int connectionTime) {
         this.connectionTime = connectionTime;
+    }
+
+    public boolean getUpdateProgress() {
+        return this.updateProgress;
     }
 }

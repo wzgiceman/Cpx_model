@@ -30,6 +30,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.view.inputmethod.InputMethodManager;
 
@@ -55,6 +56,9 @@ import java.util.regex.Pattern;
  * @date：2011-11-10 下午11:52:13
  */
 public class AbAppUtil {
+
+    private static final String TYPE_TEXT = "text/plain";
+    private static final String TYPE_IMAGE_JPG = "image/jpg";
 
     /**
      * google市场升级
@@ -83,12 +87,13 @@ public class AbAppUtil {
      */
     public static void shareMsg(Context context, String msgTitle, String msgText, String imgPath) {
         Intent intent = new Intent(Intent.ACTION_SEND);
-        if (imgPath == null || imgPath.equals("")) {
-            intent.setType("text/plain"); // 纯文本
+        if (TextUtils.isEmpty(imgPath)) {
+            //纯文本
+            intent.setType(TYPE_TEXT);
         } else {
             File f = new File(imgPath);
             if (f != null && f.exists() && f.isFile()) {
-                intent.setType("image/jpg");
+                intent.setType(TYPE_IMAGE_JPG);
                 Uri u;
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                     u = FileProvider.getUriForFile(context, context.getPackageName() + ".fileprovider", f);

@@ -17,6 +17,10 @@ fun Dialog.getString(@StringRes resId: Int): String {
     return context.getString(resId)
 }
 
+fun Dialog.getString(@StringRes resId: Int,vararg formatArgs:Any):String{
+    return context.getString(resId,formatArgs)
+}
+
 
 fun Dialog.jumpActivity(cls: Class<*>, bundle: Bundle = Bundle()){
     context.jumpActivity(cls, bundle)
