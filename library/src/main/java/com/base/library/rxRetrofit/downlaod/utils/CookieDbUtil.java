@@ -1,4 +1,4 @@
-package com.base.library.rxRetrofit.utils;
+package com.base.library.rxRetrofit.downlaod.utils;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

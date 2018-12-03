@@ -13,7 +13,7 @@ import com.base.library.rxRetrofit.exception.ApiException;
 import com.base.library.rxRetrofit.exception.HttpTimeException;
 import com.base.library.rxRetrofit.http.cookie.CookieResult;
 import com.base.library.rxRetrofit.listener.HttpOnNextListener;
-import com.base.library.rxRetrofit.utils.CookieDbUtil;
+import com.base.library.rxRetrofit.downlaod.utils.CookieDbUtil;
 import com.base.library.rxlifecycle.components.support.RxAppCompatActivity;
 import com.base.library.utils.AbLogUtil;
 import com.base.library.utils.AbStrUtil;
