@@ -30,6 +30,12 @@ public class DownInfo {
     /*回调监听*/
     @Transient
     private HttpDownOnNextListener listener;
+    /* retry次数*/
+    private transient int retryCount = 3;
+    /*retry延迟*/
+    private transient long retryDelay = 200;
+    /*retry叠加延迟*/
+    private transient long retryIncreaseDelay = 1000;
     /*超时设置 单位：秒*/
     private int connectionTime = 15;
     /*state状态数据库保存*/
@@ -62,7 +68,7 @@ public class DownInfo {
 
     @Generated(hash = 150619839)
     public DownInfo(Long id, String savePath, Long countLength, Long readLength,
-            int connectionTime, int downState, String url, boolean updateProgress) {
+                    int connectionTime, int downState, String url, boolean updateProgress) {
         this.id = id;
         this.savePath = savePath;
         this.countLength = countLength;
@@ -180,5 +186,29 @@ public class DownInfo {
 
     public boolean getUpdateProgress() {
         return this.updateProgress;
+    }
+
+    public int getRetryCount() {
+        return retryCount;
+    }
+
+    public void setRetryCount(int retryCount) {
+        this.retryCount = retryCount;
+    }
+
+    public long getRetryDelay() {
+        return retryDelay;
+    }
+
+    public void setRetryDelay(long retryDelay) {
+        this.retryDelay = retryDelay;
+    }
+
+    public long getRetryIncreaseDelay() {
+        return retryIncreaseDelay;
+    }
+
+    public void setRetryIncreaseDelay(long retryIncreaseDelay) {
+        this.retryIncreaseDelay = retryIncreaseDelay;
     }
 }

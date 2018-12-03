@@ -9,6 +9,8 @@ import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.util.Log;
 
+import com.base.library.BuildConfig;
+
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.io.Writer;
@@ -56,6 +58,7 @@ public class CrashHandler implements UncaughtExceptionHandler {
      * @param context
      */
     public void init(Context context, Class startCls) {
+        if(BuildConfig.DEBUG)return;
         mContext = context;
         this.startCls = startCls;
         // 获取系统默认的UncaughtException处理器

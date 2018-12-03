@@ -1,12 +1,16 @@
 package com.prog.zhigangwei.cpx_model.http.down
 
+import android.content.IntentFilter
 import com.base.library.rxRetrofit.downlaod.DownInfo
 import com.base.library.rxRetrofit.downlaod.HttpDownManager
 import com.base.library.rxRetrofit.listener.HttpDownOnNextListener
 import com.base.library.rxRetrofit.utils.DownDbUtil
+import com.base.library.utils.utilcode.util.LogUtils
+import com.base.library.utils.utilcode.util.NetworkUtils
 import com.base.muslim.base.activity.BaseActivity
 import com.base.muslim.base.extension.showToast
 import com.prog.zhigangwei.cpx_model.R
+import com.prog.zhigangwei.cpx_model.http.down.down.NetworkConnectChangedReceiver
 import kotlinx.android.synthetic.main.activity_http_down.*
 import java.io.File
 
@@ -22,12 +26,15 @@ import java.io.File
  * * 更复杂用例参考地址:https://github.com/wzgiceman/RxjavaRetrofitDemo-string-master/blob/master/app/src/main/java/com/example/retrofit/activity/DownLaodActivity.java
  */
 class DownActivity : BaseActivity() {
+
     companion object {
         const val ID = 16L
     }
+
     override fun layoutId() = R.layout.activity_http_down
 
     private lateinit var info: DownInfo
+    private var receiver: NetworkConnectChangedReceiver? = null
 
     override fun initData() {
         info = DownDbUtil.getInstance().queryDownBy(ID) ?: DownInfo().apply {
@@ -54,6 +61,12 @@ class DownActivity : BaseActivity() {
                 showToast("onComplete.........")
             }
 
+
+            override fun onError(e: Throwable?) {
+                showToast("onError.........${e!!.message}")
+                initWifiChangeListener()
+            }
+
             override fun updateProgress(readLength: Long, countLength: Long) {
                 tv_progress.text = String.format("%d / %d", readLength, countLength)
             }
@@ -70,18 +83,38 @@ class DownActivity : BaseActivity() {
             HttpDownManager.getInstance().pause(info)
         }
 
-        btn_clear.setOnClickListener{
-            HttpDownManager.getInstance().remove(info)
+        btn_clear.setOnClickListener {
             DownDbUtil.getInstance().deleteDownInfo(info)
-            initData()
+            File(info.savePath).delete()
+            finish()
         }
     }
 
+
+    /**
+     * 监听网络变动处理
+     */
+    private fun initWifiChangeListener() {
+        if (NetworkUtils.isConnected()) return
+        val filter = IntentFilter()
+        filter.addAction("android.net.conn.CONNECTIVITY_CHANGE")
+        filter.addAction("android.net.wifi.WIFI_STATE_CHANGED")
+        filter.addAction("android.net.wifi.STATE_CHANGE")
+        receiver = NetworkConnectChangedReceiver {
+            if (!it) return@NetworkConnectChangedReceiver
+            LogUtils.d("---->网络连接可用")
+            HttpDownManager.getInstance().startDown(info)
+        }
+        registerReceiver(receiver, filter)
+    }
 
     override fun onDestroy() {
         super.onDestroy()
         HttpDownManager.getInstance().pause(info)
         HttpDownManager.getInstance().remove(info)
+        if (null != receiver) {
+            unregisterReceiver(receiver)
+        }
     }
 
 }

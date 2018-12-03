@@ -34,11 +34,23 @@
         android:layout_height="wrap_content"
         android:text="网络加载图片"/>
 
+
+    <Button
+        android:id="@+id/btn_pre_local"
+       android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="提前加载-可以关闭网络测试"/>
+
     <Button
         android:id="@+id/btn_local"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="拍照/相册"/>
 
+
+    <ImageView
+        android:id="@+id/iv_gif"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 
 </LinearLayout>

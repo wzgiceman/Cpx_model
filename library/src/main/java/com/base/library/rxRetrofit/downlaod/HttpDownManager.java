@@ -24,7 +24,6 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.OkHttpClient;
 import okhttp3.ResponseBody;
@@ -79,7 +78,7 @@ public class HttpDownManager {
     public void startDown(final DownInfo info) {
         /*正在下载不处理*/
         if (info == null) return;
-        if (subMap.get(info.getUrl()) != null) {
+        if (subMap.containsKey(info.getUrl())) {
             LogUtils.d("subMap.get(info.getUrl()) != null");
             subMap.get(info.getUrl()).setDownInfo(info);
             return;
@@ -112,14 +111,11 @@ public class HttpDownManager {
         /*得到rx对象-上一次下載的位置開始下載*/
         httpService.download("bytes=" + info.getReadLength() + "-", info.getUrl())
                 /*失败后的retry配置*/
-                .retryWhen(new RetryWhenNetworkException())
+                .retryWhen(new RetryWhenNetworkException(info.getRetryCount(),info.getRetryDelay(),info.getRetryIncreaseDelay()))
                 /*读取下载写入文件*/
-                .map(new Function<ResponseBody, DownInfo>() {
-                    @Override
-                    public DownInfo apply(ResponseBody responseBody) {
-                        writeCache(responseBody, new File(info.getSavePath()), info);
-                        return info;
-                    }
+                .map(responseBody -> {
+                    writeCache(responseBody, new File(info.getSavePath()), info);
+                    return info;
                 })
                 /*指定线程*/
                 .subscribeOn(Schedulers.io())

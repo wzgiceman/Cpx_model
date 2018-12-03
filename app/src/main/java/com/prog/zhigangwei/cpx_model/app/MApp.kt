@@ -3,8 +3,10 @@ package com.prog.zhigangwei.cpx_model.app
 import android.content.ComponentCallbacks2
 import android.support.multidex.MultiDexApplication
 import com.base.ModelApp
+import com.base.library.crash.CrashHandler
 import com.bumptech.glide.Glide
 import com.prog.zhigangwei.cpx_model.BuildConfig
+import com.prog.zhigangwei.cpx_model.MainActivity
 import com.squareup.leakcanary.LeakCanary
 
 /**
@@ -29,9 +31,22 @@ class MApp : MultiDexApplication() {
      * 初始化一些启动数据
      */
     private fun initApp() {
-//        CrashHandler.getInstance().init(this, MainActivity::class.java)
+        CrashHandler.getInstance().init(this, MainActivity::class.java)
         ModelApp.init(this,BuildConfig.DEBUG)
     }
+
+
+    /**
+     * 检测内存泄露
+     */
+    private fun initMAT() {
+        if (!BuildConfig.DEBUG) return
+        if (LeakCanary.isInAnalyzerProcess(this)) {
+            return
+        }
+        LeakCanary.install(this)
+    }
+
 
     /**
      * 表示应用程序正常运行，并且不会被杀掉。但是目前手机的内存已经非常低了，
@@ -54,14 +69,5 @@ class MApp : MultiDexApplication() {
         Glide.get(this).clearMemory()
     }
 
-    /**
-     * 检测内存泄露
-     */
-    private fun initMAT() {
-        if (!BuildConfig.DEBUG) return
-        if (LeakCanary.isInAnalyzerProcess(this)) {
-            return
-        }
-        LeakCanary.install(this)
-    }
+
 }

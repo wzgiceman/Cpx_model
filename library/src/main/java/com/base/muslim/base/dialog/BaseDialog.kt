@@ -14,7 +14,7 @@ import com.base.muslim.base.IBase
  *
  * @author WZG
  */
-abstract class BaseDialog @JvmOverloads constructor(context: Context, style: Int = R.style.dialog_animstyle, animal: Boolean = true) : Dialog(context, style), OnClickListener, IBase {
+abstract class BaseDialog @JvmOverloads constructor(context: Context, style: Int = R.style.custom_dialog2, animal: Boolean = true) : Dialog(context, style), OnClickListener, IBase {
 
     init {
         if (animal) {
