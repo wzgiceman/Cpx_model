@@ -111,7 +111,7 @@ public class HttpDownManager {
         /*得到rx对象-上一次下載的位置開始下載*/
         httpService.download("bytes=" + info.getReadLength() + "-", info.getUrl())
                 /*失败后的retry配置*/
-                .retryWhen(new RetryWhenNetworkException(info.getRetryCount(),info.getRetryDelay(),info.getRetryIncreaseDelay()))
+                .retryWhen(new RetryWhenNetworkException(info.getRetryCount(), info.getRetryDelay(), info.getRetryIncreaseDelay()))
                 /*读取下载写入文件*/
                 .map(responseBody -> {
                     writeCache(responseBody, new File(info.getSavePath()), info);
@@ -159,7 +159,7 @@ public class HttpDownManager {
             subscriber.unsubscribe();
             subMap.remove(info.getUrl());
         }
-        /*这里需要讲info信息写入到数据中，可自由扩展，用自己项目的数据库*/
+        /*这里需要将info信息写入到数据中，可自由扩展，用自己项目的数据库*/
         db.update(info);
     }
 
@@ -235,6 +235,7 @@ public class HttpDownManager {
                     mappedBuffer.put(buffer, 0, len);
                 }
             } catch (IOException e) {
+                LogUtils.e("HttpDownManager writeCache IOException:" + e);
 //                throw new HttpTimeException(HttpTimeException.CACHE_DOWN_ERROR, e.getMessage());
             } finally {
                 if (inputStream != null) {

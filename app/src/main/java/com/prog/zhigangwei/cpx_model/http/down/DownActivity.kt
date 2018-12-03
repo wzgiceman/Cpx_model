@@ -31,10 +31,10 @@ class DownActivity : BaseActivity() {
         const val ID = 16L
     }
 
-    override fun layoutId() = R.layout.activity_http_down
-
     private lateinit var info: DownInfo
     private var receiver: NetworkConnectChangedReceiver? = null
+
+    override fun layoutId() = R.layout.activity_http_down
 
     override fun initData() {
         info = DownDbUtil.getInstance().queryDownBy(ID) ?: DownInfo().apply {
@@ -50,20 +50,24 @@ class DownActivity : BaseActivity() {
         info.listener = object : HttpDownOnNextListener<DownInfo>() {
 
             override fun onNext(t: DownInfo?) {
-                showToast("下载成功路径:${t!!.savePath}")
+                LogUtils.d("DownActivity onNext")
+                showToast("下载成功路径:${t?.savePath}")
             }
 
             override fun onStart() {
+                LogUtils.d("DownActivity onStart")
                 showToast("onStart..........")
             }
 
             override fun onComplete() {
+                LogUtils.d("DownActivity onComplete")
                 showToast("onComplete.........")
             }
 
 
             override fun onError(e: Throwable?) {
-                showToast("onError.........${e!!.message}")
+                LogUtils.d("DownActivity onError")
+                showToast("onError.........${e?.message}")
                 initWifiChangeListener()
             }
 
@@ -101,6 +105,7 @@ class DownActivity : BaseActivity() {
         filter.addAction("android.net.wifi.WIFI_STATE_CHANGED")
         filter.addAction("android.net.wifi.STATE_CHANGE")
         receiver = NetworkConnectChangedReceiver {
+            LogUtils.d("NetworkConnectChangedReceiver:$it")
             if (!it) return@NetworkConnectChangedReceiver
             LogUtils.d("---->网络连接可用")
             HttpDownManager.getInstance().startDown(info)

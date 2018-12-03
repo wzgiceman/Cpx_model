@@ -9,6 +9,7 @@ import com.base.library.rxRetrofit.downlaod.DownState;
 import com.base.library.rxRetrofit.downlaod.HttpDownManager;
 import com.base.library.rxRetrofit.listener.HttpDownOnNextListener;
 import com.base.library.rxRetrofit.utils.DownDbUtil;
+import com.base.library.utils.utilcode.util.LogUtils;
 
 import java.io.File;
 import java.lang.ref.SoftReference;
@@ -79,6 +80,7 @@ public class ProgressDownSubscriber<T> implements Observer<T>, DownloadProgressL
      */
     @Override
     public void onError(Throwable e) {
+        LogUtils.e("onError:" + e);
         if (mSubscriberOnNextListener.get() != null) {
             mSubscriberOnNextListener.get().onError(e);
         }
@@ -100,6 +102,12 @@ public class ProgressDownSubscriber<T> implements Observer<T>, DownloadProgressL
      */
     @Override
     public void onNext(T t) {
+        if(downInfo.getReadLength()<downInfo.getCountLength()&&mSubscriberOnNextListener.get() != null){
+            mSubscriberOnNextListener.get().onError(new Throwable());
+            HttpDownManager.getInstance().remove(downInfo);
+            unsubscribe();
+            return;
+        }
         if (mSubscriberOnNextListener.get() != null) {
             mSubscriberOnNextListener.get().onNext(t);
         }
@@ -116,7 +124,8 @@ public class ProgressDownSubscriber<T> implements Observer<T>, DownloadProgressL
         downInfo.setReadLength(read);
 
         /*如果暂停或者停止状态延迟，不需要继续发送回调，影响显示*/
-        if (mSubscriberOnNextListener.get() == null || !downInfo.isUpdateProgress()||downInfo.getState() == DownState.PAUSE || downInfo.getState() == DownState.STOP) return;
+        if (mSubscriberOnNextListener.get() == null || !downInfo.isUpdateProgress() || downInfo.getState() == DownState.PAUSE || downInfo.getState() == DownState.STOP)
+            return;
         handler.post(() -> {
             downInfo.setState(DownState.DOWN);
             mSubscriberOnNextListener.get().updateProgress(downInfo.getReadLength(), downInfo.getCountLength());
@@ -126,8 +135,8 @@ public class ProgressDownSubscriber<T> implements Observer<T>, DownloadProgressL
     /**
      * 取消订阅
      */
-    public void unsubscribe(){
-        if(disposable !=null && !disposable.isDisposed()){
+    public void unsubscribe() {
+        if (disposable != null && !disposable.isDisposed()) {
             disposable.dispose();
         }
     }
