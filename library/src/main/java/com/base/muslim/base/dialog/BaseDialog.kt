@@ -19,7 +19,7 @@ abstract class BaseDialog @JvmOverloads constructor(context: Context, style: Int
     init {
         if (animal) {
             val window = this.window
-            window?.setWindowAnimations(R.style.dialog_animstyle)
+            window?.setWindowAnimations(style)
         }
     }
 
