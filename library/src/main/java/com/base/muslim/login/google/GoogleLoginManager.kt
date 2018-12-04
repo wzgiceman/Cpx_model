@@ -1,4 +1,4 @@
-package com.base.muslim.login
+package com.base.muslim.login.google
 
 import android.content.Intent
 import android.support.v4.app.FragmentActivity
@@ -6,6 +6,7 @@ import android.text.TextUtils
 import com.base.library.R
 import com.base.muslim.login.common.constants.LoginConstants
 import com.base.muslim.login.common.constants.LoginConstants.Companion.GOOGLE
+import com.base.muslim.login.common.listener.OnLoginListener
 import com.google.android.gms.auth.api.Auth
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.ConnectionResult

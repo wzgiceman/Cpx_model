@@ -1,6 +1,6 @@
 package com.prog.zhigangwei.cpx_model.login
 
-import com.base.muslim.login.BaseLoginActivity
+import com.base.muslim.login.base.BaseLoginActivity
 import com.base.muslim.login.common.constants.LoginConstants.Companion.FACEBOOK
 import com.base.muslim.login.common.constants.LoginConstants.Companion.GOOGLE
 import com.base.muslim.login.common.constants.LoginConstants.Companion.TWITTER
