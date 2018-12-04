@@ -6,7 +6,7 @@ import com.base.library.rxRetrofit.api.BaseApi;
 import com.base.library.rxRetrofit.api.result.BaseResult;
 import com.base.library.rxRetrofit.exception.HttpTimeException;
 import com.base.library.rxRetrofit.http.cookie.CookieResult;
-import com.base.library.rxRetrofit.utils.CookieDbUtil;
+import com.base.library.rxRetrofit.downlaod.utils.CookieDbUtil;
 import com.base.library.utils.AbStrUtil;
 
 import io.reactivex.functions.Function;

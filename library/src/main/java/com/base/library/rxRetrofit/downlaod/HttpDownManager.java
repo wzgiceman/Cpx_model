@@ -4,11 +4,11 @@ package com.base.library.rxRetrofit.downlaod;
 import android.os.Handler;
 import android.os.Looper;
 
-import com.base.library.rxRetrofit.downlaod.DownLoadListener.DownloadInterceptor;
+import com.base.library.rxRetrofit.downlaod.loadListener.DownloadInterceptor;
 import com.base.library.rxRetrofit.exception.HttpTimeException;
 import com.base.library.rxRetrofit.exception.RetryWhenNetworkException;
 import com.base.library.rxRetrofit.http.converter.RetrofitStringConverterFactory;
-import com.base.library.rxRetrofit.subscribers.ProgressDownSubscriber;
+import com.base.library.rxRetrofit.downlaod.subscriber.ProgressDownSubscriber;
 import com.base.library.rxRetrofit.utils.DownDbUtil;
 import com.base.library.utils.utilcode.util.LogUtils;
 

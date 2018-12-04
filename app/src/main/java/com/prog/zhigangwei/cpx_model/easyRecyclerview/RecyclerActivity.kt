@@ -1,8 +1,10 @@
 package com.prog.zhigangwei.cpx_model.easyRecyclerview
 
 import android.support.v7.widget.LinearLayoutManager
+import com.base.library.easyrecyclerview.decoration.SpaceDecoration
 import com.base.library.observer.AbsObserver
-import com.base.muslim.base.activity.BaseActivity
+import com.base.library.utils.utilcode.util.ConvertUtils
+import com.base.muslim.base.activity.BaseToolsActivity
 import com.prog.zhigangwei.cpx_model.R
 import com.prog.zhigangwei.cpx_model.easyRecyclerview.common.bean.RecyclerItemBean
 import com.prog.zhigangwei.cpx_model.easyRecyclerview.easyRecyclerview.RecAdapter
@@ -24,7 +26,7 @@ import java.util.concurrent.TimeUnit
  *
  * 更多复杂用法处理参考:https://github.com/Jude95/EasyRecyclerView
  */
-class RecyclerActivity : BaseActivity() {
+class RecyclerActivity : BaseToolsActivity() {
 
     private val adapter by lazy { RecAdapter(this) }
 
@@ -37,14 +39,21 @@ class RecyclerActivity : BaseActivity() {
     }
 
     override fun initView() {
-        initComplexWidget()
+        initRecyclerView()
         initHead()
         initFooter()
     }
 
 
-    private fun initComplexWidget() {
+    override fun initRecyclerView() {
         erc.setLayoutManager(LinearLayoutManager(this))
+
+        val itemDecoration = SpaceDecoration(ConvertUtils.dp2px(8.0f))//参数是距离宽度
+        itemDecoration.setPaddingEdgeSide(true)//是否为左右2边添加padding.默认true.
+        itemDecoration.setPaddingStart(true)//是否在给第一行的item添加上padding(不包含header).默认true.
+        itemDecoration.setPaddingHeaderFooter(false)//是否对Header于Footer有效,默认false.
+        erc.addItemDecoration(itemDecoration)
+
         erc.adapter = adapter
         btn_head.setOnClickListener { initHead() }
         btn_footer.setOnClickListener { initFooter() }
@@ -57,7 +66,6 @@ class RecyclerActivity : BaseActivity() {
                             erc.setRefreshing(false)
                         }
                     })
-
         }
         /*加载更多*/
 //        void setMore(final int res,OnMoreListener listener);

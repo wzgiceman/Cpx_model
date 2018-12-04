@@ -1,15 +1,14 @@
-package com.base.library.rxRetrofit.subscribers;
+package com.base.library.rxRetrofit.downlaod.subscriber;
 
 
 import android.os.Handler;
 
 import com.base.library.rxRetrofit.downlaod.DownInfo;
-import com.base.library.rxRetrofit.downlaod.DownLoadListener.DownloadProgressListener;
+import com.base.library.rxRetrofit.downlaod.loadListener.DownloadProgressListener;
 import com.base.library.rxRetrofit.downlaod.DownState;
 import com.base.library.rxRetrofit.downlaod.HttpDownManager;
 import com.base.library.rxRetrofit.listener.HttpDownOnNextListener;
 import com.base.library.rxRetrofit.utils.DownDbUtil;
-import com.base.library.utils.utilcode.util.LogUtils;
 
 import java.io.File;
 import java.lang.ref.SoftReference;
@@ -29,7 +28,9 @@ public class ProgressDownSubscriber<T> implements Observer<T>, DownloadProgressL
     private SoftReference<HttpDownOnNextListener> mSubscriberOnNextListener;
     /*下载数据*/
     private DownInfo downInfo;
+    /*切换线程*/
     private Handler handler;
+    /*sub对象*/
     private Disposable disposable;
 
 
@@ -53,10 +54,9 @@ public class ProgressDownSubscriber<T> implements Observer<T>, DownloadProgressL
     @Override
     public void onSubscribe(Disposable d) {
         disposable = d;
-        if (mSubscriberOnNextListener.get() != null) {
-            mSubscriberOnNextListener.get().onStart();
-        }
         downInfo.setState(DownState.START);
+        if (null == mSubscriberOnNextListener || null == mSubscriberOnNextListener.get()) return;
+        mSubscriberOnNextListener.get().onStart();
     }
 
     /**
@@ -64,12 +64,11 @@ public class ProgressDownSubscriber<T> implements Observer<T>, DownloadProgressL
      */
     @Override
     public void onComplete() {
-        if (mSubscriberOnNextListener.get() != null) {
-            mSubscriberOnNextListener.get().onComplete();
-        }
         HttpDownManager.getInstance().remove(downInfo);
         downInfo.setState(DownState.FINISH);
         DownDbUtil.getInstance().update(downInfo);
+        if (null == mSubscriberOnNextListener || null == mSubscriberOnNextListener.get()) return;
+        mSubscriberOnNextListener.get().onComplete();
     }
 
     /**
@@ -80,11 +79,6 @@ public class ProgressDownSubscriber<T> implements Observer<T>, DownloadProgressL
      */
     @Override
     public void onError(Throwable e) {
-        LogUtils.e("onError:" + e);
-        if (mSubscriberOnNextListener.get() != null) {
-            mSubscriberOnNextListener.get().onError(e);
-        }
-
         HttpDownManager.getInstance().remove(downInfo);
         downInfo.setState(DownState.ERROR);
         DownDbUtil.getInstance().update(downInfo);
@@ -93,6 +87,9 @@ public class ProgressDownSubscriber<T> implements Observer<T>, DownloadProgressL
         if (file.exists()) {
             file.delete();
         }
+
+        if (null == mSubscriberOnNextListener || null == mSubscriberOnNextListener.get()) return;
+        mSubscriberOnNextListener.get().onError(e);
     }
 
     /**
@@ -102,15 +99,14 @@ public class ProgressDownSubscriber<T> implements Observer<T>, DownloadProgressL
      */
     @Override
     public void onNext(T t) {
-        if (downInfo.getReadLength() < downInfo.getCountLength() && mSubscriberOnNextListener.get() != null) {
+        if (null == mSubscriberOnNextListener || null == mSubscriberOnNextListener.get()) return;
+        if (downInfo.getReadLength() < downInfo.getCountLength()) {
             mSubscriberOnNextListener.get().onError(new Throwable());
             HttpDownManager.getInstance().remove(downInfo);
             unsubscribe();
             return;
         }
-        if (mSubscriberOnNextListener.get() != null) {
-            mSubscriberOnNextListener.get().onNext(t);
-        }
+        mSubscriberOnNextListener.get().onNext(t);
     }
 
 
@@ -124,8 +120,8 @@ public class ProgressDownSubscriber<T> implements Observer<T>, DownloadProgressL
         downInfo.setReadLength(read);
 
         /*如果暂停或者停止状态延迟，不需要继续发送回调，影响显示*/
-        if (mSubscriberOnNextListener.get() == null || !downInfo.isUpdateProgress() || downInfo.getState() == DownState.PAUSE || downInfo.getState() == DownState.STOP)
-            return;
+        if (null == mSubscriberOnNextListener || null == mSubscriberOnNextListener.get() || !downInfo.isUpdateProgress() ||
+                downInfo.getState() == DownState.PAUSE || downInfo.getState() == DownState.STOP) return;
         handler.post(() -> {
             downInfo.setState(DownState.DOWN);
             mSubscriberOnNextListener.get().updateProgress(downInfo.getReadLength(), downInfo.getCountLength());
@@ -136,7 +132,7 @@ public class ProgressDownSubscriber<T> implements Observer<T>, DownloadProgressL
      * 取消订阅
      */
     public void unsubscribe() {
-        if (disposable != null && !disposable.isDisposed()) {
+        if (null != disposable && !disposable.isDisposed()) {
             disposable.dispose();
         }
     }
