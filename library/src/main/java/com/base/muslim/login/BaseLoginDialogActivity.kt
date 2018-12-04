@@ -6,9 +6,6 @@ import android.os.Bundle
 import android.view.Gravity
 import android.view.WindowManager
 import com.base.library.R
-import com.base.library.rxRetrofit.exception.ApiException
-import com.base.library.rxRetrofit.http.HttpManager
-import com.base.library.rxRetrofit.listener.HttpOnNextListener
 import com.base.library.utils.utilcode.util.LogUtils
 import com.base.library.utils.utilcode.util.ScreenUtils
 import com.base.muslim.base.activity.BaseToolsActivity
@@ -57,9 +54,8 @@ import com.twitter.sdk.android.core.identity.TwitterLoginButton
  */
 @SuppressLint("Registered")
 abstract class BaseLoginDialogActivity : BaseToolsActivity(), LoginContract.View,
-        GoogleApiClient.OnConnectionFailedListener, FacebookCallback<LoginResult>, HttpOnNextListener {
+        GoogleApiClient.OnConnectionFailedListener, FacebookCallback<LoginResult> {
 
-    private val httpManager by lazy { HttpManager(this, this) }
     private var loginPresenter: LoginPresenter? = null
 
     /**
@@ -95,7 +91,7 @@ abstract class BaseLoginDialogActivity : BaseToolsActivity(), LoginContract.View
         setScreenDisplay(1.0, 1.0)
         window.setGravity(Gravity.CENTER)
         setFinishOnTouchOutside(false)
-        loginPresenter = LoginPresenter(httpManager)
+        loginPresenter = LoginPresenter()
         loginPresenter?.attachView(this)
     }
 
@@ -155,7 +151,6 @@ abstract class BaseLoginDialogActivity : BaseToolsActivity(), LoginContract.View
     override fun onSuccess(loginResult: LoginResult) {
         //使用Facebook的token请求我们服务器上的token
         val token = loginResult.accessToken.token
-        loginPresenter?.loginAndFinish("facebook", token, null, null)
     }
 
     override fun onCancel() {
@@ -177,31 +172,12 @@ abstract class BaseLoginDialogActivity : BaseToolsActivity(), LoginContract.View
         return twitterLoginButton
     }
 
-    override fun setBtnSendCodeText(stringResId: Int) {
-        if (null != resources) {
-            setBtnSendCodeText(resources.getString(stringResId))
-        }
-    }
-
     override fun onConnectionFailed(connectionResult: ConnectionResult) {
         LogUtils.e("Google Login onConnectionFailed:$connectionResult")
     }
 
     override fun startGoogleLoginActivityForResult(signInIntent: Intent) {
         startActivityForResult(signInIntent, REQUEST_CODE_GOOGLE_SIGN_IN)
-    }
-
-    override fun setResultAndFinish(resultCode: Int) {
-        setResult(resultCode)
-        finish()
-    }
-
-    override fun onNext(resulte: String, method: String) {
-        loginPresenter?.onNext(resulte, method)
-    }
-
-    override fun onError(e: ApiException, method: String) {
-        LogUtils.d("error:${e.message}\nmethod:$method")
     }
 
     protected fun loginByFacebook() {
@@ -214,14 +190,6 @@ abstract class BaseLoginDialogActivity : BaseToolsActivity(), LoginContract.View
 
     protected fun loginByTwitter() {
         loginPresenter?.loginByTwitter()
-    }
-
-    protected fun loginByPhoneOrEmail() {
-        loginPresenter?.loginByPhoneOrEmail()
-    }
-
-    protected fun sendCode() {
-        loginPresenter?.sendCode()
     }
 
     /**
