@@ -28,10 +28,10 @@ class LoginActivity : BaseLoginActivity() {
     }
 
     override fun onLoginSuccess(type: String, token: String) {
-        tv_login_status.append("$type 登录成功\ntoken:$token\n")
+        tv_login_status.append("$type 登录成功\ntoken:$token\n\n")
     }
 
     override fun onLoginFail(type: String, cause: String) {
-        tv_login_status.append("$type 登录失败\ncause:$cause\n")
+        tv_login_status.append("$type 登录失败\ncause:$cause\n\n")
     }
 }

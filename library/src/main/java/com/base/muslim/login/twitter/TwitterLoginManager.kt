@@ -3,7 +3,6 @@ package com.base.muslim.login.twitter
 import android.content.Context
 import android.content.Intent
 import android.text.TextUtils
-import com.base.muslim.login.common.constants.LoginConstants
 import com.base.muslim.login.common.constants.LoginConstants.Companion.TWITTER
 import com.base.muslim.login.common.listener.OnLoginListener
 import com.twitter.sdk.android.core.Callback
@@ -37,7 +36,7 @@ class TwitterLoginManager(val context: Context, val onLoginListener: OnLoginList
     }
 
     override fun failure(exception: TwitterException?) {
-        onLoginListener.onLoginFail(LoginConstants.GOOGLE, "Twitter login fail:$exception")
+        onLoginListener.onLoginFail(TWITTER, "Twitter login fail:$exception")
     }
 
     fun handleActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
