@@ -13,10 +13,45 @@
         android:orientation="vertical">
 
         <Button
-            android:id="@+id/btn_share_by_facebook"
+            android:id="@+id/btn_share_link_by_facebook"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Share by facebook"
+            android:text="Share Link by facebook"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/btn_share_image_by_facebook"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Share Image by facebook"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/btn_choose_local_video"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Choose local video"
+            android:textAllCaps="false" />
+
+        <TextView
+            android:id="@+id/tv_local_video_uri"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="Local video uri: " />
+
+        <Button
+            android:id="@+id/btn_share_video_by_facebook"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Share Video by facebook"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/btn_share_media_by_facebook"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Share Media by facebook"
             android:textAllCaps="false" />
 
         <Button
