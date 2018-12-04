@@ -36,6 +36,7 @@ import com.twitter.sdk.android.core.identity.TwitterLoginButton
  * 通过[window.setGravity(Gravity.CENTER)]设置位置，默认居中
  *
  * Phone/Email
+ * 将账号和验证码传入
  *
  * Facebook登录，需要用浏览器打开 Facebook开发者平台：https://developers.facebook.com/apps/
  * 1.创建应用，将应用编号赋值给 gradle.properties 的 facebook_app_id 变量
@@ -47,6 +48,9 @@ import com.twitter.sdk.android.core.identity.TwitterLoginButton
  *
  * Google登录，需要用浏览器打开 Google云端平台：https://console.developers.google.com/apis/credentials?project=_
  * 1.创建网页凭据
+ *
+ * Twitter登录，需要提供：twitter_consumer_key和twitter_consumer_secret，填入 gradle.properties
+ *
  * @author  Alpinist Wang
  * Company: Mobile CPX
  * Date:    2018/9/18

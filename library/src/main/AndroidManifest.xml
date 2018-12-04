@@ -57,6 +57,12 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
+        <!--facebook分享，需要手动替换appId：android:authorities="com.facebook.app.FacebookContentProvider{APP_ID}"-->
+        <provider
+            android:name="com.facebook.FacebookContentProvider"
+            android:authorities="com.facebook.app.FacebookContentProvider351993102035778"
+            android:exported="true" />
+
         <activity
             android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"

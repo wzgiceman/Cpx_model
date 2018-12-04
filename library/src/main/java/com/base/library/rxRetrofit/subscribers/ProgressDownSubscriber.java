@@ -102,7 +102,7 @@ public class ProgressDownSubscriber<T> implements Observer<T>, DownloadProgressL
      */
     @Override
     public void onNext(T t) {
-        if(downInfo.getReadLength()<downInfo.getCountLength()&&mSubscriberOnNextListener.get() != null){
+        if (downInfo.getReadLength() < downInfo.getCountLength() && mSubscriberOnNextListener.get() != null) {
             mSubscriberOnNextListener.get().onError(new Throwable());
             HttpDownManager.getInstance().remove(downInfo);
             unsubscribe();
