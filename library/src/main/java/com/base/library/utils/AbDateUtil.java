@@ -691,4 +691,23 @@ public class AbDateUtil {
         return sTime;
     }
 
+    /**
+     * 判断日期是否是今天
+     * @param date 要比较的时间
+     * @return
+     */
+    public static boolean isToday(Date date){
+        Calendar calendar = Calendar.getInstance();
+        //当前的时间
+        int nowYear = calendar.get(Calendar.YEAR);
+        int nowMonth = calendar.get(Calendar.MONTH);
+        int nowDay = calendar.get(Calendar.DAY_OF_MONTH);
+        //要比较的时间
+        calendar.setTime(date);
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+        return (nowYear == year) && (nowMonth == month) && (nowDay == day);
+    }
+
 }
