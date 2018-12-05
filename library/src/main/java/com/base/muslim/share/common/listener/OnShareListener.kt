@@ -14,6 +14,7 @@ interface OnShareListener {
      * @param type 分享方式
      */
     fun onShareSuccess(type: String)
+
     /**
      * 分享失败
      * @param type 分享方式

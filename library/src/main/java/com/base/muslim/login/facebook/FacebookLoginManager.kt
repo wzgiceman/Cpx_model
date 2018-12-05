@@ -15,18 +15,22 @@ import com.facebook.login.widget.LoginButton
 
 /**
  * Description:
- *
+ * Facebook登录管理类
  *
  * @author  Alpinist Wang
  * Company: Mobile CPX
  * Date:    2018/12/4
  */
-class FacebookLoginManager(val context: Context, val onLoginListener: OnLoginListener) : FacebookCallback<LoginResult> {
-    val callbackManager by lazy {  CallbackManager.Factory.create()}
-    fun loginByFacebook() {
+class FacebookLoginManager(private val context: Context, private val onLoginListener: OnLoginListener) : FacebookCallback<LoginResult> {
+    private val callbackManager by lazy { CallbackManager.Factory.create() }
+    private val loginButton by lazy { LoginButton(context) }
+
+    /**
+     * Facebook登录
+     */
+    fun login() {
         val currentToken = getCurrentNotExpiredFacebookToken()
         if (TextUtils.isEmpty(currentToken)) {
-            val loginButton = LoginButton(context)
             loginButton.registerCallback(callbackManager, this)
             loginButton.callOnClick()
         } else {
@@ -37,7 +41,7 @@ class FacebookLoginManager(val context: Context, val onLoginListener: OnLoginLis
     /**
      * 获取当前未过期的Facebook Token
      */
-    fun getCurrentNotExpiredFacebookToken(): String {
+    private fun getCurrentNotExpiredFacebookToken(): String {
         val accessToken: AccessToken = AccessToken.getCurrentAccessToken() ?: return ""
         if (accessToken.isExpired) {
             //如果已经过期，退出登录
@@ -66,5 +70,9 @@ class FacebookLoginManager(val context: Context, val onLoginListener: OnLoginLis
 
     fun handleActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         callbackManager?.onActivityResult(requestCode, resultCode, data)
+    }
+
+    fun release() {
+        loginButton.unregisterCallback(callbackManager)
     }
 }

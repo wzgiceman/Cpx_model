@@ -10,6 +10,14 @@ import com.base.muslim.share.common.constants.ShareConstants.Companion.TWITTER
 import com.prog.zhigangwei.cpx_model.R
 import kotlinx.android.synthetic.main.activity_share.*
 
+/**
+ * Description:
+ * 分享页面Demo
+ *
+ * @author  Alpinist Wang
+ * Company: Mobile CPX
+ * Date:    2018/12/5
+ */
 class ShareActivity : BaseShareActivity() {
     private var uri: Uri = Uri.EMPTY
 
@@ -20,6 +28,11 @@ class ShareActivity : BaseShareActivity() {
     override fun layoutId() = R.layout.activity_share
 
     override fun initView() {
+        btn_share_text_by_facebook.setOnClickListener {
+            shareText(FACEBOOK,
+                    "The model is as steady as an old dog!")
+        }
+
         btn_share_link_by_facebook.setOnClickListener {
             shareLink(FACEBOOK,
                     "https://github.com/wzgiceman/Cpx_model",
@@ -54,10 +67,9 @@ class ShareActivity : BaseShareActivity() {
                     listOf(uri, uri, uri),
                     "#CPXModel")
         }
-        btn_share_link_by_twitter.setOnClickListener {
-            shareLink(TWITTER,
-                    "https://github.com/wzgiceman/Cpx_model",
-                    "#CPXModel")
+        btn_share_text_by_twitter.setOnClickListener {
+            shareText(TWITTER,
+                    "The model is as steady as an old dog!")
         }
 
         btn_share_image_by_twitter.setOnClickListener {

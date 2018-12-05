@@ -13,15 +13,17 @@ import com.twitter.sdk.android.core.identity.TwitterLoginButton
 
 /**
  * Description:
- *
+ * Twitter登录管理类
  *
  * @author  Alpinist Wang
  * Company: Mobile CPX
  * Date:    2018/12/4
  */
-class TwitterLoginManager(val context: Context, val onLoginListener: OnLoginListener) : Callback<TwitterSession>() {
-    val twitterLoginButton = TwitterLoginButton(context)
-    fun loginByTwitter() {
+class TwitterLoginManager(context: Context, private val onLoginListener: OnLoginListener) : Callback<TwitterSession>() {
+
+    private val twitterLoginButton = TwitterLoginButton(context)
+
+    fun login() {
         twitterLoginButton.callback = this
         twitterLoginButton.callOnClick()
     }

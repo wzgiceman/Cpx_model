@@ -9,14 +9,19 @@ import com.base.muslim.share.common.listener.OnShareListener
 
 /**
  * Description:
- *
+ * 分享基类，可以继承此类实现分享，或者仿照此类中的方法调用ShareManager
  *
  * @author  Alpinist Wang
  * Company: Mobile CPX
  * Date:    2018/12/4
  */
 abstract class BaseShareActivity : BaseToolsActivity(), OnShareListener {
+
     private val shareManager by lazy { ShareManager(this, this) }
+
+    fun shareText(type: String, text: String) {
+        shareManager.shareText(type, text)
+    }
 
     @JvmOverloads
     fun shareLink(type: String, link: String, tag: String = "", quote: String = "") {

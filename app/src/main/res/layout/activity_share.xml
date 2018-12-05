@@ -13,6 +13,13 @@
         android:orientation="vertical">
 
         <Button
+            android:id="@+id/btn_share_text_by_facebook"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Share Text by facebook"
+            android:textAllCaps="false" />
+
+        <Button
             android:id="@+id/btn_share_link_by_facebook"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -55,11 +62,12 @@
             android:textAllCaps="false" />
 
         <Button
-            android:id="@+id/btn_share_link_by_twitter"
+            android:id="@+id/btn_share_text_by_twitter"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Share Link by twitter"
+            android:text="Share Text by twitter"
             android:textAllCaps="false" />
+
         <Button
             android:id="@+id/btn_share_image_by_twitter"
             android:layout_width="match_parent"

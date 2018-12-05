@@ -16,17 +16,38 @@ import com.facebook.share.widget.ShareDialog
 
 /**
  * Description:
- *
+ * Facebook分享管理类
  *
  * @author  Alpinist Wang
  * Company: Mobile CPX
  * Date:    2018/12/4
  */
-class FacebookShareManager(val activity: Activity, val onShareListener: OnShareListener) : FacebookCallback<Sharer.Result> {
+class FacebookShareManager(private val activity: Activity, private val onShareListener: OnShareListener) : FacebookCallback<Sharer.Result> {
 
-    val callbackManager by lazy { CallbackManager.Factory.create() }
-    val shareDialog by lazy { ShareDialog(activity) }
+    private val callbackManager by lazy { CallbackManager.Factory.create() }
+    private val shareDialog by lazy { ShareDialog(activity) }
 
+    /**
+     * 分享文字
+     * @param text 文字内容
+     */
+    fun shareText(text: String) {
+        val content = ShareLinkContent.Builder()
+                .setShareHashtag(ShareHashtag.Builder()
+                        .setHashtag(text)
+                        .build())
+                .setQuote(text)
+                .build()
+        shareDialog.registerCallback(callbackManager, this)
+        shareDialog.show(content)
+    }
+
+    /**
+     * 分享链接
+     * @param link 链接地址
+     * @param tag 文字内容
+     * @param quote 引文内容，和文字内容有不一样的样式
+     */
     fun shareLink(link: String, tag: String, quote: String) {
         val content = ShareLinkContent.Builder()
                 .setContentUrl(Uri.parse(link))
@@ -39,6 +60,11 @@ class FacebookShareManager(val activity: Activity, val onShareListener: OnShareL
         shareDialog.show(content)
     }
 
+    /**
+     * 分享图片
+     * @param image 图片Bitmap
+     * @param tag 文字内容
+     */
     fun shareImage(image: Bitmap, tag: String) {
         val content = SharePhotoContent.Builder()
                 .addPhoto(buildSharePhoto(image))
@@ -50,12 +76,17 @@ class FacebookShareManager(val activity: Activity, val onShareListener: OnShareL
         shareDialog.show(content)
     }
 
-    fun buildSharePhoto(image: Bitmap): SharePhoto? {
+    private fun buildSharePhoto(image: Bitmap): SharePhoto? {
         return SharePhoto.Builder()
                 .setBitmap(image)
                 .build()
     }
 
+    /**
+     * 分享本地视频，通过tag添加文字
+     * @param videoUri 本地视频Uri
+     * @param tag 文字内容
+     */
     fun shareVideo(videoUri: Uri, tag: String) {
         val content = ShareVideoContent.Builder()
                 .setVideo(buildShareVideo(videoUri))
@@ -67,14 +98,18 @@ class FacebookShareManager(val activity: Activity, val onShareListener: OnShareL
         shareDialog.show(content)
     }
 
-    fun buildShareVideo(videoUri: Uri): ShareVideo? {
+    private fun buildShareVideo(videoUri: Uri): ShareVideo? {
         return ShareVideo.Builder()
                 .setLocalUrl(videoUri)
                 .build()
     }
 
     /**
-     * 分享多媒体，每次可以分享最多包含 6 个照片和视频元素的内容
+     * 分享多媒体，图片+视频总数最多6个
+     * @param imageList 图片Bitmap列表
+     * @param videoUriList 本地视频Uri列表
+     * @param tag 文字内容
+     *
      */
     fun shareMedia(imageList: List<Bitmap>, videoUriList: List<Uri>, tag: String) {
         val shareContentBuilder = ShareMediaContent.Builder()
@@ -91,7 +126,6 @@ class FacebookShareManager(val activity: Activity, val onShareListener: OnShareL
         shareDialog.show(shareContentBuilder.build(), ShareDialog.Mode.AUTOMATIC)
     }
 
-
     override fun onSuccess(result: Sharer.Result?) {
         onShareListener.onShareSuccess(FACEBOOK)
     }
@@ -107,5 +141,4 @@ class FacebookShareManager(val activity: Activity, val onShareListener: OnShareL
     fun handleActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         callbackManager?.onActivityResult(requestCode, resultCode, data)
     }
-
 }

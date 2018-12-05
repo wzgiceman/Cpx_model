@@ -17,30 +17,37 @@ import com.twitter.sdk.android.tweetcomposer.TweetUploadService
 
 /**
  * Description:
- *
+ * Twitter分享管理类
  *
  * @author  Alpinist Wang
  * Company: Mobile CPX
  * Date:    2018/12/4
  */
-class TwitterShareManager(val activity: Activity, val onShareListener: OnShareListener) {
+class TwitterShareManager(private val activity: Activity, private val onShareListener: OnShareListener) {
 
     init {
         RxBus.get().register(this)
     }
 
-    fun shareLink(text: String, tag: String) {
-        //这里分享一个链接，更多分享配置参考官方介绍：https://dev.twitter.com/twitterkit/android/compose-tweets
+    /**
+     * 分享文字
+     * @param text 文字内容
+     */
+    fun shareText(text: String) {
         //分享卡片参考：https://developer.twitter.com/en/docs/tweets/optimize-with-cards/overview/player-card
         if (!checkSession()) return
         activity.startActivity(ComposerActivity.Builder(activity)
                 .text(text)
-                .hashtags(tag)
                 .session(TwitterCore.getInstance().sessionManager.activeSession)
                 .createIntent())
 
     }
 
+    /**
+     * 分享图片
+     * @param image 图片Bitmap
+     * @param tag 文字内容
+     */
     @Suppress("checkResult")
     fun shareImage(image: Bitmap, tag: String) {
         if (!checkSession()) return
@@ -49,7 +56,7 @@ class TwitterShareManager(val activity: Activity, val onShareListener: OnShareLi
                 .subscribe {
                     if (it) {
                         activity.startActivity(ComposerActivity.Builder(activity)
-                                .image(Bitmap2Uri(image))
+                                .image(bitmap2Uri(image))
                                 .hashtags(tag)
                                 .session(TwitterCore.getInstance().sessionManager.activeSession)
                                 .createIntent())
@@ -59,7 +66,7 @@ class TwitterShareManager(val activity: Activity, val onShareListener: OnShareLi
                 }
     }
 
-    fun checkSession(): Boolean {
+    private fun checkSession(): Boolean {
         val session = TwitterCore.getInstance().sessionManager.activeSession
         return if (session == null) {
             onShareListener.onShareFail(TWITTER, "Twitter share fail, need Login by Twitter first")
@@ -67,11 +74,12 @@ class TwitterShareManager(val activity: Activity, val onShareListener: OnShareLi
         } else true
     }
 
-    fun Bitmap2Uri(image: Bitmap) =
+    private fun bitmap2Uri(image: Bitmap) =
             Uri.parse(MediaStore.Images.Media.insertImage(activity.contentResolver, image, null, null))
 
+    @Suppress("unused")
     @Subscribe(thread = EventThread.MAIN_THREAD)
-    fun twitterShareRecever(action: String) {
+    fun twitterShareReceiver(action: String) {
         when (action) {
             TweetUploadService.UPLOAD_SUCCESS -> onShareListener.onShareSuccess(TWITTER)
             TweetUploadService.TWEET_COMPOSE_CANCEL -> onShareListener.onShareFail(TWITTER, "Twitter share cancel")

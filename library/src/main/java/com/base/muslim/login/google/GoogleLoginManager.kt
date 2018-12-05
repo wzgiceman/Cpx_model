@@ -14,19 +14,15 @@ import com.google.android.gms.common.api.GoogleApiClient
 
 /**
  * Description:
- *
+ * Google登录管理类
  *
  * @author  Alpinist Wang
  * Company: Mobile CPX
  * Date:    2018/12/4
  */
-class GoogleLoginManager(val fragmentActivity: FragmentActivity, val onLoginListener: OnLoginListener) :
+class GoogleLoginManager(private val fragmentActivity: FragmentActivity, private val onLoginListener: OnLoginListener) :
         GoogleApiClient.OnConnectionFailedListener {
 
-
-    /**
-     * google登录
-     */
     private val signInOptions by lazy {
         GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(fragmentActivity.getString(R.string.google_web_client_id))
@@ -41,12 +37,15 @@ class GoogleLoginManager(val fragmentActivity: FragmentActivity, val onLoginList
                 .build()
     }
 
-    fun loginByGoogle() {
+    /**
+     * Google登录
+     */
+    fun login() {
         val signInIntent = Auth.GoogleSignInApi.getSignInIntent(apiClient)
         fragmentActivity.startActivityForResult(signInIntent, LoginConstants.REQUEST_CODE_GOOGLE_SIGN_IN)
     }
 
-    fun handleActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    fun handleActivityResult(requestCode: Int, data: Intent?) {
         if (requestCode == LoginConstants.REQUEST_CODE_GOOGLE_SIGN_IN) {
             val token = data?.let {
                 Auth.GoogleSignInApi.getSignInResultFromIntent(it).signInAccount?.idToken

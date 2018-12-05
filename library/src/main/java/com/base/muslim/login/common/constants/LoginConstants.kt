@@ -2,7 +2,7 @@ package com.base.muslim.login.common.constants
 
 /**
  * Description:
- *
+ * 登录常量类
  *
  * @author  Alpinist Wang
  * Company: Mobile CPX

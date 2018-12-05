@@ -2,7 +2,7 @@ package com.base.muslim.share.common.constants
 
 /**
  * Description:
- *
+ * 分享常量类
  *
  * @author  Alpinist Wang
  * Company: Mobile CPX
