@@ -1,5 +1,6 @@
 package com.prog.zhigangwei.cpx_model.share
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.graphics.BitmapFactory
@@ -18,6 +19,7 @@ import kotlinx.android.synthetic.main.activity_share.*
  * Company: Mobile CPX
  * Date:    2018/12/5
  */
+@SuppressLint("SetTextI18n")
 class ShareActivity : BaseShareActivity() {
     private var uri: Uri = Uri.EMPTY
 
@@ -79,7 +81,7 @@ class ShareActivity : BaseShareActivity() {
         }
     }
 
-    fun checkUri(): Boolean {
+    private fun checkUri(): Boolean {
         if (uri == Uri.EMPTY) {
             tv_local_video_uri.text = "please click \"Choose local video\" button to select a local video first"
             return false

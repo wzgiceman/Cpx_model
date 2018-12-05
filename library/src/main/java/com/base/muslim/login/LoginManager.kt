@@ -35,7 +35,7 @@ import com.base.muslim.login.twitter.TwitterLoginManager
  * Company: Mobile CPX
  * Date:    2018/12/4
  */
-class LoginManager(val activity: FragmentActivity, val onLoginListener: OnLoginListener) {
+class LoginManager(val activity: FragmentActivity,private val onLoginListener: OnLoginListener) {
     private val facebookLoginManager by lazy { FacebookLoginManager(activity, onLoginListener) }
     private val googleLoginManager by lazy { GoogleLoginManager(activity, onLoginListener) }
     private val twitterLoginManager by lazy { TwitterLoginManager(activity, onLoginListener) }
