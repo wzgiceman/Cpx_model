@@ -11,6 +11,7 @@ import com.prog.zhigangwei.cpx_model.login.LoginActivity
 import com.prog.zhigangwei.cpx_model.permission.PermisssionActivity
 import com.prog.zhigangwei.cpx_model.rxbus.RxBusActivity
 import com.prog.zhigangwei.cpx_model.rxjava.RxJavaActivity
+import com.prog.zhigangwei.cpx_model.share.ShareActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 /**
@@ -65,6 +66,7 @@ class MainActivity : BaseActivity() {
         btn_rxjava.setOnClickListener { jumpActivity(RxJavaActivity::class.java) }
         btn_constraintLayout.setOnClickListener { jumpActivity(ConstraintLayoutActivity::class.java) }
         btn_login.setOnClickListener { jumpActivity(LoginActivity::class.java) }
+        btn_share.setOnClickListener { jumpActivity(ShareActivity::class.java) }
     }
 
     /**

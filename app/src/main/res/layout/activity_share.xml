@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
+    android:orientation="vertical"
+    tools:context=".share.ShareActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btn_share_link_by_facebook"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Share Link by facebook"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/btn_share_image_by_facebook"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Share Image by facebook"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/btn_choose_local_video"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Choose local video"
+            android:textAllCaps="false" />
+
+        <TextView
+            android:id="@+id/tv_local_video_uri"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="Local video uri: " />
+
+        <Button
+            android:id="@+id/btn_share_video_by_facebook"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Share Video by facebook"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/btn_share_media_by_facebook"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Share Media by facebook"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/btn_share_link_by_twitter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Share Link by twitter"
+            android:textAllCaps="false" />
+        <Button
+            android:id="@+id/btn_share_image_by_twitter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Share Image by twitter"
+            android:textAllCaps="false" />
+
+        <TextView
+            android:id="@+id/tv_share_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            tools:text="分享成功\ntype=xxx\ntoken=xxx\n" />
+    </LinearLayout>
+</ScrollView>

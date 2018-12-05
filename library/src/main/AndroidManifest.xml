@@ -57,6 +57,22 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
+        <!--facebook分享，需要手动替换appId：android:authorities="com.facebook.app.FacebookContentProvider{APP_ID}"-->
+        <provider
+            android:name="com.facebook.FacebookContentProvider"
+            android:authorities="com.facebook.app.FacebookContentProvider351993102035778"
+            android:exported="true" />
+        <!--Twitter分享的接收广播-->
+        <receiver
+            android:name="com.base.muslim.share.twitter.TwitterResultReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.twitter.sdk.android.tweetcomposer.UPLOAD_SUCCESS" />
+                <action android:name="com.twitter.sdk.android.tweetcomposer.UPLOAD_FAILURE" />
+                <action android:name="com.twitter.sdk.android.tweetcomposer.TWEET_COMPOSE_CANCEL" />
+            </intent-filter>
+        </receiver>
+
         <activity
             android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
