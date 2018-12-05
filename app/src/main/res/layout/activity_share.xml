@@ -55,17 +55,16 @@
             android:textAllCaps="false" />
 
         <Button
-            android:id="@+id/btn_share_by_google"
+            android:id="@+id/btn_share_link_by_twitter"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Share by google"
+            android:text="Share Link by twitter"
             android:textAllCaps="false" />
-
         <Button
-            android:id="@+id/btn_share_by_twitter"
+            android:id="@+id/btn_share_image_by_twitter"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Share by twitter"
+            android:text="Share Image by twitter"
             android:textAllCaps="false" />
 
         <TextView

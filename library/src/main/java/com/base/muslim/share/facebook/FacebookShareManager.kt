@@ -1,10 +1,11 @@
-package com.base.muslim.share
+package com.base.muslim.share.facebook
 
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
 import com.base.muslim.login.common.constants.LoginConstants.Companion.FACEBOOK
+import com.base.muslim.share.common.listener.OnShareListener
 import com.facebook.CallbackManager
 import com.facebook.FacebookCallback
 import com.facebook.FacebookException
@@ -106,4 +107,5 @@ class FacebookShareManager(val activity: Activity, val onShareListener: OnShareL
     fun handleActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         callbackManager?.onActivityResult(requestCode, resultCode, data)
     }
+
 }

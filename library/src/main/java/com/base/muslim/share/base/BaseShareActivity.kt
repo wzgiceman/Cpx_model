@@ -1,9 +1,11 @@
-package com.base.muslim.share
+package com.base.muslim.share.base
 
 import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
-import com.base.muslim.base.activity.BaseActivity
+import com.base.muslim.base.activity.BaseToolsActivity
+import com.base.muslim.share.ShareManager
+import com.base.muslim.share.common.listener.OnShareListener
 
 /**
  * Description:
@@ -13,7 +15,7 @@ import com.base.muslim.base.activity.BaseActivity
  * Company: Mobile CPX
  * Date:    2018/12/4
  */
-abstract class BaseShareActivity : BaseActivity(), OnShareListener {
+abstract class BaseShareActivity : BaseToolsActivity(), OnShareListener {
     private val shareManager by lazy { ShareManager(this, this) }
 
     @JvmOverloads
@@ -39,5 +41,10 @@ abstract class BaseShareActivity : BaseActivity(), OnShareListener {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         shareManager.handleActivityResult(requestCode, resultCode, data)
+    }
+
+    override fun onRelease() {
+        super.onRelease()
+        shareManager.release()
     }
 }
