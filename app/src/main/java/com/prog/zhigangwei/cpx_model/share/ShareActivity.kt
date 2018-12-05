@@ -115,6 +115,17 @@ class ShareActivity : BaseShareActivity() {
                     localImageUri,
                     "#CPXModel")
         }
+
+        /**Email分享*/
+        btn_share_by_email.setOnClickListener {
+            sendEmail("The model is as steady as an old dog!",
+                    "CPXModel")
+        }
+        /**SMS分享*/
+        btn_share_by_sms.setOnClickListener {
+            sendSMS("The model is as steady as an old dog!",
+                    "10086")
+        }
     }
 
     private fun checkLocalVideoUri(): Boolean {

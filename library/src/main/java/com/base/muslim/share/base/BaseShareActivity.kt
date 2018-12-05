@@ -48,6 +48,16 @@ abstract class BaseShareActivity : BaseToolsActivity(), OnShareListener {
         shareManager.shareMedia(type, imageList, videoUriList, tag)
     }
 
+    @JvmOverloads
+    fun sendEmail(emailBody: String = "", emailSubject: String = "") {
+        shareManager.sendEmail(emailBody, emailSubject)
+    }
+
+    @JvmOverloads
+    fun sendSMS(smsBody: String = "", phoneNumber: String = "") {
+        shareManager.sendSMS(smsBody, phoneNumber)
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         shareManager.handleActivityResult(requestCode, resultCode, data)

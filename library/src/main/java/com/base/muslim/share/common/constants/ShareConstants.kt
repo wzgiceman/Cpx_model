@@ -14,5 +14,13 @@ class ShareConstants {
         const val FACEBOOK = "facebook"
         /**Twitter分享方式*/
         const val TWITTER = "twitter"
+        /**Email分享方式*/
+        const val EMAIL = "email"
+        /**短信分享方式*/
+        const val SMS = "sms"
+        /**邮件分享RequestCode*/
+        const val REQUEST_CODE_SEND_EMAIL = 1001
+        /**短信分享RequestCode*/
+        const val REQUEST_CODE_SEND_SMS = 1002
     }
 }

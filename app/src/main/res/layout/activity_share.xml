@@ -104,6 +104,20 @@
             android:text="Share Local Image by twitter"
             android:textAllCaps="false" />
 
+        <Button
+            android:id="@+id/btn_share_by_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Share by Email"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/btn_share_by_sms"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Share by SMS"
+            android:textAllCaps="false" />
+
         <TextView
             android:id="@+id/tv_share_status"
             android:layout_width="wrap_content"

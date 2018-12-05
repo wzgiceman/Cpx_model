@@ -7,7 +7,9 @@ import android.net.Uri
 import com.base.muslim.login.common.constants.LoginConstants.Companion.FACEBOOK
 import com.base.muslim.login.common.constants.LoginConstants.Companion.TWITTER
 import com.base.muslim.share.common.listener.OnShareListener
+import com.base.muslim.share.email.EmailShareManager
 import com.base.muslim.share.facebook.FacebookShareManager
+import com.base.muslim.share.sms.SMSShareManager
 import com.base.muslim.share.twitter.TwitterShareManager
 
 
@@ -31,6 +33,8 @@ import com.base.muslim.share.twitter.TwitterShareManager
 class ShareManager(private val activity: Activity, private val onShareListener: OnShareListener) {
     private val facebookShareManager by lazy { FacebookShareManager(activity, onShareListener) }
     private val twitterShareManager by lazy { TwitterShareManager(activity, onShareListener) }
+    private val emailShareManager by lazy { EmailShareManager(activity, onShareListener) }
+    private val smsShareManager by lazy { SMSShareManager(activity, onShareListener) }
 
     fun shareText(type: String, text: String) {
         when (type) {
@@ -74,11 +78,24 @@ class ShareManager(private val activity: Activity, private val onShareListener: 
         }
     }
 
+    @JvmOverloads
+    fun sendEmail(emailBody: String = "", emailSubject: String = "") {
+        emailShareManager.sendEmail(emailBody, emailSubject)
+    }
+
+    @JvmOverloads
+    fun sendSMS(smsBody: String = "", phoneNumber: String = "") {
+        smsShareManager.sendSMS(smsBody, phoneNumber)
+    }
+
     fun handleActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         facebookShareManager.handleActivityResult(requestCode, resultCode, data)
+        emailShareManager.handleActivityResult(requestCode, resultCode)
+        smsShareManager.handleActivityResult(requestCode, resultCode)
     }
 
     fun release() {
         twitterShareManager.release()
     }
+
 }
