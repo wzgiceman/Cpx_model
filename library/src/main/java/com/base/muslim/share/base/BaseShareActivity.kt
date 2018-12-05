@@ -22,47 +22,38 @@ abstract class BaseShareActivity : BaseToolsActivity(), OnShareListener {
         shareManager.shareText(type, text)
     }
 
-    @JvmOverloads
     fun shareLink(type: String, link: String, tag: String = "", quote: String = "") {
         shareManager.shareLink(type, link, tag, quote)
     }
 
-    @JvmOverloads
     fun shareImage(type: String, image: Any, tag: String = "") {
         shareManager.shareImage(type, image, tag)
     }
 
-    @JvmOverloads
     fun shareVideo(type: String, videoUri: Uri, tag: String = "") {
         shareManager.shareVideo(type, videoUri, tag)
     }
 
-    @JvmOverloads
     fun shareMedia(type: String, imageList: List<Any>, videoUriList: List<Uri>, tag: String = "") {
         shareManager.shareMedia(type, imageList, videoUriList, tag)
     }
 
-    @JvmOverloads
     fun sendEmail(emailBody: String = "", emailSubject: String = "") {
         shareManager.sendEmail(emailBody, emailSubject)
     }
 
-    @JvmOverloads
     fun sendImageEmail(image: Any, emailBody: String = "", emailSubject: String = "") {
         shareManager.sendImageEmail(image, emailBody, emailSubject)
     }
 
-    @JvmOverloads
     fun sendVideoEmail(video: Uri, emailBody: String = "", emailSubject: String = "") {
         shareManager.sendVideoEmail(video, emailBody, emailSubject)
     }
 
-    @JvmOverloads
     fun sendMediaEmail(imageList: List<Any> = ArrayList(), videoList: List<Uri> = ArrayList(), emailBody: String = "", emailSubject: String = "") {
         shareManager.sendMediaEmail(imageList, videoList, emailBody, emailSubject)
     }
 
-    @JvmOverloads
     fun sendSMS(smsBody: String = "", phoneNumber: String = "") {
         shareManager.sendSMS(smsBody, phoneNumber)
     }

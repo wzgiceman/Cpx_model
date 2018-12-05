@@ -41,7 +41,6 @@ class TwitterShareManager(private val activity: Activity, private val onShareLis
      * @param image 图片Bitmap或者Uri
      * @param text 文字内容
      */
-    @JvmOverloads
     fun shareImage(image: Any = Uri.EMPTY, text: String = "") {
         if (!checkSession()) return
         val imageUri = when (image) {

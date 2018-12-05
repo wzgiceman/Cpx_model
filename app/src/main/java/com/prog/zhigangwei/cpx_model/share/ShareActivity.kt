@@ -142,7 +142,8 @@ class ShareActivity : BaseShareActivity() {
                     BitmapFactory.decodeResource(resources, R.mipmap.ic_launcher_round),
                     BitmapFactory.decodeResource(resources, R.mipmap.ic_launcher_foreground)),
                     listOf(localVideoUri),
-                    "#CPXModel")
+                    "The model is as steady as an old dog!",
+                    "CPXModel")
         }
 
         /**SMS分享*/

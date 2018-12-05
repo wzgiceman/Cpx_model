@@ -25,25 +25,22 @@ class EmailShareManager(private val activity: Activity, private val onShareListe
      * @param emailBody 邮件内容
      * @param emailSubject 邮件主题
      */
-    fun sendTextEmail(emailBody: String, emailSubject: String) {
+    fun sendTextEmail(emailBody: String = "", emailSubject: String = "") {
         sendMediaEmail(emailBody = emailBody, emailSubject = emailSubject)
     }
 
-    @JvmOverloads
     fun sendImageEmail(image: Any, emailBody: String = "", emailSubject: String = "") {
         sendMediaEmail(imageList = listOf(image), emailBody = emailBody, emailSubject = emailSubject)
     }
 
-    @JvmOverloads
     fun sendVideoEmail(video: Uri, emailBody: String = "", emailSubject: String = "") {
         sendMediaEmail(videoList = listOf(video), emailBody = emailBody, emailSubject = emailSubject)
     }
 
-    @JvmOverloads
+    @Suppress("DEPRECATION")
     fun sendMediaEmail(imageList: List<Any> = ArrayList(), videoList: List<Uri> = ArrayList(), emailBody: String = "", emailSubject: String = "") {
         val email = Intent(Intent.ACTION_SEND_MULTIPLE)
         email.type = "application/octet-stream"
-
         val uriList = ArrayList<Uri>()
         for (image in imageList) {
             val imageUri = when (image) {
@@ -55,22 +52,8 @@ class EmailShareManager(private val activity: Activity, private val onShareListe
         }
         uriList.addAll(videoList)
         email.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uriList)
-//        email.type = "image/*"
-//        for (image in imageList) {
-//            val imageUri = when (image) {
-//                is Bitmap -> ShareUtils.bitmap2Uri(image)
-//                is Uri -> image
-//                else -> Uri.EMPTY
-//            }
-//            email.putExtra(Intent.EXTRA_STREAM, imageUri)
-//        }
-//        email.type = "video/*"
-//        for (video in videoList) {
-//            email.putExtra(Intent.EXTRA_STREAM, video)
-//        }
-//        email.type = "plain/text"
-        email.putExtra(Intent.EXTRA_SUBJECT, emailSubject)
         email.putExtra(Intent.EXTRA_TEXT, emailBody)
+        email.putExtra(Intent.EXTRA_SUBJECT, emailSubject)
         activity.startActivityForResult(Intent.createChooser(email, "Choose App"), REQUEST_CODE_SEND_EMAIL)
     }
 
@@ -84,4 +67,41 @@ class EmailShareManager(private val activity: Activity, private val onShareListe
             }
         }
     }
+
+//    /*** 设置收件人地址信息*/
+//    private void setRecipientT0() throws MessagingException, UnsupportedEncodingException {
+//        if (recipientT0List.size() > 0) {
+//            InternetAddress[] sendTo = new InternetAddress[recipientT0List.size()];
+//            for (int i = 0; i < recipientT0List.size(); i++) {
+//                System.out.println("发送到:" + recipientT0List.get(i));
+//                sendTo[i] = new InternetAddress(recipientT0List.get(i), "", "UTF-8");
+//            }
+//            message.addRecipients(MimeMessage.RecipientType.TO, sendTo);
+//        }
+//    }
+//
+//    /***设置密送地址**/
+//    private void setRecipientCC() throws MessagingException, UnsupportedEncodingException {
+//        if (recipientCCList.size() > 0) {
+//            InternetAddress[] sendTo = new InternetAddress[recipientCCList.size()];
+//            for (int i = 0; i < recipientCCList.size(); i++) {
+//                System.out.println("发送到:" + recipientCCList.get(i));
+//                sendTo[i] = new InternetAddress(recipientCCList.get(i), "", "UTF-8");
+//            }
+//            message.addRecipients(MimeMessage.RecipientType.CC, sendTo);
+//        }
+//    }
+//
+//    /***设置抄送邮件地址**/
+//    private void setRecipientBCC() throws MessagingException, UnsupportedEncodingException {
+//        if (recipientBCCList.size() > 0) {
+//            InternetAddress[] sendTo = new InternetAddress[recipientBCCList.size()];
+//            for (int i = 0; i < recipientBCCList.size(); i++) {
+//                System.out.println("发送到:" + recipientBCCList.get(i));
+//                sendTo[i] = new InternetAddress(recipientBCCList.get(i), "", "UTF-8");
+//            }
+//            message.addRecipients(MimeMessage.RecipientType.BCC, sendTo);
+//        }
+//    }
+
 }
