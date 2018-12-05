@@ -27,17 +27,39 @@
             android:textAllCaps="false" />
 
         <Button
-            android:id="@+id/btn_share_image_by_facebook"
+            android:id="@+id/btn_share_bitmap_by_facebook"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Share Image by facebook"
+            android:text="Share Bitmap by facebook"
             android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/btn_choose_local_image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Choose Local Image"
+            android:textAllCaps="false" />
+
+        <TextView
+            android:id="@+id/tv_local_image_uri"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="Local image uri: " />
+
+        <Button
+            android:id="@+id/btn_share_local_image_by_facebook"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Share Local Image by facebook"
+            android:textAllCaps="false" />
+
 
         <Button
             android:id="@+id/btn_choose_local_video"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Choose local video"
+            android:text="Choose Local Video"
             android:textAllCaps="false" />
 
         <TextView
@@ -69,10 +91,17 @@
             android:textAllCaps="false" />
 
         <Button
-            android:id="@+id/btn_share_image_by_twitter"
+            android:id="@+id/btn_share_bitmap_by_twitter"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Share Image by twitter"
+            android:text="Share Bitmap by twitter"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/btn_share_local_image_by_twitter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Share Local Image by twitter"
             android:textAllCaps="false" />
 
         <TextView

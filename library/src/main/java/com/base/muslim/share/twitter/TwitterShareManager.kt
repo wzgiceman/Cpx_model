@@ -3,17 +3,16 @@ package com.base.muslim.share.twitter
 import android.app.Activity
 import android.graphics.Bitmap
 import android.net.Uri
-import android.provider.MediaStore
-import com.base.library.rxPermissions.RxPermissions
 import com.base.library.rxbus.RxBus
 import com.base.library.rxbus.annotation.Subscribe
 import com.base.library.rxbus.thread.EventThread
-import com.base.library.utils.utilcode.util.ToastUtils
 import com.base.muslim.share.common.constants.ShareConstants.Companion.TWITTER
 import com.base.muslim.share.common.listener.OnShareListener
 import com.twitter.sdk.android.core.TwitterCore
 import com.twitter.sdk.android.tweetcomposer.ComposerActivity
 import com.twitter.sdk.android.tweetcomposer.TweetUploadService
+import java.io.File
+import java.io.FileOutputStream
 
 /**
  * Description:
@@ -40,7 +39,6 @@ class TwitterShareManager(private val activity: Activity, private val onShareLis
                 .text(text)
                 .session(TwitterCore.getInstance().sessionManager.activeSession)
                 .createIntent())
-
     }
 
     /**
@@ -48,22 +46,22 @@ class TwitterShareManager(private val activity: Activity, private val onShareLis
      * @param image 图片Bitmap
      * @param tag 文字内容
      */
-    @Suppress("checkResult")
     fun shareImage(image: Bitmap, tag: String) {
+        shareImage(bitmap2Uri(image), tag)
+    }
+
+    /**
+     * 分享图片
+     * @param image 图片Bitmap
+     * @param tag 文字内容
+     */
+    fun shareImage(image: Uri, tag: String) {
         if (!checkSession()) return
-        RxPermissions.getInstance(activity)
-                .request(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                .subscribe {
-                    if (it) {
-                        activity.startActivity(ComposerActivity.Builder(activity)
-                                .image(bitmap2Uri(image))
-                                .hashtags(tag)
-                                .session(TwitterCore.getInstance().sessionManager.activeSession)
-                                .createIntent())
-                    } else {
-                        ToastUtils.showShort("No Permission")
-                    }
-                }
+        activity.startActivity(ComposerActivity.Builder(activity)
+                .image(image)
+                .hashtags(tag)
+                .session(TwitterCore.getInstance().sessionManager.activeSession)
+                .createIntent())
     }
 
     private fun checkSession(): Boolean {
@@ -74,8 +72,18 @@ class TwitterShareManager(private val activity: Activity, private val onShareLis
         } else true
     }
 
-    private fun bitmap2Uri(image: Bitmap) =
-            Uri.parse(MediaStore.Images.Media.insertImage(activity.contentResolver, image, null, null))
+    /**
+     * Bitmap转成Uri，保存在app内部存储的 share.png 中
+     */
+    private fun bitmap2Uri(image: Bitmap): Uri {
+        val fileDir = activity.getExternalFilesDir(null)
+        fileDir.mkdirs()
+        val file = File(fileDir, "share.png")
+        val outputStream = FileOutputStream(file)
+        image.compress(Bitmap.CompressFormat.PNG, 100, outputStream)
+        outputStream.close()
+        return Uri.fromFile(file)
+    }
 
     @Suppress("unused")
     @Subscribe(thread = EventThread.MAIN_THREAD)

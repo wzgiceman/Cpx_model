@@ -34,6 +34,11 @@ abstract class BaseShareActivity : BaseToolsActivity(), OnShareListener {
     }
 
     @JvmOverloads
+    fun shareImage(type: String, image: Uri, tag: String = "") {
+        shareManager.shareImage(type, image, tag)
+    }
+
+    @JvmOverloads
     fun shareVideo(type: String, videoUri: Uri, tag: String = "") {
         shareManager.shareVideo(type, videoUri, tag)
     }

@@ -53,6 +53,13 @@ class ShareManager(private val activity: Activity, private val onShareListener: 
         }
     }
 
+    fun shareImage(type: String, image: Uri, tag: String = "") {
+        when (type) {
+            FACEBOOK -> facebookShareManager.shareImage(image, tag)
+            TWITTER -> twitterShareManager.shareImage(image, tag)
+        }
+    }
+
     fun shareVideo(type: String, videoUri: Uri, tag: String = "") {
         when (type) {
             FACEBOOK -> facebookShareManager.shareVideo(videoUri, tag)

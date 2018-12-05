@@ -66,6 +66,19 @@ class FacebookShareManager(private val activity: Activity, private val onShareLi
      * @param tag 文字内容
      */
     fun shareImage(image: Bitmap, tag: String) {
+        shareBitmapOrUri(image, tag)
+    }
+
+    /**
+     * 分享图片
+     * @param image 图片Uri
+     * @param tag 文字内容
+     */
+    fun shareImage(image: Uri, tag: String) {
+        shareBitmapOrUri(image, tag)
+    }
+
+    private fun shareBitmapOrUri(image: Any, tag: String) {
         val content = SharePhotoContent.Builder()
                 .addPhoto(buildSharePhoto(image))
                 .setShareHashtag(ShareHashtag.Builder()
@@ -76,10 +89,16 @@ class FacebookShareManager(private val activity: Activity, private val onShareLi
         shareDialog.show(content)
     }
 
-    private fun buildSharePhoto(image: Bitmap): SharePhoto? {
-        return SharePhoto.Builder()
-                .setBitmap(image)
-                .build()
+    private fun buildSharePhoto(image: Any): SharePhoto? {
+        return when (image) {
+            is Bitmap -> SharePhoto.Builder()
+                    .setBitmap(image)
+                    .build()
+            is Uri -> SharePhoto.Builder()
+                    .setImageUrl(image)
+                    .build()
+            else -> null
+        }
     }
 
     /**
