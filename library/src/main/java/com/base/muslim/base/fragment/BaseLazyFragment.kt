@@ -1,12 +1,12 @@
-package com.base.muslim.base.fragment
+package com.base.library.base.fragment
 
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
 import com.base.muslim.base.IBase
+import com.base.muslim.base.fragment.BaseFragmentManagerFragment
 
 
 /**
@@ -32,27 +32,14 @@ abstract class BaseLazyFragment : BaseFragmentManagerFragment(), IBase {
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         viewCreated = true
-        if (savedInstanceState == null) {
-            initFragment()
+        if(null==savedInstanceState){
+            loadData()
         }
     }
 
 
-    /**
-     * 初始化fragment的根方法
-     */
-    protected fun initFragment() {
-        initData()
-        loadData()
-        initView()
-    }
-
-    /**
-     * 懒加载数据
-     */
-    protected abstract fun lazyLoadData()
-
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
+
         super.setUserVisibleHint(isVisibleToUser)
         //如果view没有创建或者不可见，则不能加载数据
         if (viewCreated && isVisibleToUser) {
@@ -74,7 +61,7 @@ abstract class BaseLazyFragment : BaseFragmentManagerFragment(), IBase {
         //如果可见,并且没有加载数据
         if (this.userVisibleHint && !loading) {
             loading = true
-            lazyLoadData()
+            initFragment()
         }
     }
 
@@ -84,5 +71,14 @@ abstract class BaseLazyFragment : BaseFragmentManagerFragment(), IBase {
      */
     protected fun resetLoadingStatus() {
         loading = false
+    }
+
+
+    /**
+     * 初始化fragment的根方法
+     */
+    protected fun initFragment() {
+        initData()
+        initView()
     }
 }
