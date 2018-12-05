@@ -21,6 +21,11 @@ import com.base.muslim.login.common.listener.OnLoginListener
  * 3.下载google_service.json，放入app模块下
  * 4.在身份验证 -> 登录方法 -> Google -> 网页SDK配置中找到网页客户端ID，将其赋值给 gradle.properties 的 google_web_client_id 变量
  *
+ * Twitter登录，需要在Twitter开发者平台：https://developer.twitter.com/en/apps
+ * 1.创建应用，填写app名，描述，勾选"启用twitter登录"，填写隐私权政策,team url
+ * 2.在callback url中添加：twittersdk://
+ * 3.将API Key赋值给 gradle.properties 的twitter_consumer_key，API secret key赋值给 gradle.properties 的twitter_consumer_secret
+ *
  * @author  Alpinist Wang
  * Company: Mobile CPX
  * Date:    2018/9/18

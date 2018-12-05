@@ -86,6 +86,7 @@ dependencies {
     api rootProject.ext.dependencies["design"]
     api rootProject.ext.dependencies["constraint-layout"]
     api rootProject.ext.dependencies["twitterAuth"]
+    api rootProject.ext.dependencies["twitterShare"]
     api rootProject.ext.dependencies["googleAuth"]
     //facebook
     api(rootProject.ext.dependencies["facebook-ays"])
