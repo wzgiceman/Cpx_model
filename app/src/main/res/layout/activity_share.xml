@@ -105,17 +105,38 @@
             android:textAllCaps="false" />
 
         <Button
-            android:id="@+id/btn_share_by_email"
+            android:id="@+id/btn_send_text_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Share by Email"
+            android:text="Send Text Email"
             android:textAllCaps="false" />
 
         <Button
-            android:id="@+id/btn_share_by_sms"
+            android:id="@+id/btn_send_image_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Share by SMS"
+            android:text="Send Image Email"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/btn_send_video_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Send Video Email"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/btn_send_media_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Send Media Email"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/btn_send_sms"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Send SMS"
             android:textAllCaps="false" />
 
         <TextView

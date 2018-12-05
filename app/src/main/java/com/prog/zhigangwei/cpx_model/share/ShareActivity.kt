@@ -89,8 +89,8 @@ class ShareActivity : BaseShareActivity() {
             if (!checkLocalVideoUri()) return@setOnClickListener
             shareMedia(FACEBOOK,
                     listOf(BitmapFactory.decodeResource(resources, R.mipmap.ic_launcher),
-                            BitmapFactory.decodeResource(resources, R.mipmap.ic_launcher),
-                            BitmapFactory.decodeResource(resources, R.mipmap.ic_launcher)),
+                            BitmapFactory.decodeResource(resources, R.mipmap.ic_launcher_round),
+                            BitmapFactory.decodeResource(resources, R.mipmap.ic_launcher_foreground)),
                     listOf(localVideoUri, localVideoUri, localVideoUri),
                     "#CPXModel")
         }
@@ -117,12 +117,36 @@ class ShareActivity : BaseShareActivity() {
         }
 
         /**Email分享*/
-        btn_share_by_email.setOnClickListener {
+        btn_send_text_email.setOnClickListener {
             sendEmail("The model is as steady as an old dog!",
                     "CPXModel")
         }
+
+        btn_send_image_email.setOnClickListener {
+            if (!checkLocalImageUri()) return@setOnClickListener
+            sendImageEmail(localImageUri,
+                    "The model is as steady as an old dog!",
+                    "CPXModel")
+        }
+
+        btn_send_video_email.setOnClickListener {
+            if (!checkLocalVideoUri()) return@setOnClickListener
+            sendVideoEmail(localVideoUri,
+                    "The model is as steady as an old dog!",
+                    "CPXModel")
+        }
+
+        btn_send_media_email.setOnClickListener {
+            if (!checkLocalVideoUri()) return@setOnClickListener
+            sendMediaEmail(listOf(BitmapFactory.decodeResource(resources, R.mipmap.ic_launcher),
+                    BitmapFactory.decodeResource(resources, R.mipmap.ic_launcher_round),
+                    BitmapFactory.decodeResource(resources, R.mipmap.ic_launcher_foreground)),
+                    listOf(localVideoUri),
+                    "#CPXModel")
+        }
+
         /**SMS分享*/
-        btn_share_by_sms.setOnClickListener {
+        btn_send_sms.setOnClickListener {
             sendSMS("The model is as steady as an old dog!",
                     "10086")
         }

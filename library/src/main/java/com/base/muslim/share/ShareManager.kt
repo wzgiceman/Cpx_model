@@ -2,7 +2,6 @@ package com.base.muslim.share
 
 import android.app.Activity
 import android.content.Intent
-import android.graphics.Bitmap
 import android.net.Uri
 import com.base.muslim.login.common.constants.LoginConstants.Companion.FACEBOOK
 import com.base.muslim.login.common.constants.LoginConstants.Companion.TWITTER
@@ -50,14 +49,7 @@ class ShareManager(private val activity: Activity, private val onShareListener: 
         }
     }
 
-    fun shareImage(type: String, image: Bitmap, tag: String = "") {
-        when (type) {
-            FACEBOOK -> facebookShareManager.shareImage(image, tag)
-            TWITTER -> twitterShareManager.shareImage(image, tag)
-        }
-    }
-
-    fun shareImage(type: String, image: Uri, tag: String = "") {
+    fun shareImage(type: String, image: Any, tag: String = "") {
         when (type) {
             FACEBOOK -> facebookShareManager.shareImage(image, tag)
             TWITTER -> twitterShareManager.shareImage(image, tag)
@@ -71,19 +63,29 @@ class ShareManager(private val activity: Activity, private val onShareListener: 
         }
     }
 
-    fun shareMedia(type: String, imageList: List<Bitmap>, videoUriList: List<Uri>, tag: String = "") {
+    fun shareMedia(type: String, imageList: List<Any>, videoUriList: List<Uri>, tag: String) {
         when (type) {
             FACEBOOK -> facebookShareManager.shareMedia(imageList, videoUriList, tag)
             TWITTER -> onShareListener.onShareFail(TWITTER, "Twitter share does not support media yet")
         }
     }
 
-    @JvmOverloads
     fun sendEmail(emailBody: String = "", emailSubject: String = "") {
-        emailShareManager.sendEmail(emailBody, emailSubject)
+        emailShareManager.sendTextEmail(emailBody, emailSubject)
     }
 
-    @JvmOverloads
+    fun sendImageEmail(image: Any = Uri.EMPTY, emailBody: String = "", emailSubject: String = "") {
+        emailShareManager.sendImageEmail(image, emailBody, emailSubject)
+    }
+
+    fun sendVideoEmail(video: Uri = Uri.EMPTY, emailBody: String = "", emailSubject: String = "") {
+        emailShareManager.sendVideoEmail(video, emailBody, emailSubject)
+    }
+
+    fun sendMediaEmail(imageList: List<Any> = ArrayList(), videoList: List<Uri> = ArrayList(), emailBody: String = "", emailSubject: String = "") {
+        emailShareManager.sendMediaEmail(imageList, videoList, emailBody, emailSubject)
+    }
+
     fun sendSMS(smsBody: String = "", phoneNumber: String = "") {
         smsShareManager.sendSMS(smsBody, phoneNumber)
     }

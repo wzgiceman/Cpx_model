@@ -24,7 +24,7 @@ class SMSShareManager(private val activity: Activity, private val onShareListene
      */
     fun sendSMS(smsBody: String, phoneNumber: String) {
         val sendIntent = Intent(Intent.ACTION_VIEW, Uri.parse("smsto:"))
-        sendIntent.putExtra("address", phoneNumber) // 电话号码，这行去掉的话，默认就没有电话
+        sendIntent.putExtra("address", phoneNumber)
         sendIntent.putExtra("sms_body", smsBody)
         sendIntent.type = "vnd.android-dir/mms-sms"
         activity.startActivityForResult(sendIntent, REQUEST_CODE_SEND_SMS)

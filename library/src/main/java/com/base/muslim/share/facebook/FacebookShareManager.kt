@@ -6,6 +6,7 @@ import android.graphics.Bitmap
 import android.net.Uri
 import com.base.muslim.login.common.constants.LoginConstants.Companion.FACEBOOK
 import com.base.muslim.share.common.listener.OnShareListener
+import com.base.muslim.share.common.util.ShareUtils
 import com.facebook.CallbackManager
 import com.facebook.FacebookCallback
 import com.facebook.FacebookException
@@ -32,14 +33,7 @@ class FacebookShareManager(private val activity: Activity, private val onShareLi
      * @param text 文字内容
      */
     fun shareText(text: String) {
-        val content = ShareLinkContent.Builder()
-                .setShareHashtag(ShareHashtag.Builder()
-                        .setHashtag(text)
-                        .build())
-                .setQuote(text)
-                .build()
-        shareDialog.registerCallback(callbackManager, this)
-        shareDialog.show(content)
+        shareLink(tag = text)
     }
 
     /**
@@ -48,7 +42,7 @@ class FacebookShareManager(private val activity: Activity, private val onShareLi
      * @param tag 文字内容
      * @param quote 引文内容，和文字内容有不一样的样式
      */
-    fun shareLink(link: String, tag: String, quote: String) {
+    fun shareLink(link: String = "", tag: String = "", quote: String = "") {
         val content = ShareLinkContent.Builder()
                 .setContentUrl(Uri.parse(link))
                 .setShareHashtag(ShareHashtag.Builder()
@@ -61,44 +55,12 @@ class FacebookShareManager(private val activity: Activity, private val onShareLi
     }
 
     /**
-     * 分享图片
-     * @param image 图片Bitmap
+     * 分享本地图片
+     * @param image 图片Bitmap或者图片Uri
      * @param tag 文字内容
      */
-    fun shareImage(image: Bitmap, tag: String) {
-        shareBitmapOrUri(image, tag)
-    }
-
-    /**
-     * 分享图片
-     * @param image 图片Uri
-     * @param tag 文字内容
-     */
-    fun shareImage(image: Uri, tag: String) {
-        shareBitmapOrUri(image, tag)
-    }
-
-    private fun shareBitmapOrUri(image: Any, tag: String) {
-        val content = SharePhotoContent.Builder()
-                .addPhoto(buildSharePhoto(image))
-                .setShareHashtag(ShareHashtag.Builder()
-                        .setHashtag(tag)
-                        .build())
-                .build()
-        shareDialog.registerCallback(callbackManager, this)
-        shareDialog.show(content)
-    }
-
-    private fun buildSharePhoto(image: Any): SharePhoto? {
-        return when (image) {
-            is Bitmap -> SharePhoto.Builder()
-                    .setBitmap(image)
-                    .build()
-            is Uri -> SharePhoto.Builder()
-                    .setImageUrl(image)
-                    .build()
-            else -> null
-        }
+    fun shareImage(image: Any, tag: String) {
+        shareMedia(imageList = listOf(image), tag = tag)
     }
 
     /**
@@ -107,20 +69,7 @@ class FacebookShareManager(private val activity: Activity, private val onShareLi
      * @param tag 文字内容
      */
     fun shareVideo(videoUri: Uri, tag: String) {
-        val content = ShareVideoContent.Builder()
-                .setVideo(buildShareVideo(videoUri))
-                .setShareHashtag(ShareHashtag.Builder()
-                        .setHashtag(tag)
-                        .build())
-                .build()
-        shareDialog.registerCallback(callbackManager, this)
-        shareDialog.show(content)
-    }
-
-    private fun buildShareVideo(videoUri: Uri): ShareVideo? {
-        return ShareVideo.Builder()
-                .setLocalUrl(videoUri)
-                .build()
+        shareMedia(videoUriList = listOf(videoUri), tag = tag)
     }
 
     /**
@@ -128,15 +77,18 @@ class FacebookShareManager(private val activity: Activity, private val onShareLi
      * @param imageList 图片Bitmap列表
      * @param videoUriList 本地视频Uri列表
      * @param tag 文字内容
-     *
      */
-    fun shareMedia(imageList: List<Bitmap>, videoUriList: List<Uri>, tag: String) {
+    fun shareMedia(imageList: List<Any> = ArrayList(), videoUriList: List<Uri> = ArrayList(), tag: String = "") {
         val shareContentBuilder = ShareMediaContent.Builder()
         for (image in imageList) {
             shareContentBuilder.addMedium(buildSharePhoto(image))
         }
-        for (videoUri in videoUriList) {
-            shareContentBuilder.addMedium(buildShareVideo(videoUri))
+        for (video in videoUriList) {
+            shareContentBuilder.addMedium(buildShareVideo(video))
+        }
+        /**必须添加一个Medium*/
+        if (imageList.isEmpty() && videoUriList.isEmpty()) {
+            shareContentBuilder.addMedium(buildShareVideo(Uri.EMPTY))
         }
         shareContentBuilder.setShareHashtag(ShareHashtag.Builder()
                 .setHashtag(tag)
@@ -145,15 +97,35 @@ class FacebookShareManager(private val activity: Activity, private val onShareLi
         shareDialog.show(shareContentBuilder.build(), ShareDialog.Mode.AUTOMATIC)
     }
 
+    private fun buildSharePhoto(image: Any): SharePhoto? {
+        val imageUri = when (image) {
+            is Bitmap -> ShareUtils.bitmap2Uri(image)
+            is Uri -> image
+            else -> Uri.EMPTY
+        }
+        return SharePhoto.Builder()
+                .setImageUrl(imageUri)
+                .build()
+    }
+
+    private fun buildShareVideo(videoUri: Uri): ShareVideo? {
+        return ShareVideo.Builder()
+                .setLocalUrl(videoUri)
+                .build()
+    }
+
     override fun onSuccess(result: Sharer.Result?) {
+        ShareUtils.clearShareTempPictures()
         onShareListener.onShareSuccess(FACEBOOK)
     }
 
     override fun onCancel() {
+        ShareUtils.clearShareTempPictures()
         onShareListener.onShareFail(FACEBOOK, "Facebook share cancel")
     }
 
     override fun onError(error: FacebookException?) {
+        ShareUtils.clearShareTempPictures()
         onShareListener.onShareFail(FACEBOOK, "Facebook share fail:$error")
     }
 

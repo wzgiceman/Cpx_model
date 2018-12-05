@@ -4,9 +4,12 @@ import android.app.Activity
 import android.app.Activity.RESULT_CANCELED
 import android.app.Activity.RESULT_OK
 import android.content.Intent
+import android.graphics.Bitmap
+import android.net.Uri
 import com.base.muslim.share.common.constants.ShareConstants.Companion.EMAIL
 import com.base.muslim.share.common.constants.ShareConstants.Companion.REQUEST_CODE_SEND_EMAIL
 import com.base.muslim.share.common.listener.OnShareListener
+import com.base.muslim.share.common.util.ShareUtils
 
 /**
  * Description:
@@ -22,20 +25,62 @@ class EmailShareManager(private val activity: Activity, private val onShareListe
      * @param emailBody 邮件内容
      * @param emailSubject 邮件主题
      */
-    fun sendEmail(emailBody: String, emailSubject: String) {
-        val email = Intent(Intent.ACTION_SEND)
-        email.type = "plain/text"
-        email.putExtra(android.content.Intent.EXTRA_SUBJECT, emailSubject)
-        email.putExtra(android.content.Intent.EXTRA_TEXT, emailBody)
+    fun sendTextEmail(emailBody: String, emailSubject: String) {
+        sendMediaEmail(emailBody = emailBody, emailSubject = emailSubject)
+    }
+
+    @JvmOverloads
+    fun sendImageEmail(image: Any, emailBody: String = "", emailSubject: String = "") {
+        sendMediaEmail(imageList = listOf(image), emailBody = emailBody, emailSubject = emailSubject)
+    }
+
+    @JvmOverloads
+    fun sendVideoEmail(video: Uri, emailBody: String = "", emailSubject: String = "") {
+        sendMediaEmail(videoList = listOf(video), emailBody = emailBody, emailSubject = emailSubject)
+    }
+
+    @JvmOverloads
+    fun sendMediaEmail(imageList: List<Any> = ArrayList(), videoList: List<Uri> = ArrayList(), emailBody: String = "", emailSubject: String = "") {
+        val email = Intent(Intent.ACTION_SEND_MULTIPLE)
+        email.type = "application/octet-stream"
+
+        val uriList = ArrayList<Uri>()
+        for (image in imageList) {
+            val imageUri = when (image) {
+                is Bitmap -> ShareUtils.bitmap2Uri(image)
+                is Uri -> image
+                else -> Uri.EMPTY
+            }
+            uriList.add(imageUri)
+        }
+        uriList.addAll(videoList)
+        email.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uriList)
+//        email.type = "image/*"
+//        for (image in imageList) {
+//            val imageUri = when (image) {
+//                is Bitmap -> ShareUtils.bitmap2Uri(image)
+//                is Uri -> image
+//                else -> Uri.EMPTY
+//            }
+//            email.putExtra(Intent.EXTRA_STREAM, imageUri)
+//        }
+//        email.type = "video/*"
+//        for (video in videoList) {
+//            email.putExtra(Intent.EXTRA_STREAM, video)
+//        }
+//        email.type = "plain/text"
+        email.putExtra(Intent.EXTRA_SUBJECT, emailSubject)
+        email.putExtra(Intent.EXTRA_TEXT, emailBody)
         activity.startActivityForResult(Intent.createChooser(email, "Choose App"), REQUEST_CODE_SEND_EMAIL)
     }
 
     fun handleActivityResult(requestCode: Int, resultCode: Int) {
-        if(requestCode == REQUEST_CODE_SEND_EMAIL){
+        if (requestCode == REQUEST_CODE_SEND_EMAIL) {
+            ShareUtils.clearShareTempPictures()
             when (resultCode) {
                 RESULT_OK -> onShareListener.onShareSuccess(EMAIL)
-                RESULT_CANCELED -> onShareListener.onShareFail(EMAIL,"Email share cancel")
-                else -> onShareListener.onShareFail(EMAIL,"Email share fail")
+                RESULT_CANCELED -> onShareListener.onShareFail(EMAIL, "Email share cancel")
+                else -> onShareListener.onShareFail(EMAIL, "Email share fail")
             }
         }
     }
