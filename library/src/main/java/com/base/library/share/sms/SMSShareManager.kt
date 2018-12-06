@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import android.support.v4.app.Fragment
 import com.base.library.share.common.constants.ShareConstants.Companion.REQUEST_CODE_SEND_SMS
 import com.base.library.share.common.constants.ShareConstants.Companion.SMS
 import com.base.library.share.common.listener.OnShareListener
@@ -30,11 +29,9 @@ class SMSShareManager(private val context: Context, private val onShareListener:
         sendIntent.putExtra("sms_body", smsBody)
         sendIntent.type = "vnd.android-dir/mms-sms"
         when (context) {
-            is Fragment -> context.startActivityForResult(Intent.createChooser(sendIntent,"Choose App"), REQUEST_CODE_SEND_SMS)
             is Activity -> context.startActivityForResult(Intent.createChooser(sendIntent,"Choose App"), REQUEST_CODE_SEND_SMS)
-            else -> onShareListener.onShareFail(SMS,"SMS share just support Fragment or Activity")
+            else -> onShareListener.onShareFail(SMS,"SMS share just support Activity")
         }
-
     }
 
     fun handleActivityResult(requestCode: Int, resultCode: Int) {

@@ -7,7 +7,6 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
-import android.support.v4.app.Fragment
 import com.base.library.share.common.constants.ShareConstants.Companion.EMAIL
 import com.base.library.share.common.constants.ShareConstants.Companion.REQUEST_CODE_SEND_EMAIL
 import com.base.library.share.common.listener.OnShareListener
@@ -57,9 +56,8 @@ class EmailShareManager(private val context: Context, private val onShareListene
         email.putExtra(Intent.EXTRA_TEXT, emailBody)
         email.putExtra(Intent.EXTRA_SUBJECT, emailSubject)
         when (context) {
-            is Fragment -> context.startActivityForResult(Intent.createChooser(email, "Choose App"), REQUEST_CODE_SEND_EMAIL)
             is Activity -> context.startActivityForResult(Intent.createChooser(email, "Choose App"), REQUEST_CODE_SEND_EMAIL)
-            else -> onShareListener.onShareFail(EMAIL,"Email share just support Fragment or Activity")
+            else -> onShareListener.onShareFail(EMAIL,"Email share just support Activity")
         }
     }
 
