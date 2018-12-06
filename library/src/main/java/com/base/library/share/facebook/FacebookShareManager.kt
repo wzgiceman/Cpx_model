@@ -1,10 +1,10 @@
 package com.base.library.share.facebook
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
+import android.support.v4.app.Fragment
 import com.base.library.login.common.constants.LoginConstants.Companion.FACEBOOK
 import com.base.library.share.common.listener.OnShareListener
 import com.base.library.share.common.util.ShareUtils
@@ -24,10 +24,16 @@ import com.facebook.share.widget.ShareDialog
  * Company: Mobile CPX
  * Date:    2018/12/4
  */
-class FacebookShareManager(private val context: Context, private val onShareListener: OnShareListener) : FacebookCallback<Sharer.Result> {
+class FacebookShareManager(private val context: Any, private val onShareListener: OnShareListener) : FacebookCallback<Sharer.Result> {
 
     private val callbackManager by lazy { CallbackManager.Factory.create() }
-    private val shareDialog by lazy { ShareDialog(context as Activity) }
+    private val shareDialog by lazy {
+        when (context) {
+            is Activity -> ShareDialog(context)
+            is Fragment -> ShareDialog(context)
+            else -> null
+        }
+    }
 
     /**
      * 分享文字
@@ -51,8 +57,8 @@ class FacebookShareManager(private val context: Context, private val onShareList
                         .build())
                 .setQuote(quote)
                 .build()
-        shareDialog.registerCallback(callbackManager, this)
-        shareDialog.show(content)
+        shareDialog?.registerCallback(callbackManager, this)
+        shareDialog?.show(content)
     }
 
     /**
@@ -94,8 +100,8 @@ class FacebookShareManager(private val context: Context, private val onShareList
         shareContentBuilder.setShareHashtag(ShareHashtag.Builder()
                 .setHashtag(tag)
                 .build())
-        shareDialog.registerCallback(callbackManager, this)
-        shareDialog.show(shareContentBuilder.build(), ShareDialog.Mode.AUTOMATIC)
+        shareDialog?.registerCallback(callbackManager, this)
+        shareDialog?.show(shareContentBuilder.build(), ShareDialog.Mode.AUTOMATIC)
     }
 
     private fun buildSharePhoto(image: Any?): SharePhoto? {

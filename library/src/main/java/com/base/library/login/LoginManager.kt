@@ -34,26 +34,44 @@ import com.base.library.login.twitter.TwitterLoginManager
  * Company: Mobile CPX
  * Date:    2018/12/4
  */
-class LoginManager(val activity: FragmentActivity,private val onLoginListener: OnLoginListener) {
-    private val facebookLoginManager by lazy { FacebookLoginManager(activity, onLoginListener) }
-    private val googleLoginManager by lazy { GoogleLoginManager(activity, onLoginListener) }
-    private val twitterLoginManager by lazy { TwitterLoginManager(activity, onLoginListener) }
+class LoginManager(val activity: FragmentActivity, private val onLoginListener: OnLoginListener) {
+    private var facebookLoginManager: FacebookLoginManager? = null
+    private var googleLoginManager: GoogleLoginManager? = null
+    private var twitterLoginManager: TwitterLoginManager? = null
 
     fun loginBy(type: String) {
         when (type) {
-            FACEBOOK -> facebookLoginManager.login()
-            GOOGLE -> googleLoginManager.login()
-            TWITTER -> twitterLoginManager.login()
+            FACEBOOK -> getFacebookLoginManager()?.login()
+            GOOGLE -> getGoogleLoginManager()?.login()
+            TWITTER -> getTwitterLoginManager()?.login()
         }
     }
 
+    private fun getFacebookLoginManager(): FacebookLoginManager? {
+        if (facebookLoginManager == null)
+            facebookLoginManager = FacebookLoginManager(activity, onLoginListener)
+        return facebookLoginManager
+    }
+
+    private fun getGoogleLoginManager(): GoogleLoginManager? {
+        if (googleLoginManager == null)
+            googleLoginManager = GoogleLoginManager(activity, onLoginListener)
+        return googleLoginManager
+    }
+
+    private fun getTwitterLoginManager(): TwitterLoginManager? {
+        if (twitterLoginManager == null)
+            twitterLoginManager = TwitterLoginManager(activity, onLoginListener)
+        return twitterLoginManager
+    }
+
     fun handleActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        facebookLoginManager.handleActivityResult(requestCode, resultCode, data)
-        googleLoginManager.handleActivityResult(requestCode, data)
-        twitterLoginManager.handleActivityResult(requestCode, resultCode, data)
+        facebookLoginManager?.handleActivityResult(requestCode, resultCode, data)
+        googleLoginManager?.handleActivityResult(requestCode, data)
+        twitterLoginManager?.handleActivityResult(requestCode, resultCode, data)
     }
 
     fun release() {
-        facebookLoginManager.release()
+        facebookLoginManager?.release()
     }
 }

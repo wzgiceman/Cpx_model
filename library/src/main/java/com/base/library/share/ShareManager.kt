@@ -1,8 +1,9 @@
 package com.base.library.share
 
-import android.content.Context
+import android.app.Activity
 import android.content.Intent
 import android.net.Uri
+import android.support.v4.app.Fragment
 import com.base.library.login.common.constants.LoginConstants.Companion.FACEBOOK
 import com.base.library.login.common.constants.LoginConstants.Companion.TWITTER
 import com.base.library.share.common.listener.OnShareListener
@@ -29,75 +30,120 @@ import com.base.library.share.twitter.TwitterShareManager
  * Company: Mobile CPX
  * Date:    2018/12/4
  */
-class ShareManager(private val context: Context, private val onShareListener: OnShareListener) {
-    private val facebookShareManager by lazy { FacebookShareManager(context, onShareListener) }
-    private val twitterShareManager by lazy { TwitterShareManager(context, onShareListener) }
-    private val emailShareManager by lazy { EmailShareManager(context, onShareListener) }
-    private val smsShareManager by lazy { SMSShareManager(context, onShareListener) }
+class ShareManager {
+    private var facebookShareManager: FacebookShareManager? = null
+    private var twitterShareManager: TwitterShareManager? = null
+    private var emailShareManager: EmailShareManager? = null
+    private var smsShareManager: SMSShareManager? = null
+    private var context: Any
+    private var onShareListener: OnShareListener
+
+    constructor(activity: Activity, onShareListener: OnShareListener) {
+        context = activity
+        this.onShareListener = onShareListener
+    }
+
+    constructor(fragment: Fragment, onShareListener: OnShareListener) {
+        context = fragment
+        this.onShareListener = onShareListener
+    }
+
+    private fun getFacebookShareManager(): FacebookShareManager? {
+        if (facebookShareManager == null) {
+            facebookShareManager = FacebookShareManager(context, onShareListener)
+        }
+        return facebookShareManager
+    }
+
+    private fun getTwitterShareManager(): TwitterShareManager? {
+        if (twitterShareManager == null) {
+            val context = this.context
+            twitterShareManager = when (context) {
+                is Activity -> TwitterShareManager(context, onShareListener)
+                is Fragment -> TwitterShareManager(context.context, onShareListener)
+                else -> null
+            }
+        }
+        return twitterShareManager
+    }
+
+    private fun getEmailShareManager(): EmailShareManager? {
+        if (emailShareManager == null) {
+            emailShareManager = EmailShareManager(context, onShareListener)
+        }
+        return emailShareManager
+    }
+
+    private fun getSMSShareManager(): SMSShareManager? {
+        if (smsShareManager == null) {
+            smsShareManager = SMSShareManager(context, onShareListener)
+        }
+        return smsShareManager
+    }
 
     fun shareText(type: String, text: String) {
         when (type) {
-            FACEBOOK -> facebookShareManager.shareText(text)
-            TWITTER -> twitterShareManager.shareText(text)
+            FACEBOOK -> getFacebookShareManager()?.shareText(text)
+            TWITTER -> getTwitterShareManager()?.shareText(text)
         }
     }
 
     fun shareLink(type: String, link: String, tag: String, quote: String) {
         when (type) {
-            FACEBOOK -> facebookShareManager.shareLink(link, tag, quote)
+            FACEBOOK -> getFacebookShareManager()?.shareLink(link, tag, quote)
             TWITTER -> onShareListener.onShareFail(TWITTER, "Twitter share does not support link yet")
         }
     }
 
     fun shareImage(type: String, image: Any?, tag: String = "") {
         when (type) {
-            FACEBOOK -> facebookShareManager.shareImage(image, tag)
-            TWITTER -> twitterShareManager.shareImage(image, tag)
+            FACEBOOK -> getFacebookShareManager()?.shareImage(image, tag)
+            TWITTER -> getTwitterShareManager()?.shareImage(image, tag)
         }
     }
 
     fun shareVideo(type: String, videoUri: Uri, tag: String = "") {
         when (type) {
-            FACEBOOK -> facebookShareManager.shareVideo(videoUri, tag)
+            FACEBOOK -> getFacebookShareManager()?.shareVideo(videoUri, tag)
             TWITTER -> onShareListener.onShareFail(TWITTER, "Twitter share does not support video yet")
         }
     }
 
     fun shareMedia(type: String, imageList: List<Any>, videoUriList: List<Uri>, tag: String) {
         when (type) {
-            FACEBOOK -> facebookShareManager.shareMedia(imageList, videoUriList, tag)
+            FACEBOOK -> getFacebookShareManager()?.shareMedia(imageList, videoUriList, tag)
             TWITTER -> onShareListener.onShareFail(TWITTER, "Twitter share does not support media yet")
         }
     }
 
     fun sendEmail(emailBody: String = "", emailSubject: String = "") {
-        emailShareManager.sendTextEmail(emailBody, emailSubject)
+        getEmailShareManager()?.sendTextEmail(emailBody, emailSubject)
     }
 
     fun sendImageEmail(image: Any = Uri.EMPTY, emailBody: String = "", emailSubject: String = "") {
-        emailShareManager.sendImageEmail(image, emailBody, emailSubject)
+        getEmailShareManager()?.sendImageEmail(image, emailBody, emailSubject)
     }
 
     fun sendVideoEmail(video: Uri = Uri.EMPTY, emailBody: String = "", emailSubject: String = "") {
-        emailShareManager.sendVideoEmail(video, emailBody, emailSubject)
+        getEmailShareManager()?.sendVideoEmail(video, emailBody, emailSubject)
     }
 
     fun sendMediaEmail(imageList: List<Any> = ArrayList(), videoList: List<Uri> = ArrayList(), emailBody: String = "", emailSubject: String = "") {
-        emailShareManager.sendMediaEmail(imageList, videoList, emailBody, emailSubject)
+        getEmailShareManager()?.sendMediaEmail(imageList, videoList, emailBody, emailSubject)
     }
 
     fun sendSMS(smsBody: String = "", phoneNumber: String = "") {
-        smsShareManager.sendSMS(smsBody, phoneNumber)
+        getSMSShareManager()?.sendSMS(smsBody, phoneNumber)
     }
 
     fun handleActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        facebookShareManager.handleActivityResult(requestCode, resultCode, data)
-        emailShareManager.handleActivityResult(requestCode, resultCode)
-        smsShareManager.handleActivityResult(requestCode, resultCode)
+        facebookShareManager?.handleActivityResult(requestCode, resultCode, data)
+        emailShareManager?.handleActivityResult(requestCode, resultCode)
+        smsShareManager?.handleActivityResult(requestCode, resultCode)
     }
 
     fun release() {
-        twitterShareManager.release()
+        twitterShareManager?.release()
     }
 
 }

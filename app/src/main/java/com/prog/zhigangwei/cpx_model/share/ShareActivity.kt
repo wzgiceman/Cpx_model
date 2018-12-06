@@ -56,9 +56,9 @@ class ShareActivity : BaseShareActivity() {
 
         /**选择本地图片*/
         btn_choose_local_image.setOnClickListener {
-            startActivityForResult(Intent(Intent.ACTION_GET_CONTENT).apply {
+            startActivityForResult(Intent.createChooser(Intent(Intent.ACTION_GET_CONTENT).apply {
                 type = "image/*"
-            }, REQUEST_CODE_CHOOSE_LOCAL_IMAGE)
+            },"Choose App"), REQUEST_CODE_CHOOSE_LOCAL_IMAGE)
         }
 
         /**facebook分享本地图片*/
@@ -71,9 +71,9 @@ class ShareActivity : BaseShareActivity() {
 
         /**选择本地视频*/
         btn_choose_local_video.setOnClickListener {
-            startActivityForResult(Intent(Intent.ACTION_GET_CONTENT).apply {
+            startActivityForResult(Intent.createChooser(Intent(Intent.ACTION_GET_CONTENT).apply {
                 type = "video/*"
-            }, REQUEST_CODE_CHOOSE_LOCAL_VIDEO)
+            },"Choose App"), REQUEST_CODE_CHOOSE_LOCAL_VIDEO)
         }
 
         /**facebook分享本地视频*/

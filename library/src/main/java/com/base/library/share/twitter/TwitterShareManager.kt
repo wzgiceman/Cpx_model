@@ -1,6 +1,7 @@
 package com.base.library.share.twitter
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
 import com.base.library.rxbus.RxBus
@@ -48,11 +49,11 @@ class TwitterShareManager(private val context: Context, private val onShareListe
             is Uri -> image
             else -> Uri.EMPTY
         }
-        context.startActivity(ComposerActivity.Builder(context)
+        context.startActivity(Intent.createChooser(ComposerActivity.Builder(context)
                 .image(imageUri)
                 .text(text)
                 .session(TwitterCore.getInstance().sessionManager.activeSession)
-                .createIntent())
+                .createIntent(), "Choose App"))
     }
 
     private fun checkSession(): Boolean {

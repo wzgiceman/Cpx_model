@@ -16,7 +16,7 @@ import com.base.muslim.base.fragment.BaseToolFragment
  */
 abstract class BaseShareFragment : BaseToolFragment(), OnShareListener {
 
-    private val shareManager by lazy { ShareManager(context, this) }
+    private val shareManager by lazy { ShareManager(this, this) }
 
     fun shareText(type: String, text: String) {
         shareManager.shareText(type, text)
