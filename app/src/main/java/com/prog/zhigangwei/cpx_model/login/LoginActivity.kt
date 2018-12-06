@@ -1,10 +1,10 @@
 package com.prog.zhigangwei.cpx_model.login
 
-import com.base.muslim.login.base.BaseLoginActivity
-import com.base.muslim.login.common.bean.LoginAuth
-import com.base.muslim.login.common.constants.LoginConstants.Companion.FACEBOOK
-import com.base.muslim.login.common.constants.LoginConstants.Companion.GOOGLE
-import com.base.muslim.login.common.constants.LoginConstants.Companion.TWITTER
+import com.base.library.login.base.BaseLoginActivity
+import com.base.library.login.common.bean.LoginAuth
+import com.base.library.login.common.constants.LoginConstants.Companion.FACEBOOK
+import com.base.library.login.common.constants.LoginConstants.Companion.GOOGLE
+import com.base.library.login.common.constants.LoginConstants.Companion.TWITTER
 import com.prog.zhigangwei.cpx_model.R
 import kotlinx.android.synthetic.main.activity_login.*
 

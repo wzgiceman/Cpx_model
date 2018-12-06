@@ -64,7 +64,7 @@
             android:exported="true" />
         <!--Twitter分享的接收广播-->
         <receiver
-            android:name="com.base.muslim.share.twitter.TwitterResultReceiver"
+            android:name="com.base.library.share.twitter.TwitterResultReceiver"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.twitter.sdk.android.tweetcomposer.UPLOAD_SUCCESS" />
