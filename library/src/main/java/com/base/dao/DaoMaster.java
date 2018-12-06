@@ -21,16 +21,16 @@ public class DaoMaster extends AbstractDaoMaster {
 
     /** Creates underlying database table using DAOs. */
     public static void createAllTables(Database db, boolean ifNotExists) {
-        ShareDataDao.createTable(db, ifNotExists);
         CookieResultDao.createTable(db, ifNotExists);
         DownInfoDao.createTable(db, ifNotExists);
+        ShareDataDao.createTable(db, ifNotExists);
     }
 
     /** Drops underlying database table using DAOs. */
     public static void dropAllTables(Database db, boolean ifExists) {
-        ShareDataDao.dropTable(db, ifExists);
         CookieResultDao.dropTable(db, ifExists);
         DownInfoDao.dropTable(db, ifExists);
+        ShareDataDao.dropTable(db, ifExists);
     }
 
     /**
@@ -49,9 +49,9 @@ public class DaoMaster extends AbstractDaoMaster {
 
     public DaoMaster(Database db) {
         super(db, SCHEMA_VERSION);
-        registerDaoClass(ShareDataDao.class);
         registerDaoClass(CookieResultDao.class);
         registerDaoClass(DownInfoDao.class);
+        registerDaoClass(ShareDataDao.class);
     }
 
     public DaoSession newSession() {

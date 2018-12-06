@@ -1,4 +1,4 @@
-package com.base.muslim.login.common.constants
+package com.base.library.login.common.constants
 
 /**
  * Description:

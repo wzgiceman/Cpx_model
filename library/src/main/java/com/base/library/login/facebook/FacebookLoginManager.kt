@@ -1,11 +1,11 @@
-package com.base.muslim.login.facebook
+package com.base.library.login.facebook
 
 import android.content.Context
 import android.content.Intent
 import android.text.TextUtils
-import com.base.muslim.login.common.bean.LoginAuth
-import com.base.muslim.login.common.constants.LoginConstants.Companion.FACEBOOK
-import com.base.muslim.login.common.listener.OnLoginListener
+import com.base.library.login.common.bean.LoginAuth
+import com.base.library.login.common.constants.LoginConstants.Companion.FACEBOOK
+import com.base.library.login.common.listener.OnLoginListener
 import com.facebook.AccessToken
 import com.facebook.CallbackManager
 import com.facebook.FacebookCallback

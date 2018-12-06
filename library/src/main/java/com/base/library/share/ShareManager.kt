@@ -1,15 +1,15 @@
-package com.base.muslim.share
+package com.base.library.share
 
 import android.app.Activity
 import android.content.Intent
 import android.net.Uri
-import com.base.muslim.login.common.constants.LoginConstants.Companion.FACEBOOK
-import com.base.muslim.login.common.constants.LoginConstants.Companion.TWITTER
-import com.base.muslim.share.common.listener.OnShareListener
-import com.base.muslim.share.email.EmailShareManager
-import com.base.muslim.share.facebook.FacebookShareManager
-import com.base.muslim.share.sms.SMSShareManager
-import com.base.muslim.share.twitter.TwitterShareManager
+import com.base.library.login.common.constants.LoginConstants.Companion.FACEBOOK
+import com.base.library.login.common.constants.LoginConstants.Companion.TWITTER
+import com.base.library.share.common.listener.OnShareListener
+import com.base.library.share.email.EmailShareManager
+import com.base.library.share.facebook.FacebookShareManager
+import com.base.library.share.sms.SMSShareManager
+import com.base.library.share.twitter.TwitterShareManager
 
 
 /**

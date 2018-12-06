@@ -1,4 +1,4 @@
-package com.base.muslim.share.common.constants
+package com.base.library.share.common.constants
 
 /**
  * Description:

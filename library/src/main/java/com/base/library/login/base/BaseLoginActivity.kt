@@ -1,9 +1,9 @@
-package com.base.muslim.login.base
+package com.base.library.login.base
 
 import android.content.Intent
 import com.base.muslim.base.activity.BaseToolsActivity
-import com.base.muslim.login.LoginManager
-import com.base.muslim.login.common.listener.OnLoginListener
+import com.base.library.login.LoginManager
+import com.base.library.login.common.listener.OnLoginListener
 
 /**
  * Description:

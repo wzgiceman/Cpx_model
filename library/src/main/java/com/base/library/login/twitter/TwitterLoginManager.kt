@@ -1,11 +1,11 @@
-package com.base.muslim.login.twitter
+package com.base.library.login.twitter
 
 import android.content.Context
 import android.content.Intent
 import android.text.TextUtils
-import com.base.muslim.login.common.bean.LoginAuth
-import com.base.muslim.login.common.constants.LoginConstants.Companion.TWITTER
-import com.base.muslim.login.common.listener.OnLoginListener
+import com.base.library.login.common.bean.LoginAuth
+import com.base.library.login.common.constants.LoginConstants.Companion.TWITTER
+import com.base.library.login.common.listener.OnLoginListener
 import com.twitter.sdk.android.core.Callback
 import com.twitter.sdk.android.core.Result
 import com.twitter.sdk.android.core.TwitterException

@@ -1,4 +1,4 @@
-package com.base.muslim.share.twitter
+package com.base.library.share.twitter
 
 import android.app.Activity
 import android.graphics.Bitmap
@@ -6,9 +6,9 @@ import android.net.Uri
 import com.base.library.rxbus.RxBus
 import com.base.library.rxbus.annotation.Subscribe
 import com.base.library.rxbus.thread.EventThread
-import com.base.muslim.share.common.constants.ShareConstants.Companion.TWITTER
-import com.base.muslim.share.common.listener.OnShareListener
-import com.base.muslim.share.common.util.ShareUtils
+import com.base.library.share.common.constants.ShareConstants.Companion.TWITTER
+import com.base.library.share.common.listener.OnShareListener
+import com.base.library.share.common.util.ShareUtils
 import com.twitter.sdk.android.core.TwitterCore
 import com.twitter.sdk.android.tweetcomposer.ComposerActivity
 import com.twitter.sdk.android.tweetcomposer.TweetUploadService

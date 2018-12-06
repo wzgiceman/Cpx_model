@@ -1,4 +1,4 @@
-package com.base.muslim.share.common.util
+package com.base.library.share.common.util
 
 import android.graphics.Bitmap
 import android.net.Uri

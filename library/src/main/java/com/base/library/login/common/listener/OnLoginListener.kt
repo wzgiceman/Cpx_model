@@ -1,6 +1,6 @@
-package com.base.muslim.login.common.listener
+package com.base.library.login.common.listener
 
-import com.base.muslim.login.common.bean.LoginAuth
+import com.base.library.login.common.bean.LoginAuth
 
 /**
  * Description:

@@ -1,12 +1,12 @@
-package com.base.muslim.share.facebook
+package com.base.library.share.facebook
 
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
-import com.base.muslim.login.common.constants.LoginConstants.Companion.FACEBOOK
-import com.base.muslim.share.common.listener.OnShareListener
-import com.base.muslim.share.common.util.ShareUtils
+import com.base.library.login.common.constants.LoginConstants.Companion.FACEBOOK
+import com.base.library.share.common.listener.OnShareListener
+import com.base.library.share.common.util.ShareUtils
 import com.facebook.CallbackManager
 import com.facebook.FacebookCallback
 import com.facebook.FacebookException

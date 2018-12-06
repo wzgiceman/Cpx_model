@@ -1,4 +1,4 @@
-package com.base.muslim.share.email
+package com.base.library.share.email
 
 import android.app.Activity
 import android.app.Activity.RESULT_CANCELED
@@ -6,10 +6,10 @@ import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
-import com.base.muslim.share.common.constants.ShareConstants.Companion.EMAIL
-import com.base.muslim.share.common.constants.ShareConstants.Companion.REQUEST_CODE_SEND_EMAIL
-import com.base.muslim.share.common.listener.OnShareListener
-import com.base.muslim.share.common.util.ShareUtils
+import com.base.library.share.common.constants.ShareConstants.Companion.EMAIL
+import com.base.library.share.common.constants.ShareConstants.Companion.REQUEST_CODE_SEND_EMAIL
+import com.base.library.share.common.listener.OnShareListener
+import com.base.library.share.common.util.ShareUtils
 
 /**
  * Description:

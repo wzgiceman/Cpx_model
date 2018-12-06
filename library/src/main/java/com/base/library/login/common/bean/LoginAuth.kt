@@ -1,4 +1,4 @@
-package com.base.muslim.login.common.bean
+package com.base.library.login.common.bean
 
 /**
  * Description:
