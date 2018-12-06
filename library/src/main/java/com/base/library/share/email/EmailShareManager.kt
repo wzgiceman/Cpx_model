@@ -3,9 +3,11 @@ package com.base.library.share.email
 import android.app.Activity
 import android.app.Activity.RESULT_CANCELED
 import android.app.Activity.RESULT_OK
+import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
+import android.support.v4.app.Fragment
 import com.base.library.share.common.constants.ShareConstants.Companion.EMAIL
 import com.base.library.share.common.constants.ShareConstants.Companion.REQUEST_CODE_SEND_EMAIL
 import com.base.library.share.common.listener.OnShareListener
@@ -19,7 +21,7 @@ import com.base.library.share.common.util.ShareUtils
  * Company: Mobile CPX
  * Date:    2018/12/5
  */
-class EmailShareManager(private val activity: Activity, private val onShareListener: OnShareListener) {
+class EmailShareManager(private val context: Context, private val onShareListener: OnShareListener) {
     /**
      * 发送邮件
      * @param emailBody 邮件内容
@@ -54,7 +56,11 @@ class EmailShareManager(private val activity: Activity, private val onShareListe
         email.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uriList)
         email.putExtra(Intent.EXTRA_TEXT, emailBody)
         email.putExtra(Intent.EXTRA_SUBJECT, emailSubject)
-        activity.startActivityForResult(Intent.createChooser(email, "Choose App"), REQUEST_CODE_SEND_EMAIL)
+        when (context) {
+            is Fragment -> context.startActivityForResult(Intent.createChooser(email, "Choose App"), REQUEST_CODE_SEND_EMAIL)
+            is Activity -> context.startActivityForResult(Intent.createChooser(email, "Choose App"), REQUEST_CODE_SEND_EMAIL)
+            else -> onShareListener.onShareFail(EMAIL,"Email share just support Fragment or Activity")
+        }
     }
 
     fun handleActivityResult(requestCode: Int, resultCode: Int) {

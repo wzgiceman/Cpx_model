@@ -1,6 +1,7 @@
 package com.base.library.share.facebook
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
@@ -23,10 +24,10 @@ import com.facebook.share.widget.ShareDialog
  * Company: Mobile CPX
  * Date:    2018/12/4
  */
-class FacebookShareManager(private val activity: Activity, private val onShareListener: OnShareListener) : FacebookCallback<Sharer.Result> {
+class FacebookShareManager(private val context: Context, private val onShareListener: OnShareListener) : FacebookCallback<Sharer.Result> {
 
     private val callbackManager by lazy { CallbackManager.Factory.create() }
-    private val shareDialog by lazy { ShareDialog(activity) }
+    private val shareDialog by lazy { ShareDialog(context as Activity) }
 
     /**
      * 分享文字

@@ -1,6 +1,6 @@
 package com.base.library.share
 
-import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import com.base.library.login.common.constants.LoginConstants.Companion.FACEBOOK
@@ -29,11 +29,11 @@ import com.base.library.share.twitter.TwitterShareManager
  * Company: Mobile CPX
  * Date:    2018/12/4
  */
-class ShareManager(private val activity: Activity, private val onShareListener: OnShareListener) {
-    private val facebookShareManager by lazy { FacebookShareManager(activity, onShareListener) }
-    private val twitterShareManager by lazy { TwitterShareManager(activity, onShareListener) }
-    private val emailShareManager by lazy { EmailShareManager(activity, onShareListener) }
-    private val smsShareManager by lazy { SMSShareManager(activity, onShareListener) }
+class ShareManager(private val context: Context, private val onShareListener: OnShareListener) {
+    private val facebookShareManager by lazy { FacebookShareManager(context, onShareListener) }
+    private val twitterShareManager by lazy { TwitterShareManager(context, onShareListener) }
+    private val emailShareManager by lazy { EmailShareManager(context, onShareListener) }
+    private val smsShareManager by lazy { SMSShareManager(context, onShareListener) }
 
     fun shareText(type: String, text: String) {
         when (type) {

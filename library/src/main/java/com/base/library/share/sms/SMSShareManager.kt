@@ -1,8 +1,10 @@
 package com.base.library.share.sms
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.support.v4.app.Fragment
 import com.base.library.share.common.constants.ShareConstants.Companion.REQUEST_CODE_SEND_SMS
 import com.base.library.share.common.constants.ShareConstants.Companion.SMS
 import com.base.library.share.common.listener.OnShareListener
@@ -15,7 +17,7 @@ import com.base.library.share.common.listener.OnShareListener
  * Company: Mobile CPX
  * Date:    2018/12/5
  */
-class SMSShareManager(private val activity: Activity, private val onShareListener: OnShareListener) {
+class SMSShareManager(private val context: Context, private val onShareListener: OnShareListener) {
 
     /**
      * 发送短信
@@ -27,7 +29,12 @@ class SMSShareManager(private val activity: Activity, private val onShareListene
         sendIntent.putExtra("address", phoneNumber)
         sendIntent.putExtra("sms_body", smsBody)
         sendIntent.type = "vnd.android-dir/mms-sms"
-        activity.startActivityForResult(sendIntent, REQUEST_CODE_SEND_SMS)
+        when (context) {
+            is Fragment -> context.startActivityForResult(Intent.createChooser(sendIntent,"Choose App"), REQUEST_CODE_SEND_SMS)
+            is Activity -> context.startActivityForResult(Intent.createChooser(sendIntent,"Choose App"), REQUEST_CODE_SEND_SMS)
+            else -> onShareListener.onShareFail(SMS,"SMS share just support Fragment or Activity")
+        }
+
     }
 
     fun handleActivityResult(requestCode: Int, resultCode: Int) {

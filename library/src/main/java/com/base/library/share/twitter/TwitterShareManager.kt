@@ -1,6 +1,6 @@
 package com.base.library.share.twitter
 
-import android.app.Activity
+import android.content.Context
 import android.graphics.Bitmap
 import android.net.Uri
 import com.base.library.rxbus.RxBus
@@ -21,7 +21,7 @@ import com.twitter.sdk.android.tweetcomposer.TweetUploadService
  * Company: Mobile CPX
  * Date:    2018/12/4
  */
-class TwitterShareManager(private val activity: Activity, private val onShareListener: OnShareListener) {
+class TwitterShareManager(private val context: Context, private val onShareListener: OnShareListener) {
 
     init {
         RxBus.get().register(this)
@@ -48,7 +48,7 @@ class TwitterShareManager(private val activity: Activity, private val onShareLis
             is Uri -> image
             else -> Uri.EMPTY
         }
-        activity.startActivity(ComposerActivity.Builder(activity)
+        context.startActivity(ComposerActivity.Builder(context)
                 .image(imageUri)
                 .text(text)
                 .session(TwitterCore.getInstance().sessionManager.activeSession)
