@@ -4,7 +4,6 @@ import android.graphics.Bitmap
 import android.net.Uri
 import com.base.library.rxRetrofit.RxRetrofitApp
 import com.base.library.utils.utilcode.util.FileUtils
-import com.base.library.utils.utilcode.util.LogUtils
 import java.io.File
 import java.io.FileOutputStream
 
@@ -18,7 +17,7 @@ import java.io.FileOutputStream
  */
 object ShareUtils {
     /**
-     * Bitmap转成Uri，保存在app内部存储的 share.png 中
+     * Bitmap转成Uri，保存在app内部存储的 share_temp_System.currentTimeMillis().png 中
      */
     fun bitmap2Uri(image: Bitmap): Uri {
         val fileDir = RxRetrofitApp.getApplication().getExternalFilesDir(null)
@@ -35,14 +34,13 @@ object ShareUtils {
      */
     fun clearShareTempPictures() {
         synchronized(this) {
-            val fileDir = RxRetrofitApp.getApplication().getExternalFilesDir(null).apply { mkdirs() }
+            val fileDir = RxRetrofitApp.getApplication().getExternalFilesDir(null)
+                    .apply { mkdirs() }
             fileDir
                     .list()
                     .map {
-                        LogUtils.d("here is $it")
                         if (it.startsWith("share_temp_")) {
-                            val result = FileUtils.delete("$fileDir${File.separatorChar}$it")
-                            LogUtils.d("find $fileDir${File.separatorChar}$it, delete success? :$result")
+                            FileUtils.delete("$fileDir${File.separatorChar}$it")
                         }
                     }
         }

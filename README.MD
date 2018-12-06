@@ -33,6 +33,52 @@ CPX Model
 如果您有任何问题或反馈，请提交到[Github Issues](https://github.com/wzgiceman/Cpx_model/issues).
 
 ## 更新日志
+
+* 2018.12.06
+    
+    1.新增第三方登录
+        Facebook登录，需要用浏览器打开 Facebook开发者平台：https://developers.facebook.com/apps/
+        
+        1.创建应用，将应用编号赋值给 gradle.properties 的 facebook_app_id 变量
+        
+        2.在Facebook开发者平台控制台的 设置->基本 中添加Android平台，填入Google Play包名、类名、密钥散列、隐私权政策、启用单点登录并保存
+        
+        3.在Facebook开发者平台控制台公开发布应用
+        
+        Google登录，需要在firebase控制台创建项目：firebase.com
+        
+        1.身份验证中，启用Google登录
+        
+        2.项目设置中，填入SHA1和包名
+        
+        3.下载google_service.json，放入app模块下
+        
+        4.在 google-service.json 中找到网页客户端ID，将其赋值给 gradle.properties 的 google_web_client_id 变量
+        
+        Twitter登录，需要在Twitter开发者平台：https://developer.twitter.com/en/apps
+        
+        1.创建应用，填写app名，描述，勾选"启用twitter登录"，填写隐私权政策,team url
+        
+        2.在callback url中添加：twittersdk://
+        
+        3.将API Key赋值给 gradle.properties 的twitter_consumer_key，API secret key赋值给 gradle.properties 的twitter_consumer_secret
+    
+    2.新增第三方分享
+    
+        1.Facebook分享：支持facebook分享文字、链接、图片、视频、多媒体
+        
+        facebook分享链接时，通过tag添加文字，通过quote添加引文
+        
+        facebook只支持分享本地视频
+        
+        facebook分享多媒体时，图片+视频总数最多6个
+        
+        分享图片、视频、多媒体时，可以通过 tag 添加文字
+        
+        2.Twitter分享：支持Twitter分享文字、图片
+        
+        分享图片时，可以通过 tag 添加文字
+
 * 2018.11.23
 
     1.新增滑动返回，通过enableSwipeBack设置是否启用，默认关

@@ -7,6 +7,7 @@ import com.base.library.R
 import com.base.library.rxRetrofit.RxRetrofitApp
 import com.base.library.utils.utilcode.util.LogUtils
 import com.base.library.utils.utilcode.util.Utils
+import com.squareup.leakcanary.LeakCanary
 import com.twitter.sdk.android.core.DefaultLogger
 import com.twitter.sdk.android.core.Twitter
 import com.twitter.sdk.android.core.TwitterAuthConfig
@@ -22,7 +23,6 @@ import com.twitter.sdk.android.core.TwitterConfig
  */
 object ModelApp {
 
-    @JvmOverloads
     fun init(app: Application, debug: Boolean = true) {
         RxRetrofitApp.init(app, debug)
         Utils.init(app)
@@ -30,6 +30,7 @@ object ModelApp {
                 .setConsoleSwitch(BuildConfig.DEBUG)
                 .setLogSwitch(BuildConfig.DEBUG)
         initTwitterLogin(app)
+        initMAT(app)
     }
 
     private fun initTwitterLogin(app: Application) {
@@ -40,5 +41,16 @@ object ModelApp {
                 .debug(BuildConfig.DEBUG)
                 .build()
         Twitter.initialize(config)
+    }
+
+    /**
+     * 检测内存泄露
+     */
+    private fun initMAT(app: Application) {
+        if (!BuildConfig.DEBUG) return
+        if (LeakCanary.isInAnalyzerProcess(app)) {
+            return
+        }
+        LeakCanary.install(app)
     }
 }
