@@ -59,7 +59,7 @@ class FacebookShareManager(private val activity: Activity, private val onShareLi
      * @param image 图片Bitmap或者图片Uri
      * @param tag 文字内容
      */
-    fun shareImage(image: Any, tag: String) {
+    fun shareImage(image: Any?, tag: String) {
         shareMedia(imageList = listOf(image), tag = tag)
     }
 
@@ -78,7 +78,7 @@ class FacebookShareManager(private val activity: Activity, private val onShareLi
      * @param videoUriList 本地视频Uri列表
      * @param tag 文字内容
      */
-    fun shareMedia(imageList: List<Any> = ArrayList(), videoUriList: List<Uri> = ArrayList(), tag: String = "") {
+    fun shareMedia(imageList: List<Any?> = ArrayList(), videoUriList: List<Uri> = ArrayList(), tag: String = "") {
         val shareContentBuilder = ShareMediaContent.Builder()
         for (image in imageList) {
             shareContentBuilder.addMedium(buildSharePhoto(image))
@@ -97,7 +97,7 @@ class FacebookShareManager(private val activity: Activity, private val onShareLi
         shareDialog.show(shareContentBuilder.build(), ShareDialog.Mode.AUTOMATIC)
     }
 
-    private fun buildSharePhoto(image: Any): SharePhoto? {
+    private fun buildSharePhoto(image: Any?): SharePhoto? {
         val imageUri = when (image) {
             is Bitmap -> ShareUtils.bitmap2Uri(image)
             is Uri -> image

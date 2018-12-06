@@ -5,10 +5,10 @@ import android.app.Activity
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.net.Uri
-import com.base.library.utils.utilcode.util.TimeUtils
 import com.base.library.share.base.BaseShareActivity
 import com.base.library.share.common.constants.ShareConstants.Companion.FACEBOOK
 import com.base.library.share.common.constants.ShareConstants.Companion.TWITTER
+import com.base.library.utils.utilcode.util.TimeUtils
 import com.prog.zhigangwei.cpx_model.R
 import kotlinx.android.synthetic.main.activity_share.*
 
@@ -50,7 +50,7 @@ class ShareActivity : BaseShareActivity() {
         /**facebook分享bitmap图片*/
         btn_share_bitmap_by_facebook.setOnClickListener {
             shareImage(FACEBOOK,
-                    BitmapFactory.decodeResource(resources, R.mipmap.ic_launcher),
+                    BitmapFactory.decodeResource(resources, R.drawable.shadow_left),
                     "#CPXModel")
         }
 

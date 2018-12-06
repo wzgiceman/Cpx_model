@@ -26,7 +26,7 @@ abstract class BaseShareActivity : BaseToolsActivity(), OnShareListener {
         shareManager.shareLink(type, link, tag, quote)
     }
 
-    fun shareImage(type: String, image: Any, tag: String = "") {
+    fun shareImage(type: String, image: Any?, tag: String = "") {
         shareManager.shareImage(type, image, tag)
     }
 
