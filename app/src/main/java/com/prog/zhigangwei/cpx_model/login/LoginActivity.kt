@@ -1,6 +1,7 @@
 package com.prog.zhigangwei.cpx_model.login
 
 import com.base.muslim.login.base.BaseLoginActivity
+import com.base.muslim.login.common.bean.LoginAuth
 import com.base.muslim.login.common.constants.LoginConstants.Companion.FACEBOOK
 import com.base.muslim.login.common.constants.LoginConstants.Companion.GOOGLE
 import com.base.muslim.login.common.constants.LoginConstants.Companion.TWITTER
@@ -27,8 +28,8 @@ class LoginActivity : BaseLoginActivity() {
     override fun initData() {
     }
 
-    override fun onLoginSuccess(type: String, token: String) {
-        tv_login_status.append("$type 登录成功\ntoken:$token\n\n")
+    override fun onLoginSuccess(type: String, auth: LoginAuth) {
+        tv_login_status.append("$type 登录成功\ntoken:${auth.token}\ntwitterSecret:${auth.twitterSecret}\n\n")
     }
 
     override fun onLoginFail(type: String, cause: String) {

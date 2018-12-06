@@ -3,6 +3,7 @@ package com.base.muslim.login.twitter
 import android.content.Context
 import android.content.Intent
 import android.text.TextUtils
+import com.base.muslim.login.common.bean.LoginAuth
 import com.base.muslim.login.common.constants.LoginConstants.Companion.TWITTER
 import com.base.muslim.login.common.listener.OnLoginListener
 import com.twitter.sdk.android.core.Callback
@@ -30,11 +31,16 @@ class TwitterLoginManager(context: Context, private val onLoginListener: OnLogin
 
     override fun success(result: Result<TwitterSession>?) {
         val token = result?.data?.authToken?.token
+        val secret = result?.data?.authToken?.secret
         if (token == null || TextUtils.isEmpty(token)) {
             onLoginListener.onLoginFail(TWITTER, "Twitter Login fail, token is null")
             return
         }
-        onLoginListener.onLoginSuccess(TWITTER, token)
+        if (secret == null || TextUtils.isEmpty(secret)) {
+            onLoginListener.onLoginFail(TWITTER, "Twitter Login fail, secert is null")
+            return
+        }
+        onLoginListener.onLoginSuccess(TWITTER, LoginAuth(token, secret))
     }
 
     override fun failure(exception: TwitterException?) {

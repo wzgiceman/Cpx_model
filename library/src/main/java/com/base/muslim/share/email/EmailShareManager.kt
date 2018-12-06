@@ -67,41 +67,4 @@ class EmailShareManager(private val activity: Activity, private val onShareListe
             }
         }
     }
-
-//    /*** 设置收件人地址信息*/
-//    private void setRecipientT0() throws MessagingException, UnsupportedEncodingException {
-//        if (recipientT0List.size() > 0) {
-//            InternetAddress[] sendTo = new InternetAddress[recipientT0List.size()];
-//            for (int i = 0; i < recipientT0List.size(); i++) {
-//                System.out.println("发送到:" + recipientT0List.get(i));
-//                sendTo[i] = new InternetAddress(recipientT0List.get(i), "", "UTF-8");
-//            }
-//            message.addRecipients(MimeMessage.RecipientType.TO, sendTo);
-//        }
-//    }
-//
-//    /***设置密送地址**/
-//    private void setRecipientCC() throws MessagingException, UnsupportedEncodingException {
-//        if (recipientCCList.size() > 0) {
-//            InternetAddress[] sendTo = new InternetAddress[recipientCCList.size()];
-//            for (int i = 0; i < recipientCCList.size(); i++) {
-//                System.out.println("发送到:" + recipientCCList.get(i));
-//                sendTo[i] = new InternetAddress(recipientCCList.get(i), "", "UTF-8");
-//            }
-//            message.addRecipients(MimeMessage.RecipientType.CC, sendTo);
-//        }
-//    }
-//
-//    /***设置抄送邮件地址**/
-//    private void setRecipientBCC() throws MessagingException, UnsupportedEncodingException {
-//        if (recipientBCCList.size() > 0) {
-//            InternetAddress[] sendTo = new InternetAddress[recipientBCCList.size()];
-//            for (int i = 0; i < recipientBCCList.size(); i++) {
-//                System.out.println("发送到:" + recipientBCCList.get(i));
-//                sendTo[i] = new InternetAddress(recipientBCCList.get(i), "", "UTF-8");
-//            }
-//            message.addRecipients(MimeMessage.RecipientType.BCC, sendTo);
-//        }
-//    }
-
 }

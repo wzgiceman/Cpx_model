@@ -1,5 +1,7 @@
 package com.base.muslim.login.common.listener
 
+import com.base.muslim.login.common.bean.LoginAuth
+
 /**
  * Description:
  * 登录接口
@@ -12,9 +14,9 @@ interface OnLoginListener {
     /**
      * 登录成功
      * @param type 登录方式
-     * @param token 获取到的token
+     * @param auth 获取到的身份信息
      */
-    fun onLoginSuccess(type: String, token: String)
+    fun onLoginSuccess(type: String, auth: LoginAuth)
 
     /**
      * 登录失败

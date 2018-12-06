@@ -3,6 +3,7 @@ package com.base.muslim.login.facebook
 import android.content.Context
 import android.content.Intent
 import android.text.TextUtils
+import com.base.muslim.login.common.bean.LoginAuth
 import com.base.muslim.login.common.constants.LoginConstants.Companion.FACEBOOK
 import com.base.muslim.login.common.listener.OnLoginListener
 import com.facebook.AccessToken
@@ -34,7 +35,7 @@ class FacebookLoginManager(private val context: Context, private val onLoginList
             loginButton.registerCallback(callbackManager, this)
             loginButton.callOnClick()
         } else {
-            onLoginListener.onLoginSuccess(FACEBOOK, currentToken)
+            onLoginListener.onLoginSuccess(FACEBOOK, LoginAuth(currentToken))
         }
     }
 
@@ -57,7 +58,8 @@ class FacebookLoginManager(private val context: Context, private val onLoginList
             onLoginListener.onLoginFail(FACEBOOK, "Facebook Login fail, token is null")
             return
         }
-        onLoginListener.onLoginSuccess(FACEBOOK, result.accessToken.token)
+
+        onLoginListener.onLoginSuccess(FACEBOOK, LoginAuth(result.accessToken.token))
     }
 
     override fun onCancel() {
