@@ -29,7 +29,7 @@ class LoginActivity : BaseLoginActivity() {
     }
 
     override fun onLoginSuccess(type: String, auth: LoginAuth) {
-        tv_login_status.append("$type 登录成功\ntoken:${auth.token}\ntwitterSecret:${auth.twitterSecret}\n\n")
+        tv_login_status.append("$type 登录成功\ntoken:${auth.token}\ntwitterSecret:${auth.twitterSecret}\nemail:${auth.email}\n\n")
     }
 
     override fun onLoginFail(type: String, cause: String) {

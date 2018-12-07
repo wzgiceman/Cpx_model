@@ -51,11 +51,14 @@ class GoogleLoginManager(private val fragmentActivity: FragmentActivity, private
             val token = data?.let {
                 Auth.GoogleSignInApi.getSignInResultFromIntent(it).signInAccount?.idToken
             }
+            val email = data?.let {
+                Auth.GoogleSignInApi.getSignInResultFromIntent(it).signInAccount?.email
+            } ?: ""
             if (token == null || TextUtils.isEmpty(token)) {
                 onLoginListener.onLoginFail(GOOGLE, "Google Login fail, token is null")
                 return
             }
-            onLoginListener.onLoginSuccess(GOOGLE, LoginAuth(token))
+            onLoginListener.onLoginSuccess(GOOGLE, LoginAuth(token = token, email = email))
         }
     }
 

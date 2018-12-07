@@ -8,5 +8,6 @@ package com.base.library.login.common.bean
  * Company: Mobile CPX
  * Date:    2018/12/6
  */
-class LoginAuth(val token: String = "",
-                val twitterSecret: String = "")
+class LoginAuth (var token: String = "",
+                var twitterSecret: String = "",
+                var email: String = "")
