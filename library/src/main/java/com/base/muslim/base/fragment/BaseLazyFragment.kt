@@ -37,6 +37,10 @@ abstract class BaseLazyFragment : BaseFragmentManagerFragment(), IBase {
         }
     }
 
+    /**
+     * 懒加载数据
+     */
+    protected abstract fun lazyLoadData()
 
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
 
@@ -79,6 +83,7 @@ abstract class BaseLazyFragment : BaseFragmentManagerFragment(), IBase {
      */
     protected fun initFragment() {
         initData()
+        lazyLoadData()
         initView()
     }
 }

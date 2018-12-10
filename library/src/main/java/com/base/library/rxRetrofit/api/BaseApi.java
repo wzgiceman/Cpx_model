@@ -29,7 +29,7 @@ public abstract class BaseApi {
     /*是否显示加载框*/
     private transient boolean showProgress = true;
     /*是否需要缓存处理*/
-    protected transient boolean cache = false;
+    private transient boolean cache = false;
     /*固定基础url*/
     public transient static String BASE_URL = "http://api.onlinemuslim.net/";
     /*基础url*/
