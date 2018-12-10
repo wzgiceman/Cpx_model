@@ -6,11 +6,10 @@ import android.text.TextUtils
 import com.base.library.login.common.bean.LoginAuth
 import com.base.library.login.common.constants.LoginConstants.Companion.TWITTER
 import com.base.library.login.common.listener.OnLoginListener
-import com.twitter.sdk.android.core.Callback
-import com.twitter.sdk.android.core.Result
-import com.twitter.sdk.android.core.TwitterException
-import com.twitter.sdk.android.core.TwitterSession
+import com.base.library.utils.utilcode.util.LogUtils
+import com.twitter.sdk.android.core.*
 import com.twitter.sdk.android.core.identity.TwitterLoginButton
+import com.twitter.sdk.android.core.models.User
 
 /**
  * Description:
@@ -20,9 +19,10 @@ import com.twitter.sdk.android.core.identity.TwitterLoginButton
  * Company: Mobile CPX
  * Date:    2018/12/4
  */
-class TwitterLoginManager(context: Context, private val onLoginListener: OnLoginListener) : Callback<TwitterSession>() {
+class TwitterLoginManager(val context: Context, private val onLoginListener: OnLoginListener) : Callback<TwitterSession>() {
 
     private val twitterLoginButton = TwitterLoginButton(context)
+    private val auth = LoginAuth()
 
     fun login() {
         twitterLoginButton.callback = this
@@ -37,10 +37,25 @@ class TwitterLoginManager(context: Context, private val onLoginListener: OnLogin
             return
         }
         if (secret == null || TextUtils.isEmpty(secret)) {
-            onLoginListener.onLoginFail(TWITTER, "Twitter Login fail, secert is null")
+            onLoginListener.onLoginFail(TWITTER, "Twitter Login fail, secret is null")
             return
         }
-        onLoginListener.onLoginSuccess(TWITTER, LoginAuth(token, secret))
+        auth.token = token
+        auth.twitterSecret = secret
+        TwitterCore.getInstance().apiClient.accountService.verifyCredentials(true, false, true)
+                .enqueue(object : Callback<User>() {
+                    override fun success(result: Result<User>?) {
+                        LogUtils.d("twitter success ${result?.data?.email}")
+                        auth.email = result?.data?.email ?: ""
+                        onLoginListener.onLoginSuccess(TWITTER, auth)
+                    }
+
+                    override fun failure(exception: TwitterException?) {
+                        LogUtils.d("twitter get info failure:$exception")
+                        onLoginListener.onLoginSuccess(TWITTER, auth)
+                    }
+
+                })
     }
 
     override fun failure(exception: TwitterException?) {
