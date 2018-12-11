@@ -29,32 +29,16 @@ class FacebookLoginManager(private val context: Context, private val onLoginList
 
     /**
      * Facebook登录
+     * 如果当前账号未退出，先退出当前账号。每次都向用户请求最新的Facebook账户登录
+     * 之前使用的逻辑是如果当前账号未退出，则使用当前账户直接登录。导致的问题是切换了Facebook账号后，无法切换用户
      */
     fun login() {
-        val currentToken = getCurrentNotExpiredFacebookToken()
-        if (TextUtils.isEmpty(currentToken)) {
-            loginButton.setReadPermissions(arrayListOf("email"))
-            loginButton.registerCallback(callbackManager, this)
-            loginButton.callOnClick()
-        } else {
-            auth.token = currentToken
-            getUserInfo(AccessToken.getCurrentAccessToken())
+        if (null != AccessToken.getCurrentAccessToken()) {
+            LoginManager.getInstance().logOut()
         }
-    }
-
-
-    /**
-     * 获取当前未过期的Facebook Token
-     */
-    private fun getCurrentNotExpiredFacebookToken(): String {
-        val accessToken: AccessToken = AccessToken.getCurrentAccessToken() ?: return ""
-        if (accessToken.isExpired) {
-            //如果已经过期，退出登录
-            val loginManager: LoginManager? = LoginManager.getInstance()
-            loginManager?.logOut()
-            return ""
-        }
-        return accessToken.token
+        loginButton.setReadPermissions(arrayListOf("email"))
+        loginButton.registerCallback(callbackManager, this)
+        loginButton.callOnClick()
     }
 
     override fun onSuccess(result: LoginResult?) {
