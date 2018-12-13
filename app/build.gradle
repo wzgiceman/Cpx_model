@@ -14,16 +14,6 @@ android {
         multiDexEnabled true
     }
 
-    compileSdkVersion rootProject.ext.android.compileSdkVersion
-    defaultConfig {
-        applicationId applicationIds
-        minSdkVersion rootProject.ext.android.minSdkVersion
-        targetSdkVersion rootProject.ext.android.targetSdkVersion
-        versionCode versionCodes.toInteger()
-        versionName versionNames
-        multiDexEnabled true
-    }
-
     dexOptions {
         javaMaxHeapSize "8g" //此处可根据电脑本身配置 数值越大 当然越快
     }
