@@ -1,12 +1,14 @@
 package com.base.library.rxRetrofit.api;
 
+import android.util.Log;
+
+import com.alibaba.fastjson.annotation.JSONField;
 import com.base.library.rxRetrofit.RxRetrofitApp;
 import com.base.library.rxRetrofit.http.converter.RetrofitStringConverterFactory;
 import com.base.library.rxRetrofit.http.head.HeadInterceptor;
 import com.base.library.rxRetrofit.http.head.HttpLoggingInterceptor;
-import com.base.library.utils.AbLogUtil;
-import com.base.library.utils.AbSharedUtil;
-import com.base.library.utils.AbStrUtil;
+import com.base.library.utils.utilcode.util.SPUtils;
+import com.base.library.utils.utilcode.util.StringUtils;
 
 import java.util.concurrent.TimeUnit;
 
@@ -63,10 +65,16 @@ public abstract class BaseApi {
     /**
      * 设置参数
      *
+     *
      * @return
      */
+    @JSONField(serialize=false)
     public abstract Observable getObservable();
 
+    @JSONField(serialize=false)
+    public String getUrl() {
+        return getBaseUrl() + getMethod();
+    }
 
     public int getCookieNoNetWorkTime() {
         return cookieNoNetWorkTime;
@@ -93,15 +101,11 @@ public abstract class BaseApi {
     }
 
     public String getBaseUrl() {
-        return AbStrUtil.isEmpty(baseUrl) ? BASE_URL : baseUrl;
+        return StringUtils.isEmpty(baseUrl) ? BASE_URL : baseUrl;
     }
 
     public void setBaseUrl(String baseUrl) {
         this.baseUrl = baseUrl;
-    }
-
-    public String getUrl() {
-        return getBaseUrl() + getMethod();
     }
 
     public boolean isCache() {
@@ -176,8 +180,9 @@ public abstract class BaseApi {
         this.advanceLoadCache = advanceLoadCache;
     }
 
+    @JSONField(serialize=false)
     public String getCacheUrl() {
-        if (AbStrUtil.isEmpty(cacheUrl)) {
+        if (StringUtils.isEmpty(cacheUrl)) {
             return getUrl();
         }
         return cacheUrl;
@@ -189,8 +194,8 @@ public abstract class BaseApi {
 
 
     public static String getConfig() {
-        if (AbStrUtil.isEmpty(config)) {
-            config = AbSharedUtil.getString(RxRetrofitApp.getApplication(), "token");
+        if (StringUtils.isEmpty(config)) {
+            config = SPUtils.getInstance().getString("token","");
         }
         return config;
     }
@@ -206,6 +211,7 @@ public abstract class BaseApi {
      *
      * @return
      */
+    @JSONField(serialize=false)
     public Retrofit getRetrofit() {
         if (null != retrofit) {
             return retrofit;
@@ -242,9 +248,8 @@ public abstract class BaseApi {
         //日志显示级别
         HttpLoggingInterceptor.Level level = HttpLoggingInterceptor.Level.BODY;
         //新建log拦截器
-        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor(message -> AbLogUtil.d("RxRetrofit",
+        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor(message -> Log.d("RxRetrofit",
                 "Retrofit====Message:" + message));
-
         loggingInterceptor.setLevel(level);
         return loggingInterceptor;
     }

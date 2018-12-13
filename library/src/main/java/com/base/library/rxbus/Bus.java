@@ -8,7 +8,7 @@ import com.base.library.rxbus.entity.ProducerEvent;
 import com.base.library.rxbus.entity.SubscriberEvent;
 import com.base.library.rxbus.finder.Finder;
 import com.base.library.rxbus.thread.ThreadEnforcer;
-import com.base.library.utils.AbLogUtil;
+import com.base.library.utils.utilcode.util.LogUtils;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -317,7 +317,7 @@ public class Bus {
             Collection<SubscriberEvent> eventMethodsInListener = entry.getValue();
 
             if (currentSubscribers == null || !currentSubscribers.containsAll(eventMethodsInListener)) {
-                AbLogUtil.e("Missing event subscriber for an annotated method. Is " + object.getClass()
+                LogUtils.e("Missing event subscriber for an annotated method. Is " + object.getClass()
                         + " registered?");
             }
 

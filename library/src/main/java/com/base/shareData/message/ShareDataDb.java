@@ -9,7 +9,7 @@ import com.base.dao.DaoMaster;
 import com.base.dao.DaoSession;
 import com.base.dao.ShareDataDao;
 import com.base.library.rxRetrofit.RxRetrofitApp;
-import com.base.library.utils.AbStrUtil;
+import com.base.library.utils.utilcode.util.StringUtils;
 import com.base.shareData.ShareSparse;
 import com.base.shareData.user.User;
 
@@ -107,7 +107,7 @@ public class ShareDataDb {
             DaoSession daoSession = daoMaster.newSession();
             ShareDataDao dao = daoSession.getShareDataDao();
             ShareData shareData = dao.queryBuilder().where(ShareDataDao.Properties.Id.eq(id)).unique();
-            if (shareData == null || AbStrUtil.isEmpty(shareData.getMsg())) return shareData;
+            if (shareData == null || StringUtils.isEmpty(shareData.getMsg())) return shareData;
             if (id.equals(ShareSparse.USER_CLS)) {
                 return JSONObject.parseObject(shareData.getMsg(), User.class);
             }

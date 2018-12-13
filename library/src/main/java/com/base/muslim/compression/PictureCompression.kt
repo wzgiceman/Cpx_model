@@ -4,7 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.net.Uri
 import android.text.TextUtils
-import com.base.library.utils.AbLogUtil
+import com.base.library.utils.utilcode.util.LogUtils
 import com.base.muslim.camera.OnPicturePathListener
 import com.base.muslim.camera.utils.PATH
 import com.base.muslim.camera.utils.Photo
@@ -67,7 +67,7 @@ object PictureCompression {
                     }
 
                     override fun onError(e: Throwable?) {
-                        AbLogUtil.d(PictureCompression::class.java, "onError:" + e!!.message)
+                        LogUtils.d(PictureCompression::class.java, "onError:" + e!!.message)
                     }
                 }).launch()
     }
@@ -96,7 +96,7 @@ object PictureCompression {
                     }
 
                     override fun onError(e: Throwable?) {
-                        AbLogUtil.d(PictureCompression::class.java, "onError:" + e!!.message)
+                        LogUtils.d(PictureCompression::class.java, "onError:" + e!!.message)
                     }
                 }).launch()
     }
@@ -124,7 +124,7 @@ object PictureCompression {
                     }
 
                     override fun onError(e: Throwable?) {
-                        AbLogUtil.d(PictureCompression::class.java, "onError:" + e!!.message)
+                        LogUtils.d(PictureCompression::class.java, "onError:" + e!!.message)
                     }
                 }).launch()
     }

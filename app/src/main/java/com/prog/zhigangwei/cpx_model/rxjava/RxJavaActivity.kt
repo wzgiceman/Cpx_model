@@ -2,7 +2,7 @@ package com.prog.zhigangwei.cpx_model.rxjava
 
 import android.annotation.SuppressLint
 import com.base.library.observer.AbsObserver
-import com.base.library.utils.AbLogUtil
+import com.base.library.utils.utilcode.util.LogUtils
 import com.base.muslim.base.activity.BaseActivity
 import com.prog.zhigangwei.cpx_model.R
 import io.reactivex.*
@@ -77,21 +77,21 @@ class RxJavaActivity : BaseActivity() {
         //2.创建Subscriber
         var subscriber = object : FlowableSubscriber<Int> {
             override fun onComplete() {
-                AbLogUtil.d("xc", "onComplete")
+                LogUtils.d("xc", "onComplete")
             }
 
             override fun onSubscribe(s: Subscription) {
-                AbLogUtil.d("xc", "onSubscribe")
+                LogUtils.d("xc", "onSubscribe")
                 //订阅时候的操作,请求多少事件
                 s.request(Long.MAX_VALUE)
             }
 
             override fun onNext(t: Int?) {
-                AbLogUtil.d("xc", "onNext $t")
+                LogUtils.d("xc", "onNext $t")
             }
 
             override fun onError(t: Throwable?) {
-                AbLogUtil.d("xc", "onNext ${t?.message}")
+                LogUtils.d("xc", "onNext ${t?.message}")
             }
 
         }
@@ -126,16 +126,16 @@ class RxJavaActivity : BaseActivity() {
             private var i: Int = 0
 
             override fun onComplete() {
-                AbLogUtil.d("xc", "onComplete")
+                LogUtils.d("xc", "onComplete")
             }
 
             override fun onSubscribe(d: Disposable) {
-                AbLogUtil.d("xc", "onSubscribe")
+                LogUtils.d("xc", "onSubscribe")
                 mDisposable = d
             }
 
             override fun onNext(t: Int) {
-                AbLogUtil.d("xc", "onNext $t")
+                LogUtils.d("xc", "onNext $t")
                 i++
                 if (i == 4) {
                     //切断的操作，让Observer观察者不再接收上游事件
@@ -144,14 +144,14 @@ class RxJavaActivity : BaseActivity() {
             }
 
             override fun onError(e: Throwable) {
-                AbLogUtil.d("xc", "onError:${e.message}")
+                LogUtils.d("xc", "onError:${e.message}")
             }
 
         }
         //自定义的封装的Observer
         var myObserver: AbsObserver<Int> = object : AbsObserver<Int>() {
             override fun onNext(t: Int) {
-                AbLogUtil.d("xc", "onNext $t")
+                LogUtils.d("xc", "onNext $t")
                 if (t == 4) {
                     //取消订阅
                     unsubscribe()
@@ -191,11 +191,11 @@ class RxJavaActivity : BaseActivity() {
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(Schedulers.io())
                 .doOnNext {
-                    AbLogUtil.d("xc", "value:$it observeOn(io) : ${Thread.currentThread().name}")
+                    LogUtils.d("xc", "value:$it observeOn(io) : ${Thread.currentThread().name}")
                 }
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe {
-                    AbLogUtil.d("xc", "value:$it observeOn(mainThread) : ${Thread.currentThread().name}")
+                    LogUtils.d("xc", "value:$it observeOn(mainThread) : ${Thread.currentThread().name}")
                 }
     }
 
@@ -229,25 +229,25 @@ class RxJavaActivity : BaseActivity() {
     private fun testCreate() {
         Observable
                 .create<Int> {
-                    AbLogUtil.d("xc", "emitter 1")
+                    LogUtils.d("xc", "emitter 1")
                     it.onNext(1)
-                    AbLogUtil.d("xc", "emitter 2")
+                    LogUtils.d("xc", "emitter 2")
                     it.onNext(2)
-                    AbLogUtil.d("xc", "emitter 3")
+                    LogUtils.d("xc", "emitter 3")
                     it.onNext(3)
-                    AbLogUtil.d("xc", "emitter 4")
+                    LogUtils.d("xc", "emitter 4")
                     it.onNext(4)
-                    AbLogUtil.d("xc", "emitter complete")
+                    LogUtils.d("xc", "emitter complete")
                     it.onComplete()
-                    AbLogUtil.d("xc", "emitter 5")
+                    LogUtils.d("xc", "emitter 5")
                     it.onNext(5)
-                    AbLogUtil.d("xc", "emitter 6")
+                    LogUtils.d("xc", "emitter 6")
                     it.onNext(6)
-                    AbLogUtil.d("xc", "emitter 7")
+                    LogUtils.d("xc", "emitter 7")
                     it.onNext(7)
 
                 }.subscribe {
-                    AbLogUtil.d("xc", "onNext $it")
+                    LogUtils.d("xc", "onNext $it")
                 }
     }
 
@@ -258,7 +258,7 @@ class RxJavaActivity : BaseActivity() {
         Observable.just("1", "1", "2", "2", "4", "5")
                 .distinct()
                 .subscribe {
-                    AbLogUtil.d("xc", "onNext $it")
+                    LogUtils.d("xc", "onNext $it")
                 }
     }
 
@@ -271,7 +271,7 @@ class RxJavaActivity : BaseActivity() {
                     return@filter it % 2 == 0
                 }
                 .subscribe {
-                    AbLogUtil.d("xc", "onNext $it")
+                    LogUtils.d("xc", "onNext $it")
                 }
     }
 
@@ -279,10 +279,10 @@ class RxJavaActivity : BaseActivity() {
      * timer 延时
      */
     private fun testTimer() {
-        AbLogUtil.d("xc", "timer")
+        LogUtils.d("xc", "timer")
         Observable.timer(2, TimeUnit.SECONDS)
                 .subscribe {
-                    AbLogUtil.d("xc", "onNext:$it")
+                    LogUtils.d("xc", "onNext:$it")
                 }
     }
 
@@ -292,11 +292,11 @@ class RxJavaActivity : BaseActivity() {
      * 常用作倒计时
      */
     private fun testInterval() {
-        AbLogUtil.d("xc", "interval")
+        LogUtils.d("xc", "interval")
         Observable.interval(1, TimeUnit.SECONDS)
                 .take(11)
                 .subscribe {
-                    AbLogUtil.d("xc", "onNext:$it")
+                    LogUtils.d("xc", "onNext:$it")
                 }
     }
 
@@ -306,7 +306,7 @@ class RxJavaActivity : BaseActivity() {
     private fun testJust() {
         Observable.just("1", "3", "5", "7")
                 .subscribe {
-                    AbLogUtil.d("xc", "onNext $it")
+                    LogUtils.d("xc", "onNext $it")
                 }
     }
 
@@ -324,7 +324,7 @@ class RxJavaActivity : BaseActivity() {
                 }.map {
                     return@map "${it * 2}"
                 }.subscribe {
-                    AbLogUtil.d("xc", "onNext $it")
+                    LogUtils.d("xc", "onNext $it")
                 }
     }
 
@@ -343,7 +343,7 @@ class RxJavaActivity : BaseActivity() {
 
                 }.flatMap(object : Function<Int, ObservableSource<String>> {
                     override fun apply(t: Int): ObservableSource<String> {
-                        AbLogUtil.d("xc", "applay:$t")
+                        LogUtils.d("xc", "applay:$t")
                         var list = mutableListOf<String>()
                         for (i in 1..3) {
                             list.add("I am value ${i * t}")
@@ -353,7 +353,7 @@ class RxJavaActivity : BaseActivity() {
                     }
 
                 }).subscribe {
-                    AbLogUtil.d("xc", "onNext $it")
+                    LogUtils.d("xc", "onNext $it")
                 }
     }
 
@@ -371,7 +371,7 @@ class RxJavaActivity : BaseActivity() {
 
                         })
                 .subscribe {
-                    AbLogUtil.d("xc", "onNext $it")
+                    LogUtils.d("xc", "onNext $it")
                 }
 
     }
@@ -385,7 +385,7 @@ class RxJavaActivity : BaseActivity() {
                         Observable.just("10", "11")
                 )
                 .subscribe {
-                    AbLogUtil.d("xc", "onNext $it")
+                    LogUtils.d("xc", "onNext $it")
                 }
     }
 
@@ -397,7 +397,7 @@ class RxJavaActivity : BaseActivity() {
         Observable.just(1, 2, 3, 4, 5, 6, 7, 8, 9)
                 .buffer(4, 2)
                 .subscribe {
-                    AbLogUtil.d("xc", "onNext $it")
+                    LogUtils.d("xc", "onNext $it")
                 }
     }
 
@@ -408,7 +408,7 @@ class RxJavaActivity : BaseActivity() {
         Observable.just(1, 2, 3, 4, 5, 6, 7, 8, 9)
                 .skip(2)
                 .subscribe {
-                    AbLogUtil.d("xc", "onNext $it")
+                    LogUtils.d("xc", "onNext $it")
                 }
     }
 
@@ -432,7 +432,7 @@ class RxJavaActivity : BaseActivity() {
             it.onComplete()
         }.throttleFirst(200, TimeUnit.MILLISECONDS)
                 .subscribe {
-                    AbLogUtil.d("xc", "onNext $it")
+                    LogUtils.d("xc", "onNext $it")
                 }
     }
 
@@ -455,7 +455,7 @@ class RxJavaActivity : BaseActivity() {
             it.onComplete()
         }.debounce(300, TimeUnit.MILLISECONDS)
                 .subscribe {
-                    AbLogUtil.d("xc", "onNext $it")
+                    LogUtils.d("xc", "onNext $it")
                 }
     }
 
@@ -465,7 +465,7 @@ class RxJavaActivity : BaseActivity() {
     private fun testLast() {
         Observable.just(1, 2, 3, 4)
                 .last(6)
-                .subscribe { t -> AbLogUtil.d("xc", "onNext $t") }
+                .subscribe { t -> LogUtils.d("xc", "onNext $t") }
 
     }
 

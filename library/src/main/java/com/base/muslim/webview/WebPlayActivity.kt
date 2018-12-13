@@ -13,7 +13,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.webkit.*
 import com.base.library.R
-import com.base.library.utils.AbLogUtil
 import com.base.muslim.base.activity.BaseActivity
 import kotlinx.android.synthetic.main.activity_web_play.*
 import java.util.regex.Pattern
@@ -328,7 +327,6 @@ open class WebPlayActivity : BaseActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        AbLogUtil.d("WebPlayActivity onDestroy")
         if (web_view != null) {
             web_view.clearHistory()
             val parent: ViewGroup = web_view.parent as ViewGroup

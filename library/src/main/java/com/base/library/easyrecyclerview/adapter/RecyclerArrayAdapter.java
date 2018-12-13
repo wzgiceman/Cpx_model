@@ -28,7 +28,7 @@ import android.view.ViewGroup;
 
 import com.base.library.R;
 import com.base.library.easyrecyclerview.EasyRecyclerView;
-import com.base.library.utils.AbStrUtil;
+import com.base.library.utils.utilcode.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -775,7 +775,7 @@ abstract public class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
                 return;
             }
         }
-        String message = AbStrUtil.isEmpty(title) ? getContext().getString(R.string.Loading) : title;
+        String message = StringUtils.isEmpty(title) ? getContext().getString(R.string.Loading) : title;
         if (loadingDailog == null) {
             loadingDailog = ProgressDialog.show(getContext(), null, message);
             loadingDailog.setCancelable(cancel);

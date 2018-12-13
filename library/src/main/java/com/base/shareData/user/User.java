@@ -2,8 +2,7 @@ package com.base.shareData.user;
 
 import com.alibaba.fastjson.JSONObject;
 import com.base.library.rxRetrofit.api.BaseApi;
-import com.base.library.rxRetrofit.RxRetrofitApp;
-import com.base.library.utils.AbSharedUtil;
+import com.base.library.utils.utilcode.util.SPUtils;
 
 /**
  * Describe:用户
@@ -361,7 +360,7 @@ public class User {
 
     public void setLocalLg(String localLg) {
         this.localLg = localLg;
-        AbSharedUtil.putString(RxRetrofitApp.getApplication(), "token", getLocalLg() + "&" + getToken());
+        SPUtils.getInstance().put("token", getLocalLg() + "&" + getToken());
     }
 
 
@@ -536,7 +535,7 @@ public class User {
     public void setToken(String token) {
         this.token = token;
         String config = getLocalLg() + "&" + token;
-        AbSharedUtil.putString(RxRetrofitApp.getApplication(), "token", config);
+        SPUtils.getInstance().put("token", config);
         BaseApi.setConfig(config);
     }
 

@@ -1,7 +1,7 @@
 package com.prog.zhigangwei.cpx_model.http.common.api.notice
 
 import com.base.library.rxRetrofit.api.BaseApi
-import com.base.library.utils.AbAppUtil
+import com.base.library.utils.utilcode.util.DeviceUtils
 import com.prog.zhigangwei.cpx_model.http.common.api.ApiService
 import io.reactivex.Observable
 
@@ -16,13 +16,13 @@ class NoticePostApi constructor(var token: String?) : BaseApi() {
     init {
         isShowProgress = false
         terminalType = "android"
-        isCache=true
+        isCache=false
         method="message/message/userTerminal"
-        deviceId = AbAppUtil.getMacID()
+        deviceId = DeviceUtils.getMacAddress()
     }
 
     override fun getObservable(): Observable<*> {
         val service = retrofit!!.create(ApiService::class.java)
-        return service.postNotice(token,terminalType,deviceId)
+        return service.postNotice(this)
     }
 }
