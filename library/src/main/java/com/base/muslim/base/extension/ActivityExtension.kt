@@ -37,10 +37,17 @@ fun Activity.checkKeyboard(ev: MotionEvent) {
     if (ev.action == MotionEvent.ACTION_DOWN) {
         val v = currentFocus
         if (isShouldHideKeyboard(v, ev)) {
-            val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager?
-            imm?.hideSoftInputFromWindow(v?.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
+            hideKeyboard()
         }
     }
+}
+
+/**
+ * 隐藏软键盘
+ */
+fun Activity.hideKeyboard(){
+    val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager?
+    imm?.hideSoftInputFromWindow(currentFocus?.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
 }
 
 /**
