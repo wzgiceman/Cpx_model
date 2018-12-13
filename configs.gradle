@@ -18,7 +18,7 @@ ext {
             "NineOldAndroids"      : "com.nineoldandroids:library:latest.integration",
             /* 视频播放*/
             "squareup"             : "com.squareup:otto:latest.integration",
-            "fastjson"             : "com.alibaba:fastjson:1.2.47",
+            "fastjson"             : "com.alibaba:fastjson:1.2.54",
             /*友盟统计*/
             "collectionsUser"      : "com.umeng.analytics:analytics:latest.integration",
             /*模糊渐变清晰的imageview*/

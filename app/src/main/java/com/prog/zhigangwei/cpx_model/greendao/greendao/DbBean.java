@@ -1,5 +1,9 @@
 package com.prog.zhigangwei.cpx_model.greendao.greendao;
 
+import com.base.library.rxbus.annotation.Subscribe;
+import com.base.library.rxbus.annotation.Tag;
+import com.base.library.rxbus.thread.EventThread;
+
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Keep;
@@ -21,6 +25,10 @@ public class DbBean {
     private String myId;
     private String name;
     private String mail;
+
+
+
+
 
     @Keep
     public DbBean(Long id, String myId, String name, String mail) {

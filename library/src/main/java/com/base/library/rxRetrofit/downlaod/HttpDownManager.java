@@ -5,12 +5,11 @@ import android.os.Handler;
 import android.os.Looper;
 
 import com.base.library.rxRetrofit.downlaod.loadListener.DownloadInterceptor;
+import com.base.library.rxRetrofit.downlaod.subscriber.ProgressDownSubscriber;
 import com.base.library.rxRetrofit.exception.HttpTimeException;
 import com.base.library.rxRetrofit.exception.RetryWhenNetworkException;
 import com.base.library.rxRetrofit.http.converter.RetrofitStringConverterFactory;
-import com.base.library.rxRetrofit.downlaod.subscriber.ProgressDownSubscriber;
 import com.base.library.rxRetrofit.utils.DownDbUtil;
-import com.base.library.utils.utilcode.util.LogUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -79,7 +78,6 @@ public class HttpDownManager {
         /*正在下载不处理*/
         if (info == null) return;
         if (subMap.containsKey(info.getUrl())) {
-            LogUtils.d("subMap.get(info.getUrl()) != null");
             subMap.get(info.getUrl()).setDownInfo(info);
             return;
         }
@@ -235,7 +233,6 @@ public class HttpDownManager {
                     mappedBuffer.put(buffer, 0, len);
                 }
             } catch (IOException e) {
-                LogUtils.e("HttpDownManager writeCache IOException:" + e);
 //                throw new HttpTimeException(HttpTimeException.CACHE_DOWN_ERROR, e.getMessage());
             } finally {
                 if (inputStream != null) {

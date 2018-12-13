@@ -9,14 +9,15 @@ import android.net.NetworkInfo;
 import com.base.library.R;
 import com.base.library.rxRetrofit.RxRetrofitApp;
 import com.base.library.rxRetrofit.api.BaseApi;
+import com.base.library.rxRetrofit.downlaod.utils.CookieDbUtil;
 import com.base.library.rxRetrofit.exception.ApiException;
 import com.base.library.rxRetrofit.exception.HttpTimeException;
 import com.base.library.rxRetrofit.http.cookie.CookieResult;
 import com.base.library.rxRetrofit.listener.HttpOnNextListener;
-import com.base.library.rxRetrofit.downlaod.utils.CookieDbUtil;
 import com.base.library.rxlifecycle.components.support.RxAppCompatActivity;
-import com.base.library.utils.AbLogUtil;
-import com.base.library.utils.AbStrUtil;
+import com.base.library.utils.utilcode.util.LogUtils;
+import com.base.library.utils.utilcode.util.ResourceUtils;
+import com.base.library.utils.utilcode.util.StringUtils;
 
 import java.lang.ref.SoftReference;
 
@@ -152,11 +153,11 @@ public class ProgressSubscriber<T> implements Observer<T> {
         CookieResult cookieResult = CookieDbUtil.getInstance().queryCookieBy(api.getCacheUrl());
         if (cookieResult == null) {
             /*获取gson文件缓存数据*/
-            String result = AbStrUtil.getAssetsJsonBy(RxRetrofitApp.getApplication(), getPreCacheFileName());
-            if (!AbStrUtil.isEmpty(result)) {
-                resultOnNext(result);
-            } else {
+            String result = ResourceUtils.readAssets2String(getPreCacheFileName());
+            if (StringUtils.isEmpty(result)) {
                 errorDo(te);
+            } else {
+                resultOnNext(result);
             }
         } else {
             resultOnNext(cookieResult.getResult());
@@ -232,7 +233,7 @@ public class ProgressSubscriber<T> implements Observer<T> {
                 httpOnNextListener.onError(apiException, api.getMethod());
             }
         } catch (Exception e) {
-            AbLogUtil.e("listener onError error--->" + e.getMessage());
+            LogUtils.d("listener onError error--->" + e.getMessage());
         }
 
     }

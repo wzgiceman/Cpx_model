@@ -15,11 +15,41 @@
         android:scaleType="fitXY"/>
 
 
+    <TextView
+        android:id="@+id/tv_other"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:scaleType="fitXY"/>
+
+    <TextView
+        android:id="@+id/tv_MAIN"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:scaleType="fitXY"/>
+
+
+
+
+
+
     <Button
         android:id="@+id/btn_send"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="发送消息"/>
+        android:text="发送消息简单"/>
+
+
+    <Button
+        android:id="@+id/btn_send_other"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="发送消息-type-other"/>
+
+    <Button
+        android:id="@+id/btn_send_all"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="发送消息-type-main"/>
 
 
 </LinearLayout>

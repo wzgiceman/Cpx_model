@@ -4,8 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.base.library.rxRetrofit.api.BaseApi;
 import com.base.library.rxRetrofit.api.result.BaseResult;
 import com.base.library.rxRetrofit.exception.HttpTimeException;
-import com.base.library.utils.AbStrUtil;
-
+import com.base.library.utils.utilcode.util.StringUtils;
 
 import io.reactivex.Observable;
 import io.reactivex.functions.Function;
@@ -40,22 +39,19 @@ public class TokenFunc implements Function<Object, Observable> {
 
         if (result.getCode() == 1) {
             return retrofit.create(TokenServiceApi.class).token()
-                    .flatMap(new Function() {
-                        @Override
-                        public Observable apply(Object o) {
-                            if (!AbStrUtil.isEmpty(o.toString())) {
-                                BaseResult resulte = JSONObject.parseObject(o.toString(), BaseResult.class);
-                                if (0 == resulte.getCode()) {
-                                    /*解析出tokean传入到当前请求的api接口类中*/
-                                    BaseApi.setConfig("");
-                                } else {
-                                    throw new HttpTimeException(HttpTimeException.HTTP_TOKEN_ERROR, "The network server runs down");
-                                }
-                                /*继续当前接口请求*/
-                                return baseApi.getObservable();
+                    .flatMap((Function) o1 -> {
+                        if (!StringUtils.isEmpty(o1.toString())) {
+                            BaseResult resulte = JSONObject.parseObject(o1.toString(), BaseResult.class);
+                            if (0 == resulte.getCode()) {
+                                /*解析出tokean传入到当前请求的api接口类中*/
+                                BaseApi.setConfig("");
+                            } else {
+                                throw new HttpTimeException(HttpTimeException.HTTP_TOKEN_ERROR, "The network server runs down");
                             }
-                            throw new HttpTimeException(HttpTimeException.HTTP_TOKEN_ERROR, "The network server runs down");
+                            /*继续当前接口请求*/
+                            return baseApi.getObservable();
                         }
+                        throw new HttpTimeException(HttpTimeException.HTTP_TOKEN_ERROR, "The network server runs down");
                     });
         } else {
             return Observable.just(o);

@@ -1,8 +1,8 @@
 package com.prog.zhigangwei.cpx_model.http.common.api
 
+import com.prog.zhigangwei.cpx_model.http.common.api.notice.NoticePostApi
 import io.reactivex.Observable
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
+import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
 
@@ -34,7 +34,6 @@ interface ApiService {
     /**
      * 发送通知需要的tokean信息到服务器
      */
-    @FormUrlEncoded
     @POST("message/message/userTerminal")
-    fun postNotice(@Field("token")token:String?, @Field("terminal_type")terminalType:String, @Field("device_id")deviceId:String): Observable<String>
+    fun postNotice(@Body api:NoticePostApi): Observable<String>
 }

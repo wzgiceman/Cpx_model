@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.base.library.utils.AbLogUtil;
+import com.base.library.utils.utilcode.util.LogUtils;
 import com.base.router.empty.EmptyActivity;
 
 /**
@@ -44,7 +44,7 @@ public class ActivityRouter {
             startActivity(context, clazz, bundle);
         } catch (ClassNotFoundException e) {
             startActivity(context, EmptyActivity.class,null);
-            AbLogUtil.e("The class cannot be found");
+            LogUtils.e("The class cannot be found");
         }
     }
 
@@ -59,7 +59,7 @@ public class ActivityRouter {
             startActivity(context, clazz, null);
         } catch (ClassNotFoundException e) {
             startActivity(context, EmptyActivity.class,null);
-            AbLogUtil.e("The class cannot be found");
+            LogUtils.e("The class cannot be found");
         }
     }
 }

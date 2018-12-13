@@ -2,7 +2,7 @@ package com.base.library.crash;
 
 import android.content.Context;
 
-import com.base.library.utils.AbDateUtil;
+import com.base.library.utils.utilcode.util.TimeUtils;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -24,7 +24,7 @@ public class FileLogUtil {
      * @param log 日志内容
      */
     public static void log(String log, Context context) {
-        String currentTime = AbDateUtil.getCurrentDate("yyyy-MM-dd HH:mm:ss");
+        String currentTime = TimeUtils.getNowString();
         currentTime = "************" + currentTime + "************\n";
         log = toUtf8(log) + "\n";
 
@@ -50,7 +50,7 @@ public class FileLogUtil {
      */
     public static File checkLogFile(Context context) {
         File logFile = null;
-        String logFileName = AbDateUtil.getCurrentDate("yyyy-MM-dd HH:mm:ss") + ".log";
+        String logFileName = TimeUtils.getNowString()+ ".log";
         File folder = new File(context.getExternalFilesDir(null),"error"); // 创建文件夹
         logFile = new File(folder, logFileName); // 创建log文件
         if (!folder.exists()) {
