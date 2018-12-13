@@ -4,10 +4,10 @@ package com.base.library.rxRetrofit.http.func;
 import com.alibaba.fastjson.JSONObject;
 import com.base.library.rxRetrofit.api.BaseApi;
 import com.base.library.rxRetrofit.api.result.BaseResult;
+import com.base.library.rxRetrofit.downlaod.utils.CookieDbUtil;
 import com.base.library.rxRetrofit.exception.HttpTimeException;
 import com.base.library.rxRetrofit.http.cookie.CookieResult;
-import com.base.library.rxRetrofit.downlaod.utils.CookieDbUtil;
-import com.base.library.utils.AbStrUtil;
+import com.base.library.utils.utilcode.util.StringUtils;
 
 import io.reactivex.functions.Function;
 
@@ -36,7 +36,7 @@ public class ResultFunc implements Function<Object, String> {
         /*数据回调格式统一判断*/
         BaseResult result = JSONObject.parseObject(o.toString(), BaseResult.class);
         if (result.getCode() == 0) {
-            if (AbStrUtil.isEmpty(result.getData())) return "";
+            if (StringUtils.isEmpty(result.getData())) return "";
             /*缓存处理*/
             CookieResult cookieRes = CookieDbUtil.getInstance().queryCookieBy(basePar.getCacheUrl());
             long time = System.currentTimeMillis();
@@ -52,7 +52,7 @@ public class ResultFunc implements Function<Object, String> {
 
             return result.getData();
         } else {
-            throw new HttpTimeException(HttpTimeException.CACHE_HTTP_POST_ERROR, AbStrUtil.isEmpty(result.getMsg()) ? "error " +
+            throw new HttpTimeException(HttpTimeException.CACHE_HTTP_POST_ERROR, StringUtils.isEmpty(result.getMsg()) ? "error " +
                     "data" : result.getMsg());
         }
 

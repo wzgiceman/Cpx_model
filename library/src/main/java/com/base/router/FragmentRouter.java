@@ -1,9 +1,8 @@
 package com.base.router;
 
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 
-import com.base.library.utils.AbLogUtil;
+import com.base.library.utils.utilcode.util.LogUtils;
 import com.base.muslim.base.fragment.BaseFragment;
 import com.base.router.empty.EmptyFragment;
 
@@ -28,7 +27,7 @@ public class FragmentRouter {
             fragment = (BaseFragment) fragmentClass.newInstance();
         } catch (Exception e) {
             fragment = new EmptyFragment();
-            AbLogUtil.e("The fragment cannot be found");
+            LogUtils.e("The fragment cannot be found");
         }
         return fragment;
     }

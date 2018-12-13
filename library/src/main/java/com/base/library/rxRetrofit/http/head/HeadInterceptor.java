@@ -2,11 +2,11 @@ package com.base.library.rxRetrofit.http.head;
 
 import com.alibaba.fastjson.JSONObject;
 import com.base.library.R;
+import com.base.library.rxRetrofit.RxRetrofitApp;
 import com.base.library.rxRetrofit.api.BaseApi;
 import com.base.library.rxRetrofit.api.result.BaseResult;
-import com.base.library.rxRetrofit.RxRetrofitApp;
 import com.base.library.rxRetrofit.exception.HttpTimeException;
-import com.base.library.utils.AbStrUtil;
+import com.base.library.utils.utilcode.util.StringUtils;
 import com.base.router.ActivityRouter;
 import com.base.router.RouterList;
 
@@ -46,7 +46,7 @@ public class HeadInterceptor implements Interceptor {
         String[] config = BaseApi.getConfig().split("&");
         Request request = original.newBuilder()
                 .header("language", config[0])
-                .header("Authorization", "Token " + (config.length > 1 && !AbStrUtil.isEmpty(config[1]) ? config[1] : ""))
+                .header("Authorization", "Token " + (config.length > 1 && !StringUtils.isEmpty(config[1]) ? config[1] : ""))
                 .header("version", RxRetrofitApp.getApplication().getString(R.string.versionWeb))
                 .method(original.method(), original.body())
                 .build();
