@@ -2,6 +2,7 @@ package com.prog.zhigangwei.cpx_model.rxbus
 
 import com.base.library.rxbus.RxBus
 import com.base.library.rxbus.annotation.Subscribe
+import com.base.library.rxbus.annotation.Tag
 import com.base.library.rxbus.thread.EventThread
 import com.base.muslim.base.activity.BaseActivity
 import com.prog.zhigangwei.cpx_model.R
@@ -31,14 +32,32 @@ class RxBusActivity : BaseActivity() {
         btn_send.setOnClickListener {
             RxBus.get().post(SendEvent("发送消息"))
         }
+        btn_send_other.setOnClickListener {
+            RxBus.get().post("OTHER", SendEvent("发送消息-类型：OTHER"))
+        }
+        btn_send_all.setOnClickListener {
+            RxBus.get().post("MAIN", SendEvent("发送消息-类型：MAIN"))
+        }
+    }
+
+
+    @Subscribe(thread = EventThread.MAIN_THREAD)
+    fun updatesScRecord(event: SendEvent) {
+        tv_name.text = event.msg
+    }
+
+
+    @Subscribe(thread = EventThread.MAIN_THREAD, tags = [Tag("OTHER")])
+    fun updateScRecords(event: SendEvent) {
+        tv_other.text = event.msg
     }
 
     /**
      * 刷新当前位置数据
      */
-    @Subscribe(thread = EventThread.MAIN_THREAD)
+    @Subscribe(thread = EventThread.MAIN_THREAD, tags = [Tag("MAIN"), Tag("OTHER")])
     fun updateScRecord(event: SendEvent) {
-        tv_name.text = event.msg
+        tv_MAIN.text = event.msg
     }
 
     override fun onStop() {
