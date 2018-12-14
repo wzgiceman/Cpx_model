@@ -13,7 +13,7 @@
         android:top="10dp">
         <bitmap
             android:gravity="center"
-            android:src="@mipmap/loading_img"/>
+            android:src="@mipmap/ic_launcher"/>
     </item>
     <!--<item android:width="20dp" android:height="20dp">-->
     <!--<animated-rotate-->

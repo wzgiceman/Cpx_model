@@ -3,33 +3,20 @@
     <string name="service_error">The network server runs down</string>
     <string name="json_error">Data parsing error</string>
     <string name="url_error">Unable to parse zone</string>
-    <string name="not_activity">The class cannot be found</string>
 
     <string name="Loading">Loading.....</string>
     <string name="exit_dialog_Cancel">Cancel</string>
     <string name="tips_dialog_Drop">Yes</string>
-    <string name="input_error">The input is incomplete</string>
     <string name="please_turn_on_camera_permissions">Please enable camera permissions in Settings</string>
     <string name="Camera">Camera</string>
     <string name="Album">Album</string>
     <string name="how_to_get_picture">Choose how to get pictures</string>
 
-    <string-array name="sp_font_name">
-        <item>Othmani</item>
-        <item>Indopak</item>
-    </string-array>
-
     <string name="http_cancel">Network request cancellation</string>
-    <string name="my_azakar"> My Duas</string>
 
     <!-- 已经到底了 -->
-    <string name="no_more">No more.</string>
 
     <!--电话/邮箱登录 发送验证码-->
-    <string name="send_code">SEND CODE</string>
-    <string name="account_cannot_be_empty">Account cannot be empty.</string>
-    <string name="please_input_verification_code">Please input verification code</string>
-
 
 
 </resources>
