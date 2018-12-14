@@ -1,7 +1,7 @@
 package com.base.router.empty;
 
 import com.base.library.R;
-import com.base.muslim.base.fragment.BaseFragment;
+import com.base.project.base.fragment.BaseFragment;
 
 /**
  * Describe:空的fragment

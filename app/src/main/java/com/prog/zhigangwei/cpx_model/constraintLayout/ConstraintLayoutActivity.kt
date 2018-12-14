@@ -1,6 +1,6 @@
 package com.prog.zhigangwei.cpx_model.constraintLayout
 
-import com.base.muslim.base.activity.BaseActivity
+import com.base.project.base.activity.BaseActivity
 import com.prog.zhigangwei.cpx_model.R
 
 /**

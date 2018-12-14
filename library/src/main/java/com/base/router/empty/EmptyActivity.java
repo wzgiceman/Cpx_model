@@ -1,7 +1,7 @@
 package com.base.router.empty;
 
 import com.base.library.R;
-import com.base.muslim.base.activity.BaseActivity;
+import com.base.project.base.activity.BaseActivity;
 
 /**
  * Describe:空的Activity

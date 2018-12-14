@@ -4,7 +4,7 @@ import android.support.v7.widget.LinearLayoutManager
 import com.base.library.easyrecyclerview.decoration.SpaceDecoration
 import com.base.library.observer.AbsObserver
 import com.base.library.utils.utilcode.util.ConvertUtils
-import com.base.muslim.base.activity.BaseToolsActivity
+import com.base.project.base.activity.BaseToolsActivity
 import com.prog.zhigangwei.cpx_model.R
 import com.prog.zhigangwei.cpx_model.easyRecyclerview.common.bean.RecyclerItemBean
 import com.prog.zhigangwei.cpx_model.easyRecyclerview.easyRecyclerview.RecAdapter
