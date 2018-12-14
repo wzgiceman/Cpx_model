@@ -35,12 +35,7 @@ public final class TimeUtils {
 
 
     private static SimpleDateFormat getDefaultFormat() {
-        SimpleDateFormat simpleDateFormat = SDF_THREAD_LOCAL.get();
-        if (simpleDateFormat == null) {
-            simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
-            SDF_THREAD_LOCAL.set(simpleDateFormat);
-        }
-        return simpleDateFormat;
+        return getDefaultFormat("yyyy-MM-dd HH:mm:ss");
     }
 
     private TimeUtils() {
