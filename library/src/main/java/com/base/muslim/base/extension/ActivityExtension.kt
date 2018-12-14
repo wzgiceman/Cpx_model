@@ -7,6 +7,7 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
+import com.base.library.utils.utilcode.util.KeyboardUtils
 
 /**
  * Description:
@@ -37,18 +38,11 @@ fun Activity.checkKeyboard(ev: MotionEvent) {
     if (ev.action == MotionEvent.ACTION_DOWN) {
         val v = currentFocus
         if (isShouldHideKeyboard(v, ev)) {
-            hideKeyboard()
+            KeyboardUtils.hideSoftInput(this)
         }
     }
 }
 
-/**
- * 隐藏软键盘
- */
-fun Activity.hideKeyboard(){
-    val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager?
-    imm?.hideSoftInputFromWindow(currentFocus?.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
-}
 
 /**
  * 根据EditText所在坐标和用户点击的坐标相对比，来判断是否隐藏键盘，当用户点击EditText时不隐藏
