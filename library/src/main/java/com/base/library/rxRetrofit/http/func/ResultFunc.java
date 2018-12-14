@@ -2,6 +2,8 @@ package com.base.library.rxRetrofit.http.func;
 
 
 import com.alibaba.fastjson.JSONObject;
+import com.base.library.R;
+import com.base.library.rxRetrofit.RxRetrofitApp;
 import com.base.library.rxRetrofit.api.BaseApi;
 import com.base.library.rxRetrofit.api.result.BaseResult;
 import com.base.library.rxRetrofit.downlaod.utils.CookieDbUtil;
@@ -25,8 +27,9 @@ public class ResultFunc implements Function<Object, String> {
 
     @Override
     public String apply(Object o) {
-        if (o == null || "".equals(o.toString())) {
-            throw new HttpTimeException(HttpTimeException.CACHE_HTTP_ERROR, "error service");
+        if (o == null || StringUtils.isEmpty(o.toString())) {
+            throw new HttpTimeException(HttpTimeException.CACHE_HTTP_ERROR,
+                    RxRetrofitApp.getApplication().getString(R.string.service_error));
         }
 
         if (basePar.isIgnoreJudge()) {
@@ -36,24 +39,23 @@ public class ResultFunc implements Function<Object, String> {
         /*数据回调格式统一判断*/
         BaseResult result = JSONObject.parseObject(o.toString(), BaseResult.class);
         if (result.getCode() == 0) {
+            if (!basePar.isCache()) return StringUtils.isEmpty(result.getData()) ? "" : result.getData();
             if (StringUtils.isEmpty(result.getData())) return "";
             /*缓存处理*/
             CookieResult cookieRes = CookieDbUtil.getInstance().queryCookieBy(basePar.getCacheUrl());
             long time = System.currentTimeMillis();
-            if (cookieRes == null && basePar.isCache()) {
+            if (cookieRes == null) {
                 cookieRes = new CookieResult(basePar.getCacheUrl(), result.getData(), time);
                 CookieDbUtil.getInstance().saveCookie(cookieRes);
-            }
-            if (cookieRes != null) {
+            } else {
                 cookieRes.setResult(result.getData());
                 cookieRes.setTime(time);
                 CookieDbUtil.getInstance().updateCookie(cookieRes);
             }
-
             return result.getData();
         } else {
-            throw new HttpTimeException(HttpTimeException.CACHE_HTTP_POST_ERROR, StringUtils.isEmpty(result.getMsg()) ? "error " +
-                    "data" : result.getMsg());
+            throw new HttpTimeException(HttpTimeException.CACHE_HTTP_POST_ERROR, StringUtils.isEmpty(result.getMsg())
+                    ? RxRetrofitApp.getApplication().getString(R.string.service_error) : result.getMsg());
         }
 
     }

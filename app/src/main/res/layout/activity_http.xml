@@ -18,6 +18,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="get-网络请求"/>
+    <Button
+        android:id="@+id/btn_get_refresh"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="get-网络请求-缓存情况下刷新数据"/>
 
     <Button
         android:id="@+id/btn_post"
