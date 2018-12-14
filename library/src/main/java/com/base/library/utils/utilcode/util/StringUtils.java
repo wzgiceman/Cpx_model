@@ -190,4 +190,32 @@ public final class StringUtils {
         }
         return new String(chars);
     }
+
+
+    /**
+     * http 转成string
+     *
+     * @param http
+     * @return
+     */
+    public static String http2String(String http) {
+        return http.replace("//", "").replace("/", "").replace(":", "").replace(".", "");
+    }
+
+    /**
+     * 描述：不足2个字符的在前面补“0”.
+     *
+     * @param str 指定的字符串
+     * @return 至少2个字符的字符串
+     */
+    public static String strFormat2(String str) {
+        try {
+            if (str.length() <= 1) {
+                str = "0" + str;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return str;
+    }
 }

@@ -1441,4 +1441,26 @@ public final class TimeUtils {
         }
         return sb.toString();
     }
+
+
+    /**
+     * 判断系统是否是24小时格式
+     * @return
+     */
+    public static boolean is24() {
+        return android.text.format.DateFormat.is24HourFormat(Utils.getApp());
+    }
+
+    /**
+     * 时间日期格式化到年月日.
+     */
+    public static final String DATE_FORMAT_YMD = "yyyy-MM-dd";
+
+    public static final String DATE_FORMAT_DMHM = "dd/MM HH:mm";
+
+    /**
+     * 时分.
+     */
+    public static final String DATE_FORMAT_HM24 = "HH:mm";
+    public static final String DATE_FORMAT_HM12 = "hh:mm aa";
 }

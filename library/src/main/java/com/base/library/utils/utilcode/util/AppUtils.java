@@ -1096,4 +1096,20 @@ public final class AppUtils {
         }
         return flag;
     }
+
+
+    /**
+     * google市场升级
+     *
+     * @param context
+     */
+    public static void updateApp(Context context) {
+        try {
+            String packageName = context.getPackageName();
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setData(Uri.parse("market://details?id=" + packageName));
+            context.startActivity(Intent.createChooser(intent, "choose app"));
+        } catch (Exception e) {
+        }
+    }
 }
