@@ -32,6 +32,8 @@ abstract class BaseActivity : BaseSwipeBackActivity(), IBase {
      * 初始化Activity的根方法
      */
     protected open fun initActivity() {
+        layoutId().takeUnless { it == IBase.NO_LAYOUT }?.let { setContentView(it) }
+        layoutId().takeUnless { it == IBase.NO_LAYOUT } ?: let { "222" }
         if (layoutId() != IBase.NO_LAYOUT) {
             setContentView(layoutId())
         }
@@ -50,7 +52,6 @@ abstract class BaseActivity : BaseSwipeBackActivity(), IBase {
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        bundle ?: return
         outState.putBundle("bundle", bundle)
     }
 
@@ -65,7 +66,8 @@ abstract class BaseActivity : BaseSwipeBackActivity(), IBase {
      * @param savedInstanceState
      */
     protected fun restoreSaveState(savedInstanceState: Bundle?) {
-        if(null != intent.extras){
+        intent.extras?.let { bundle = it }
+        if (null != intent.extras) {
             bundle = intent.extras
         }
         if (bundle == null && savedInstanceState != null && savedInstanceState.containsKey("bundle")) {

@@ -64,7 +64,7 @@ public class ProgressSubscriber<T> implements Observer<T> {
      */
     @Override
     public void onSubscribe(Disposable d) {
-        if (api.isCache()) {
+        if (api.isCache() && !api.isRefresh()) {
             /*获取缓存数据*/
             CookieResult cookieResult = CookieDbUtil.getInstance().queryCookieBy(api.getCacheUrl());
             int duration = isNetworkAvailable(RxRetrofitApp.getApplication()) ? api.getCookieNetWorkTime()

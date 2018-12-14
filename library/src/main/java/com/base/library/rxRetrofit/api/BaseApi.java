@@ -32,6 +32,8 @@ public abstract class BaseApi {
     private transient boolean showProgress = true;
     /*是否需要缓存处理*/
     private transient boolean cache = false;
+    /*是否是刷新模式：true标识不论是否有缓存处理都及时处理最新数据，并且根据cache设置控制数据缓存更新*/
+    private transient boolean refresh = false;
     /*固定基础url*/
     public transient static String BASE_URL = "http://api.onlinemuslim.net/";
     /*基础url*/
@@ -54,7 +56,7 @@ public abstract class BaseApi {
     private transient String cacheUrl;
     /*常用服务器校验字段*/
     private transient static String config;
-    /*忽略结果判断*/
+    /*忽略结果判断-特殊接口不能按照规范返回时使用*/
     private transient boolean ignoreJudge;
     /*retrofit控制器*/
     private Retrofit retrofit;
@@ -65,13 +67,12 @@ public abstract class BaseApi {
     /**
      * 设置参数
      *
-     *
      * @return
      */
-    @JSONField(serialize=false)
+    @JSONField(serialize = false)
     public abstract Observable getObservable();
 
-    @JSONField(serialize=false)
+    @JSONField(serialize = false)
     public String getUrl() {
         return getBaseUrl() + getMethod();
     }
@@ -180,7 +181,15 @@ public abstract class BaseApi {
         this.advanceLoadCache = advanceLoadCache;
     }
 
-    @JSONField(serialize=false)
+    public boolean isRefresh() {
+        return refresh;
+    }
+
+    public void setRefresh(boolean refresh) {
+        this.refresh = refresh;
+    }
+
+    @JSONField(serialize = false)
     public String getCacheUrl() {
         if (StringUtils.isEmpty(cacheUrl)) {
             return getUrl();
@@ -195,7 +204,7 @@ public abstract class BaseApi {
 
     public static String getConfig() {
         if (StringUtils.isEmpty(config)) {
-            config = SPUtils.getInstance().getString("token","");
+            config = SPUtils.getInstance().getString("token", "");
         }
         return config;
     }
@@ -211,7 +220,7 @@ public abstract class BaseApi {
      *
      * @return
      */
-    @JSONField(serialize=false)
+    @JSONField(serialize = false)
     public Retrofit getRetrofit() {
         if (null != retrofit) {
             return retrofit;
