@@ -4,7 +4,7 @@ import android.content.Intent
 import android.net.Uri
 import com.base.library.share.ShareManager
 import com.base.library.share.common.listener.OnShareListener
-import com.base.muslim.base.activity.BaseToolsActivity
+import com.base.project.base.activity.BaseToolsActivity
 
 /**
  * Description:

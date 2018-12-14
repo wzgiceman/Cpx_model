@@ -7,8 +7,8 @@ import android.widget.TextView
 import com.base.library.easyrecyclerview.adapter.BaseViewHolder
 import com.base.library.easyrecyclerview.adapter.RecyclerArrayAdapter
 import com.base.library.utils.utilcode.util.LogUtils
-import com.base.muslim.base.adapter.BaseHolder
-import com.base.muslim.weak.Weak
+import com.base.project.base.adapter.BaseHolder
+import com.base.project.weak.Weak
 import com.prog.zhigangwei.cpx_model.R
 import com.prog.zhigangwei.cpx_model.easyRecyclerview.common.bean.RecyclerItemBean
 

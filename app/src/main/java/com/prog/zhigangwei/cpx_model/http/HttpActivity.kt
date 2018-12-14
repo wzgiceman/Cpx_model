@@ -5,9 +5,9 @@ import com.base.library.rxRetrofit.http.HttpManager
 import com.base.library.rxRetrofit.http.func.ResultFunc
 import com.base.library.rxRetrofit.listener.HttpOnNextListener
 import com.base.library.utils.utilcode.util.LogUtils
-import com.base.muslim.base.activity.BaseToolsActivity
-import com.base.muslim.base.extension.jumpActivity
-import com.base.muslim.base.extension.showToast
+import com.base.project.base.activity.BaseToolsActivity
+import com.base.project.base.extension.jumpActivity
+import com.base.project.base.extension.showToast
 import com.prog.zhigangwei.cpx_model.R
 import com.prog.zhigangwei.cpx_model.http.common.api.LanguageApi.LanguagesApi
 import com.prog.zhigangwei.cpx_model.http.common.api.notice.NoticePostApi

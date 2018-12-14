@@ -32,7 +32,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme_bg_no" />
         <activity
-            android:name="com.base.muslim.camera.capturedialog.PictureCaptureDialog"
+            android:name="com.base.project.camera.capturedialog.PictureCaptureDialog"
             android:screenOrientation="portrait"
             android:theme="@style/PictureCaptureDialog" />
 
@@ -48,7 +48,7 @@
 
         <!-- 拍照或从相册获取图片 -->
         <provider
-            android:name="com.base.muslim.camera.provider.MuslimFileProvider"
+            android:name="com.base.project.camera.provider.MuslimFileProvider"
             android:authorities="${applicationId}.provider"
             android:exported="false"
             android:grantUriPermissions="true">
@@ -94,7 +94,7 @@
             android:name="com.base.router.empty.EmptyActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.base.muslim.webview.WebPlayActivity"
+            android:name="com.base.project.webview.WebPlayActivity"
             android:screenOrientation="portrait" />
 
     </application>

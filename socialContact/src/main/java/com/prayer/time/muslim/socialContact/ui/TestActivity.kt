@@ -1,6 +1,6 @@
 package com.prayer.time.muslim.socialContact.ui
 
-import com.base.muslim.base.activity.BaseActivity
+import com.base.project.base.activity.BaseActivity
 import com.prayer.time.muslim.socialContact.R
 import kotlinx.android.synthetic.main.social_contact_activity_main.*
 

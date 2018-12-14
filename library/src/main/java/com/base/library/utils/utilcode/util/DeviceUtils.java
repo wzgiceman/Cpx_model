@@ -84,19 +84,6 @@ public final class DeviceUtils {
         return Build.VERSION.SDK_INT;
     }
 
-    /**
-     * Return the android id of device.
-     *
-     * @return the android id of device
-     */
-    @SuppressLint("HardwareIds")
-    public static String getAndroidID() {
-        String id = Settings.Secure.getString(
-                Utils.getApp().getContentResolver(),
-                Settings.Secure.ANDROID_ID
-        );
-        return id == null ? "" : id;
-    }
 
     /**
      * Return the MAC address.
@@ -357,7 +344,7 @@ public final class DeviceUtils {
      *
      * @return
      */
-    public static String getMacID() {
+    public static String getAndroidID() {
         String deviceId = "35" + (Build.BOARD.length() % 10) + (Build.BRAND.length() % 10) + (Build.CPU_ABI.length() %
                 10) + (Build.DEVICE.length() % 10) + (Build.MANUFACTURER.length() % 10) + (Build.MODEL.length() % 10) + (Build
                 .PRODUCT.length() % 10);

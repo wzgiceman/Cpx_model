@@ -3,7 +3,7 @@ package com.base.router;
 import android.support.annotation.NonNull;
 
 import com.base.library.utils.utilcode.util.LogUtils;
-import com.base.muslim.base.fragment.BaseFragment;
+import com.base.project.base.fragment.BaseFragment;
 import com.base.router.empty.EmptyFragment;
 
 

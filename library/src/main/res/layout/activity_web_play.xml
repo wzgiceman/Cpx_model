@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/c_FFFFFFFF"
     android:orientation="vertical"
-    tools:context="com.base.muslim.webview.WebPlayActivity">
+    tools:context="com.base.project.webview.WebPlayActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/web_toolbar"
