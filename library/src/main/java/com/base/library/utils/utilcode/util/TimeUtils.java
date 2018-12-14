@@ -30,6 +30,7 @@ public final class TimeUtils {
             simpleDateFormat = new SimpleDateFormat(format, Locale.getDefault());
             SDF_THREAD_LOCAL.set(simpleDateFormat);
         }
+        simpleDateFormat.applyPattern(format);
         return simpleDateFormat;
     }
 
