@@ -105,7 +105,7 @@ class TipsDialog : BaseDialog {
     /**
      * 显示弹窗
      * 参数1：确定按钮的文字，默认为Drop
-     * 参数2：设置窗口类型
+     * 参数2：设置窗口类型dialog_tips.xml
      * 参数3：可变参数，弹窗的提示内容
      */
     fun showDialog(okBtnText: String?, type: Any, vararg tipsText: String) {

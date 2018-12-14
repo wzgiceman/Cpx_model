@@ -13,14 +13,13 @@ import com.base.muslim.base.IBase
 abstract class BaseActivity : BaseSwipeBackActivity(), IBase {
     /**上个界面传入的数据*/
     protected var bundle: Bundle = Bundle()
+    /**控制是否需要绘制UI界面*/
     protected var beforeUi = true
-    /**是否启用滑动返回*/
-    private var enableSwipeBack = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         restoreSaveState(savedInstanceState)
-        setBackEnable(enableSwipeBack)
+        setBackEnable(false)
         if (beforeUi) {
             initActivity()
         } else {
@@ -50,7 +49,6 @@ abstract class BaseActivity : BaseSwipeBackActivity(), IBase {
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        bundle ?: return
         outState.putBundle("bundle", bundle)
     }
 
@@ -65,7 +63,7 @@ abstract class BaseActivity : BaseSwipeBackActivity(), IBase {
      * @param savedInstanceState
      */
     protected fun restoreSaveState(savedInstanceState: Bundle?) {
-        if(null != intent.extras){
+        if (null != intent.extras) {
             bundle = intent.extras
         }
         if (bundle == null && savedInstanceState != null && savedInstanceState.containsKey("bundle")) {

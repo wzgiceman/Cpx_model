@@ -44,14 +44,22 @@ class HttpActivity : BaseToolsActivity(), HttpOnNextListener {
     }
 
     override fun initView() {
-        btn_get.setOnClickListener { httpManager.doHttpDeal(wallApi) }
+        btn_get.setOnClickListener {
+            wallApi.isRefresh = false
+            httpManager.doHttpDeal(wallApi)
+        }
+
+        btn_get_refresh.setOnClickListener {
+            wallApi.isRefresh = true
+            httpManager.doHttpDeal(wallApi)
+        }
+
         btn_post.setOnClickListener { httpManager.doHttpDeal(noticeApi) }
 
         /*可以提前将网络关闭测试，永远不会失败*/
         btn_pre_gson.setOnClickListener { httpManager.doHttpDeal(languagesApi) }
 
         btn_down.setOnClickListener { jumpActivity(DownActivity::class.java) }
-
 
 
         btn_all.setOnClickListener {

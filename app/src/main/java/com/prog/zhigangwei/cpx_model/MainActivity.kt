@@ -57,6 +57,7 @@ class MainActivity : BaseActivity() {
      * 基本控件处理
      */
     private fun initComplexWidget() {
+        setBackEnable(false)
         btn_http.setOnClickListener { jumpActivity(HttpActivity::class.java) }
         btn_permission.setOnClickListener { jumpActivity(PermisssionActivity::class.java) }
         btn_img.setOnClickListener { jumpActivity(ImageActivity::class.java) }
