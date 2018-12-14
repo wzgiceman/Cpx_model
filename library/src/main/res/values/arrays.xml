@@ -2,113 +2,12 @@
 <resources>
 
     <!--埋点1期-->
-    <string name="click_prayers">click_button_prayers</string>
-    <string name="click_wallpaper">click_button_wallpaper</string>
-    <string name="choose_wallpaper">choose_wallpaper</string>
-    <string name="click_button_sharehome">click_button_sharehome</string>
-    <string name="time_pre_reminder">time_pre_reminder</string>
-    <string name="click_button_qibla">click_button_qibla</string>
-    <string name="click_button_QBbackground">click_button_QBbackground</string>
-    <string name="click_button_quran">click_button_quran</string>
-    <string name="click_Quran_chapter">click_Quran_chapter</string>
-    <string name="favorite_ID">favorite_ID</string>
-    <string name="notes_ID">notes_ID</string>
-    <string name="shareapp">shareapp</string>
-    <string name="click_bell">click_bell</string>
-    <string name="click_noti_none">click_noti_none</string>
-    <string name="click_noti_silent">click_noti_silent</string>
-    <string name="click_noti_beep">click_noti_beep</string>
     <!--埋点2期-->
-    <string name="click_manu">click_menu</string>
-    <string name="click_tasbeeth">ta_click_tasbih</string>
-    <string name="click_setting">click_setting</string>
-    <string name="click_language">click_language</string>
-    <string name="click_asr">click_asr</string>
-    <string name="click_high">click_high</string>
-    <string name="click_share">click_share</string>
-    <string name="click_feedback">click_feedback</string>
-    <string name="click_aboutus">click_aboutus</string>
-    <string name="post">post</string>
-    <string name="post_success">post_success</string>
-    <string name="post_myzakar">post_myzakar</string>
-    <string name="Turn_position">Turn_position</string>
-    <string name="click_skip">click_skip</string>
-    <string name="choose_guran">choose_guran</string>
-    <string name="confirm_language">confirm_language</string>
-    <string name="click_login">login</string>
-    <string name="login_sucs">login successfully</string>
-
-    <string name="click_allprayertimes">click_allprayertimes</string>
-    <string name="click_30days">click_30days</string>
-    <string name="click_share30days">click_share30days</string>
-    <string name="click_dailyverse">dv_click_dailyverse</string>
-    <string name="click_readmore">dv_click_readmore</string>
-    <string name="click_events">click_events</string>
-    <string name="click_live">click_live</string>
-    <string name="click_notes">click_notes</string>
-    <string name="click_collection">click_collection</string>
-    <string name="dv_shareverse_set">dv_shareverse_set</string>
-    <string name="dv_click_index">dv_click_index</string>
-    <string name="dv_click_nightmode">dv_click_nightmode</string>
-    <string name="dv_click_daymode">dv_click_daymode</string>
-    <string name="dv_click_events">dv_click_events</string>
-    <string name="dv_click_duas">dv_click_duas</string>
-    <string name="dv_click_live">dv_click_live</string>
 
     <!--动态资源打点-->
-    <string name="wallpaper_down">wallpaper_down</string>
-    <string name="mp3_set">mp3_set</string>
-    <string name="compass_set">compass_set</string>
-    <string name="name">name</string>
-    <string name="dv_click_shareverse">dv_click_shareverse</string>
-    <string name="dv_click_collection">dv_click_collection</string>
-    <string name="dv_click_mark">dv_click_mark</string>
-    <string name="dv_click_playverse">dv_click_playverse</string>
-    <string name="dv_click_notes">dv_click_notes</string>
-    <string name="chapterid_sentenceid">chapterid_sentenceid</string>
-
-
-    <string name="click_greetingcards">gc_click_greetingcards</string>
-    <string name="ninetynine_click_99names">ninetynine_click_99names</string>
-    <string name="click_duas">du_click_duas</string>
-    <string name="click_channel">cha_click_channel</string>
-
-    <string name="name_set">name_set</string>
-    <string name="ta_click_tasbih">ta_click_tasbih</string>
-    <string name="ta_click_refresh">ta_click_refresh</string>
-    <string name="ta_click_cancelreset">ta_click_cancelreset</string>
-    <string name="ta_click_reset">ta_click_reset</string>
-    <string name="ta_click_tasbih_tasbih">ta_click_tasbih_tasbih</string>
-    <string name="ta_click_tasbihset">ta_click_tasbihset</string>
-    <string name="ta_tasbih_id">tasbihid</string>
-    <string name="ta_click_beadsset">ta_click_beadsset</string>
-    <string name="ta_bead_id">beadid</string>
-    <string name="ta_click_statistical">ta_click_statistical</string>
-    <string name="ta_click_countypeset">ta_click_countypeset</string>
-    <string name="ta_count_id">countid</string>
-    <string name="ta_click_sound_set">ta_sound_set</string>
-    <string name="ta_sound_mode_id">soundmodeid</string>
-
-    <string name="cha_click_recommend">cha_click_recommend</string>
-    <string name="cha_click_popular">cha_click_popular</string>
-    <string name="a_click_playvideo">a_click_playvideo</string>
-    <string name="cha_video_id">videoid</string>
-    <string name="cha_user_id">userid</string>
 
 
     <!--字体-->
-    <string-array name="sp_font">
-        <item>Hafs.otf</item>
-        <item>Al Qalam Quran Majeed.ttf</item>
-    </string-array>
 
 
-    <string name="pickerview_cancel">Cancel</string>
-    <string name="pickerview_submit">Confirm</string>
-    <string name="pickerview_year">Year</string>
-    <string name="pickerview_month">Month</string>
-    <string name="pickerview_day">Day</string>
-    <string name="pickerview_hours">Hour</string>
-    <string name="pickerview_minutes">Min</string>
-    <string name="pickerview_seconds">Second</string>
 </resources>
