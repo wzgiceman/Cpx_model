@@ -13,14 +13,13 @@ import com.base.muslim.base.IBase
 abstract class BaseActivity : BaseSwipeBackActivity(), IBase {
     /**上个界面传入的数据*/
     protected var bundle: Bundle = Bundle()
+    /**控制是否需要绘制UI界面*/
     protected var beforeUi = true
-    /**是否启用滑动返回*/
-    private var enableSwipeBack = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         restoreSaveState(savedInstanceState)
-        setBackEnable(enableSwipeBack)
+        setBackEnable(false)
         if (beforeUi) {
             initActivity()
         } else {
@@ -32,8 +31,6 @@ abstract class BaseActivity : BaseSwipeBackActivity(), IBase {
      * 初始化Activity的根方法
      */
     protected open fun initActivity() {
-        layoutId().takeUnless { it == IBase.NO_LAYOUT }?.let { setContentView(it) }
-        layoutId().takeUnless { it == IBase.NO_LAYOUT } ?: let { "222" }
         if (layoutId() != IBase.NO_LAYOUT) {
             setContentView(layoutId())
         }
@@ -66,7 +63,6 @@ abstract class BaseActivity : BaseSwipeBackActivity(), IBase {
      * @param savedInstanceState
      */
     protected fun restoreSaveState(savedInstanceState: Bundle?) {
-        intent.extras?.let { bundle = it }
         if (null != intent.extras) {
             bundle = intent.extras
         }
