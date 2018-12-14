@@ -17,6 +17,7 @@ import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
 import java.util.Enumeration;
+import java.util.UUID;
 
 import static android.Manifest.permission.ACCESS_WIFI_STATE;
 import static android.Manifest.permission.INTERNET;
@@ -348,5 +349,26 @@ public final class DeviceUtils {
      */
     public static void reboot2Bootloader() {
         ShellUtils.execCmd("reboot bootloader", true);
+    }
+
+
+    /**
+     * 设备的唯一mac地址
+     *
+     * @return
+     */
+    public static String getMacID() {
+        String deviceId = "35" + (Build.BOARD.length() % 10) + (Build.BRAND.length() % 10) + (Build.CPU_ABI.length() %
+                10) + (Build.DEVICE.length() % 10) + (Build.MANUFACTURER.length() % 10) + (Build.MODEL.length() % 10) + (Build
+                .PRODUCT.length() % 10);
+        String serial = null;
+        try {
+            serial = android.os.Build.class.getField("SERIAL").get(null).toString();
+            return new UUID(deviceId.hashCode(), serial.hashCode()).toString();
+        } catch (Exception exception) {
+            //some value
+            serial = "serial";
+        }
+        return new UUID(deviceId.hashCode(), serial.hashCode()).toString();
     }
 }
