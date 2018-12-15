@@ -170,8 +170,12 @@ public class ProgressSubscriber<T> implements Observer<T> {
      * @return
      */
     private String getPreCacheFileName() {
-        String fileName = CACHE_DATA_DIR_NAME + api.getMethod();
-        if (!api.getMethod().endsWith(JSON_SUFFIX)) {
+        String method = api.getMethod();
+        if (method.endsWith("/")) {
+            method = method.substring(0,method.length() - 1);
+        }
+        String fileName = CACHE_DATA_DIR_NAME + method;
+        if (!method.endsWith(JSON_SUFFIX)) {
             fileName += JSON_SUFFIX;
         }
         return fileName;
