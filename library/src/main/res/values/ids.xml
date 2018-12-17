@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="id_tag_autolayout_size" type="id"></item>
+    <item name="cb_item_tag" type="id"></item>
+
+    <!--截图-->
+    <item type="id" name="CACHE_BITMAP_KEY"></item>
+    <item type="id" name="CACHE_BITMAP_DIRTY_KEY"></item>
+
+
+    <item type="id" name="auto_focus"/>
+    <item type="id" name="decode"/>
+    <item type="id" name="decode_failed"/>
+    <item type="id" name="decode_succeeded"/>
+    <item type="id" name="launch_product_query"/>
+    <item type="id" name="quit"/>
+    <item type="id" name="restart_preview"/>
+    <item type="id" name="return_scan_result"/>
+
+</resources>
