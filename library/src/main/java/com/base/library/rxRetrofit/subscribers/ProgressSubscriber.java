@@ -81,9 +81,7 @@ public class ProgressSubscriber<T> implements Observer<T> {
             }
         }
 
-        if (api.isShowProgress()) {
-            initProgressDialog(api.isCancel(), d);
-        }
+        initProgressDialog(api.isCancel(), d);
     }
 
 
@@ -91,9 +89,7 @@ public class ProgressSubscriber<T> implements Observer<T> {
      * 初始化加载框
      */
     private void initProgressDialog(boolean cancel, Disposable d) {
-        if (!api.isShowProgress()) {
-            return;
-        }
+        if (!api.isShowProgress()) return;
         Context context = mActivity.get();
         if (pd == null && context != null) {
             pd = ProgressDialog.show(context, null, context.getString(R.string.Loading));
@@ -133,9 +129,7 @@ public class ProgressSubscriber<T> implements Observer<T> {
      */
     @Override
     public void onError(Throwable e) {
-        if (null == mActivity || null == mActivity.get() || mActivity.get().isFinishing()) {
-            return;
-        }
+        if (null == mActivity || null == mActivity.get() || mActivity.get().isFinishing()) return;
         /*需要緩存并且本地有缓存才返回*/
         if (api.isCache()) {
             getCache(e);

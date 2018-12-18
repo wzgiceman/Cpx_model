@@ -71,12 +71,11 @@ public class HttpManager {
 
 
         /*数据String回调*/
-        if (onNextListener != null && null != onNextListener.get() && null != appCompatActivity && null != appCompatActivity
-                .get()) {
+        if (null!=onNextListener && null != onNextListener.get() && null != appCompatActivity && null != appCompatActivity.get
+                ()) {
             ProgressSubscriber subscriber = new ProgressSubscriber(baseApi, onNextListener, appCompatActivity);
             observable.compose(appCompatActivity.get().bindUntilEvent(ActivityEvent.DESTROY)).observeOn(AndroidSchedulers
-                    .mainThread()).subscribe
-                    (subscriber);
+                    .mainThread()).subscribe(subscriber);
         }
 
         return observable;
