@@ -4,6 +4,7 @@ import android.util.SparseArray
 import com.alibaba.fastjson.JSONObject
 import com.base.shareData.message.ShareData
 import com.base.shareData.message.ShareDataDb
+import com.base.shareData.user.User
 
 /**
  *
@@ -32,9 +33,29 @@ object ShareSparse {
      */
     fun getValueBy(key: String): Any {
         if (null == MUSLIM_DATA.get(key.toInt())) {
-            putValue(key, getDbValueBy(key))
+            var value = getDbValueBy(key)
+            if(value != null){
+                putValue(key, value)
+            }else{
+                return createEmptyValue(key)
+            }
         }
         return MUSLIM_DATA.get(key.toInt())
+    }
+
+    /**
+     * 创建key 创建空的value
+     */
+    private fun createEmptyValue(key:String):Any{
+        return when(key){
+            USER_CLS ->{
+                User()
+            }
+            else->{
+                Any()
+            }
+        }
+
     }
 
 
@@ -42,7 +63,7 @@ object ShareSparse {
      * 根据上面定义的常量从数据库获取
      * @param key 关键key
      */
-    fun getDbValueBy(key: String): Any {
+    fun getDbValueBy(key: String): Any? {
         return ShareDataDb.getInstance().queryBy(key)
     }
 

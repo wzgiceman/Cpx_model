@@ -1,5 +1,7 @@
 package com.base.library.utils.utilcode.util;
 
+import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.CompressFormat;
@@ -22,7 +24,9 @@ import android.graphics.Shader;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.media.ExifInterface;
+import android.net.Uri;
 import android.os.Build;
+import android.os.Environment;
 import android.renderscript.Allocation;
 import android.renderscript.Element;
 import android.renderscript.RenderScript;
@@ -35,6 +39,10 @@ import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
+
+import com.base.library.R;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.Target;
 
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
@@ -147,6 +155,42 @@ public final class ImageUtils {
      */
     public static Drawable bytes2Drawable(final byte[] bytes) {
         return bitmap2Drawable(bytes2Bitmap(bytes));
+    }
+
+    /**
+     * 对view 进行截图
+     *
+     * @param view The view.
+     * @return bitmap
+     */
+    public static Bitmap getMagicDrawingCache(final View view) {
+        Bitmap bitmap = (Bitmap) view.getTag(R.id.CACHE_BITMAP_KEY);
+        Boolean dirty = (Boolean) view.getTag(R.id.CACHE_BITMAP_DIRTY_KEY);
+        if (view.getWidth() == 0 && view.getHeight() == 0) {
+            view.measure(View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED), View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec
+                    .UNSPECIFIED));
+            view.layout(0, 0, view.getMeasuredWidth(), view.getMeasuredHeight());
+        }
+        int width = view.getWidth();
+        int height = view.getHeight();
+        if (bitmap == null || bitmap.getWidth() != width || bitmap.getHeight() != height) {
+            if (bitmap != null && !bitmap.isRecycled()) {
+                bitmap.recycle();
+            }
+            try{
+                bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+            view.setTag(R.id.CACHE_BITMAP_KEY, bitmap);
+            dirty = true;
+        }
+        if (dirty == true) {
+            Canvas canvas = new Canvas(bitmap);
+            view.draw(canvas);
+            view.setTag(R.id.CACHE_BITMAP_DIRTY_KEY, false);
+        }
+        return bitmap;
     }
 
     /**
@@ -1924,5 +1968,59 @@ public final class ImageUtils {
                 e.printStackTrace();
             }
         }
+    }
+
+    /**
+     * 下载图片
+     *
+     * @param url
+     * @param context
+     * @param insertImage true 下载到相册中(需要提前申请写入权限) false 下载到包名下
+     * @return
+     */
+    public static String downBitmapBy(String url, Context context, boolean insertImage) {
+        File currentFile = null;
+        if (insertImage) {
+            currentFile = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + "DCIM"
+                    + File.separator + context.getString(R.string.app_name) + File.separator);
+            if (!currentFile.exists()) {
+                currentFile.mkdirs();
+            }
+        } else {
+            currentFile = context.getExternalFilesDir(null);
+        }
+        String name = StringUtils.http2String(url);
+        currentFile = new File(currentFile, name + ".jpg");
+        if (currentFile.exists()) {
+            return currentFile.getAbsolutePath();
+        }
+
+        try {
+            Bitmap bitmap = Glide.with(context)
+                    .asBitmap()
+                    .load(url)
+                    .into(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL)
+                    .get();
+            if (bitmap != null) {
+                save(bitmap, currentFile,CompressFormat.JPEG);
+            }
+            if (insertImage) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                    final Intent scanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+                    final Uri contentUri = Uri.fromFile(currentFile);
+                    scanIntent.setData(contentUri);
+                    context.sendBroadcast(scanIntent);
+                } else {
+                    final Intent intent = new Intent(Intent.ACTION_MEDIA_MOUNTED, Uri.parse("file://" + Environment
+                            .getExternalStorageDirectory()));
+                    context.sendBroadcast(intent);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            return currentFile.getAbsolutePath();
+        }
+
     }
 }
