@@ -46,7 +46,7 @@ fun report(key: String, value: Bundle? = null) {
 
 
 /**
- * 放置多次点击
+ * 防止多次点击
  * 默认一秒内重复点击无效
  */
 @JvmOverloads
