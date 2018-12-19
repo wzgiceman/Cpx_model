@@ -1,9 +1,9 @@
 package com.prog.zhigangwei.cpx_model.image
 
-import com.base.muslim.base.activity.BaseActivity
-import com.base.muslim.camera.OnPicturePathListener
-import com.base.muslim.camera.PictureCapture
-import com.base.muslim.camera.utils.Photo
+import com.base.project.base.activity.BaseActivity
+import com.base.project.camera.OnPicturePathListener
+import com.base.project.camera.PictureCapture
+import com.base.project.camera.utils.Photo
 import com.bumptech.glide.Glide
 import com.prog.zhigangwei.cpx_model.R
 import kotlinx.android.synthetic.main.activity_image.*

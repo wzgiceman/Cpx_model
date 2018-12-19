@@ -7,8 +7,8 @@ import com.base.library.rxRetrofit.listener.HttpDownOnNextListener
 import com.base.library.rxRetrofit.utils.DownDbUtil
 import com.base.library.utils.utilcode.util.LogUtils
 import com.base.library.utils.utilcode.util.NetworkUtils
-import com.base.muslim.base.activity.BaseActivity
-import com.base.muslim.base.extension.showToast
+import com.base.project.base.activity.BaseActivity
+import com.base.project.base.extension.showToast
 import com.prog.zhigangwei.cpx_model.R
 import com.prog.zhigangwei.cpx_model.http.down.down.NetworkConnectChangedReceiver
 import kotlinx.android.synthetic.main.activity_http_down.*

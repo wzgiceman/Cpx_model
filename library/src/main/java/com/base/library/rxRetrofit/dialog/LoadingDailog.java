@@ -4,7 +4,7 @@ import android.content.Context;
 import android.widget.TextView;
 
 import com.base.library.R;
-import com.base.muslim.base.dialog.BaseDialog;
+import com.base.project.base.dialog.BaseDialog;
 
 
 /**

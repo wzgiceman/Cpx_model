@@ -1,7 +1,7 @@
 package com.prog.zhigangwei.cpx_model
 
-import com.base.muslim.base.activity.BaseActivity
-import com.base.muslim.base.extension.jumpActivity
+import com.base.project.base.activity.BaseActivity
+import com.base.project.base.extension.jumpActivity
 import com.prog.zhigangwei.cpx_model.constraintLayout.ConstraintLayoutActivity
 import com.prog.zhigangwei.cpx_model.easyRecyclerview.RecyclerActivity
 import com.prog.zhigangwei.cpx_model.greendao.GreendaoActivity

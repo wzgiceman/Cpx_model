@@ -3,7 +3,7 @@ package com.prog.zhigangwei.cpx_model.rxjava
 import android.annotation.SuppressLint
 import com.base.library.observer.AbsObserver
 import com.base.library.utils.utilcode.util.LogUtils
-import com.base.muslim.base.activity.BaseActivity
+import com.base.project.base.activity.BaseActivity
 import com.prog.zhigangwei.cpx_model.R
 import io.reactivex.*
 import io.reactivex.android.schedulers.AndroidSchedulers
