@@ -1,9 +1,12 @@
 package com.base.project.base.extension
 
 import android.os.Bundle
+import android.view.View
 import com.base.library.BuildConfig
+import com.base.library.rxbinding.view.RxView
 import com.base.library.utils.DataReportUtils
 import com.base.library.utils.utilcode.util.ToastUtils
+import java.util.concurrent.TimeUnit
 
 /**
  * Description:
@@ -39,4 +42,16 @@ fun showToast(content: Any?) {
 @JvmOverloads
 fun report(key: String, value: Bundle? = null) {
     DataReportUtils.getInstance().report(key, value)
+}
+
+
+/**
+ * 放置多次点击
+ * 默认一秒内重复点击无效
+ */
+@JvmOverloads
+fun View.setOnRxClickListener(listener: (View) -> Unit) {
+    RxView.clicks(this)
+            .throttleFirst(1, TimeUnit.SECONDS)
+            .subscribe { listener(this) }
 }
