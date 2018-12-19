@@ -23,6 +23,8 @@ import android.support.v4.content.FileProvider;
 import android.util.Log;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
@@ -1032,5 +1034,82 @@ public final class AppUtils {
             }
         }
         return "";
+    }
+
+    /**
+     * 导入数据库.
+     *
+     * @param context the context
+     * @param dbName  the db name
+     * @param rawRes  the raw res
+     * @return true, del
+     */
+
+    public static boolean importDatabase(Context context, String dbName, int rawRes, boolean del) {
+        int bufferSize = 1024;
+        InputStream is = null;
+        FileOutputStream fos = null;
+        boolean flag = false;
+
+        try {
+            String dbPath = "/data/data/" + context.getPackageName() + "/databases/" + dbName;
+            File dbfile = new File(dbPath);
+            int versionCode = getAppVersionCode();
+            if (del && dbfile.exists() && versionCode != SPUtils.getInstance().getInt(dbName)) {
+                dbfile.delete();
+            }
+            if (del) {
+                SPUtils.getInstance().put(dbName, versionCode);
+            }
+            //判断数据库文件是否存在，若不存在则执行导入，否则直接打开数据库
+            if (!dbfile.exists()) {
+                //欲导入的数据库
+                if (!dbfile.getParentFile().exists()) {
+                    dbfile.getParentFile().mkdirs();
+                }
+                dbfile.createNewFile();
+                is = context.getResources().openRawResource(rawRes);
+                fos = new FileOutputStream(dbfile);
+                byte[] buffer = new byte[bufferSize];
+                int count = 0;
+                while ((count = is.read(buffer)) > 0) {
+                    fos.write(buffer, 0, count);
+                }
+                fos.flush();
+            }
+            flag = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (fos != null) {
+                try {
+                    fos.close();
+                } catch (Exception e) {
+                }
+            }
+            if (is != null) {
+                try {
+                    is.close();
+                } catch (Exception e) {
+                }
+            }
+        }
+        return flag;
+    }
+
+
+    /**
+     * google市场升级
+     *
+     * @param context
+     */
+    public static void updateApp(Context context) {
+        try {
+            String packageName = context.getPackageName();
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setData(Uri.parse("market://details?id=" + packageName));
+            context.startActivity(Intent.createChooser(intent, "choose app"));
+        } catch (Exception e) {
+        }
     }
 }

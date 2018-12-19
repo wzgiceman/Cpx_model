@@ -327,4 +327,15 @@ public final class ResourceUtils {
             }
         }
     }
+
+    /**
+     * 根据名字得到mip下资源图片
+     *
+     * @param name
+     * @return
+     */
+    public static int getMipIdBy(String name) {
+        return Utils.getApp().getResources().getIdentifier(name, "mipmap", Utils.getApp()
+                .getPackageName());
+    }
 }

@@ -18,7 +18,7 @@ class NoticePostApi constructor(var token: String?) : BaseApi() {
         terminalType = "android"
         isCache=false
         method="message/message/userTerminal"
-        deviceId = DeviceUtils.getMacAddress()
+        deviceId = DeviceUtils.getAndroidID()
     }
 
     override fun getObservable(): Observable<*> {
