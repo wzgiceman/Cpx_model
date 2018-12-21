@@ -4,7 +4,6 @@ import android.app.Activity
 import android.os.Bundle
 import android.support.annotation.StringRes
 import android.support.v4.app.Fragment
-import com.base.library.rxlifecycle.components.support.RxAppCompatActivity
 
 /**
  * Description:
@@ -33,12 +32,6 @@ fun Fragment.isValidActivity(): Boolean {
     return context != null && (context as Activity).isValidActivity()
 }
 
-fun Fragment.getRxActivity(): RxAppCompatActivity? {
-    if (context is RxAppCompatActivity) {
-        return context as RxAppCompatActivity
-    }
-    return null
-}
 
 @JvmOverloads
 fun Fragment.report(@StringRes resId: Int, value: Bundle? = null) {

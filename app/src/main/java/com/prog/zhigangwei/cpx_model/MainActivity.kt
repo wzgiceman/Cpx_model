@@ -61,16 +61,16 @@ class MainActivity : BaseToolsActivity() {
      */
     private fun initComplexWidget() {
         setBackEnable(false)
-        btn_http.setOnClickListener { jumpActivity(HttpActivity::class.java) }
-        btn_permission.setOnClickListener { jumpActivity(PermisssionActivity::class.java) }
-        btn_img.setOnClickListener { jumpActivity(ImageActivity::class.java) }
-        btn_RxBus.setOnClickListener { jumpActivity(RxBusActivity::class.java) }
-        btn_EasyRecyclerView.setOnClickListener { jumpActivity(RecyclerActivity::class.java) }
-        btn_greendao.setOnClickListener { jumpActivity(GreendaoActivity::class.java) }
-        btn_rxjava.setOnClickListener { jumpActivity(RxJavaActivity::class.java) }
-        btn_constraintLayout.setOnClickListener { jumpActivity(ConstraintLayoutActivity::class.java) }
-        btn_login.setOnClickListener { jumpActivity(LoginActivity::class.java) }
-        btn_share.setOnClickListener { jumpActivity(ShareActivity::class.java) }
+        btn_http.setOnRxClickListener { jumpActivity(HttpActivity::class.java) }
+        btn_permission.setOnRxClickListener { jumpActivity(PermisssionActivity::class.java) }
+        btn_img.setOnRxClickListener { jumpActivity(ImageActivity::class.java) }
+        btn_RxBus.setOnRxClickListener { jumpActivity(RxBusActivity::class.java) }
+        btn_EasyRecyclerView.setOnRxClickListener { jumpActivity(RecyclerActivity::class.java) }
+        btn_greendao.setOnRxClickListener { jumpActivity(GreendaoActivity::class.java) }
+        btn_rxjava.setOnRxClickListener { jumpActivity(RxJavaActivity::class.java) }
+        btn_constraintLayout.setOnRxClickListener { jumpActivity(ConstraintLayoutActivity::class.java) }
+        btn_login.setOnRxClickListener { jumpActivity(LoginActivity::class.java) }
+        btn_share.setOnRxClickListener { jumpActivity(ShareActivity::class.java) }
         btn_rx_click.setOnRxClickListener { LogUtils.d("---->dddddddd") }
         btn_vpfg.setOnRxClickListener {jumpActivity(VpFragmentActivity::class.java) }
     }
