@@ -256,7 +256,7 @@ public class ProgressSubscriber<T> implements Observer<T> {
     /**
      * 判断Fragment/Activity是否已销毁
      *
-     * @return 是否已销毁
+     * @return true：未销毁，false：已销毁
      */
     private boolean isValid() {
         return null != mSubscriberOnNextListener && null != mSubscriberOnNextListener.get() && null != mActivity && null !=

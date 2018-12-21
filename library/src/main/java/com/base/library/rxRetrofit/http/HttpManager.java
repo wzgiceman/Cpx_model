@@ -88,7 +88,7 @@ public class HttpManager {
         if (onNextListener != null && null != onNextListener.get() && null != mFragment && null != mFragment.get()) {
             ProgressSubscriber subscriber = new ProgressSubscriber();
             subscriber.setFgProgSub(baseApi, onNextListener,mFragment);
-            observable.compose(mFragment.get().bindUntilEvent(FragmentEvent.DETACH)).observeOn(AndroidSchedulers
+            observable.compose(mFragment.get().bindUntilEvent(FragmentEvent.DESTROY_VIEW)).observeOn(AndroidSchedulers
                     .mainThread()).subscribe(subscriber);
         }
         return observable;
