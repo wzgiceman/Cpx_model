@@ -23,7 +23,7 @@ class SelectPageAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
     }
 
     override fun getCount(): Int {
-        return 20
+        return 100
     }
 
     override fun getPageTitle(position: Int): CharSequence {

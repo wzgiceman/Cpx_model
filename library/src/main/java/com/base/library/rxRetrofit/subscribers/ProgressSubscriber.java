@@ -15,10 +15,10 @@ import com.base.library.rxRetrofit.exception.ApiException;
 import com.base.library.rxRetrofit.exception.HttpTimeException;
 import com.base.library.rxRetrofit.http.cookie.CookieResult;
 import com.base.library.rxRetrofit.listener.HttpOnNextListener;
-import com.base.library.rxlifecycle.components.support.RxAppCompatActivity;
 import com.base.library.utils.utilcode.util.LogUtils;
 import com.base.library.utils.utilcode.util.ResourceUtils;
 import com.base.library.utils.utilcode.util.StringUtils;
+import com.base.project.base.activity.BaseActivity;
 import com.base.project.base.fragment.BaseFragment;
 
 import java.lang.ref.SoftReference;
@@ -37,7 +37,7 @@ public class ProgressSubscriber<T> implements Observer<T> {
     /*回调接口*/
     private SoftReference<HttpOnNextListener> mSubscriberOnNextListener;
     /* 软引用反正内存泄露*/
-    private SoftReference<RxAppCompatActivity> mActivity;
+    private SoftReference<BaseActivity> mActivity;
     private SoftReference<BaseFragment> mFragment;
     /*加载框可自己定义*/
     private ProgressDialog pd;
@@ -49,7 +49,7 @@ public class ProgressSubscriber<T> implements Observer<T> {
     private final String JSON_SUFFIX = ".json";
 
 
-    public void setAtProgSub(@NonNull BaseApi api, @NonNull SoftReference<HttpOnNextListener> listenerSoftReference,
+    public void setFgProgSub(@NonNull BaseApi api, @NonNull SoftReference<HttpOnNextListener> listenerSoftReference,
                              @NonNull SoftReference<BaseFragment> mFragment) {
         this.api = api;
         this.mSubscriberOnNextListener = listenerSoftReference;
@@ -57,8 +57,8 @@ public class ProgressSubscriber<T> implements Observer<T> {
         this.mActivity=new SoftReference(mFragment.get().getContext());
     }
 
-    public void setFgProgSub(@NonNull BaseApi api, @NonNull SoftReference<HttpOnNextListener> listenerSoftReference,
-                             @NonNull SoftReference<RxAppCompatActivity> mActivity) {
+    public void setAtProgSub(@NonNull BaseApi api, @NonNull SoftReference<HttpOnNextListener> listenerSoftReference,
+                             @NonNull SoftReference<BaseActivity> mActivity) {
         this.api = api;
         this.mSubscriberOnNextListener = listenerSoftReference;
         this.mActivity = mActivity;
@@ -235,7 +235,7 @@ public class ProgressSubscriber<T> implements Observer<T> {
         try {
             HttpOnNextListener httpOnNextListener = mSubscriberOnNextListener.get();
             if (null != mSubscriberOnNextListener && null != mSubscriberOnNextListener.get() && null != mActivity && null !=
-                    mActivity.get() && !mActivity.get().isFinishing()) {
+                    mActivity.get() && !mActivity.get().isFinishing()&&null!=mFragment.get()&&mFragment.get().isHidden()) {
                 httpOnNextListener.onError(apiException, api.getMethod());
             }
         } catch (Exception e) {
@@ -252,7 +252,7 @@ public class ProgressSubscriber<T> implements Observer<T> {
      */
     private void resultOnNext(String result) {
         if (null != mSubscriberOnNextListener && null != mSubscriberOnNextListener.get() && null != mActivity && null !=
-                mActivity.get() && !mActivity.get().isFinishing()&&null!=mFragment.get()&&mFragment.get().isDetached()) {
+                mActivity.get() && !mActivity.get().isFinishing()&&null!=mFragment.get()&&mFragment.get().isAdded()) {
             mSubscriberOnNextListener.get().onNext(result, api.getMethod());
         }
     }

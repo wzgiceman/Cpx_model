@@ -10,7 +10,6 @@ import com.base.library.rxRetrofit.listener.HttpOnNextListener;
 import com.base.library.rxRetrofit.subscribers.ProgressSubscriber;
 import com.base.library.rxlifecycle.android.ActivityEvent;
 import com.base.library.rxlifecycle.android.FragmentEvent;
-import com.base.library.rxlifecycle.components.support.RxAppCompatActivity;
 import com.base.project.base.activity.BaseActivity;
 import com.base.project.base.fragment.BaseFragment;
 
@@ -32,9 +31,9 @@ public class HttpManager {
     private SoftReference<BaseActivity> mActivity;
     private SoftReference<BaseFragment> mFragment;
 
-    public HttpManager(@NonNull HttpOnNextListener onNextListener, @NonNull RxAppCompatActivity appCompatActivity) {
+    public HttpManager(@NonNull HttpOnNextListener onNextListener, @NonNull BaseActivity activity) {
         this.onNextListener = new SoftReference(onNextListener);
-        this.mActivity = new SoftReference(appCompatActivity);
+        this.mActivity = new SoftReference(activity);
     }
 
     public HttpManager(@NonNull HttpOnNextListener onNextListener, @NonNull BaseFragment fragment) {
@@ -88,7 +87,7 @@ public class HttpManager {
         }
         if (onNextListener != null && null != onNextListener.get() && null != mFragment && null != mFragment.get()) {
             ProgressSubscriber subscriber = new ProgressSubscriber();
-            subscriber.setAtProgSub(baseApi, onNextListener,mFragment);
+            subscriber.setFgProgSub(baseApi, onNextListener,mFragment);
             observable.compose(mFragment.get().bindUntilEvent(FragmentEvent.DETACH)).observeOn(AndroidSchedulers
                     .mainThread()).subscribe(subscriber);
         }

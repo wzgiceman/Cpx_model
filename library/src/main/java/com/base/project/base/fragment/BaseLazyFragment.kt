@@ -60,7 +60,7 @@ abstract class BaseLazyFragment : BaseFragmentManagerFragment() {
      */
     private fun loadData() {
         //如果可见,并且没有加载数据
-        if (this.userVisibleHint && !loading) {
+        if (this.isVisible && !loading) {
             loading = true
             initFragment()
         }
