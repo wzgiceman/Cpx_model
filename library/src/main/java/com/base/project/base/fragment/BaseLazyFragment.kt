@@ -1,4 +1,4 @@
-package com.base.library.base.fragment
+package com.base.project.base.fragment
 
 
 import android.os.Bundle
@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.base.project.base.IBase
-import com.base.project.base.fragment.BaseFragmentManagerFragment
 
 
 /**
@@ -20,7 +19,7 @@ import com.base.project.base.fragment.BaseFragmentManagerFragment
  * @copyright cpx
  */
 
-abstract class BaseLazyFragment : BaseFragmentManagerFragment(), IBase {
+abstract class BaseLazyFragment : BaseFragmentManagerFragment() {
     /**是否加载数据*/
     private var loading = false
     /**判断view是否创建*/
@@ -37,13 +36,7 @@ abstract class BaseLazyFragment : BaseFragmentManagerFragment(), IBase {
         }
     }
 
-    /**
-     * 懒加载数据
-     */
-    protected abstract fun lazyLoadData()
-
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
-
         super.setUserVisibleHint(isVisibleToUser)
         //如果view没有创建或者不可见，则不能加载数据
         if (viewCreated && isVisibleToUser) {
@@ -83,7 +76,6 @@ abstract class BaseLazyFragment : BaseFragmentManagerFragment(), IBase {
      */
     protected fun initFragment() {
         initData()
-        lazyLoadData()
         initView()
     }
 }
