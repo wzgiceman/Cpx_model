@@ -9,7 +9,10 @@ import com.base.library.rxRetrofit.http.func.ResultFunc;
 import com.base.library.rxRetrofit.listener.HttpOnNextListener;
 import com.base.library.rxRetrofit.subscribers.ProgressSubscriber;
 import com.base.library.rxlifecycle.android.ActivityEvent;
+import com.base.library.rxlifecycle.android.FragmentEvent;
 import com.base.library.rxlifecycle.components.support.RxAppCompatActivity;
+import com.base.project.base.activity.BaseActivity;
+import com.base.project.base.fragment.BaseFragment;
 
 import java.lang.ref.SoftReference;
 
@@ -26,15 +29,20 @@ import io.reactivex.schedulers.Schedulers;
 public class HttpManager {
     /*软引用對象*/
     private SoftReference<HttpOnNextListener> onNextListener;
-    private SoftReference<RxAppCompatActivity> appCompatActivity;
+    private SoftReference<BaseActivity> mActivity;
+    private SoftReference<BaseFragment> mFragment;
 
     public HttpManager(@NonNull HttpOnNextListener onNextListener, @NonNull RxAppCompatActivity appCompatActivity) {
         this.onNextListener = new SoftReference(onNextListener);
-        this.appCompatActivity = new SoftReference(appCompatActivity);
+        this.mActivity = new SoftReference(appCompatActivity);
+    }
+
+    public HttpManager(@NonNull HttpOnNextListener onNextListener, @NonNull BaseFragment fragment) {
+        this.onNextListener = new SoftReference(onNextListener);
+        this.mFragment = new SoftReference<>(fragment);
     }
 
     public HttpManager() {
-
     }
 
 
@@ -71,13 +79,19 @@ public class HttpManager {
 
 
         /*数据String回调*/
-        if (null!=onNextListener && null != onNextListener.get() && null != appCompatActivity && null != appCompatActivity.get
-                ()) {
-            ProgressSubscriber subscriber = new ProgressSubscriber(baseApi, onNextListener, appCompatActivity);
-            observable.compose(appCompatActivity.get().bindUntilEvent(ActivityEvent.DESTROY)).observeOn(AndroidSchedulers
+        if (onNextListener != null && null != onNextListener.get() && null != mActivity && null != mActivity
+                .get()) {
+            ProgressSubscriber subscriber = new ProgressSubscriber();
+            subscriber.setAtProgSub(baseApi, onNextListener, mActivity);
+            observable.compose(mActivity.get().bindUntilEvent(ActivityEvent.DESTROY)).observeOn(AndroidSchedulers
                     .mainThread()).subscribe(subscriber);
         }
-
+        if (onNextListener != null && null != onNextListener.get() && null != mFragment && null != mFragment.get()) {
+            ProgressSubscriber subscriber = new ProgressSubscriber();
+            subscriber.setAtProgSub(baseApi, onNextListener,mFragment);
+            observable.compose(mFragment.get().bindUntilEvent(FragmentEvent.DETACH)).observeOn(AndroidSchedulers
+                    .mainThread()).subscribe(subscriber);
+        }
         return observable;
     }
 

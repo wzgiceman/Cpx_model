@@ -14,6 +14,7 @@ import com.prog.zhigangwei.cpx_model.permission.PermisssionActivity
 import com.prog.zhigangwei.cpx_model.rxbus.RxBusActivity
 import com.prog.zhigangwei.cpx_model.rxjava.RxJavaActivity
 import com.prog.zhigangwei.cpx_model.share.ShareActivity
+import com.prog.zhigangwei.cpx_model.vpFragment.VpFragmentActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 /**
@@ -71,6 +72,7 @@ class MainActivity : BaseToolsActivity() {
         btn_login.setOnClickListener { jumpActivity(LoginActivity::class.java) }
         btn_share.setOnClickListener { jumpActivity(ShareActivity::class.java) }
         btn_rx_click.setOnRxClickListener { LogUtils.d("---->dddddddd") }
+        btn_vpfg.setOnRxClickListener {jumpActivity(VpFragmentActivity::class.java) }
     }
 
     /**
