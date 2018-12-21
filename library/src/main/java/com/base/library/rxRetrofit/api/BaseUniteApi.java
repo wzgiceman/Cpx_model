@@ -3,7 +3,7 @@ package com.base.library.rxRetrofit.api;
 
 import com.base.library.rxRetrofit.http.HttpManager;
 import com.base.library.rxRetrofit.listener.HttpOnNextListener;
-import com.base.library.rxlifecycle.components.support.RxAppCompatActivity;
+import com.base.project.base.activity.BaseActivity;
 
 import io.reactivex.Observable;
 
@@ -14,7 +14,7 @@ import io.reactivex.Observable;
 public class BaseUniteApi extends BaseApi {
     private HttpManager manager;
 
-    public BaseUniteApi(HttpOnNextListener onNextListener, RxAppCompatActivity appCompatActivity) {
+    public BaseUniteApi(HttpOnNextListener onNextListener, BaseActivity appCompatActivity) {
         manager = new HttpManager(onNextListener, appCompatActivity);
     }
 

@@ -20,7 +20,6 @@ abstract class BaseLazyFragment : BaseFragmentManagerFragment() {
     private var viewCreated = false
     /**是否加载数据*/
     protected var loading = false
-    protected var userVisibleHintValue = userVisibleHint
     /**
      * 字段说明：忽略[onViewCreated]中[loadData]前的 savedInstanceState == null 判断
      * 使用方法：专供FragmentStatePagerAdapter使用，使用了FragmentStatePagerAdapter的ViewPager，

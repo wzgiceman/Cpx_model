@@ -13,14 +13,14 @@ import io.reactivex.Observable
  *
  *Company :cpx
  */
-class WallDetailApi(var bless_blog_id:String) : BaseApi() {
+class WallDetailApi(var bless_blog_id: String) : BaseApi() {
 
     init {
-        baseUrl="http://api.acgmonster.com/shine/"
-        cacheUrl="$url/$bless_blog_id"
-        isCache=false
-        isShowProgress=false
-        isIgnoreJudge=true
+        baseUrl = "http://api.acgmonster.com/shine/"
+        cacheUrl = "$url/$bless_blog_id"
+        isCache = false
+        isShowProgress = false
+        isIgnoreJudge = true
     }
 
     override fun getObservable(): Observable<*> {

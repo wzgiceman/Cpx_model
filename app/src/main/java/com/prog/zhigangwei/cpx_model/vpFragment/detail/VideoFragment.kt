@@ -7,7 +7,6 @@ import com.base.library.rxRetrofit.exception.ApiException
 import com.base.library.rxRetrofit.http.HttpManager
 import com.base.library.rxRetrofit.listener.HttpOnNextListener
 import com.base.library.utils.utilcode.util.ConvertUtils
-import com.base.library.utils.utilcode.util.LogUtils
 import com.base.project.base.fragment.BaseLazyFragment
 import com.prog.zhigangwei.cpx_model.R
 import com.prog.zhigangwei.cpx_model.vpFragment.common.api.WallDetailApi
@@ -35,7 +34,7 @@ class VideoFragment : BaseLazyFragment(), HttpOnNextListener {
     override fun layoutId() = R.layout.fragment_wall
 
     override fun initData() {
-        LogUtils.d("--->initData")
+//        LogUtils.d("${isAdded}-->initData")
         erc.setRefreshing(true)
         httpManager.doHttpDeal(WallDetailApi(arguments.getString("key")))
     }
@@ -67,4 +66,20 @@ class VideoFragment : BaseLazyFragment(), HttpOnNextListener {
         erc.setRefreshing(false)
     }
 
+
+//
+//    override fun onStop() {
+//        super.onStop()
+//        LogUtils.d("-->onStop")
+//    }
+//
+//    override fun onDestroy() {
+//        super.onDestroy()
+//        LogUtils.d("-->onDestroy")
+//    }
+//
+//    override fun onDetach() {
+//        super.onDetach()
+//        LogUtils.d("${isAdded}-->onDetach")
+//    }
 }
