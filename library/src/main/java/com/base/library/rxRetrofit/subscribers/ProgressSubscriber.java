@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.support.annotation.NonNull;
 
 import com.base.library.R;
 import com.base.library.rxRetrofit.RxRetrofitApp;
@@ -18,6 +19,7 @@ import com.base.library.rxlifecycle.components.support.RxAppCompatActivity;
 import com.base.library.utils.utilcode.util.LogUtils;
 import com.base.library.utils.utilcode.util.ResourceUtils;
 import com.base.library.utils.utilcode.util.StringUtils;
+import com.base.project.base.fragment.BaseFragment;
 
 import java.lang.ref.SoftReference;
 
@@ -36,6 +38,7 @@ public class ProgressSubscriber<T> implements Observer<T> {
     private SoftReference<HttpOnNextListener> mSubscriberOnNextListener;
     /* 软引用反正内存泄露*/
     private SoftReference<RxAppCompatActivity> mActivity;
+    private SoftReference<BaseFragment> mFragment;
     /*加载框可自己定义*/
     private ProgressDialog pd;
     /*请求数据*/
@@ -45,16 +48,21 @@ public class ProgressSubscriber<T> implements Observer<T> {
     /*json 后缀*/
     private final String JSON_SUFFIX = ".json";
 
-    /**
-     * 构造
-     *
-     * @param api
-     */
-    public ProgressSubscriber(BaseApi api, SoftReference<HttpOnNextListener> listenerSoftReference,
-                              SoftReference<RxAppCompatActivity> mActivity) {
+
+    public void setAtProgSub(@NonNull BaseApi api, @NonNull SoftReference<HttpOnNextListener> listenerSoftReference,
+                             @NonNull SoftReference<BaseFragment> mFragment) {
+        this.api = api;
+        this.mSubscriberOnNextListener = listenerSoftReference;
+        this.mFragment = mFragment;
+        this.mActivity = new SoftReference(mFragment.get().getContext());
+    }
+
+    public void setFgProgSub(@NonNull BaseApi api, @NonNull SoftReference<HttpOnNextListener> listenerSoftReference,
+                             @NonNull SoftReference<RxAppCompatActivity> mActivity) {
         this.api = api;
         this.mSubscriberOnNextListener = listenerSoftReference;
         this.mActivity = mActivity;
+
     }
 
 
@@ -81,9 +89,7 @@ public class ProgressSubscriber<T> implements Observer<T> {
             }
         }
 
-        if (api.isShowProgress()) {
-            initProgressDialog(api.isCancel(), d);
-        }
+        initProgressDialog(api.isCancel(), d);
     }
 
 
@@ -91,9 +97,7 @@ public class ProgressSubscriber<T> implements Observer<T> {
      * 初始化加载框
      */
     private void initProgressDialog(boolean cancel, Disposable d) {
-        if (!api.isShowProgress()) {
-            return;
-        }
+        if (!api.isShowProgress()) return;
         Context context = mActivity.get();
         if (pd == null && context != null) {
             pd = ProgressDialog.show(context, null, context.getString(R.string.Loading));
@@ -133,9 +137,7 @@ public class ProgressSubscriber<T> implements Observer<T> {
      */
     @Override
     public void onError(Throwable e) {
-        if (null == mActivity || null == mActivity.get() || mActivity.get().isFinishing()) {
-            return;
-        }
+        if (null == mActivity || null == mActivity.get() || mActivity.get().isFinishing()) return;
         /*需要緩存并且本地有缓存才返回*/
         if (api.isCache()) {
             getCache(e);
@@ -172,7 +174,7 @@ public class ProgressSubscriber<T> implements Observer<T> {
     private String getPreCacheFileName() {
         String method = api.getMethod();
         if (method.endsWith("/")) {
-            method = method.substring(0,method.length() - 1);
+            method = method.substring(0, method.length() - 1);
         }
         String fileName = CACHE_DATA_DIR_NAME + method;
         if (!method.endsWith(JSON_SUFFIX)) {
@@ -250,7 +252,7 @@ public class ProgressSubscriber<T> implements Observer<T> {
      */
     private void resultOnNext(String result) {
         if (null != mSubscriberOnNextListener && null != mSubscriberOnNextListener.get() && null != mActivity && null !=
-                mActivity.get() && !mActivity.get().isFinishing()) {
+                mActivity.get() && !mActivity.get().isFinishing() && null != mFragment.get() && !mFragment.get().isDetached()) {
             mSubscriberOnNextListener.get().onNext(result, api.getMethod());
         }
     }

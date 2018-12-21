@@ -1,7 +1,9 @@
 package com.prog.zhigangwei.cpx_model
 
-import com.base.project.base.activity.BaseActivity
+import com.base.library.utils.utilcode.util.LogUtils
+import com.base.project.base.activity.BaseToolsActivity
 import com.base.project.base.extension.jumpActivity
+import com.base.project.base.extension.setOnRxClickListener
 import com.prog.zhigangwei.cpx_model.constraintLayout.ConstraintLayoutActivity
 import com.prog.zhigangwei.cpx_model.easyRecyclerview.RecyclerActivity
 import com.prog.zhigangwei.cpx_model.greendao.GreendaoActivity
@@ -12,6 +14,7 @@ import com.prog.zhigangwei.cpx_model.permission.PermisssionActivity
 import com.prog.zhigangwei.cpx_model.rxbus.RxBusActivity
 import com.prog.zhigangwei.cpx_model.rxjava.RxJavaActivity
 import com.prog.zhigangwei.cpx_model.share.ShareActivity
+import com.prog.zhigangwei.cpx_model.vpFragment.VpFragmentActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 /**
@@ -23,7 +26,7 @@ import kotlinx.android.synthetic.main.activity_main.*
  *
  *Company :cpx
  */
-class MainActivity : BaseActivity() {
+class MainActivity : BaseToolsActivity() {
 
     override fun layoutId() = R.layout.activity_main
 
@@ -68,6 +71,8 @@ class MainActivity : BaseActivity() {
         btn_constraintLayout.setOnClickListener { jumpActivity(ConstraintLayoutActivity::class.java) }
         btn_login.setOnClickListener { jumpActivity(LoginActivity::class.java) }
         btn_share.setOnClickListener { jumpActivity(ShareActivity::class.java) }
+        btn_rx_click.setOnRxClickListener { LogUtils.d("---->dddddddd") }
+        btn_vpfg.setOnRxClickListener {jumpActivity(VpFragmentActivity::class.java) }
     }
 
     /**
@@ -84,4 +89,5 @@ class MainActivity : BaseActivity() {
     private fun initViewB() {
 
     }
+
 }

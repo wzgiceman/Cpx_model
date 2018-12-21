@@ -7,23 +7,28 @@ import android.view.View
 import android.view.ViewGroup
 import com.base.project.base.IBase
 
-
 /**
- * 懒加载的fragment
- * 使用方法：
- * 1.实现[lazyLoadData]方法,在该方法中调用懒加载数据的方法，
- * 2.在懒加载数据请求成功后调用[.resetLoadingStatus]
+ * Description:
+ * Fragment基类，懒加载
  *
- * @author xuechao
- * @date 2018/9/26 上午9:32
- * @copyright cpx
+ * @author  Alpinist Wang
+ * Company: Mobile CPX
+ * Date:    2018/9/25
  */
-
 abstract class BaseLazyFragment : BaseFragmentManagerFragment() {
-    /**是否加载数据*/
-    private var loading = false
     /**判断view是否创建*/
     private var viewCreated = false
+    /**是否加载数据*/
+    protected var loading = false
+    protected var userVisibleHintValue = userVisibleHint
+    /**
+     * 字段说明：忽略[onViewCreated]中[loadData]前的 savedInstanceState == null 判断
+     * 使用方法：专供FragmentStatePagerAdapter使用，使用了FragmentStatePagerAdapter的ViewPager，
+     *      ViewPager中的子Fragment需要在[onCreateView]中将其设置为true（Kotlin文件可以在[init]方法中将其设置为true）
+     * 原因：因为FragmentStatePagerAdapter会自动处理Fragment的状态保存与恢复
+     *      但不会处理页面数据的保存与恢复，所以数据需要重新加载
+     */
+    protected var ignoreSavedState = false
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return if (layoutId() != IBase.NO_LAYOUT) View.inflate(context, layoutId(), null) else null
@@ -31,24 +36,14 @@ abstract class BaseLazyFragment : BaseFragmentManagerFragment() {
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         viewCreated = true
-        if (null == savedInstanceState) {
-            loadData()
-        }
-    }
-
-    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
-        super.setUserVisibleHint(isVisibleToUser)
-        //如果view没有创建或者不可见，则不能加载数据
-        if (viewCreated && isVisibleToUser) {
+        if (ignoreSavedState || null == savedInstanceState) {
             loadData()
         }
     }
 
     override fun onHiddenChanged(hidden: Boolean) {
         super.onHiddenChanged(hidden)
-        if (!hidden) {
-            loadData()
-        }
+        loadData()
     }
 
     /**
@@ -56,7 +51,7 @@ abstract class BaseLazyFragment : BaseFragmentManagerFragment() {
      */
     private fun loadData() {
         //如果可见,并且没有加载数据
-        if (this.userVisibleHint && !loading) {
+        if (viewCreated && this.isVisible && !loading) {
             loading = true
             initFragment()
         }
@@ -66,7 +61,7 @@ abstract class BaseLazyFragment : BaseFragmentManagerFragment() {
      * 重置加载状态
      * 数据懒加载取消/失败调用此方法，使得下次到达此页面时可以再次触发lazyLoadData刷新数据
      */
-    protected fun resetLoadingStatus() {
+    open fun resetLoadingStatus() {
         loading = false
     }
 
@@ -78,4 +73,10 @@ abstract class BaseLazyFragment : BaseFragmentManagerFragment() {
         initData()
         initView()
     }
+
+
+    protected fun checkPrepared(): Boolean {
+        return userVisibleHint && viewCreated && context != null
+    }
+
 }
