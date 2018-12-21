@@ -259,8 +259,13 @@ public class ProgressSubscriber<T> implements Observer<T> {
      * @return true：未销毁，false：已销毁
      */
     private boolean isValid() {
-        return null != mSubscriberOnNextListener && null != mSubscriberOnNextListener.get() && null != mActivity && null !=
-                mActivity.get() && !mActivity.get().isFinishing() && null != mFragment.get() && mFragment.get().isAdded();
+        boolean atValid= null != mSubscriberOnNextListener && null != mSubscriberOnNextListener.get() && null != mActivity && null !=
+                mActivity.get() && !mActivity.get().isFinishing();
+        if(null==mFragment){
+            return atValid;
+        }else{
+            return atValid&&null != mFragment.get() && mFragment.get().isAdded();
+        }
     }
 
 
