@@ -1,5 +1,7 @@
 package com.base.library.rxRetrofit.http.head;
 
+import android.text.TextUtils;
+
 import com.alibaba.fastjson.JSONObject;
 import com.base.library.R;
 import com.base.library.rxRetrofit.RxRetrofitApp;
@@ -39,9 +41,10 @@ public class HeadInterceptor implements Interceptor {
     public Response intercept(Chain chain) throws IOException {
         Request original = chain.request();
         /*设置方法*/
-        String method = original.url().url().toString().replace(baseApi.getBaseUrl(), "");
-        baseApi.setMethod(method);
-
+        if (TextUtils.isEmpty(baseApi.getMethod())) {
+            String method = original.url().url().toString().replace(baseApi.getBaseUrl(), "");
+            baseApi.setMethod(method);
+        }
         /*设置head信息-token*/
         String[] config = BaseApi.getConfig().split("&");
         Request request = original.newBuilder()
