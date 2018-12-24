@@ -164,6 +164,18 @@ public final class ImageUtils {
      * @return bitmap
      */
     public static Bitmap getMagicDrawingCache(final View view) {
+        return getMagicDrawingCache(view,false);
+    }
+
+
+    /**
+     * 对view 进行截图
+     *
+     * @param view The view.
+     * @param useCache 是否使用缓存
+     * @return bitmap
+     */
+    public static Bitmap getMagicDrawingCache(final View view,boolean useCache) {
         Bitmap bitmap = (Bitmap) view.getTag(R.id.CACHE_BITMAP_KEY);
         Boolean dirty = (Boolean) view.getTag(R.id.CACHE_BITMAP_DIRTY_KEY);
         if (view.getWidth() == 0 && view.getHeight() == 0) {
@@ -177,15 +189,15 @@ public final class ImageUtils {
             if (bitmap != null && !bitmap.isRecycled()) {
                 bitmap.recycle();
             }
-            try{
+            try {
                 bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565);
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
             view.setTag(R.id.CACHE_BITMAP_KEY, bitmap);
             dirty = true;
         }
-        if (dirty == true) {
+        if (dirty || !useCache) {
             Canvas canvas = new Canvas(bitmap);
             view.draw(canvas);
             view.setTag(R.id.CACHE_BITMAP_DIRTY_KEY, false);
