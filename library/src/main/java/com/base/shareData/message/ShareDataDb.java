@@ -75,7 +75,7 @@ public class ShareDataDb {
     }
 
 
-    public void savrOrUpdate(Object info) {
+    public void saveOrUpdate(Object info) {
         if (info == null) return;
         DaoMaster daoMaster = new DaoMaster(getWritableDatabase());
         DaoSession daoSession = daoMaster.newSession();

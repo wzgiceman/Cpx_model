@@ -1,5 +1,6 @@
 package com.base.project.base.extension
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import com.base.library.BuildConfig
@@ -49,7 +50,7 @@ fun report(key: String, value: Bundle? = null) {
  * 防止多次点击
  * 默认一秒内重复点击无效
  */
-@JvmOverloads
+@SuppressLint("CheckResult")
 fun View.setOnRxClickListener(listener: (View) -> Unit) {
     RxView.clicks(this)
             .throttleFirst(1, TimeUnit.SECONDS)

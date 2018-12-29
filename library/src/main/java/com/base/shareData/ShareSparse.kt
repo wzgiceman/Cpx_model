@@ -21,76 +21,66 @@ object ShareSparse {
      */
     const val USER_CLS: String = "1"
 
-
     /**
      * 存放数据的对象
      */
-    private val MUSLIM_DATA: SparseArray<Any> = SparseArray()
+    private val PROJECT_DATA: SparseArray<Any> = SparseArray()
 
     /**
      * 根据上面定义的常量获取对象
      * @param key 关键key
      */
     fun getValueBy(key: String): Any {
-        if (null == MUSLIM_DATA.get(key.toInt())) {
-            var value = getDbValueBy(key)
-            if(value != null){
-                putValue(key, value)
-            }else{
-                return createEmptyValue(key)
-            }
+        if (null == PROJECT_DATA.get(key.toInt())) {
+            val value = getDbValueBy(key) ?: createEmptyValue(key)
+            putValue(key, value)
         }
-        return MUSLIM_DATA.get(key.toInt())
+        return PROJECT_DATA.get(key.toInt())
     }
+
+    /**
+     * 保存数据到本地
+     *
+     * @param key key
+     * @param any 数据源
+     * @param saveLocal 是否需要保存到本地数据库
+     */
+    fun putValue(key: String, any: Any, saveLocal: Boolean = false) {
+        if (saveLocal) {
+            putDbValue(key, any)
+        }
+        PROJECT_DATA.put(key.toInt(), any)
+    }
+
 
     /**
      * 创建key 创建空的value
      */
-    private fun createEmptyValue(key:String):Any{
-        return when(key){
-            USER_CLS ->{
+    private fun createEmptyValue(key: String): Any {
+        return when (key) {
+            USER_CLS -> {
                 User()
             }
-            else->{
+            else -> {
                 Any()
             }
         }
-
     }
-
 
     /**
      * 根据上面定义的常量从数据库获取
      * @param key 关键key
      */
-    fun getDbValueBy(key: String): Any? {
+    private fun getDbValueBy(key: String): Any? {
         return ShareDataDb.getInstance().queryBy(key)
     }
-
 
     /**
      * set全局db变量
      * @param key 关键key
      * @param any 数据源
      */
-    fun putDbValue(key: String, any: Any) {
-        ShareDataDb.getInstance().savrOrUpdate(ShareData(key, JSONObject.toJSONString(any)))
+    private fun putDbValue(key: String, any: Any) {
+        ShareDataDb.getInstance().saveOrUpdate(ShareData(key, JSONObject.toJSONString(any)))
     }
-
-
-    /**
-     * 是否需要保持数据到本地
-     *
-     * @param key key
-     * @param any 数据源
-     * @param saveLocal 是否需要缓冲处理
-     */
-    fun putValue(key: String, any: Any, saveLocal: Boolean=false) {
-        if (saveLocal) {
-            putDbValue(key, any)
-        }
-        MUSLIM_DATA.put(key.toInt(), any)
-    }
-
-
 }

@@ -16,8 +16,8 @@ class NoticePostApi constructor(var token: String?) : BaseApi() {
     init {
         isShowProgress = false
         terminalType = "android"
-        isCache=false
-        method="message/message/userTerminal"
+        isCache = false
+        method = "message/message/userTerminal"
         deviceId = DeviceUtils.getAndroidID()
     }
 
