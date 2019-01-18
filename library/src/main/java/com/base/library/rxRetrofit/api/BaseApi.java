@@ -7,8 +7,9 @@ import com.base.library.rxRetrofit.RxRetrofitApp;
 import com.base.library.rxRetrofit.http.converter.RetrofitStringConverterFactory;
 import com.base.library.rxRetrofit.http.head.HeadInterceptor;
 import com.base.library.rxRetrofit.http.head.HttpLoggingInterceptor;
-import com.base.library.utils.utilcode.util.SPUtils;
 import com.base.library.utils.utilcode.util.StringUtils;
+import com.base.shareData.ShareSparse;
+import com.base.shareData.user.User;
 
 import java.util.concurrent.TimeUnit;
 
@@ -23,7 +24,7 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
  * Created by zhigang wei
  * on 2017/8/29.
  * <p>
- * Company :Sichuan Ziyan
+ * Company :cpx
  */
 public abstract class BaseApi {
     /*是否能取消加载框*/
@@ -31,7 +32,7 @@ public abstract class BaseApi {
     /*是否显示加载框*/
     private transient boolean showProgress = true;
     /*是否需要缓存处理*/
-    private transient boolean cache = false;
+    protected transient boolean cache = false;
     /*是否是刷新模式：true标识不论是否有缓存处理都及时处理最新数据，并且根据cache设置控制数据缓存更新*/
     private transient boolean refresh = false;
     /*固定基础url*/
@@ -41,10 +42,10 @@ public abstract class BaseApi {
     /*方法-如果需要缓存必须设置这个参数；不需要不用設置*/
     private transient String method = "";
     /*超时时间-默认10秒*/
-    private transient int connectionTime = 15;
+    private transient int connectionTime = 10;
     /*有网情况下的本地缓存时间默xxx秒*/
     private transient int cookieNetWorkTime = 60 * 10;
-    /*无网络的情况下本地缓存时间默认30天*/
+    /*无网络的情况下本地缓存时间默认一年*/
     private transient int cookieNoNetWorkTime = 24 * 60 * 60 * 30 * 12;
     /* retry次数*/
     private transient int retryCount = 1;
@@ -62,7 +63,8 @@ public abstract class BaseApi {
     private Retrofit retrofit;
     /*有缓存下时间过期是否先显示缓存数据在拉取最新的更新界面*/
     private transient boolean advanceLoadCache;
-
+    /*是否是本地缓存数据回传前台*/
+    private transient boolean cacheResulte;
 
     /**
      * 设置参数
@@ -71,6 +73,15 @@ public abstract class BaseApi {
      */
     @JSONField(serialize = false)
     public abstract Observable getObservable();
+
+//    @JSONField(serialize = false)
+//    public Observable getListObservable() {
+//        String cacheContent = getCacheContent(false);
+//        if (!StringUtils.isEmpty(cacheContent)) {
+//            return Observable.just(cacheContent);
+//        }
+//        return getObservable().map(new ResultFunc(this)).onErrorResumeNext(new ListException(this));
+//    }
 
     @JSONField(serialize = false)
     public String getUrl() {
@@ -189,6 +200,26 @@ public abstract class BaseApi {
         this.refresh = refresh;
     }
 
+    public static void setConfig(String config) {
+        BaseApi.config = config;
+    }
+
+    public void setCacheUrl(String cacheUrl) {
+        this.cacheUrl = cacheUrl;
+    }
+
+    public void setRetrofit(Retrofit retrofit) {
+        this.retrofit = retrofit;
+    }
+
+    public boolean isCacheResulte() {
+        return cacheResulte;
+    }
+
+    public void setCacheResulte(boolean cacheResulte) {
+        this.cacheResulte = cacheResulte;
+    }
+
     @JSONField(serialize = false)
     public String getCacheUrl() {
         if (StringUtils.isEmpty(cacheUrl)) {
@@ -197,20 +228,12 @@ public abstract class BaseApi {
         return cacheUrl;
     }
 
-    public void setCacheUrl(String cacheUrl) {
-        this.cacheUrl = cacheUrl;
-    }
-
-
+    @JSONField(serialize = false)
     public static String getConfig() {
         if (StringUtils.isEmpty(config)) {
-            config = SPUtils.getInstance().getString("token", "");
+            config = ((User) ShareSparse.INSTANCE.getValueBy(ShareSparse.USER_CLS)).getToken();
         }
         return config;
-    }
-
-    public static void setConfig(String config) {
-        BaseApi.config = config;
     }
 
 
@@ -243,16 +266,13 @@ public abstract class BaseApi {
         return retrofit;
     }
 
-    public void setRetrofit(Retrofit retrofit) {
-        this.retrofit = retrofit;
-    }
-
     /**
      * 日志输出
      * 自行判定是否添加
      *
      * @return
      */
+    @JSONField(serialize = false)
     private HttpLoggingInterceptor getHttpLoggingInterceptor() {
         //日志显示级别
         HttpLoggingInterceptor.Level level = HttpLoggingInterceptor.Level.BODY;
@@ -262,4 +282,30 @@ public abstract class BaseApi {
         loggingInterceptor.setLevel(level);
         return loggingInterceptor;
     }
+
+
+    /**
+     * 获取缓存
+     * 暂用list api处理中
+     *
+     * @param ignoreTime 是否忽略时间校验
+     * @return
+     */
+//    @JSONField(serialize = false)
+//    public String getCacheContent(boolean ignoreTime) {
+//        if (!cache) return null;
+//        if (refresh && !ignoreTime) return null;
+//        /*获取缓存数据*/
+//        CookieResult cookieResult = CookieDbUtil.getInstance().queryCookieBy(getCacheUrl());
+//        int duration = AppUtil.isNetworkAvailable(RxRetrofitApp.getApplication()) ? getCookieNetWorkTime()
+//                : getCookieNoNetWorkTime();
+//        if (null == cookieResult) return null;
+//        if (ignoreTime) {
+//            return cookieResult.getResult();
+//        }
+//        if (!ignoreTime && !refresh && (System.currentTimeMillis() - cookieResult.getTime()) / 1000 < duration) {
+//            return cookieResult.getResult();
+//        }
+//        return null;
+//    }
 }

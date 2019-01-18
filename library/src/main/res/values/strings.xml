@@ -13,6 +13,7 @@
     <string name="how_to_get_picture">Choose how to get pictures</string>
 
     <string name="http_cancel">Network request cancellation</string>
+    <string name="http_data_error">Network  request data failure</string>
 
 
 

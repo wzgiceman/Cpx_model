@@ -3,8 +3,6 @@ package com.base.library.rxRetrofit.subscribers;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.support.annotation.NonNull;
 
 import com.base.library.R;
@@ -15,7 +13,8 @@ import com.base.library.rxRetrofit.exception.ApiException;
 import com.base.library.rxRetrofit.exception.HttpTimeException;
 import com.base.library.rxRetrofit.http.cookie.CookieResult;
 import com.base.library.rxRetrofit.listener.HttpOnNextListener;
-import com.base.library.utils.utilcode.util.LogUtils;
+import com.base.library.utils.utilcode.util.NetworkUtils;
+import com.base.library.utils.utilcode.util.ObjectUtils;
 import com.base.library.utils.utilcode.util.ResourceUtils;
 import com.base.library.utils.utilcode.util.StringUtils;
 import com.base.project.base.activity.BaseActivity;
@@ -75,20 +74,19 @@ public class ProgressSubscriber<T> implements Observer<T> {
         if (api.isCache() && !api.isRefresh()) {
             /*获取缓存数据*/
             CookieResult cookieResult = CookieDbUtil.getInstance().queryCookieBy(api.getCacheUrl());
-            int duration = isNetworkAvailable(RxRetrofitApp.getApplication()) ? api.getCookieNetWorkTime()
-                    : api.getCookieNoNetWorkTime();
+            int duration = NetworkUtils.isAvailableByPing() ? api.getCookieNetWorkTime() : api.getCookieNoNetWorkTime();
             if (null != cookieResult && (System.currentTimeMillis() - cookieResult.getTime()) / 1000 < duration) {
                 onComplete();
                 d.dispose();
-                resultOnNext(cookieResult.getResult());
+                resultOnNext(cookieResult.getResult(), true);
+
                 return;
             }
 
             if (null != cookieResult && api.isAdvanceLoadCache()) {
-                resultOnNext(cookieResult.getResult());
+                resultOnNext(cookieResult.getResult(), true);
             }
         }
-
         initProgressDialog(api.isCancel(), d);
     }
 
@@ -115,7 +113,7 @@ public class ProgressSubscriber<T> implements Observer<T> {
      * 隐藏
      */
     private void dismissProgressDialog() {
-        if (pd != null) {
+        if (pd != null && pd.isShowing()) {
             pd.dismiss();
         }
     }
@@ -159,10 +157,10 @@ public class ProgressSubscriber<T> implements Observer<T> {
             if (StringUtils.isEmpty(result)) {
                 errorDo(te);
             } else {
-                resultOnNext(result);
+                resultOnNext(result, true);
             }
         } else {
-            resultOnNext(cookieResult.getResult());
+            resultOnNext(cookieResult.getResult(), true);
         }
     }
 
@@ -193,8 +191,9 @@ public class ProgressSubscriber<T> implements Observer<T> {
         if (e instanceof ApiException) {
             resultOnError((ApiException) e);
         } else {
-            resultOnError(new ApiException(e, HttpTimeException.UNKNOWN_ERROR, RxRetrofitApp.getApplication().getString(R
-                    .string.service_error)));
+            String errorMsg = null == e || ObjectUtils.isEmpty(e.getMessage()) ? RxRetrofitApp.getApplication().getString(R.string
+                    .service_error) : e.getMessage();
+            resultOnError(new ApiException(e, HttpTimeException.UNKNOWN_ERROR, errorMsg));
         }
     }
 
@@ -206,7 +205,7 @@ public class ProgressSubscriber<T> implements Observer<T> {
      */
     @Override
     public void onNext(T t) {
-        resultOnNext(t.toString());
+        resultOnNext(t.toString(), false);
     }
 
 
@@ -217,7 +216,8 @@ public class ProgressSubscriber<T> implements Observer<T> {
         if (disposable != null && !disposable.isDisposed()) {
             disposable.dispose();
             if (api.isCache()) {
-                getCache(null);
+                getCache(new ApiException(new Throwable(), HttpTimeException.HTTP_CANCEL, RxRetrofitApp.getApplication()
+                        .getString(R.string.http_data_error)));
             } else {
                 errorDo(new ApiException(new Throwable(), HttpTimeException.HTTP_CANCEL, RxRetrofitApp.getApplication()
                         .getString(R.string.http_cancel)));
@@ -230,8 +230,9 @@ public class ProgressSubscriber<T> implements Observer<T> {
      *
      * @param result
      */
-    private void resultOnNext(String result) {
+    private void resultOnNext(String result, boolean cache) {
         if (isValid()) {
+            api.setCacheResulte(cache);
             mSubscriberOnNextListener.get().onNext(result, api.getMethod());
         }
     }
@@ -242,15 +243,10 @@ public class ProgressSubscriber<T> implements Observer<T> {
      * @param apiException
      */
     private void resultOnError(ApiException apiException) {
-        try {
-            HttpOnNextListener httpOnNextListener = mSubscriberOnNextListener.get();
-            if (isValid()) {
-                httpOnNextListener.onError(apiException, api.getMethod());
-            }
-        } catch (Exception e) {
-            LogUtils.d("listener onError error--->" + e.getMessage());
+        HttpOnNextListener httpOnNextListener = mSubscriberOnNextListener.get();
+        if (isValid()) {
+            httpOnNextListener.onError(apiException, api.getMethod());
         }
-
     }
 
     /**
@@ -259,8 +255,8 @@ public class ProgressSubscriber<T> implements Observer<T> {
      * @return true：未销毁，false：已销毁
      */
     private boolean isValid() {
-        boolean atValid = null != mSubscriberOnNextListener && null != mSubscriberOnNextListener.get()
-                && null != mActivity && null != mActivity.get() && !mActivity.get().isFinishing();
+        boolean atValid = null != mSubscriberOnNextListener && null != mSubscriberOnNextListener.get() && null != mActivity &&
+                null != mActivity.get() && !mActivity.get().isFinishing();
         if (null == mFragment) {
             return atValid;
         } else {
@@ -268,28 +264,4 @@ public class ProgressSubscriber<T> implements Observer<T> {
         }
     }
 
-
-    /**
-     * 是否有网络
-     *
-     * @param context
-     * @return
-     */
-    private boolean isNetworkAvailable(Context context) {
-        try {
-            ConnectivityManager connectivity = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-            if (connectivity != null) {
-                NetworkInfo info = connectivity.getActiveNetworkInfo();
-                if (info != null && info.isConnected()) {
-                    if (info.getState() == NetworkInfo.State.CONNECTED) {
-                        return true;
-                    }
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
-        return false;
-    }
 }
