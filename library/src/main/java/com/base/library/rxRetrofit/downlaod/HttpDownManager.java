@@ -4,11 +4,11 @@ package com.base.library.rxRetrofit.downlaod;
 import android.os.Handler;
 import android.os.Looper;
 
-import com.base.library.rxRetrofit.downlaod.loadListener.DownloadInterceptor;
-import com.base.library.rxRetrofit.downlaod.subscriber.ProgressDownSubscriber;
+import com.base.library.rxRetrofit.downlaod.DownLoadListener.DownloadInterceptor;
 import com.base.library.rxRetrofit.exception.HttpTimeException;
 import com.base.library.rxRetrofit.exception.RetryWhenNetworkException;
 import com.base.library.rxRetrofit.http.converter.RetrofitStringConverterFactory;
+import com.base.library.rxRetrofit.subscribers.ProgressDownSubscriber;
 import com.base.library.rxRetrofit.utils.DownDbUtil;
 
 import java.io.File;
@@ -23,6 +23,7 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.OkHttpClient;
 import okhttp3.ResponseBody;
@@ -35,15 +36,15 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
  * Created by WZG on 2016/7/16.
  */
 public class HttpDownManager {
+    /*单利对象*/
+    private volatile static HttpDownManager INSTANCE;
     /*记录下载数据*/
     private Set<DownInfo> downInfos;
     /*回调sub队列*/
     private HashMap<String, ProgressDownSubscriber> subMap;
-    /*单例对象*/
-    private volatile static HttpDownManager INSTANCE;
     /*数据库类*/
     private DownDbUtil db;
-    /*下载进度回调主线程*/
+    /*下载进度回掉主线程*/
     private Handler handler;
 
     private HttpDownManager() {
@@ -76,8 +77,7 @@ public class HttpDownManager {
      */
     public void startDown(final DownInfo info) {
         /*正在下载不处理*/
-        if (info == null) return;
-        if (subMap.containsKey(info.getUrl())) {
+        if (info == null || subMap.get(info.getUrl()) != null) {
             subMap.get(info.getUrl()).setDownInfo(info);
             return;
         }
@@ -85,7 +85,7 @@ public class HttpDownManager {
         ProgressDownSubscriber subscriber = new ProgressDownSubscriber(info, handler);
         /*记录回调sub*/
         subMap.put(info.getUrl(), subscriber);
-        /*获取service，多次请求公用一个service*/
+        /*获取service，多次请求公用一个sercie*/
         HttpDownService httpService;
         if (downInfos.contains(info)) {
             httpService = info.getService();
@@ -109,11 +109,14 @@ public class HttpDownManager {
         /*得到rx对象-上一次下載的位置開始下載*/
         httpService.download("bytes=" + info.getReadLength() + "-", info.getUrl())
                 /*失败后的retry配置*/
-                .retryWhen(new RetryWhenNetworkException(info.getRetryCount(), info.getRetryDelay(), info.getRetryIncreaseDelay()))
+                .retryWhen(new RetryWhenNetworkException())
                 /*读取下载写入文件*/
-                .map(responseBody -> {
-                    writeCache(responseBody, new File(info.getSavePath()), info);
-                    return info;
+                .map(new Function<ResponseBody, DownInfo>() {
+                    @Override
+                    public DownInfo apply(ResponseBody responseBody) {
+                        writeCache(responseBody, new File(info.getSavePath()), info);
+                        return info;
+                    }
                 })
                 /*指定线程*/
                 .subscribeOn(Schedulers.io())
@@ -157,7 +160,7 @@ public class HttpDownManager {
             subscriber.unsubscribe();
             subMap.remove(info.getUrl());
         }
-        /*这里需要将info信息写入到数据中，可自由扩展，用自己项目的数据库*/
+        /*这里需要讲info信息写入到数据中，可自由扩展，用自己项目的数据库*/
         db.update(info);
     }
 

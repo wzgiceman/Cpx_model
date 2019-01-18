@@ -43,78 +43,17 @@ import okio.BufferedSource;
  */
 public final class HttpLoggingInterceptor implements Interceptor {
     private static final Charset UTF8 = Charset.forName("UTF-8");
-
-    public enum Level {
-        /**
-         * No logs.
-         */
-        NONE,
-        /**
-         * Logs request and response lines.
-         * <p>
-         * <p>Example:
-         * <pre>{@code
-         * --> POST /greeting http/1.1 (3-byte body)
-         *
-         * <-- 200 OK (22ms, 6-byte body)
-         * }</pre>
-         */
-        BASIC,
-        /**
-         * Logs request and response lines and their respective headers.
-         * <p>
-         * <p>Example:
-         * <pre>{@code
-         * --> POST /greeting http/1.1
-         * Host: example.com
-         * Content-Type: plain/text
-         * Content-Length: 3
-         * --> END POST
-         *
-         * <-- 200 OK (22ms)
-         * Content-Type: plain/text
-         * Content-Length: 6
-         * <-- END HTTP
-         * }</pre>
-         */
-        HEADERS,
-        /**
-         * Logs request and response lines and their respective headers and bodies (if present).
-         * <p>
-         * <p>Example:
-         * <pre>{@code
-         * --> POST /greeting http/1.1
-         * Host: example.com
-         * Content-Type: plain/text
-         * Content-Length: 3
-         *
-         * Hi?
-         * --> END GET
-         *
-         * <-- 200 OK (22ms)
-         * Content-Type: plain/text
-         * Content-Length: 6
-         *
-         * Hello!
-         * <-- END HTTP
-         * }</pre>
-         */
-        BODY
-    }
-
-    public interface Logger {
-        void log(String message);
-
-    }
+    private final Logger logger;
+    private volatile Level level = Level.NONE;
 
 
     public HttpLoggingInterceptor(Logger logger) {
         this.logger = logger;
     }
 
-    private final Logger logger;
-
-    private volatile Level level = Level.NONE;
+    public Level getLevel() {
+        return level;
+    }
 
     /**
      * Change the level at which this interceptor logs.
@@ -123,10 +62,6 @@ public final class HttpLoggingInterceptor implements Interceptor {
         if (level == null) throw new NullPointerException("level == null. Use Level.NONE instead.");
         this.level = level;
         return this;
-    }
-
-    public Level getLevel() {
-        return level;
     }
 
     @Override
@@ -211,8 +146,7 @@ public final class HttpLoggingInterceptor implements Interceptor {
             for (int i = 0, count = headers.size(); i < count; i++) {
                 logger.log(headers.name(i) + ": " + headers.value(i));
             }
-
-            if (!logBody || !hasRequestBody) {
+            if (!logBody) {
                 logger.log("<-- END HTTP");
             } else if (bodyEncoded(response.headers())) {
                 logger.log("<-- END HTTP (encoded body omitted)");
@@ -250,5 +184,68 @@ public final class HttpLoggingInterceptor implements Interceptor {
     private boolean bodyEncoded(Headers headers) {
         String contentEncoding = headers.get("Content-Encoding");
         return contentEncoding != null && !contentEncoding.equalsIgnoreCase("identity");
+    }
+
+    public enum Level {
+        /**
+         * No logs.
+         */
+        NONE,
+        /**
+         * Logs request and response lines.
+         * <p>
+         * <p>Example:
+         * <pre>{@code
+         * --> POST /greeting http/1.1 (3-byte body)
+         *
+         * <-- 200 OK (22ms, 6-byte body)
+         * }</pre>
+         */
+        BASIC,
+        /**
+         * Logs request and response lines and their respective headers.
+         * <p>
+         * <p>Example:
+         * <pre>{@code
+         * --> POST /greeting http/1.1
+         * Host: example.com
+         * Content-Type: plain/text
+         * Content-Length: 3
+         * --> END POST
+         *
+         * <-- 200 OK (22ms)
+         * Content-Type: plain/text
+         * Content-Length: 6
+         * <-- END HTTP
+         * }</pre>
+         */
+        HEADERS,
+        /**
+         * Logs request and response lines and their respective headers and bodies (if present).
+         * <p>
+         * <p>Example:
+         * <pre>{@code
+         * --> POST /greeting http/1.1
+         * Host: example.com
+         * Content-Type: plain/text
+         * Content-Length: 3
+         *
+         * Hi?
+         * --> END GET
+         *
+         * <-- 200 OK (22ms)
+         * Content-Type: plain/text
+         * Content-Length: 6
+         *
+         * Hello!
+         * <-- END HTTP
+         * }</pre>
+         */
+        BODY
+    }
+
+    public interface Logger {
+        void log(String message);
+
     }
 }

@@ -1,14 +1,11 @@
 package com.base.library.rxRetrofit.http.head;
 
-import android.text.TextUtils;
-
 import com.alibaba.fastjson.JSONObject;
 import com.base.library.R;
+import com.base.library.rxRetrofit.Api.BaseApi;
+import com.base.library.rxRetrofit.Api.resulte.BaseResult;
 import com.base.library.rxRetrofit.RxRetrofitApp;
-import com.base.library.rxRetrofit.api.BaseApi;
-import com.base.library.rxRetrofit.api.result.BaseResult;
 import com.base.library.rxRetrofit.exception.HttpTimeException;
-import com.base.library.utils.utilcode.util.StringUtils;
 import com.base.router.ActivityRouter;
 import com.base.router.RouterList;
 
@@ -41,15 +38,12 @@ public class HeadInterceptor implements Interceptor {
     public Response intercept(Chain chain) throws IOException {
         Request original = chain.request();
         /*设置方法*/
-        if (TextUtils.isEmpty(baseApi.getMethod())) {
-            String method = original.url().url().toString().replace(baseApi.getBaseUrl(), "");
-            baseApi.setMethod(method);
-        }
-        /*设置head信息-token*/
-        String[] config = BaseApi.getConfig().split("&");
+        String method = original.url().url().toString().replace(baseApi.getBaseUrl(), "");
+        baseApi.setMethod(method);
+
         Request request = original.newBuilder()
-                .header("language", config[0])
-                .header("Authorization", "Token " + (config.length > 1 && !StringUtils.isEmpty(config[1]) ? config[1] : ""))
+                .header("language", "en")
+                .header("Authorization", "hello")
                 .header("version", RxRetrofitApp.getApplication().getString(R.string.versionWeb))
                 .method(original.method(), original.body())
                 .build();

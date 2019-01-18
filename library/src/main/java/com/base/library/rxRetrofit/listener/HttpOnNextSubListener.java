@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 
 import io.reactivex.Observable;
 
+
 /**
  * 回调ober对象
  * Created by WZG on 2016/12/12.

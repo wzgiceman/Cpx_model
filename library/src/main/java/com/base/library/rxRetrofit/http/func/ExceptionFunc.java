@@ -1,11 +1,10 @@
 package com.base.library.rxRetrofit.http.func;
 
-import com.base.library.rxRetrofit.exception.FactoryException;
 
+import com.base.library.rxRetrofit.exception.FactoryException;
 
 import io.reactivex.Observable;
 import io.reactivex.functions.Function;
-
 
 /**
  * 异常处理
@@ -15,7 +14,7 @@ import io.reactivex.functions.Function;
 public class ExceptionFunc implements Function<Throwable, Observable> {
 
     @Override
-    public Observable apply(Throwable throwable) {
-        return Observable.error(FactoryException.analysisException(throwable));
+    public Observable apply(Throwable throwable) throws Exception {
+        return Observable.error(FactoryException.analysisExcetpion(throwable));
     }
 }

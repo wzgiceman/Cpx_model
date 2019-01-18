@@ -17,10 +17,10 @@ import okio.Sink;
 
 public class ProgressRequestBody extends RequestBody {
 
-    //实际起作用的RequestBody
-    private RequestBody delegate;
     //进度回调接口
     private final UploadProgressListener progressListener;
+    //实际起作用的RequestBody
+    private RequestBody delegate;
     private CountingSink countingSink;
 
     public ProgressRequestBody(RequestBody requestBody, UploadProgressListener progressListener) {
@@ -40,6 +40,21 @@ public class ProgressRequestBody extends RequestBody {
         BufferedSink bufferedSink = Okio.buffer(countingSink);
         delegate.writeTo(bufferedSink);
         bufferedSink.flush();
+    }
+
+    /**
+     * 返回文件总的字节大小
+     * 如果文件大小获取失败则返回-1
+     *
+     * @return
+     */
+    @Override
+    public long contentLength() {
+        try {
+            return delegate.contentLength();
+        } catch (IOException e) {
+            return -1;
+        }
     }
 
     class CountingSink extends ForwardingSink {
@@ -67,21 +82,6 @@ public class ProgressRequestBody extends RequestBody {
             if (progressListener != null) {
                 progressListener.onProgress(byteWritten, countLength);
             }
-        }
-    }
-
-    /**
-     * 返回文件总的字节大小
-     * 如果文件大小获取失败则返回-1
-     *
-     * @return
-     */
-    @Override
-    public long contentLength() {
-        try {
-            return delegate.contentLength();
-        } catch (IOException e) {
-            return -1;
         }
     }
 }

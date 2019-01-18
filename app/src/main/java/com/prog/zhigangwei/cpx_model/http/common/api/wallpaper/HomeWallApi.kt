@@ -1,6 +1,6 @@
 package com.prog.zhigangwei.cpx_model.http.common.api.wallpaper
 
-import com.base.library.rxRetrofit.api.BaseApi
+import com.base.library.rxRetrofit.Api.BaseApi
 import com.prog.zhigangwei.cpx_model.http.common.api.ApiService
 import io.reactivex.Observable
 
@@ -18,7 +18,7 @@ class HomeWallApi : BaseApi() {
 
     init {
         method = "index_wallpapers"
-        isCache = true
+//        isCache = true
         cookieNetWorkTime=20
     }
 

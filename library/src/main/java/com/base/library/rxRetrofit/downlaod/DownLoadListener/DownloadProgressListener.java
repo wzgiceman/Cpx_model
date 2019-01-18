@@ -1,4 +1,4 @@
-package com.base.library.rxRetrofit.downlaod.loadListener;
+package com.base.library.rxRetrofit.downlaod.DownLoadListener;
 
 
 /**
@@ -8,6 +8,7 @@ package com.base.library.rxRetrofit.downlaod.loadListener;
 public interface DownloadProgressListener {
     /**
      * 下载进度
+     *
      * @param read
      * @param count
      * @param done

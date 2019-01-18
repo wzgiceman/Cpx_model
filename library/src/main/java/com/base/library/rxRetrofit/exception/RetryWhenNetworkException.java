@@ -9,7 +9,6 @@ import io.reactivex.Observable;
 import io.reactivex.functions.BiFunction;
 import io.reactivex.functions.Function;
 
-
 /**
  * retry条件
  * Created by WZG on 2016/10/17.
@@ -38,19 +37,21 @@ public class RetryWhenNetworkException implements Function<Observable<? extends 
     }
 
     @Override
-    public Observable<?> apply(Observable<? extends Throwable> observable) {
+    public Observable<?> apply(Observable<? extends Throwable> observable) throws Exception {
         return observable
-                .zipWith(Observable.range(1, count + 1), (BiFunction<Throwable, Integer, Wrapper>) (throwable, integer) ->
-                        new Wrapper(throwable, integer)).flatMap((Function<Wrapper, Observable<?>>) wrapper -> {
-                    if ((wrapper.throwable instanceof ConnectException
-                            || wrapper.throwable instanceof SocketTimeoutException
-                            || wrapper.throwable instanceof TimeoutException)
-                            && wrapper.index < count + 1) { //如果超出重试次数也抛出错误，否则默认是会进入onCompleted
+                .zipWith(Observable.range(1, count + 1), (BiFunction<Throwable, Integer, Wrapper>) (throwable, integer) -> new Wrapper(throwable, integer)).flatMap(new Function<Wrapper, Observable<?>>() {
+                    @Override
+                    public Observable<?> apply(Wrapper wrapper) throws Exception {
+                        if ((wrapper.throwable instanceof ConnectException
+                                || wrapper.throwable instanceof SocketTimeoutException
+                                || wrapper.throwable instanceof TimeoutException)
+                                && wrapper.index < count + 1) { //如果超出重试次数也抛出错误，否则默认是会进入onCompleted
+                            return Observable.timer(delay + (wrapper.index - 1) * increaseDelay, TimeUnit.MILLISECONDS);
 
-                        return Observable.timer(delay + (wrapper.index - 1) * increaseDelay, TimeUnit.MILLISECONDS);
-
+                        }
+                        return Observable.error(wrapper.throwable);
                     }
-                    return Observable.error(wrapper.throwable);
+
                 });
     }
 

@@ -1,4 +1,4 @@
-package com.base.library.rxRetrofit.downlaod.loadListener;
+package com.base.library.rxRetrofit.downlaod.DownLoadListener;
 
 import java.io.IOException;
 

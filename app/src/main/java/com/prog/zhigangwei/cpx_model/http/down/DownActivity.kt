@@ -88,7 +88,7 @@ class DownActivity : BaseActivity() {
         }
 
         btn_clear.setOnClickListener {
-            DownDbUtil.getInstance().deleteDownInfo(info)
+            DownDbUtil.getInstance().deleteDowninfo(info)
             File(info.savePath).delete()
             finish()
         }

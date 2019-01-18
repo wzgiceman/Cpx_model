@@ -1,5 +1,7 @@
 package com.base.library.rxRetrofit.exception;
 
+import android.text.TextUtils;
+
 /**
  * 回调统一请求异常
  * Created by WZG on 2016/12/12.
@@ -14,7 +16,6 @@ public class ApiException extends Exception {
     private String message;
 
 
-
     public ApiException(Throwable e) {
         super(e);
     }
@@ -23,7 +24,7 @@ public class ApiException extends Exception {
         super(showMsg, cause);
         setCode(code);
         setDisplayMessage(showMsg);
-        if(cause != null){
+        if (cause != null && !TextUtils.isEmpty(cause.getMessage())) {
             setMessage(cause.getMessage());
         }
     }

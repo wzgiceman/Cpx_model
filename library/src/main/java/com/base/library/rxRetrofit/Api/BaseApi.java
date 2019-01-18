@@ -1,12 +1,17 @@
-package com.base.library.rxRetrofit.api;
+package com.base.library.rxRetrofit.Api;
 
 import android.util.Log;
 
 import com.alibaba.fastjson.annotation.JSONField;
 import com.base.library.rxRetrofit.RxRetrofitApp;
 import com.base.library.rxRetrofit.http.converter.RetrofitStringConverterFactory;
+import com.base.library.rxRetrofit.http.cookie.CookieResult;
+import com.base.library.rxRetrofit.http.func.ResultFunc;
 import com.base.library.rxRetrofit.http.head.HeadInterceptor;
 import com.base.library.rxRetrofit.http.head.HttpLoggingInterceptor;
+import com.base.library.rxRetrofit.httpList.httpList.ListException;
+import com.base.library.rxRetrofit.utils.AppUtil;
+import com.base.library.rxRetrofit.utils.CookieDbUtil;
 import com.base.library.utils.utilcode.util.StringUtils;
 import com.base.shareData.ShareSparse;
 import com.base.shareData.user.User;
@@ -24,7 +29,7 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
  * Created by zhigang wei
  * on 2017/8/29.
  * <p>
- * Company :cpx
+ * Company :Sichuan Ziyan
  */
 public abstract class BaseApi {
     /*是否能取消加载框*/
@@ -74,14 +79,14 @@ public abstract class BaseApi {
     @JSONField(serialize = false)
     public abstract Observable getObservable();
 
-//    @JSONField(serialize = false)
-//    public Observable getListObservable() {
-//        String cacheContent = getCacheContent(false);
-//        if (!StringUtils.isEmpty(cacheContent)) {
-//            return Observable.just(cacheContent);
-//        }
-//        return getObservable().map(new ResultFunc(this)).onErrorResumeNext(new ListException(this));
-//    }
+    @JSONField(serialize = false)
+    public Observable getListObservable() {
+        String cacheContent = getCacheContent(false);
+        if (!StringUtils.isEmpty(cacheContent)) {
+            return Observable.just(cacheContent);
+        }
+        return getObservable().map(new ResultFunc(this)).onErrorResumeNext(new ListException(this));
+    }
 
     @JSONField(serialize = false)
     public String getUrl() {
@@ -291,21 +296,21 @@ public abstract class BaseApi {
      * @param ignoreTime 是否忽略时间校验
      * @return
      */
-//    @JSONField(serialize = false)
-//    public String getCacheContent(boolean ignoreTime) {
-//        if (!cache) return null;
-//        if (refresh && !ignoreTime) return null;
-//        /*获取缓存数据*/
-//        CookieResult cookieResult = CookieDbUtil.getInstance().queryCookieBy(getCacheUrl());
-//        int duration = AppUtil.isNetworkAvailable(RxRetrofitApp.getApplication()) ? getCookieNetWorkTime()
-//                : getCookieNoNetWorkTime();
-//        if (null == cookieResult) return null;
-//        if (ignoreTime) {
-//            return cookieResult.getResult();
-//        }
-//        if (!ignoreTime && !refresh && (System.currentTimeMillis() - cookieResult.getTime()) / 1000 < duration) {
-//            return cookieResult.getResult();
-//        }
-//        return null;
-//    }
+    @JSONField(serialize = false)
+    public String getCacheContent(boolean ignoreTime) {
+        if (!cache) return null;
+        if (refresh && !ignoreTime) return null;
+        /*获取缓存数据*/
+        CookieResult cookieResult = CookieDbUtil.getInstance().queryCookieBy(getCacheUrl());
+        int duration = AppUtil.isNetworkAvailable(RxRetrofitApp.getApplication()) ? getCookieNetWorkTime()
+                : getCookieNoNetWorkTime();
+        if (null == cookieResult) return null;
+        if (ignoreTime) {
+            return cookieResult.getResult();
+        }
+        if (!ignoreTime && !refresh && (System.currentTimeMillis() - cookieResult.getTime()) / 1000 < duration) {
+            return cookieResult.getResult();
+        }
+        return null;
+    }
 }

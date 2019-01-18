@@ -36,4 +36,6 @@ interface ApiService {
      */
     @POST("message/message/userTerminal")
     fun postNotice(@Body api:NoticePostApi): Observable<String>
+
+
 }

@@ -28,12 +28,12 @@ public class FactoryException {
     /*未知错误*/
     public static final int UNKNOWN_ERROR = 0x4;
     /*无法解析该域名*/
-    public static final int UNKNOWN_HOST_ERROR = 0x6;
+    public static final int UNKOWNHOST_ERROR = 0x6;
 
-    private static final String HTTP_EXCEPTION_MSG = RxRetrofitApp.getApplication().getString(R.string.service_error);
-    private static final String CONNECT_EXCEPTION_MSG = RxRetrofitApp.getApplication().getString(R.string.service_error);
-    private static final String JSON_EXCEPTION_MSG = RxRetrofitApp.getApplication().getString(R.string.json_error);
-    private static final String UNKNOWN_HOST_EXCEPTION_MSG = RxRetrofitApp.getApplication().getString(R.string.url_error);
+    private static final String HttpException_MSG = RxRetrofitApp.getApplication().getString(R.string.service_error);
+    private static final String ConnectException_MSG = RxRetrofitApp.getApplication().getString(R.string.service_error);
+    private static final String JSONException_MSG = RxRetrofitApp.getApplication().getString(R.string.json_error);
+    private static final String UnknownHostException_MSG = RxRetrofitApp.getApplication().getString(R.string.url_error);
 
     /**
      * 解析异常
@@ -41,12 +41,12 @@ public class FactoryException {
      * @param e
      * @return
      */
-    public static ApiException analysisException(Throwable e) {
+    public static ApiException analysisExcetpion(Throwable e) {
         ApiException apiException = new ApiException(e);
         if (e instanceof HttpException) {
             /*网络异常*/
             apiException.setCode(HTTP_ERROR);
-            apiException.setDisplayMessage(HTTP_EXCEPTION_MSG);
+            apiException.setDisplayMessage(HttpException_MSG);
         } else if (e instanceof HttpTimeException) {
             /*自定义运行时异常*/
             HttpTimeException exception = (HttpTimeException) e;
@@ -55,18 +55,18 @@ public class FactoryException {
         } else if (e instanceof ConnectException || e instanceof SocketTimeoutException) {
             /*链接异常*/
             apiException.setCode(HTTP_ERROR);
-            apiException.setDisplayMessage(CONNECT_EXCEPTION_MSG);
+            apiException.setDisplayMessage(ConnectException_MSG);
         } else if (e instanceof JSONException || e instanceof ParseException) {
             apiException.setCode(JSON_ERROR);
-            apiException.setDisplayMessage(JSON_EXCEPTION_MSG);
+            apiException.setDisplayMessage(JSONException_MSG);
         } else if (e instanceof UnknownHostException) {
             /*无法解析该域名异常*/
-            apiException.setCode(UNKNOWN_HOST_ERROR);
-            apiException.setDisplayMessage(UNKNOWN_HOST_EXCEPTION_MSG);
+            apiException.setCode(UNKOWNHOST_ERROR);
+            apiException.setDisplayMessage(UnknownHostException_MSG);
         } else {
             /*未知异常*/
             apiException.setCode(UNKNOWN_ERROR);
-            apiException.setDisplayMessage(HTTP_EXCEPTION_MSG);
+            apiException.setDisplayMessage(HttpException_MSG);
         }
         return apiException;
     }

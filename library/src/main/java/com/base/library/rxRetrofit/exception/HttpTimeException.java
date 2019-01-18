@@ -27,7 +27,7 @@ public class HttpTimeException extends RuntimeException {
     /*交互取消*/
     public static final int HTTP_DATA_NULL = 0x1011;
     /*获取tokean失败*/
-    public static final int HTTP_TOKEN_ERROR = 0x10112;
+    public static final int HTTP_TOKEAN_ERROR = 0x10112;
     /*CONFIG失败*/
     public static final int HTTP_CONFIG_ERROR = 0x10118;
     /*http需要忽略的异常*/

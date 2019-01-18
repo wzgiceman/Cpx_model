@@ -1,4 +1,4 @@
-package com.base.library.rxRetrofit.api.result;
+package com.base.library.rxRetrofit.Api.resulte;
 
 /**
  * Describe:http数据返回基础类
@@ -36,4 +36,6 @@ public class BaseResult {
     public void setData(String data) {
         this.data = data;
     }
+
+
 }

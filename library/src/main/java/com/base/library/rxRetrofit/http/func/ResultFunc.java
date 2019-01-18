@@ -3,12 +3,12 @@ package com.base.library.rxRetrofit.http.func;
 
 import com.alibaba.fastjson.JSONObject;
 import com.base.library.R;
+import com.base.library.rxRetrofit.Api.BaseApi;
+import com.base.library.rxRetrofit.Api.resulte.BaseResult;
 import com.base.library.rxRetrofit.RxRetrofitApp;
-import com.base.library.rxRetrofit.api.BaseApi;
-import com.base.library.rxRetrofit.api.result.BaseResult;
-import com.base.library.rxRetrofit.downlaod.utils.CookieDbUtil;
 import com.base.library.rxRetrofit.exception.HttpTimeException;
 import com.base.library.rxRetrofit.http.cookie.CookieResult;
+import com.base.library.rxRetrofit.utils.CookieDbUtil;
 import com.base.library.utils.utilcode.util.StringUtils;
 
 import io.reactivex.functions.Function;
@@ -17,7 +17,6 @@ import io.reactivex.functions.Function;
  * 服务器返回数据判断
  * Created by WZG on 2017/3/23.
  */
-
 public class ResultFunc implements Function<Object, String> {
     private BaseApi basePar;
 
@@ -28,8 +27,8 @@ public class ResultFunc implements Function<Object, String> {
     @Override
     public String apply(Object o) {
         if (o == null || StringUtils.isEmpty(o.toString())) {
-            throw new HttpTimeException(HttpTimeException.CACHE_HTTP_ERROR,
-                    RxRetrofitApp.getApplication().getString(R.string.service_error));
+            throw new HttpTimeException(HttpTimeException.CACHE_HTTP_ERROR, RxRetrofitApp.getApplication().getString(R.string
+                    .service_error));
         }
 
         if (basePar.isIgnoreJudge()) {
@@ -57,6 +56,5 @@ public class ResultFunc implements Function<Object, String> {
             throw new HttpTimeException(HttpTimeException.CACHE_HTTP_POST_ERROR, StringUtils.isEmpty(result.getMsg())
                     ? RxRetrofitApp.getApplication().getString(R.string.service_error) : result.getMsg());
         }
-
     }
 }

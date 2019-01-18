@@ -5,7 +5,7 @@ package com.base.library.rxRetrofit.downlaod;
  * Created by WZG on 2016/10/21.
  */
 
-public enum  DownState {
+public enum DownState {
     START(0),
     DOWN(1),
     PAUSE(2),
@@ -14,15 +14,15 @@ public enum  DownState {
     FINISH(5);
     private int state;
 
+    DownState(int state) {
+        this.state = state;
+    }
+
     public int getState() {
         return state;
     }
 
     public void setState(int state) {
-        this.state = state;
-    }
-
-    DownState(int state) {
         this.state = state;
     }
 }

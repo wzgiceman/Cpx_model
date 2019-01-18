@@ -26,7 +26,6 @@ public class CookieResult {
         this.time = time;
     }
 
-
     @Keep
     public CookieResult(Long id, String url, String result, long time) {
         this.id = id;
@@ -35,11 +34,9 @@ public class CookieResult {
         this.time = time;
     }
 
-
     @Keep
     public CookieResult() {
     }
-
 
     public Long getId() {
         return this.id;
@@ -72,6 +69,5 @@ public class CookieResult {
     public void setTime(long time) {
         this.time = time;
     }
-
 
 }

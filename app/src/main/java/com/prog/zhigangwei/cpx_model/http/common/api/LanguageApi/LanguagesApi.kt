@@ -1,6 +1,6 @@
 package com.prog.zhigangwei.cpx_model.http.common.api.LanguageApi
 
-import com.base.library.rxRetrofit.api.BaseApi
+import com.base.library.rxRetrofit.Api.BaseApi
 import com.prog.zhigangwei.cpx_model.http.common.api.ApiService
 import io.reactivex.Observable
 

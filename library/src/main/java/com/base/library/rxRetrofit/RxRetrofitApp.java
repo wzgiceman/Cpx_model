@@ -13,12 +13,13 @@ public class RxRetrofitApp {
 
 
     public static void init(Application app) {
-        init(app,true);
+        init(app, true);
     }
 
     public static void init(Application app, boolean debug) {
         setApplication(app);
         setDebug(debug);
+        initDb(app);
     }
 
     public static Application getApplication() {
@@ -37,4 +38,8 @@ public class RxRetrofitApp {
         RxRetrofitApp.debug = debug;
     }
 
+
+    private static void initDb(Application app) {
+//        AbAppUtil.importDatabase(app, "lib", R.raw.lib);
+    }
 }

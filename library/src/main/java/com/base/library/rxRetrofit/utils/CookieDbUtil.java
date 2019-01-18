@@ -1,4 +1,4 @@
-package com.base.library.rxRetrofit.downlaod.utils;
+package com.base.library.rxRetrofit.utils;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -19,8 +19,8 @@ import java.util.List;
  */
 
 public class CookieDbUtil {
-    private static CookieDbUtil db;
     private final static String dbName = "lib";
+    private static CookieDbUtil db;
     private DaoMaster.DevOpenHelper openHelper;
     private Context context;
 

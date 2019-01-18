@@ -1,7 +1,7 @@
 package com.base.shareData.user;
 
 import com.alibaba.fastjson.JSONObject;
-import com.base.library.rxRetrofit.api.BaseApi;
+import com.base.library.rxRetrofit.Api.BaseApi;
 import com.base.library.utils.utilcode.util.SPUtils;
 
 /**
@@ -532,11 +532,10 @@ public class User {
         return token;
     }
 
+
     public void setToken(String token) {
         this.token = token;
-        String config = getLocalLg() + "&" + token;
-        SPUtils.getInstance().put("token", config);
-        BaseApi.setConfig(config);
+        BaseApi.setConfig(token);
     }
 
     public String getSpFont() {

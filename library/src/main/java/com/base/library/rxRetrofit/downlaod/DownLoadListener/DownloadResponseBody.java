@@ -1,4 +1,4 @@
-package com.base.library.rxRetrofit.downlaod.loadListener;
+package com.base.library.rxRetrofit.downlaod.DownLoadListener;
 
 import java.io.IOException;
 
@@ -12,6 +12,7 @@ import okio.Source;
 
 /**
  * 自定义精度的body
+ *
  * @author wzg
  */
 public class DownloadResponseBody extends ResponseBody {

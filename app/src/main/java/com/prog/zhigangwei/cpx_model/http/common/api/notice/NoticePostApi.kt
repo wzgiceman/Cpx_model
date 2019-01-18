@@ -1,6 +1,6 @@
 package com.prog.zhigangwei.cpx_model.http.common.api.notice
 
-import com.base.library.rxRetrofit.api.BaseApi
+import com.base.library.rxRetrofit.Api.BaseApi
 import com.base.library.utils.utilcode.util.DeviceUtils
 import com.prog.zhigangwei.cpx_model.http.common.api.ApiService
 import io.reactivex.Observable

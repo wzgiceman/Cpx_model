@@ -21,20 +21,21 @@ import java.util.List;
  */
 
 public class DownDbUtil {
-    private static DownDbUtil db;
     private final static String dbName = "lib";
+    private static DownDbUtil db;
     private DaoMaster.DevOpenHelper openHelper;
     private Context context;
 
 
     public DownDbUtil() {
-        context= RxRetrofitApp.getApplication();
+        context = RxRetrofitApp.getApplication();
         openHelper = new DaoMaster.DevOpenHelper(context, dbName, null);
     }
 
 
     /**
      * 获取单例
+     *
      * @return
      */
     public static DownDbUtil getInstance() {
@@ -72,21 +73,21 @@ public class DownDbUtil {
     }
 
 
-    public void save(DownInfo info){
+    public void save(DownInfo info) {
         DaoMaster daoMaster = new DaoMaster(getWritableDatabase());
         DaoSession daoSession = daoMaster.newSession();
         DownInfoDao downInfoDao = daoSession.getDownInfoDao();
         downInfoDao.insert(info);
     }
 
-    public void update(DownInfo info){
+    public void update(DownInfo info) {
         DaoMaster daoMaster = new DaoMaster(getWritableDatabase());
         DaoSession daoSession = daoMaster.newSession();
         DownInfoDao downInfoDao = daoSession.getDownInfoDao();
         downInfoDao.update(info);
     }
 
-    public void deleteDownInfo(DownInfo info){
+    public void deleteDowninfo(DownInfo info) {
         DaoMaster daoMaster = new DaoMaster(getWritableDatabase());
         DaoSession daoSession = daoMaster.newSession();
         DownInfoDao downInfoDao = daoSession.getDownInfoDao();

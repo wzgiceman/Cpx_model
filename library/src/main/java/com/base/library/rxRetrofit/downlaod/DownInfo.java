@@ -4,10 +4,10 @@ package com.base.library.rxRetrofit.downlaod;
 import com.base.library.rxRetrofit.listener.HttpDownOnNextListener;
 
 import org.greenrobot.greendao.annotation.Entity;
+import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Keep;
 import org.greenrobot.greendao.annotation.Transient;
-import org.greenrobot.greendao.annotation.Generated;
 
 /**
  * apk下载请求数据基础类
@@ -30,12 +30,6 @@ public class DownInfo {
     /*回调监听*/
     @Transient
     private HttpDownOnNextListener listener;
-    /* retry次数*/
-    private transient int retryCount = 3;
-    /*retry延迟*/
-    private transient long retryDelay = 200;
-    /*retry叠加延迟*/
-    private transient long retryIncreaseDelay = 1000;
     /*超时设置 单位：秒*/
     private int connectionTime = 15;
     /*state状态数据库保存*/
@@ -97,18 +91,13 @@ public class DownInfo {
         }
     }
 
-    public boolean isUpdateProgress() {
-        return updateProgress;
-    }
-
-    public void setUpdateProgress(boolean updateProgress) {
-        this.updateProgress = updateProgress;
-    }
-
     public void setState(DownState state) {
         setDownState(state.getState());
     }
 
+    public boolean isUpdateProgress() {
+        return updateProgress;
+    }
 
     public int getDownState() {
         return downState;
@@ -150,7 +139,6 @@ public class DownInfo {
         this.savePath = savePath;
     }
 
-
     public Long getCountLength() {
         return countLength;
     }
@@ -158,7 +146,6 @@ public class DownInfo {
     public void setCountLength(Long countLength) {
         this.countLength = countLength;
     }
-
 
     public Long getReadLength() {
         return readLength;
@@ -188,27 +175,7 @@ public class DownInfo {
         return this.updateProgress;
     }
 
-    public int getRetryCount() {
-        return retryCount;
-    }
-
-    public void setRetryCount(int retryCount) {
-        this.retryCount = retryCount;
-    }
-
-    public long getRetryDelay() {
-        return retryDelay;
-    }
-
-    public void setRetryDelay(long retryDelay) {
-        this.retryDelay = retryDelay;
-    }
-
-    public long getRetryIncreaseDelay() {
-        return retryIncreaseDelay;
-    }
-
-    public void setRetryIncreaseDelay(long retryIncreaseDelay) {
-        this.retryIncreaseDelay = retryIncreaseDelay;
+    public void setUpdateProgress(boolean updateProgress) {
+        this.updateProgress = updateProgress;
     }
 }
