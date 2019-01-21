@@ -12,8 +12,8 @@ import com.base.library.rxRetrofit.exception.ApiException;
 import com.base.library.rxRetrofit.exception.HttpTimeException;
 import com.base.library.rxRetrofit.http.cookie.CookieResult;
 import com.base.library.rxRetrofit.listener.HttpOnNextListener;
-import com.base.library.rxRetrofit.utils.AppUtil;
 import com.base.library.rxRetrofit.utils.CookieDbUtil;
+import com.base.library.utils.utilcode.util.NetworkUtils;
 import com.base.library.utils.utilcode.util.ObjectUtils;
 import com.base.library.utils.utilcode.util.ResourceUtils;
 import com.base.library.utils.utilcode.util.StringUtils;
@@ -74,8 +74,7 @@ public class ProgressSubscriber<T> implements Observer<T> {
         if (api.isCache() && !api.isRefresh()) {
             /*获取缓存数据*/
             CookieResult cookieResult = CookieDbUtil.getInstance().queryCookieBy(api.getCacheUrl());
-            int duration = AppUtil.isNetworkAvailable(RxRetrofitApp.getApplication()) ? api.getCookieNetWorkTime()
-                    : api.getCookieNoNetWorkTime();
+            int duration = NetworkUtils.isAvailableByPing() ? api.getCookieNetWorkTime() : api.getCookieNoNetWorkTime();
             if (null != cookieResult && (System.currentTimeMillis() - cookieResult.getTime()) / 1000 < duration) {
                 onComplete();
                 d.dispose();
@@ -216,12 +215,12 @@ public class ProgressSubscriber<T> implements Observer<T> {
     public void onCancelProgress(Disposable disposable) {
         if (disposable != null && !disposable.isDisposed()) {
             disposable.dispose();
+            ApiException exception = new ApiException(new Throwable(), HttpTimeException.HTTP_CANCEL, RxRetrofitApp
+                    .getApplication().getString(R.string.http_data_error));
             if (api.isCache()) {
-                getCache(new ApiException(new Throwable(), HttpTimeException.HTTP_CANCEL, RxRetrofitApp.getApplication()
-                        .getString(R.string.http_data_error)));
+                getCache(exception);
             } else {
-                errorDo(new ApiException(new Throwable(), HttpTimeException.HTTP_CANCEL, RxRetrofitApp.getApplication()
-                        .getString(R.string.http_cancel)));
+                errorDo(exception);
             }
         }
     }
