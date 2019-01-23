@@ -30,7 +30,6 @@ class VideoFragment : BaseLazyFragment(), HttpOnNextListener {
     override fun layoutId() = R.layout.fragment_wall
 
     override fun initData() {
-//        LogUtils.d("${isAdded}-->initData")
         erc.setRefreshing(true)
         httpManager.doHttpDeal(WallDetailApi(arguments.getString("key")))
     }
@@ -74,19 +73,4 @@ class VideoFragment : BaseLazyFragment(), HttpOnNextListener {
         erc.showError()
         erc.setRefreshing(false)
     }
-
-//    override fun onStop() {
-//        super.onStop()
-//        LogUtils.d("-->onStop")
-//    }
-//
-//    override fun onDestroy() {
-//        super.onDestroy()
-//        LogUtils.d("-->onDestroy")
-//    }
-//
-//    override fun onDetach() {
-//        super.onDetach()
-//        LogUtils.d("${isAdded}-->onDetach")
-//    }
 }

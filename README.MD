@@ -45,6 +45,8 @@ CPX Model
     3.优化BaseSaveFragment代码及注释，使代码更简洁
     
     4.修改了.gitignore，将gradle/文件夹上传，保证gradle-wrapper.properties版本一致
+    
+    5.添加initNow()方法，作为懒加载的开关，对于不需要懒加载的Fragment，调用initNow即可
 
 * 2018.12.06
     

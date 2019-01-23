@@ -19,16 +19,18 @@ abstract class BaseLazyFragment : BaseSaveFragment(), IBase {
     /**数据加载状态*/
     protected var loadingStatus = LoadingStatusType.NotLoadYet
     /**
+     * 懒加载开关，设置为true时不使用懒加载
+     *
      * 注：1.对于TabLayout绑定的Fragment，在
      * [BaseFragmentManagerFragment]的[BaseFragmentManagerFragment.initFragmentList]方法和
      * [com.base.project.base.activity.BaseFragmentManagerActivity]的
      * [com.base.project.base.activity.BaseFragmentManagerActivity.initFragmentList]方法
-     * 中将第一个Fragment的[isFirst]设置为了true，使得进入时加载数据
+     * 中将第一个Fragment的[initNow]设置为了true，使得进入时加载数据
      * 因为这种情况下第一个Fragment的isVisible为false，不设置此参数的话，[initData]无法加载
      * 2.ViewPager无需设置此参数，ViewPager默认相邻的两个Fragment的[isVisible]为true
      * 3.使用者无需关心此参数
      */
-    var isFirst = false
+    private var initNow = false
 
     /**数据加载状态*/
     enum class LoadingStatusType {
@@ -65,7 +67,7 @@ abstract class BaseLazyFragment : BaseSaveFragment(), IBase {
      */
     private fun loadData() {
         //如果可见,并且没有加载数据
-        if ((isFirst || isVisible) && loadingStatus == LoadingStatusType.NotLoadYet) {
+        if ((initNow || isVisible) && loadingStatus == LoadingStatusType.NotLoadYet) {
             loadingStatus = LoadingStatusType.Loading
             initData()
             initView()
@@ -103,5 +105,12 @@ abstract class BaseLazyFragment : BaseSaveFragment(), IBase {
      */
     open fun loadingFinish() {
         loadingStatus = LoadingStatusType.LoadFinish
+    }
+
+    /**
+     * 立即初始化，不使用懒加载
+     */
+    fun initNow() {
+        initNow = true
     }
 }
