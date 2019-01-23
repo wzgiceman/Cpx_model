@@ -14,7 +14,7 @@ import java.lang.ref.WeakReference
 /**
  * 图片获取（拍照或从相册）
  */
-object PictureCapture :OnPicturePathListener ,Serializable{
+object PictureCapture : OnPicturePathListener, Serializable {
     /*是否需要剪裁*/
     var needCrop: Boolean = false
     const val BUNDLE_KEY = "ListenerItem"
@@ -37,6 +37,20 @@ object PictureCapture :OnPicturePathListener ,Serializable{
     }
 
     /**
+     * 获取图片，通过拍照或从相册选择 （不经过压缩）
+     * @param context
+     * @param listener   未压缩的图片文件回掉接口
+     * @param needCrop   是否需要剪裁
+     * @param chooseTake   是否直接选择拍照方式，不需要弹框选择 1拍照 2图片
+     */
+    fun getPicture(context: Context, listener: OnPicturePathListener, needCrop: Boolean = false, chooseTake: Int = -1) {
+        this.needCrop = needCrop
+        weakReference = WeakReference(listener)
+        listenerItem.listener = this
+        showDialog(context, chooseTake)
+    }
+
+    /**
      * 获取图片，通过拍照或从相册选择 （压缩过的图片）
      * @param context
      * @param listener   压缩过的图片文件回掉接口
@@ -49,6 +63,21 @@ object PictureCapture :OnPicturePathListener ,Serializable{
         showDialog(context)
     }
 
+
+    /**
+     * 获取图片，通过拍照或从相册选择 （压缩过的图片）
+     * @param context
+     * @param listener   压缩过的图片文件回掉接口
+     * @param needCrop   是否需要剪裁
+     * @param chooseTake   是否直接选择拍照方式，不需要弹框选择 1拍照 2图片
+     */
+    fun getCompressionPicture(context: Context, listener: OnPicturePathListener, needCrop: Boolean = false, chooseTake: Int = -1) {
+        this.needCrop = needCrop
+        weakReference = WeakReference(listener)
+        listenerItem.listener = this
+        showDialog(context, chooseTake)
+    }
+
     /**
      * 使用getCompressionPicture时在此回掉方法中去压缩图片
      */
@@ -59,10 +88,11 @@ object PictureCapture :OnPicturePathListener ,Serializable{
     /**
      *显示选择Camera 或 Album 的Dialog
      */
-    private fun showDialog(context: Context) {
+    private fun showDialog(context: Context, chooseTake: Int = -1) {
         var intent = Intent(context, PictureCaptureDialog::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
         bundle.putSerializable(BUNDLE_KEY, listenerItem)
+        intent.putExtra("chooseTake", chooseTake)
         intent.putExtras(bundle)
         context.startActivity(intent)
     }
