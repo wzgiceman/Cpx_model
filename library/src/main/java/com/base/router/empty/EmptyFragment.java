@@ -20,7 +20,6 @@ public class EmptyFragment extends BaseLazyFragment {
 
     @Override
     public void initView() {
-
     }
 
     @Override

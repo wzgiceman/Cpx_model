@@ -25,7 +25,7 @@ class VpFragmentActivity : BaseActivity() {
         tab_layout_channel_title.setupWithViewPager(view_pager_channel)
         val adapter = SelectPageAdapter(supportFragmentManager)
         val data = arrayListOf<String>()
-        for (i in 1..100) {
+        for (i in 0..99) {
             data.add("$i")
         }
         adapter.addAll(data)

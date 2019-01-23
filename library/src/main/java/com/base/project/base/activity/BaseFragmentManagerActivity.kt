@@ -3,8 +3,8 @@ package com.base.project.base.activity
 import android.support.v4.app.Fragment
 import com.base.library.R
 import com.base.library.utils.utilcode.util.FragmentUtils
+import com.base.library.utils.utilcode.util.LogUtils
 import com.base.project.base.fragment.BaseLazyFragment
-
 
 /**
  * Fragment基础管理类
@@ -36,6 +36,7 @@ abstract class BaseFragmentManagerActivity : BaseToolsActivity() {
     protected fun initFragmentList(containerId: Int, fragmentList: List<BaseLazyFragment>): BaseLazyFragment {
         this.fragmentList = fragmentList
         FragmentUtils.add(supportFragmentManager, fragmentList, containerId, show)
+        fragmentList[show].isFirst = true
         return fragmentList[show]
     }
 
@@ -50,6 +51,7 @@ abstract class BaseFragmentManagerActivity : BaseToolsActivity() {
         if (show == index) return fragmentList[index]
         val fragment = fragmentList[index]
         FragmentUtils.showHide(fragment, fragmentList)
+        LogUtils.d("showFragment")
         show = index
         return fragment
     }

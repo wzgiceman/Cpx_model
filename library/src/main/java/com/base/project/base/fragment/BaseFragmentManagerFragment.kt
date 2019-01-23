@@ -34,6 +34,7 @@ abstract class BaseFragmentManagerFragment : BaseToolFragment() {
     protected fun initFragmentList(containerId: Int, fragmentList: List<BaseLazyFragment>): BaseLazyFragment {
         this.fragmentList = fragmentList
         FragmentUtils.add(childFragmentManager, fragmentList, containerId, show)
+        fragmentList[show].isFirst = true
         return fragmentList[show]
     }
 

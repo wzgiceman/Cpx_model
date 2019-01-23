@@ -10,8 +10,8 @@ import com.base.library.rxRetrofit.listener.HttpOnNextListener;
 import com.base.library.rxRetrofit.subscribers.ProgressSubscriber;
 import com.base.library.rxlifecycle.android.ActivityEvent;
 import com.base.library.rxlifecycle.android.FragmentEvent;
+import com.base.library.rxlifecycle.components.support.RxFragment;
 import com.base.project.base.activity.BaseActivity;
-import com.base.project.base.fragment.BaseLazyFragment;
 
 import java.lang.ref.SoftReference;
 
@@ -29,14 +29,14 @@ public class HttpManager {
     /*软引用對象*/
     private SoftReference<HttpOnNextListener> onNextListener;
     private SoftReference<BaseActivity> mActivity;
-    private SoftReference<BaseLazyFragment> mFragment;
+    private SoftReference<RxFragment> mFragment;
 
     public HttpManager(@NonNull HttpOnNextListener onNextListener, @NonNull BaseActivity activity) {
         this.onNextListener = new SoftReference(onNextListener);
         this.mActivity = new SoftReference(activity);
     }
 
-    public HttpManager(@NonNull HttpOnNextListener onNextListener, @NonNull BaseLazyFragment fragment) {
+    public HttpManager(@NonNull HttpOnNextListener onNextListener, @NonNull RxFragment fragment) {
         this.onNextListener = new SoftReference(onNextListener);
         this.mFragment = new SoftReference<>(fragment);
     }

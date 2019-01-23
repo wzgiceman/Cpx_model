@@ -58,15 +58,15 @@ class VideoFragment : BaseLazyFragment(), HttpOnNextListener {
 
 
     override fun onNext(result: String, method: String) {
-        loadingFinish()
         erc.setRefreshing(false)
         adapter.removeAll()
         val video = JSONObject.parseObject(result, Video::class.java)
         if (video?.entries == null || video.entries.isEmpty()) {
             erc.showEmpty()
-            return
+        } else {
+            adapter.addAll(JSONObject.parseObject(result, Video::class.java).entries)
         }
-        adapter.addAll(JSONObject.parseObject(result, Video::class.java).entries)
+        loadingFinish()
     }
 
     override fun onError(e: ApiException, method: String) {

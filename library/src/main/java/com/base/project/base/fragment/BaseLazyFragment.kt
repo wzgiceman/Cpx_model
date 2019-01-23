@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.base.library.utils.utilcode.util.LogUtils
 import com.base.project.base.IBase
 
 /**
@@ -17,10 +16,19 @@ import com.base.project.base.IBase
  * Date:    2018/9/25
  */
 abstract class BaseLazyFragment : BaseSaveFragment(), IBase {
-    /**判断view是否创建*/
-    private var viewCreated = false
     /**数据加载状态*/
     protected var loadingStatus = LoadingStatusType.NotLoadYet
+    /**
+     * 注：1.对于TabLayout绑定的Fragment，在
+     * [BaseFragmentManagerFragment]的[BaseFragmentManagerFragment.initFragmentList]方法和
+     * [com.base.project.base.activity.BaseFragmentManagerActivity]的
+     * [com.base.project.base.activity.BaseFragmentManagerActivity.initFragmentList]方法
+     * 中将第一个Fragment的[isFirst]设置为了true，使得进入时加载数据
+     * 因为这种情况下第一个Fragment的isVisible为false，不设置此参数的话，[initData]无法加载
+     * 2.ViewPager无需设置此参数，ViewPager默认相邻的两个Fragment的[isVisible]为true
+     * 3.使用者无需关心此参数
+     */
+    var isFirst = false
 
     /**数据加载状态*/
     enum class LoadingStatusType {
@@ -38,7 +46,6 @@ abstract class BaseLazyFragment : BaseSaveFragment(), IBase {
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewCreated = true
         loadData()
     }
 
@@ -58,8 +65,7 @@ abstract class BaseLazyFragment : BaseSaveFragment(), IBase {
      */
     private fun loadData() {
         //如果可见,并且没有加载数据
-        LogUtils.d("${arguments.getString("key")}-->viewCreated:$viewCreated\tisHidden:$isHidden\tuserVisibleHint:$userVisibleHint\tloadingStatus:$loadingStatus")
-        if (viewCreated && !isHidden && loadingStatus == LoadingStatusType.NotLoadYet) {
+        if ((isFirst || isVisible) && loadingStatus == LoadingStatusType.NotLoadYet) {
             loadingStatus = LoadingStatusType.Loading
             initData()
             initView()
@@ -78,8 +84,6 @@ abstract class BaseLazyFragment : BaseSaveFragment(), IBase {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        // View销毁时，重置viewCreated
-        viewCreated = false
         // 如果数据仍然在加载，View就被销毁了，则重置loadingStatus，使得下次到达此页面重新加载数据
         if (loadingStatus == LoadingStatusType.Loading) {
             resetLoadingStatus()
