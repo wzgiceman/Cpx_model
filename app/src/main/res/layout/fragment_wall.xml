@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<com.base.library.easyrecyclerview.EasyRecyclerView
+<com.base.library.easyrecyclerview.EasyRecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/erc"
-    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-
-</com.base.library.easyrecyclerview.EasyRecyclerView>
+    android:layout_height="match_parent"
+    app:layout_empty="@layout/view_empty"
+    app:layout_error="@layout/view_error" />

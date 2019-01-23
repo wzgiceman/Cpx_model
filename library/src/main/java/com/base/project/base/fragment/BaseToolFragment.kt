@@ -10,7 +10,7 @@ import com.base.project.base.extension.isValidActivity
  * fragment基础工具类
  * Created by WZG on 2016/1/28.
  */
-abstract class BaseToolFragment : BaseSaveFragment(), IBaseTool {
+abstract class BaseToolFragment : BaseLazyFragment(), IBaseTool {
 
     private var loadingDialog: ProgressDialog? = null
 

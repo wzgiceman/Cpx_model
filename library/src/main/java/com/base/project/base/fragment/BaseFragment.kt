@@ -11,20 +11,18 @@ import com.base.project.base.IBase.Companion.NO_LAYOUT
 
 /**
  * 自定义fragment基础类
+ * 非懒加载模式
  *
  * @author WZG
  */
 abstract class BaseFragment : RxFragment(), IBase {
-    /**
-     * 是否加载完成的标识
-     */
-    protected var createFinish = false
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return if (layoutId() != NO_LAYOUT) View.inflate(context, layoutId(), null) else null
     }
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         if (savedInstanceState == null) {
             initFragment()
         }

@@ -3,7 +3,7 @@ package com.base.project.base.activity
 import android.support.v4.app.Fragment
 import com.base.library.R
 import com.base.library.utils.utilcode.util.FragmentUtils
-import com.base.project.base.fragment.BaseFragment
+import com.base.project.base.fragment.BaseLazyFragment
 
 
 /**
@@ -16,7 +16,7 @@ abstract class BaseFragmentManagerActivity : BaseToolsActivity() {
     /**当前显示的位置 */
     protected var show = 0
     /**tab页 */
-    private var fragmentList: List<BaseFragment>? = null
+    private var fragmentList: List<BaseLazyFragment>? = null
 
     /**
      * 设置当前tab里显示的fragment页面
@@ -33,7 +33,7 @@ abstract class BaseFragmentManagerActivity : BaseToolsActivity() {
      * @param containerId
      * @param fragmentList
      */
-    protected fun initFragmentList(containerId: Int, fragmentList: List<BaseFragment>): BaseFragment {
+    protected fun initFragmentList(containerId: Int, fragmentList: List<BaseLazyFragment>): BaseLazyFragment {
         this.fragmentList = fragmentList
         FragmentUtils.add(supportFragmentManager, fragmentList, containerId, show)
         return fragmentList[show]
@@ -44,7 +44,7 @@ abstract class BaseFragmentManagerActivity : BaseToolsActivity() {
      *
      * @param index
      */
-    protected fun showFragment(index: Int): BaseFragment? {
+    protected fun showFragment(index: Int): BaseLazyFragment? {
         val fragmentList = this.fragmentList
         if (fragmentList == null || fragmentList.isEmpty() || index < 0 || index >= fragmentList.size) return null
         if (show == index) return fragmentList[index]

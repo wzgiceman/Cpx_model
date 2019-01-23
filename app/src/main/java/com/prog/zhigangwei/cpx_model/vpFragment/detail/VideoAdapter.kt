@@ -47,9 +47,5 @@ class VideoAdapter(context: Context) : RecyclerArrayAdapter<Video.EntriesBean>(c
             Glide.with(context).load(data.cover).apply(RequestOptions().placeholder(drawa))
                     .into(ivWall)
         }
-
-
     }
-
-
 }

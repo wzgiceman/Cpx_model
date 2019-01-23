@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.base.library.utils.utilcode.util.LogUtils
 import com.base.project.base.IBase
 
 /**
@@ -15,33 +16,40 @@ import com.base.project.base.IBase
  * Company: Mobile CPX
  * Date:    2018/9/25
  */
-abstract class BaseLazyFragment : BaseFragmentManagerFragment() {
+abstract class BaseLazyFragment : BaseSaveFragment(), IBase {
     /**判断view是否创建*/
     private var viewCreated = false
-    /**是否加载数据*/
-    protected var loading = false
-    /**
-     * 字段说明：忽略[onViewCreated]中[loadData]前的 savedInstanceState == null 判断
-     * 使用方法：专供FragmentStatePagerAdapter使用，使用了FragmentStatePagerAdapter的ViewPager，
-     *      ViewPager中的子Fragment需要在[onCreateView]中将其设置为true（Kotlin文件可以在[init]方法中将其设置为true）
-     * 原因：因为FragmentStatePagerAdapter会自动处理Fragment的状态保存与恢复
-     *      但不会处理页面数据的保存与恢复，所以数据需要重新加载
-     */
-    protected var ignoreSavedState = false
+    /**数据加载状态*/
+    protected var loadingStatus = LoadingStatusType.NotLoadYet
+
+    /**数据加载状态*/
+    enum class LoadingStatusType {
+        //尚未加载
+        NotLoadYet,
+        //加载中
+        Loading,
+        //加载完成
+        LoadFinish
+    }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return if (layoutId() != IBase.NO_LAYOUT) View.inflate(context, layoutId(), null) else null
     }
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         viewCreated = true
-        if (ignoreSavedState || null == savedInstanceState) {
-            loadData()
-        }
+        loadData()
     }
+
 
     override fun onHiddenChanged(hidden: Boolean) {
         super.onHiddenChanged(hidden)
+        loadData()
+    }
+
+    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
+        super.setUserVisibleHint(isVisibleToUser)
         loadData()
     }
 
@@ -50,32 +58,46 @@ abstract class BaseLazyFragment : BaseFragmentManagerFragment() {
      */
     private fun loadData() {
         //如果可见,并且没有加载数据
-        if (viewCreated && (this.isVisible || userVisibleHint) && !loading) {
-            loading = true
-            initFragment()
+        LogUtils.d("${arguments.getString("key")}-->viewCreated:$viewCreated\tisHidden:$isHidden\tuserVisibleHint:$userVisibleHint\tloadingStatus:$loadingStatus")
+        if (viewCreated && !isHidden && loadingStatus == LoadingStatusType.NotLoadYet) {
+            loadingStatus = LoadingStatusType.Loading
+            initData()
+            initView()
+        }
+    }
+
+    /**
+     * 恢复数据
+     * fragment销毁时，fragment中的数据不会被销毁
+     * 当fragment重新创建时，将数据再次设置到view中
+     */
+    override fun onRestoreState(savedInstanceState: Bundle) {
+        super.onRestoreState(savedInstanceState)
+        initView()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        // View销毁时，重置viewCreated
+        viewCreated = false
+        // 如果数据仍然在加载，View就被销毁了，则重置loadingStatus，使得下次到达此页面重新加载数据
+        if (loadingStatus == LoadingStatusType.Loading) {
+            resetLoadingStatus()
         }
     }
 
     /**
      * 重置加载状态
-     * 数据懒加载取消/失败调用此方法，使得下次到达此页面时可以再次触发lazyLoadData刷新数据
+     * 数据懒加载取消/失败调用此方法，使得下次到达此页面时刷新数据
      */
     open fun resetLoadingStatus() {
-        loading = false
+        loadingStatus = LoadingStatusType.NotLoadYet
     }
-
 
     /**
-     * 初始化fragment的根方法
+     * 加载状态设置为加载完成
      */
-    protected fun initFragment() {
-        initData()
-        initView()
+    open fun loadingFinish() {
+        loadingStatus = LoadingStatusType.LoadFinish
     }
-
-
-    protected fun checkPrepared(): Boolean {
-        return userVisibleHint && viewCreated && context != null
-    }
-
 }

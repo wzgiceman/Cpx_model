@@ -1,7 +1,6 @@
 package com.prog.zhigangwei.cpx_model.vpFragment.vpFragment
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
 import com.prog.zhigangwei.cpx_model.vpFragment.detail.VideoFragment
@@ -15,18 +14,25 @@ import com.prog.zhigangwei.cpx_model.vpFragment.detail.VideoFragment
  */
 class SelectPageAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
 
-    override fun getItem(position: Int): Fragment {
-        return VideoFragment().apply {
-            arguments = Bundle().apply { putString("key", "A$position") }
-        }
-    }
+    private val fragmentList: ArrayList<VideoFragment> = arrayListOf()
 
-    override fun getCount(): Int {
-        return 100
-    }
+    override fun getItem(position: Int) = fragmentList[position]
+
+    override fun getCount() = fragmentList.size
 
     override fun getPageTitle(position: Int): CharSequence {
         return "A$position"
     }
 
+    /**
+     * 添加fragments
+     */
+    fun addAll(data: List<String>) {
+        for (item in data) {
+            fragmentList.add(VideoFragment().apply {
+                arguments = Bundle().apply { putString("key", "A$item") }
+            })
+        }
+        notifyDataSetChanged()
+    }
 }

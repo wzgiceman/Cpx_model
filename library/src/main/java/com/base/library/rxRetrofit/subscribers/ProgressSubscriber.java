@@ -18,7 +18,7 @@ import com.base.library.utils.utilcode.util.ObjectUtils;
 import com.base.library.utils.utilcode.util.ResourceUtils;
 import com.base.library.utils.utilcode.util.StringUtils;
 import com.base.project.base.activity.BaseActivity;
-import com.base.project.base.fragment.BaseFragment;
+import com.base.project.base.fragment.BaseLazyFragment;
 
 import java.lang.ref.SoftReference;
 
@@ -37,7 +37,7 @@ public class ProgressSubscriber<T> implements Observer<T> {
     private SoftReference<HttpOnNextListener> mSubscriberOnNextListener;
     /* 软引用反正内存泄露*/
     private SoftReference<BaseActivity> mActivity;
-    private SoftReference<BaseFragment> mFragment;
+    private SoftReference<BaseLazyFragment> mFragment;
     /*加载框可自己定义*/
     private ProgressDialog pd;
     /*请求数据*/
@@ -49,7 +49,7 @@ public class ProgressSubscriber<T> implements Observer<T> {
 
 
     public void setFgProgSub(@NonNull BaseApi api, @NonNull SoftReference<HttpOnNextListener> listenerSoftReference,
-                             @NonNull SoftReference<BaseFragment> mFragment) {
+                             @NonNull SoftReference<BaseLazyFragment> mFragment) {
         this.api = api;
         this.mSubscriberOnNextListener = listenerSoftReference;
         this.mFragment = mFragment;

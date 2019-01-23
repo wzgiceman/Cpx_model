@@ -25,11 +25,7 @@ import kotlinx.android.synthetic.main.fragment_wall.*
  */
 class VideoFragment : BaseLazyFragment(), HttpOnNextListener {
     private val adapter by lazy { VideoAdapter(context) }
-    private val httpManager by lazy { HttpManager(this,this) }
-
-    init {
-        ignoreSavedState=true
-    }
+    private val httpManager by lazy { HttpManager(this, this) }
 
     override fun layoutId() = R.layout.fragment_wall
 
@@ -52,22 +48,33 @@ class VideoFragment : BaseLazyFragment(), HttpOnNextListener {
         erc.setRefreshListener {
             initData()
         }
-
+        erc.errorView.setOnClickListener {
+            initData()
+        }
+        erc.emptyView.setOnClickListener {
+            initData()
+        }
     }
 
 
     override fun onNext(result: String, method: String) {
+        loadingFinish()
         erc.setRefreshing(false)
         adapter.removeAll()
+        val video = JSONObject.parseObject(result, Video::class.java)
+        if (video?.entries == null || video.entries.isEmpty()) {
+            erc.showEmpty()
+            return
+        }
         adapter.addAll(JSONObject.parseObject(result, Video::class.java).entries)
     }
 
     override fun onError(e: ApiException, method: String) {
+        resetLoadingStatus()
+        erc.showError()
         erc.setRefreshing(false)
     }
 
-
-//
 //    override fun onStop() {
 //        super.onStop()
 //        LogUtils.d("-->onStop")

@@ -3,7 +3,7 @@ package com.base.router;
 import android.support.annotation.NonNull;
 
 import com.base.library.utils.utilcode.util.LogUtils;
-import com.base.project.base.fragment.BaseFragment;
+import com.base.project.base.fragment.BaseLazyFragment;
 import com.base.router.empty.EmptyFragment;
 
 
@@ -20,11 +20,11 @@ import com.base.router.empty.EmptyFragment;
 public class FragmentRouter {
 
     @NonNull
-    public static BaseFragment getFragment(String name) {
-        BaseFragment fragment = null;
+    public static BaseLazyFragment getFragment(String name) {
+        BaseLazyFragment fragment = null;
         try {
             Class fragmentClass = Class.forName(name);
-            fragment = (BaseFragment) fragmentClass.newInstance();
+            fragment = (BaseLazyFragment) fragmentClass.newInstance();
         } catch (Exception e) {
             fragment = new EmptyFragment();
             LogUtils.e("The fragment cannot be found");

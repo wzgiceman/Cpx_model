@@ -14,7 +14,7 @@ abstract class BaseFragmentManagerFragment : BaseToolFragment() {
     /**当前显示的位置 */
     protected var show = 0
     /**tab页 */
-    private var fragmentList: List<BaseFragment>? = null
+    private var fragmentList: List<BaseLazyFragment>? = null
 
     /**
      * 设置当前tab里显示的fragment页面
@@ -31,7 +31,7 @@ abstract class BaseFragmentManagerFragment : BaseToolFragment() {
      * @param containerId
      * @param fragmentList
      */
-    protected fun initFragmentList(containerId: Int, fragmentList: List<BaseFragment>): BaseFragment {
+    protected fun initFragmentList(containerId: Int, fragmentList: List<BaseLazyFragment>): BaseLazyFragment {
         this.fragmentList = fragmentList
         FragmentUtils.add(childFragmentManager, fragmentList, containerId, show)
         return fragmentList[show]
@@ -42,7 +42,7 @@ abstract class BaseFragmentManagerFragment : BaseToolFragment() {
      *
      * @param index
      */
-    protected fun showFragment(index: Int): BaseFragment? {
+    protected fun showFragment(index: Int): BaseLazyFragment? {
         val fragmentList = this.fragmentList
         if (fragmentList == null || fragmentList.isEmpty() || index < 0 || index >= fragmentList.size) return null
         if (show == index) return fragmentList[index]

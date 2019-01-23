@@ -34,9 +34,22 @@ CPX Model
 
 ## 更新日志
 
+* 2019.01.23
+
+    1.修改BaseLazyFragment继承关系，BaseLazyFragment不再继承自BaseFragment，因为BaseLazyFragment和BaseFragment不兼容
+    现在BaseLazyFragment被放置在上层，BaseFragmentManagerFragment继承自BaseLazyFragment
+    
+    2.修复BaseLazyFragment，现在请严格划分方法层级：initData中做数据处理，initView中做View初始化和数据绑定。
+    原因是fragment销毁时，fragment中的数据不会被销毁，当fragment重新创建时，会重新调用initView将数据设置到view中
+    
+    3.优化BaseSaveFragment代码及注释，使代码更简洁
+    
+    4.修改了.gitignore，将gradle/文件夹上传，保证gradle-wrapper.properties版本一致
+
 * 2018.12.06
     
     1.新增第三方登录
+    
         Facebook登录，需要用浏览器打开 Facebook开发者平台：https://developers.facebook.com/apps/
         
         1.创建应用，将应用编号赋值给 gradle.properties 的 facebook_app_id 变量

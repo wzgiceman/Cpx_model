@@ -1,7 +1,7 @@
 package com.base.router.empty;
 
 import com.base.library.R;
-import com.base.project.base.fragment.BaseFragment;
+import com.base.project.base.fragment.BaseLazyFragment;
 
 /**
  * Describe:空的fragment
@@ -11,7 +11,7 @@ import com.base.project.base.fragment.BaseFragment;
  * <p>
  * Company :cpx
  */
-public class EmptyFragment extends BaseFragment {
+public class EmptyFragment extends BaseLazyFragment {
 
     @Override
     public int layoutId() {

@@ -24,7 +24,11 @@ class VpFragmentActivity : BaseActivity() {
     override fun initView() {
         tab_layout_channel_title.setupWithViewPager(view_pager_channel)
         val adapter = SelectPageAdapter(supportFragmentManager)
+        val data = arrayListOf<String>()
+        for (i in 1..100) {
+            data.add("$i")
+        }
+        adapter.addAll(data)
         view_pager_channel.adapter = adapter
     }
-
 }
