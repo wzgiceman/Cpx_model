@@ -17,22 +17,9 @@ import com.base.project.base.IBase
  */
 abstract class BaseLazyFragment : BaseSaveFragment(), IBase {
     /**数据加载状态*/
-    protected var loadingStatus = LoadingStatusType.NotLoadYet
-    /**
-     * 懒加载开关，设置为true时不使用懒加载
-     *
-     * 注：1.对于TabLayout绑定的Fragment，在
-     * [BaseFragmentManagerFragment]的[BaseFragmentManagerFragment.initFragmentList]方法和
-     * [com.base.project.base.activity.BaseFragmentManagerActivity]的
-     * [com.base.project.base.activity.BaseFragmentManagerActivity.initFragmentList]方法
-     * 中将第一个Fragment的[initNow]设置为了true，使得进入时加载数据
-     * 因为这种情况下第一个Fragment的isVisible为false，不设置此参数的话，[initData]无法加载
-     * 2.ViewPager无需设置此参数，ViewPager默认相邻的两个Fragment的[isVisible]为true
-     * 3.使用者无需关心此参数
-     */
-    private var initNow = false
+    private var loadingStatus = LoadingStatusType.NotLoadYet
 
-    /**数据加载状态*/
+    /**数据加载状态枚举值*/
     enum class LoadingStatusType {
         //尚未加载
         NotLoadYet,
@@ -66,12 +53,22 @@ abstract class BaseLazyFragment : BaseSaveFragment(), IBase {
      * 加载数据
      */
     private fun loadData() {
-        //如果可见,并且没有加载数据
-        if ((initNow || isVisible) && loadingStatus == LoadingStatusType.NotLoadYet) {
+        if (checkVisible() && loadingStatus == LoadingStatusType.NotLoadYet) {
             loadingStatus = LoadingStatusType.Loading
             initData()
             initView()
         }
+    }
+
+    /**
+     * 确定Fragment是否可见
+     * 比系统的[isVisible]方法少了 view.windowToken == null 判断
+     * 由于commit提交的Fragment的view.windowToken初始时为null，导致[isVisible]为false，无法懒加载数据
+     * TODO 当然，最好的方法是使当前显示的Fragment的view.windowToken变为非空，暂时没有找到解决方法
+     *
+     */
+    private fun checkVisible(): Boolean {
+        return isAdded && !isHidden && view != null && view?.visibility == View.VISIBLE
     }
 
     /**
@@ -105,12 +102,5 @@ abstract class BaseLazyFragment : BaseSaveFragment(), IBase {
      */
     open fun loadingFinish() {
         loadingStatus = LoadingStatusType.LoadFinish
-    }
-
-    /**
-     * 立即初始化，不使用懒加载
-     */
-    fun initNow() {
-        initNow = true
     }
 }

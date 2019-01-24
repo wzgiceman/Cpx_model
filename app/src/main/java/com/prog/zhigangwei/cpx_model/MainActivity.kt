@@ -39,7 +39,6 @@ class MainActivity : BaseToolsActivity() {
      * 数据处理A
      */
     private fun initDataA() {
-
     }
 
 
@@ -47,7 +46,6 @@ class MainActivity : BaseToolsActivity() {
      * 数据处理B
      */
     private fun initDataB() {
-
     }
 
     override fun initView() {
@@ -72,7 +70,7 @@ class MainActivity : BaseToolsActivity() {
         btn_login.setOnRxClickListener { jumpActivity(LoginActivity::class.java) }
         btn_share.setOnRxClickListener { jumpActivity(ShareActivity::class.java) }
         btn_rx_click.setOnRxClickListener { LogUtils.d("---->dddddddd") }
-        btn_vpfg.setOnRxClickListener {jumpActivity(VpFragmentActivity::class.java) }
+        btn_vpfg.setOnRxClickListener { jumpActivity(VpFragmentActivity::class.java) }
     }
 
     /**
