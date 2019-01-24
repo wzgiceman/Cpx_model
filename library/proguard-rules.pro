@@ -265,12 +265,12 @@ public static java.lang.String TABLENAME;
 
 
 #lib基础包混淆
--keep class com.base.library.retrofit_rx.** { *; }
+-keep class com.base.** { *; }
 
-
+#注解
+-keepclassmembers class ** {
+    @com.base.library.rxbus.annotation.Subscribe public *;
+    @com.base.library.rxbus.annotation.Produce public *;
+}
 
 #---------------------------------app忽略实体类文件---------------------------------
-#moudle包
--keep class com.prog.muslim.db.** { *; }
--keep class com.prog.muslim.bean.result.** { *; }
--keep class com.base.share_data.** { *; }

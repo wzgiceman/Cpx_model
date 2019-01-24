@@ -45,13 +45,21 @@ class PictureCaptureDialog : BaseActivity() {
                 .subscribe {
                     if (it) { //有权限
                         super.initActivity()
+                        if (1 == bundle.getInt("chooseTake")) {
+                            takePicture()
+                            setVisible()
+                        } else if (2 == bundle.getInt("chooseTake")) {
+                            getPictureFromAlbum()
+                            setVisible()
+                        }
                     } else {
                         Toast.makeText(this, getString(R.string.please_turn_on_camera_permissions), Toast.LENGTH_SHORT).show()
                         finish()
                     }
                 }
     }
-    override fun layoutId() =R.layout.dialog_picture_capture
+
+    override fun layoutId() = R.layout.dialog_picture_capture
 
     override fun initData() {
         PATH.initialize(this)
