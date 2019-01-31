@@ -7,6 +7,7 @@ import com.base.library.rxRetrofit.exception.ApiException
 import com.base.library.rxRetrofit.http.HttpManager
 import com.base.library.rxRetrofit.listener.HttpOnNextListener
 import com.base.library.utils.utilcode.util.ConvertUtils
+import com.base.library.utils.utilcode.util.LogUtils
 import com.base.project.base.fragment.BaseLazyFragment
 import com.prog.zhigangwei.cpx_model.R
 import com.prog.zhigangwei.cpx_model.vpFragment.common.api.WallDetailApi
@@ -26,7 +27,6 @@ import kotlinx.android.synthetic.main.fragment_wall.*
 class VideoFragment : BaseLazyFragment(), HttpOnNextListener {
     private val adapter by lazy { VideoAdapter(context) }
     private val httpManager by lazy { HttpManager(this, this) }
-
     override fun layoutId() = R.layout.fragment_wall
 
     override fun initData() {
@@ -55,7 +55,6 @@ class VideoFragment : BaseLazyFragment(), HttpOnNextListener {
         }
     }
 
-
     override fun onNext(result: String, method: String) {
         erc.setRefreshing(false)
         adapter.removeAll()
@@ -65,12 +64,17 @@ class VideoFragment : BaseLazyFragment(), HttpOnNextListener {
         } else {
             adapter.addAll(JSONObject.parseObject(result, Video::class.java).entries)
         }
-        loadingFinish()
+        loadingSuccess()
     }
 
     override fun onError(e: ApiException, method: String) {
-        resetLoadingStatus()
+        loadingFail()
         erc.showError()
         erc.setRefreshing(false)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        LogUtils.d("")
     }
 }

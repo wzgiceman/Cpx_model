@@ -9,8 +9,8 @@ import com.base.project.base.IBase
 /**
  * Description:
  * Fragment基类，懒加载
- * 当数据加载完成后调用[loadingFinish],Fragment重建时便不会再次调用[initData]，只会调用[initView]将数据设置上去
- * 当数据加载取消/失败后调用[resetLoadingStatus]，使得Fragment重建时再次调用[initData]加载数据
+ * 当数据加载完成后调用[loadingSuccess],Fragment重建时便不会再次调用[initData]，只会调用[initView]将数据设置上去
+ * 当数据加载取消/失败后调用[loadingFail]，使得Fragment重建时再次调用[initData]加载数据
  *
  * @author  Alpinist Wang
  * Company: Mobile CPX
@@ -86,7 +86,7 @@ abstract class BaseLazyFragment : BaseSaveFragment(), IBase {
     /**
      * 加载状态设置为加载完成
      */
-    open fun loadingFinish() {
+    open fun loadingSuccess() {
         loadingStatus = LoadingStatusType.LoadFinish
     }
 
@@ -94,7 +94,7 @@ abstract class BaseLazyFragment : BaseSaveFragment(), IBase {
      * 重置加载状态
      * 数据懒加载取消/失败调用此方法，使得下次到达此页面时刷新数据
      */
-    open fun resetLoadingStatus() {
+    open fun loadingFail() {
         loadingStatus = LoadingStatusType.NotLoadYet
     }
 
@@ -102,7 +102,7 @@ abstract class BaseLazyFragment : BaseSaveFragment(), IBase {
         super.onDestroyView()
         // 如果数据仍然在加载，View就被销毁了，则重置loadingStatus，使得Fragment重建时重新加载数据
         if (loadingStatus == LoadingStatusType.Loading) {
-            resetLoadingStatus()
+            loadingFail()
         }
     }
 }
