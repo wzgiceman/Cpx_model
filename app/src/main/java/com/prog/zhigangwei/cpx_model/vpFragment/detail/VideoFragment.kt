@@ -7,7 +7,6 @@ import com.base.library.rxRetrofit.exception.ApiException
 import com.base.library.rxRetrofit.http.HttpManager
 import com.base.library.rxRetrofit.listener.HttpOnNextListener
 import com.base.library.utils.utilcode.util.ConvertUtils
-import com.base.library.utils.utilcode.util.LogUtils
 import com.base.project.base.fragment.BaseLazyFragment
 import com.prog.zhigangwei.cpx_model.R
 import com.prog.zhigangwei.cpx_model.vpFragment.common.api.WallDetailApi
@@ -73,8 +72,4 @@ class VideoFragment : BaseLazyFragment(), HttpOnNextListener {
         erc.setRefreshing(false)
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        LogUtils.d("")
-    }
 }

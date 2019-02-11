@@ -23,6 +23,7 @@ import com.twitter.sdk.android.core.TwitterConfig
  */
 object ModelApp {
 
+    @JvmStatic
     fun init(app: Application, debug: Boolean = true) {
         RxRetrofitApp.init(app, debug)
         Utils.init(app)
