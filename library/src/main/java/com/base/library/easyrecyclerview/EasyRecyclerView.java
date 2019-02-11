@@ -479,6 +479,32 @@ public class EasyRecyclerView extends FrameLayout {
         mRecycler.setItemAnimator(animator);
     }
 
+    /**
+     * 设置 item decoration
+     * @param itemDecoration
+     */
+    public void setItemDecoration(RecyclerView.ItemDecoration itemDecoration) {
+        RecyclerView.ItemDecoration decoration = mRecycler.getItemDecorationAt(0);
+        while (null != decoration) {
+            mRecycler.removeItemDecoration(decoration);
+            decoration = mRecycler.getItemDecorationAt(0);
+        }
+        addItemDecoration(itemDecoration);
+    }
+
+    /**
+     * 设置 item decoration
+     * @param itemDecoration
+     * @param index
+     */
+    public void setItemDecoration(RecyclerView.ItemDecoration itemDecoration,int index){
+        RecyclerView.ItemDecoration decoration = mRecycler.getItemDecorationAt(index);
+        if (null != decoration) {
+            mRecycler.removeItemDecoration(decoration);
+        }
+        addItemDecoration(itemDecoration,index);
+    }
+
     public void addItemDecoration(RecyclerView.ItemDecoration itemDecoration) {
         mRecycler.addItemDecoration(itemDecoration);
     }
