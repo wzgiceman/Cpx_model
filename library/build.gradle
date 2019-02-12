@@ -78,7 +78,7 @@ dependencies {
     api rootProject.ext.dependencies["retrofit"]
     api rootProject.ext.dependencies["greenDao"]
     api rootProject.ext.dependencies["fastjson"]
-    api(rootProject.ext.dependencies["glide"]){
+    api(rootProject.ext.dependencies["glide"]) {
         exclude group: "com.android.support"
     }
     api rootProject.ext.dependencies["kotlin"]
@@ -89,14 +89,13 @@ dependencies {
     api rootProject.ext.dependencies["twitterShare"]
     api rootProject.ext.dependencies["googleAuth"]
     //facebook
-    api(rootProject.ext.dependencies["facebook-ays"])
-            {
-                exclude group: 'com.android.support', module: 'support-v4'
-                exclude group: 'com.android.support', module: 'appcompat-v7'
-                exclude group: 'com.android.support', module: 'customtabs'
-                exclude group: 'com.android.support', module: 'support-annotations'
-                exclude group: 'com.android.support', module: 'support-core-utils'
-            }
+    api(rootProject.ext.dependencies["facebook-ays"]) {
+        exclude group: 'com.android.support', module: 'support-v4'
+        exclude group: 'com.android.support', module: 'appcompat-v7'
+        exclude group: 'com.android.support', module: 'customtabs'
+        exclude group: 'com.android.support', module: 'support-annotations'
+        exclude group: 'com.android.support', module: 'support-core-utils'
+    }
 
     /*leak 内存泄露检查*/
     debugApi rootProject.ext.dependencies["debugleakcanary"]

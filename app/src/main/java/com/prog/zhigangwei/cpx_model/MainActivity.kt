@@ -15,6 +15,7 @@ import com.prog.zhigangwei.cpx_model.rxbus.RxBusActivity
 import com.prog.zhigangwei.cpx_model.rxjava.RxJavaActivity
 import com.prog.zhigangwei.cpx_model.share.ShareActivity
 import com.prog.zhigangwei.cpx_model.vpFragment.VpFragmentActivity
+import com.prog.zhigangwei.cpx_model.youtube.YouTubeActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 /**
@@ -69,8 +70,9 @@ class MainActivity : BaseToolsActivity() {
         btn_constraintLayout.setOnRxClickListener { jumpActivity(ConstraintLayoutActivity::class.java) }
         btn_login.setOnRxClickListener { jumpActivity(LoginActivity::class.java) }
         btn_share.setOnRxClickListener { jumpActivity(ShareActivity::class.java) }
-        btn_rx_click.setOnRxClickListener { LogUtils.d("---->dddddddd") }
+        btn_rx_click.setOnRxClickListener { LogUtils.d("---->1秒内只会打印一次") }
         btn_vpfg.setOnRxClickListener { jumpActivity(VpFragmentActivity::class.java) }
+        btn_youtube.setOnRxClickListener { jumpActivity(YouTubeActivity::class.java) }
     }
 
     /**

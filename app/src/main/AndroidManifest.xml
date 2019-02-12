@@ -45,6 +45,10 @@
 
         <receiver android:name=".http.down.down.NetworkConnectChangedReceiver" />
 
+        <activity android:name=".youtube.YouTubeActivity" />
+        <activity
+            android:name=".youtube.video.YouTubeVideoActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden" />
     </application>
 
 </manifest>
