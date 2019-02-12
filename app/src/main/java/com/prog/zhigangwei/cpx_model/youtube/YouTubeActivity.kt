@@ -1,11 +1,13 @@
 package com.prog.zhigangwei.cpx_model.youtube
 
 import android.support.v7.widget.LinearLayoutManager
+import android.text.TextUtils
 import com.base.library.easyrecyclerview.adapter.RecyclerArrayAdapter
 import com.base.library.rxRetrofit.exception.ApiException
 import com.base.library.rxRetrofit.http.HttpManager
 import com.base.library.rxRetrofit.listener.HttpOnNextListener
 import com.base.library.utils.utilcode.util.LogUtils
+import com.base.library.utils.utilcode.util.ToastUtils
 import com.base.project.base.activity.BaseActivity
 import com.prog.zhigangwei.cpx_model.R
 import com.prog.zhigangwei.cpx_model.youtube.common.api.YouTubeApi
@@ -15,7 +17,7 @@ import kotlinx.android.synthetic.main.activity_you_tube.*
 
 /**
  * Description:
- * Youtube页面
+ * Youtube视频列表页面
  *
  * @author  Alpinist Wang
  * Company: Mobile CPX
@@ -30,6 +32,7 @@ class YouTubeActivity : BaseActivity(), HttpOnNextListener, RecyclerArrayAdapter
     override fun layoutId() = R.layout.activity_you_tube
 
     override fun initData() {
+        rv.setRefreshing(true)
         youTubeApi.category = "funny"
         httpManager.doHttpDeal(youTubeApi)
     }
@@ -56,11 +59,22 @@ class YouTubeActivity : BaseActivity(), HttpOnNextListener, RecyclerArrayAdapter
 
     override fun onNext(result: String, method: String) {
         LogUtils.d("method:$method\nresult:$result")
+        rv.setRefreshing(false)
         val videos = youTubeApi.convert(result)
+        if (TextUtils.isEmpty(youTubeApi.pageToken)) {
+            youTubeAdapter.clear()
+        }
+        if (TextUtils.isEmpty(youTubeApi.pageToken) && (videos == null || videos.isEmpty())) {
+            rv.showEmpty()
+            return
+        }
         youTubeAdapter.addAll(videos)
     }
 
     override fun onError(e: ApiException, method: String) {
         LogUtils.d("error:${e.displayMessage}\nmethod:$method")
+        rv.setRefreshing(false)
+        rv.showError()
+        ToastUtils.showShort(e.displayMessage)
     }
 }

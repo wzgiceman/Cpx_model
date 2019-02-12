@@ -4,12 +4,13 @@ import java.util.List;
 
 /**
  * Description:
+ * YouTubeApi返回的结果
  *
  * @author Alpinist Wang
  * Company: Mobile CPX
  * Date:    2019/2/12
  */
-public class YoutubeResult {
+public class YouTubeResult {
 
     /**
      * errorCode : 0

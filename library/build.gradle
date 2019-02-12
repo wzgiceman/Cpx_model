@@ -22,6 +22,7 @@ android {
         resValue "string", "twitter_consumer_secret", "${twitter_consumer_secret}"
         resValue "string", "google_web_client_id", "${google_web_client_id}"
         resValue "string", "base_url_password", "${base_url_password}"
+        resValue "string", "you_tube_api_key", "${you_tube_api_key}"
     }
 
     buildTypes {

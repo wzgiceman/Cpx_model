@@ -2,7 +2,7 @@ package com.prog.zhigangwei.cpx_model.youtube.common.api
 
 import com.alibaba.fastjson.JSONObject
 import com.base.library.rxRetrofit.Api.BaseApi
-import com.prog.zhigangwei.cpx_model.youtube.common.bean.YoutubeResult
+import com.prog.zhigangwei.cpx_model.youtube.common.bean.YouTubeResult
 import io.reactivex.Observable
 
 /**
@@ -18,6 +18,7 @@ class YouTubeApi : BaseApi() {
     init {
         baseUrl = "http://54.153.41.63:8080/"
         isIgnoreJudge = true
+        isShowProgress = false
     }
 
     // 分类，理论上可以传任何参数，因为本质上后台是走的YouTube搜索Api
@@ -32,9 +33,12 @@ class YouTubeApi : BaseApi() {
         return apiService.getVideo(category, pageToken, limit)
     }
 
-    fun convert(result: String): List<YoutubeResult.ContentBean.ItemsBean>? {
-        val youtubeResult = JSONObject.parseObject(result, YoutubeResult::class.java)
-        // 更新下一页token
+    /**
+     * 处理接口返回的数据
+     */
+    fun convert(result: String): List<YouTubeResult.ContentBean.ItemsBean>? {
+        val youtubeResult = JSONObject.parseObject(result, YouTubeResult::class.java)
+        // 更新下一页的pageToken
         pageToken = youtubeResult.content.next_page_token
         return youtubeResult.content.items
     }

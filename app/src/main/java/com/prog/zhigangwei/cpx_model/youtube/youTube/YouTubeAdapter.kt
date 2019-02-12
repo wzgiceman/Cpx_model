@@ -9,7 +9,7 @@ import com.base.library.easyrecyclerview.adapter.RecyclerArrayAdapter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.prog.zhigangwei.cpx_model.R
-import com.prog.zhigangwei.cpx_model.youtube.common.bean.YoutubeResult
+import com.prog.zhigangwei.cpx_model.youtube.common.bean.YouTubeResult
 
 /**
  * Description:
@@ -19,14 +19,14 @@ import com.prog.zhigangwei.cpx_model.youtube.common.bean.YoutubeResult
  * Company: Mobile CPX
  * Date:    2019/2/12
  */
-class YouTubeAdapter(context: Context) : RecyclerArrayAdapter<YoutubeResult.ContentBean.ItemsBean>(context) {
+class YouTubeAdapter(context: Context) : RecyclerArrayAdapter<YouTubeResult.ContentBean.ItemsBean>(context) {
     override fun onCreateEasyViewHolder(parent: ViewGroup?, viewType: Int): BaseViewHolder<*> =
             YouTubeViewHolder(parent)
 
-    internal class YouTubeViewHolder(parent: ViewGroup?) : BaseViewHolder<YoutubeResult.ContentBean.ItemsBean>(parent, R.layout.item_you_tube) {
+    internal class YouTubeViewHolder(parent: ViewGroup?) : BaseViewHolder<YouTubeResult.ContentBean.ItemsBean>(parent, R.layout.item_you_tube) {
         private val tvTitle: TextView = `$`(R.id.tv_title)
         private val ivThumbnail: ImageView = `$`(R.id.iv_thumbnail)
-        override fun setData(videoItem: YoutubeResult.ContentBean.ItemsBean) {
+        override fun setData(videoItem: YouTubeResult.ContentBean.ItemsBean) {
             super.setData(videoItem)
             tvTitle.text = videoItem.title
             Glide.with(context)
