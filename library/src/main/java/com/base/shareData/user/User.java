@@ -1,7 +1,7 @@
 package com.base.shareData.user;
 
 import com.alibaba.fastjson.JSONObject;
-import com.base.library.rxRetrofit.Api.BaseApi;
+import com.base.library.rxRetrofit.api.BaseApi;
 import com.base.library.utils.utilcode.util.SPUtils;
 
 /**

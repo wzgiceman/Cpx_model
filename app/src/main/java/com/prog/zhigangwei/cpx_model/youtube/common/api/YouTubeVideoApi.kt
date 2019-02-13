@@ -1,19 +1,19 @@
 package com.prog.zhigangwei.cpx_model.youtube.common.api
 
 import com.alibaba.fastjson.JSONObject
-import com.base.library.rxRetrofit.Api.BaseApi
-import com.prog.zhigangwei.cpx_model.youtube.common.bean.YouTubeResult
+import com.base.library.rxRetrofit.api.BaseApi
+import com.prog.zhigangwei.cpx_model.youtube.common.bean.YouTubeVideoResult
 import io.reactivex.Observable
 
 /**
  * Description:
- * YoutubeApi
+ * Youtube视频Api
  *
  * @author  Alpinist Wang
  * Company: Mobile CPX
  * Date:    2019/2/12
  */
-class YouTubeApi : BaseApi() {
+class YouTubeVideoApi : BaseApi() {
 
     init {
         baseUrl = "http://54.153.41.63:8080/"
@@ -30,16 +30,13 @@ class YouTubeApi : BaseApi() {
 
     override fun getObservable(): Observable<*> {
         val apiService = retrofit.create(YouTubeApiService::class.java)
-        return apiService.getVideo(category, pageToken, limit)
+        return apiService.getVideos(category, pageToken, limit)
     }
 
     /**
      * 处理接口返回的数据
      */
-    fun convert(result: String): List<YouTubeResult.ContentBean.ItemsBean>? {
-        val youtubeResult = JSONObject.parseObject(result, YouTubeResult::class.java)
-        // 更新下一页的pageToken
-        pageToken = youtubeResult.content.next_page_token
-        return youtubeResult.content.items
+    fun convert(result: String): YouTubeVideoResult? {
+        return JSONObject.parseObject(result, YouTubeVideoResult::class.java)
     }
 }

@@ -10,7 +10,7 @@ import java.util.List;
  * Company: Mobile CPX
  * Date:    2019/2/12
  */
-public class YouTubeResult {
+public class YouTubeVideoResult {
 
     /**
      * errorCode : 0
@@ -82,7 +82,7 @@ public class YouTubeResult {
              */
 
             private String video_id;
-            private String publish_time;
+            private long publish_time;
             private String title;
             private String description;
             private String thumbnail_url;
@@ -96,13 +96,6 @@ public class YouTubeResult {
                 this.video_id = video_id;
             }
 
-            public String getPublish_time() {
-                return publish_time;
-            }
-
-            public void setPublish_time(String publish_time) {
-                this.publish_time = publish_time;
-            }
 
             public String getTitle() {
                 return title;
@@ -134,6 +127,14 @@ public class YouTubeResult {
 
             public void setChannel_title(String channel_title) {
                 this.channel_title = channel_title;
+            }
+
+            public long getPublish_time() {
+                return publish_time;
+            }
+
+            public void setPublish_time(long publish_time) {
+                this.publish_time = publish_time;
             }
         }
     }

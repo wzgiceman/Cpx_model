@@ -7,31 +7,34 @@
     tools:background="@color/colorPrimaryDark">
 
     <TextView
-        android:id="@+id/tv_title"
+        android:id="@+id/tv_author"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Title" />
 
-    <ImageView
-        android:id="@+id/iv_thumbnail"
-        android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:layout_margin="8dp"
-        android:adjustViewBounds="true"
-        android:scaleType="centerCrop"
-        app:layout_constraintTop_toBottomOf="@id/tv_title"
-        tools:src="@mipmap/ic_launcher" />
-
     <TextView
-        android:id="@+id/tv_comment"
+        android:id="@+id/tv_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="8dp"
-        android:text="@string/comment"
+        android:textColor="@color/c_666666"
+        android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/iv_thumbnail" />
+        app:layout_constraintTop_toBottomOf="@id/tv_author"
+        tools:text="hahahaha" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@android:color/black"
+        app:layout_constraintBottom_toBottomOf="parent" />
 </android.support.constraint.ConstraintLayout>

@@ -10,9 +10,10 @@ import com.base.library.utils.utilcode.util.LogUtils
 import com.base.library.utils.utilcode.util.ToastUtils
 import com.base.project.base.activity.BaseActivity
 import com.prog.zhigangwei.cpx_model.R
-import com.prog.zhigangwei.cpx_model.youtube.common.api.YouTubeApi
+import com.prog.zhigangwei.cpx_model.youtube.comment.YouTubeCommentActivity
+import com.prog.zhigangwei.cpx_model.youtube.common.api.YouTubeVideoApi
 import com.prog.zhigangwei.cpx_model.youtube.video.YouTubeVideoActivity
-import com.prog.zhigangwei.cpx_model.youtube.youTube.YouTubeAdapter
+import com.prog.zhigangwei.cpx_model.youtube.youtube.YouTubeAdapter
 import kotlinx.android.synthetic.main.activity_you_tube.*
 
 /**
@@ -26,15 +27,15 @@ import kotlinx.android.synthetic.main.activity_you_tube.*
 class YouTubeActivity : BaseActivity(), HttpOnNextListener, RecyclerArrayAdapter.OnMoreListener {
 
     private val httpManager by lazy { HttpManager(this, this) }
-    private val youTubeApi by lazy { YouTubeApi() }
+    private val youTubeVideoApi by lazy { YouTubeVideoApi() }
     private val youTubeAdapter by lazy { YouTubeAdapter(this) }
 
     override fun layoutId() = R.layout.activity_you_tube
 
     override fun initData() {
         rv.setRefreshing(true)
-        youTubeApi.category = "funny"
-        httpManager.doHttpDeal(youTubeApi)
+        youTubeVideoApi.category = "funny"
+        httpManager.doHttpDeal(youTubeVideoApi)
     }
 
     override fun initView() {
@@ -43,15 +44,22 @@ class YouTubeActivity : BaseActivity(), HttpOnNextListener, RecyclerArrayAdapter
         youTubeAdapter.setOnItemClickListener {
             YouTubeVideoActivity.start(this@YouTubeActivity, youTubeAdapter.allData[it].video_id)
         }
-        youTubeAdapter.setMore(R.layout.view_load_more, this)
-        rv.setRefreshAndRetryListener {
-            youTubeApi.pageToken = ""
-            httpManager.doHttpDeal(youTubeApi)
+        youTubeAdapter.setOnItemChildClickListener { position, id ->
+            YouTubeCommentActivity.start(this@YouTubeActivity, youTubeAdapter.allData[position].video_id)
         }
+        rv.setRefreshAndRetryListener {
+            youTubeVideoApi.pageToken = ""
+            httpManager.doHttpDeal(youTubeVideoApi)
+        }
+        youTubeAdapter.setMore(R.layout.view_load_more, this)
     }
 
     override fun onMoreShow() {
-        httpManager.doHttpDeal(youTubeApi)
+        if (youTubeVideoApi.pageToken.isEmpty()) {
+            youTubeAdapter.pauseMore()
+            return
+        }
+        httpManager.doHttpDeal(youTubeVideoApi)
     }
 
     override fun onMoreClick() {
@@ -60,15 +68,18 @@ class YouTubeActivity : BaseActivity(), HttpOnNextListener, RecyclerArrayAdapter
     override fun onNext(result: String, method: String) {
         LogUtils.d("method:$method\nresult:$result")
         rv.setRefreshing(false)
-        val videos = youTubeApi.convert(result)
-        if (TextUtils.isEmpty(youTubeApi.pageToken)) {
+        val youtubeResult = youTubeVideoApi.convert(result)
+        val videos = youtubeResult?.content?.items
+        if (TextUtils.isEmpty(youTubeVideoApi.pageToken)) {
             youTubeAdapter.clear()
         }
-        if (TextUtils.isEmpty(youTubeApi.pageToken) && (videos == null || videos.isEmpty())) {
+        if (TextUtils.isEmpty(youTubeVideoApi.pageToken) && (videos == null || videos.isEmpty())) {
             rv.showEmpty()
             return
         }
         youTubeAdapter.addAll(videos)
+        // 更新下一页的pageToken
+        youTubeVideoApi.pageToken = if (youtubeResult?.content?.next_page_token == null) "" else youtubeResult.content.next_page_token
     }
 
     override fun onError(e: ApiException, method: String) {

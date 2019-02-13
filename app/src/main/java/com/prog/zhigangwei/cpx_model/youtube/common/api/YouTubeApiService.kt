@@ -12,12 +12,28 @@ import retrofit2.http.Path
  * Company: Mobile CPX
  * Date:    2019/2/12
  */
-interface YouTubeApiService{
+interface YouTubeApiService {
     /**
-     * 获取YoutubeVideo列表
+     * 获取YouTubeVideo列表
      */
-    @GET("youtube/find/{category}/{page_token}/{limit}")
-    fun getVideo(@Path("category") category: String?,
-                 @Path("page_token") pageToken: String,
-                 @Path("limit") limit: Int): Observable<String>
+    @GET("youtube/video/find/{category}/{page_token}/{limit}")
+    fun getVideos(@Path("category") category: String?,
+                  @Path("page_token") pageToken: String,
+                  @Path("limit") limit: Int): Observable<String>
+
+    /**
+     * 获取YouTube视频评论列表
+     */
+    @GET("youtube/comment/find/{video_id}/{page_token}/{limit}")
+    fun getVideoComments(@Path("video_id") videoId: String?,
+                         @Path("page_token") pageToken: String,
+                         @Path("limit") limit: Int): Observable<String>
+
+    /**
+     * 获取YouTube二级评论列表
+     */
+    @GET("youtube/comment/findChild/{parent_id}/{page_token}/{limit}")
+    fun getVideoChildComments(@Path("parent_id") parentId: String?,
+                              @Path("page_token") pageToken: String,
+                              @Path("limit") limit: Int): Observable<String>
 }

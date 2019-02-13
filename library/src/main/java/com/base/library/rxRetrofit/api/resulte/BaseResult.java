@@ -1,4 +1,4 @@
-package com.base.library.rxRetrofit.Api.resulte;
+package com.base.library.rxRetrofit.api.resulte;
 
 /**
  * Describe:http数据返回基础类
