@@ -101,4 +101,9 @@ dependencies {
     /*leak 内存泄露检查*/
     debugApi rootProject.ext.dependencies["debugleakcanary"]
     releaseApi rootProject.ext.dependencies["releaseleakcanary"]
+
+    // firebase 崩溃
+    api (rootProject.ext.dependencies["firebase-crashlytics"]) {
+        transitive = true
+    }
 }

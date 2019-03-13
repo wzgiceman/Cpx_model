@@ -10,6 +10,7 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.util.Log;
 
 import com.base.library.BuildConfig;
+import com.crashlytics.android.Crashlytics;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -100,6 +101,8 @@ public class CrashHandler implements UncaughtExceptionHandler {
         if (ex == null) {
             return false;
         }
+        //firebase 崩溃报告
+        Crashlytics.logException(ex);
         // 收集设备参数信息
         LinkedHashMap<String, String> info = collectDeviceInfo(mContext);
         // 保存日志文件

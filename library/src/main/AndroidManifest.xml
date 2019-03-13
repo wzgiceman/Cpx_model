@@ -16,6 +16,11 @@
         android:allowBackup="false"
         android:supportsRtl="true">
 
+        <!--Crashlytics 关闭自动收集功能-->
+        <meta-data
+            android:name="firebase_crashlytics_collection_enabled"
+            android:value="false" />
+
         <!-- facebook -->
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
