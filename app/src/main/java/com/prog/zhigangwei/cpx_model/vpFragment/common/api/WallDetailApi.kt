@@ -1,6 +1,6 @@
 package com.prog.zhigangwei.cpx_model.vpFragment.common.api
 
-import com.base.library.rxRetrofit.Api.BaseApi
+import com.base.library.rxRetrofit.api.BaseApi
 import io.reactivex.Observable
 
 

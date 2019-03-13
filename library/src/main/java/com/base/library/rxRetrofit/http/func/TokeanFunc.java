@@ -1,8 +1,8 @@
 package com.base.library.rxRetrofit.http.func;
 
 import com.alibaba.fastjson.JSONObject;
-import com.base.library.rxRetrofit.Api.BaseApi;
-import com.base.library.rxRetrofit.Api.resulte.BaseResult;
+import com.base.library.rxRetrofit.api.BaseApi;
+import com.base.library.rxRetrofit.api.resulte.BaseResult;
 import com.base.library.rxRetrofit.exception.HttpTimeException;
 
 import io.reactivex.Observable;

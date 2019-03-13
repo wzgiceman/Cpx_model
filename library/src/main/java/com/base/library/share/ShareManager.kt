@@ -35,49 +35,44 @@ class ShareManager {
     private var twitterShareManager: TwitterShareManager? = null
     private var emailShareManager: EmailShareManager? = null
     private var smsShareManager: SMSShareManager? = null
-    private var context: Any
+    private var contextHolder: Any
     private var onShareListener: OnShareListener
 
     constructor(activity: Activity, onShareListener: OnShareListener) {
-        context = activity
+        contextHolder = activity
         this.onShareListener = onShareListener
     }
 
     constructor(fragment: Fragment, onShareListener: OnShareListener) {
-        context = fragment
+        contextHolder = fragment
         this.onShareListener = onShareListener
     }
 
     private fun getFacebookShareManager(): FacebookShareManager? {
-        if (facebookShareManager == null) {
-            facebookShareManager = FacebookShareManager(context, onShareListener)
-        }
+        if (facebookShareManager == null)
+            facebookShareManager = FacebookShareManager(contextHolder, onShareListener)
         return facebookShareManager
     }
 
     private fun getTwitterShareManager(): TwitterShareManager? {
-        if (twitterShareManager == null) {
-            val context = this.context
-            twitterShareManager = when (context) {
-                is Activity -> TwitterShareManager(context, onShareListener)
-                is Fragment -> TwitterShareManager(context.context, onShareListener)
+        if (twitterShareManager == null)
+            twitterShareManager = when (contextHolder) {
+                is Activity -> TwitterShareManager(contextHolder as Activity, onShareListener)
+                is Fragment -> TwitterShareManager((contextHolder as Fragment).context, onShareListener)
                 else -> null
             }
-        }
         return twitterShareManager
     }
 
     private fun getEmailShareManager(): EmailShareManager? {
-        if (emailShareManager == null) {
-            emailShareManager = EmailShareManager(context, onShareListener)
-        }
+        if (emailShareManager == null)
+            emailShareManager = EmailShareManager(contextHolder, onShareListener)
         return emailShareManager
     }
 
     private fun getSMSShareManager(): SMSShareManager? {
-        if (smsShareManager == null) {
-            smsShareManager = SMSShareManager(context, onShareListener)
-        }
+        if (smsShareManager == null)
+            smsShareManager = SMSShareManager(contextHolder, onShareListener)
         return smsShareManager
     }
 

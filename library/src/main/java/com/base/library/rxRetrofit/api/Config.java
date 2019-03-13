@@ -1,4 +1,4 @@
-package com.base.library.rxRetrofit.Api;
+package com.base.library.rxRetrofit.api;
 
 /**
  * Describe:系统参数

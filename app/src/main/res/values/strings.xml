@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">CPX Model</string>
+    <string name="comment">Comment</string>
 </resources>

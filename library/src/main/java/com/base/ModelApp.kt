@@ -25,6 +25,7 @@ import io.fabric.sdk.android.Fabric
  */
 object ModelApp {
 
+    @JvmStatic
     fun init(app: Application, debug: Boolean = true) {
         RxRetrofitApp.init(app, debug)
         Utils.init(app)
