@@ -227,14 +227,22 @@ public class HttpDownManager {
 
                 inputStream = responseBody.byteStream();
                 randomAccessFile = new RandomAccessFile(file, "rwd");
-                channelOut = randomAccessFile.getChannel();
-                MappedByteBuffer mappedBuffer = channelOut.map(FileChannel.MapMode.READ_WRITE,
-                        info.getReadLength(), allLength - info.getReadLength());
                 byte[] buffer = new byte[1024 * 4];
                 int len;
-                while ((len = inputStream.read(buffer)) != -1) {
-                    mappedBuffer.put(buffer, 0, len);
+                if (allLength >= Integer.MAX_VALUE) {
+                    randomAccessFile.seek(info.getReadLength());
+                    while ((len = inputStream.read(buffer)) != -1) {
+                        randomAccessFile.write(buffer, 0, len);
+                    }
+                } else {
+                    channelOut = randomAccessFile.getChannel();
+                    MappedByteBuffer mappedBuffer = channelOut.map(FileChannel.MapMode.READ_WRITE,
+                            info.getReadLength(), allLength - info.getReadLength());
+                    while ((len = inputStream.read(buffer)) != -1) {
+                        mappedBuffer.put(buffer, 0, len);
+                    }
                 }
+                
             } catch (IOException e) {
 //                throw new HttpTimeException(HttpTimeException.CACHE_DOWN_ERROR, e.getMessage());
             } finally {

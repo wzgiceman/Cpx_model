@@ -26,7 +26,6 @@ import kotlinx.android.synthetic.main.fragment_wall.*
 class VideoFragment : BaseLazyFragment(), HttpOnNextListener {
     private val adapter by lazy { VideoAdapter(context) }
     private val httpManager by lazy { HttpManager(this, this) }
-
     override fun layoutId() = R.layout.fragment_wall
 
     override fun initData() {
@@ -41,7 +40,7 @@ class VideoFragment : BaseLazyFragment(), HttpOnNextListener {
         itemDecoration.setPaddingEdgeSide(true)//是否为左右2边添加padding.默认true.
         itemDecoration.setPaddingStart(true)//是否在给第一行的item添加上padding(不包含header).默认true.
         itemDecoration.setPaddingHeaderFooter(false)//是否对Header于Footer有效,默认false.
-        erc.addItemDecoration(itemDecoration)
+        erc.setItemDecoration(itemDecoration)
 
         /*下拉刷新*/
         erc.setRefreshListener {
@@ -55,7 +54,6 @@ class VideoFragment : BaseLazyFragment(), HttpOnNextListener {
         }
     }
 
-
     override fun onNext(result: String, method: String) {
         erc.setRefreshing(false)
         adapter.removeAll()
@@ -65,12 +63,13 @@ class VideoFragment : BaseLazyFragment(), HttpOnNextListener {
         } else {
             adapter.addAll(JSONObject.parseObject(result, Video::class.java).entries)
         }
-        loadingFinish()
+        loadingSuccess()
     }
 
     override fun onError(e: ApiException, method: String) {
-        resetLoadingStatus()
+        loadingFail()
         erc.showError()
         erc.setRefreshing(false)
     }
+
 }

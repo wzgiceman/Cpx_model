@@ -2,8 +2,8 @@ package com.base.library.rxRetrofit.http.head;
 
 import com.alibaba.fastjson.JSONObject;
 import com.base.library.R;
-import com.base.library.rxRetrofit.Api.BaseApi;
-import com.base.library.rxRetrofit.Api.resulte.BaseResult;
+import com.base.library.rxRetrofit.api.BaseApi;
+import com.base.library.rxRetrofit.api.resulte.BaseResult;
 import com.base.library.rxRetrofit.RxRetrofitApp;
 import com.base.library.rxRetrofit.exception.HttpTimeException;
 import com.base.router.ActivityRouter;

@@ -31,6 +31,10 @@ public class ProgressDownSubscriber<T> implements Observer<T>, DownloadProgressL
     private DownInfo downInfo;
     private Handler handler;
     private Disposable disposable;
+    /**
+     * 上次更新的长度
+     */
+    private long prevUpdateLen = 0;
 
 
     public ProgressDownSubscriber(DownInfo downInfo, Handler handler) {
@@ -52,6 +56,7 @@ public class ProgressDownSubscriber<T> implements Observer<T>, DownloadProgressL
      */
     @Override
     public void onSubscribe(Disposable d) {
+        prevUpdateLen = 0;
         disposable = d;
         if (mSubscriberOnNextListener.get() != null) {
             mSubscriberOnNextListener.get().onStart();
@@ -103,7 +108,7 @@ public class ProgressDownSubscriber<T> implements Observer<T>, DownloadProgressL
     @Override
     public void onNext(T t) {
         if(downInfo.getReadLength()<downInfo.getCountLength()&&mSubscriberOnNextListener.get() != null){
-            mSubscriberOnNextListener.get().onError(new Throwable());
+            mSubscriberOnNextListener.get().onError(new IllegalArgumentException("read:"+downInfo.getReadLength()+",count:"+downInfo.getCountLength()));
             HttpDownManager.getInstance().remove(downInfo);
             unsubscribe();
             return;
@@ -126,10 +131,14 @@ public class ProgressDownSubscriber<T> implements Observer<T>, DownloadProgressL
         /*如果暂停或者停止状态延迟，不需要继续发送回调，影响显示*/
         if (mSubscriberOnNextListener.get() == null || !downInfo.isUpdateProgress() || downInfo.getState() == DownState.PAUSE || downInfo.getState() == DownState.STOP)
             return;
-        handler.post(() -> {
-            downInfo.setState(DownState.DOWN);
-            mSubscriberOnNextListener.get().updateProgress(downInfo.getReadLength(), downInfo.getCountLength());
-        });
+        if (read - prevUpdateLen > downInfo.getUpdateSize()) {
+            prevUpdateLen = read;
+            handler.post(() -> {
+                downInfo.setState(DownState.DOWN);
+                mSubscriberOnNextListener.get().updateProgress(downInfo.getReadLength(), downInfo.getCountLength());
+            });
+        }
+        
     }
 
     /**

@@ -174,6 +174,7 @@ public class Bus {
         if (object == null) {
             throw new NullPointerException("Object to register must not be null.");
         }
+        if (hasRegistered(object)) return;
         enforcer.enforce(this);
 
         Map<EventType, ProducerEvent> foundProducers = finder.findAllProducers(object);
@@ -295,6 +296,7 @@ public class Bus {
         if (object == null) {
             throw new NullPointerException("Object to unregister must not be null.");
         }
+        if (!hasRegistered(object)) return;
         enforcer.enforce(this);
 
         Map<EventType, ProducerEvent> producersInListener = finder.findAllProducers(object);

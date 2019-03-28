@@ -39,6 +39,12 @@ public class DownInfo {
     /*是否需要实时更新下载进度,避免线程的多次切换*/
     private boolean updateProgress;
 
+    /**
+     * 进度更新大小，默认为32k
+     */
+    @Transient
+    private  int updateSize = 32 * 1024;
+
 
     @Keep
     public DownInfo(Long id, String savePath, Long countLength, Long readLength,
@@ -177,5 +183,13 @@ public class DownInfo {
 
     public void setUpdateProgress(boolean updateProgress) {
         this.updateProgress = updateProgress;
+    }
+
+    public int getUpdateSize() {
+        return updateSize;
+    }
+
+    public void setUpdateSize(int updateSize) {
+        this.updateSize = updateSize;
     }
 }

@@ -1,6 +1,6 @@
 package com.base.library.rxRetrofit.httpList.httpList;
 
-import com.base.library.rxRetrofit.Api.BaseApi;
+import com.base.library.rxRetrofit.api.BaseApi;
 import com.base.library.utils.utilcode.util.StringUtils;
 
 import io.reactivex.Observable;

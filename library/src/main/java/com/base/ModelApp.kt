@@ -7,11 +7,13 @@ import com.base.library.R
 import com.base.library.rxRetrofit.RxRetrofitApp
 import com.base.library.utils.utilcode.util.LogUtils
 import com.base.library.utils.utilcode.util.Utils
+import com.crashlytics.android.Crashlytics
 import com.squareup.leakcanary.LeakCanary
 import com.twitter.sdk.android.core.DefaultLogger
 import com.twitter.sdk.android.core.Twitter
 import com.twitter.sdk.android.core.TwitterAuthConfig
 import com.twitter.sdk.android.core.TwitterConfig
+import io.fabric.sdk.android.Fabric
 
 /**
  * Description:
@@ -23,6 +25,7 @@ import com.twitter.sdk.android.core.TwitterConfig
  */
 object ModelApp {
 
+    @JvmStatic
     fun init(app: Application, debug: Boolean = true) {
         RxRetrofitApp.init(app, debug)
         Utils.init(app)
@@ -42,6 +45,7 @@ object ModelApp {
 
         initTwitterLogin(app)
         initMAT(app)
+        initFirebaseCrashlytics(app)
     }
 
     private fun initTwitterLogin(app: Application) {
@@ -63,5 +67,17 @@ object ModelApp {
             return
         }
         LeakCanary.install(app)
+    }
+
+    /**
+     * 初始化firebase崩溃统计
+     */
+    private fun initFirebaseCrashlytics(app:Application) {
+        if (BuildConfig.DEBUG) return
+        val fabric = Fabric.Builder(app)
+            .kits(Crashlytics())
+            .debuggable(true)           // Enables Crashlytics debugger
+            .build()
+        Fabric.with(fabric)
     }
 }

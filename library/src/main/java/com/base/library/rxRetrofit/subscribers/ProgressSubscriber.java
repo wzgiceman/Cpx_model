@@ -6,7 +6,7 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 
 import com.base.library.R;
-import com.base.library.rxRetrofit.Api.BaseApi;
+import com.base.library.rxRetrofit.api.BaseApi;
 import com.base.library.rxRetrofit.RxRetrofitApp;
 import com.base.library.rxRetrofit.exception.ApiException;
 import com.base.library.rxRetrofit.exception.HttpTimeException;

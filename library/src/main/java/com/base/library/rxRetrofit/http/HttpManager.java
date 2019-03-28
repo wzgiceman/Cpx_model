@@ -2,7 +2,7 @@ package com.base.library.rxRetrofit.http;
 
 import android.support.annotation.NonNull;
 
-import com.base.library.rxRetrofit.Api.BaseApi;
+import com.base.library.rxRetrofit.api.BaseApi;
 import com.base.library.rxRetrofit.exception.RetryWhenNetworkException;
 import com.base.library.rxRetrofit.http.func.ExceptionFunc;
 import com.base.library.rxRetrofit.http.func.ResultFunc;
