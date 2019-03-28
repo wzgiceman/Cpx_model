@@ -84,7 +84,7 @@ public class DownDbUtil {
         DaoMaster daoMaster = new DaoMaster(getWritableDatabase());
         DaoSession daoSession = daoMaster.newSession();
         DownInfoDao downInfoDao = daoSession.getDownInfoDao();
-        downInfoDao.update(info);
+        downInfoDao.insertOrReplace(info);
     }
 
     public void deleteDowninfo(DownInfo info) {
