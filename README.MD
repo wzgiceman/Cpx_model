@@ -33,6 +33,9 @@ CPX Model
 如果您有任何问题或反馈，请提交到[Github Issues](https://github.com/wzgiceman/Cpx_model/issues).
 
 ## 更新日志
+* 2019.03.28
+
+    1.更新LeakCanary
 
 * 2019.01.23
 

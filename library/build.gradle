@@ -101,4 +101,5 @@ dependencies {
     /*leak 内存泄露检查*/
     debugApi rootProject.ext.dependencies["debugleakcanary"]
     releaseApi rootProject.ext.dependencies["releaseleakcanary"]
+    releaseApi rootProject.ext.dependencies["releasefragmentleakcanary"]
 }
