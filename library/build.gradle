@@ -3,6 +3,7 @@ apply plugin: 'org.greenrobot.greendao'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
+
 android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
     defaultConfig {
@@ -22,6 +23,7 @@ android {
         resValue "string", "twitter_consumer_secret", "${twitter_consumer_secret}"
         resValue "string", "google_web_client_id", "${google_web_client_id}"
         resValue "string", "base_url_password", "${base_url_password}"
+        resValue "string", "you_tube_api_key", "${you_tube_api_key}"
     }
 
     buildTypes {
@@ -78,7 +80,7 @@ dependencies {
     api rootProject.ext.dependencies["retrofit"]
     api rootProject.ext.dependencies["greenDao"]
     api rootProject.ext.dependencies["fastjson"]
-    api(rootProject.ext.dependencies["glide"]){
+    api(rootProject.ext.dependencies["glide"]) {
         exclude group: "com.android.support"
     }
     api rootProject.ext.dependencies["kotlin"]
@@ -89,17 +91,20 @@ dependencies {
     api rootProject.ext.dependencies["twitterShare"]
     api rootProject.ext.dependencies["googleAuth"]
     //facebook
-    api(rootProject.ext.dependencies["facebook-ays"])
-            {
-                exclude group: 'com.android.support', module: 'support-v4'
-                exclude group: 'com.android.support', module: 'appcompat-v7'
-                exclude group: 'com.android.support', module: 'customtabs'
-                exclude group: 'com.android.support', module: 'support-annotations'
-                exclude group: 'com.android.support', module: 'support-core-utils'
-            }
+    api(rootProject.ext.dependencies["facebook-ays"]) {
+        exclude group: 'com.android.support', module: 'support-v4'
+        exclude group: 'com.android.support', module: 'appcompat-v7'
+        exclude group: 'com.android.support', module: 'customtabs'
+        exclude group: 'com.android.support', module: 'support-annotations'
+        exclude group: 'com.android.support', module: 'support-core-utils'
+    }
 
     /*leak 内存泄露检查*/
     debugApi rootProject.ext.dependencies["debugleakcanary"]
     releaseApi rootProject.ext.dependencies["releaseleakcanary"]
     releaseApi rootProject.ext.dependencies["releasefragmentleakcanary"]
+    // firebase 崩溃
+    api (rootProject.ext.dependencies["firebase-crashlytics"]) {
+        transitive = true
+    }
 }

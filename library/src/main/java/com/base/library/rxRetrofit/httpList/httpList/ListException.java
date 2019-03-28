@@ -1,5 +1,6 @@
 package com.base.library.rxRetrofit.httpList.httpList;
 
+
 import com.base.library.rxRetrofit.api.BaseApi;
 import com.base.library.utils.utilcode.util.StringUtils;
 
@@ -14,7 +15,7 @@ import io.reactivex.functions.Function;
 public class ListException implements Function<Throwable, Observable> {
     private BaseApi api;
 
-    public ListException(BaseApi api) {
+    public ListException(com.base.library.rxRetrofit.api.BaseApi api) {
         this.api = api;
     }
 

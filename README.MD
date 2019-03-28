@@ -36,6 +36,7 @@ CPX Model
 * 2019.03.28
 
     1.更新LeakCanary
+    2.修改baseapi位置
 
 * 2019.01.23
 

@@ -1,7 +1,6 @@
 package com.base.library.rxRetrofit.httpList.httpList
 
 import com.base.library.rxRetrofit.api.BaseApi
-
 /**
  * Description:
  * 链式调用Api和回调结果类
