@@ -1,12 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    package="com.prog.zhigangwei.cpx_model">
+<manifest package="com.prog.zhigangwei.cpx_model"
+          xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:tools="http://schemas.android.com/tools">
 
     <!-- 允许读取网络状态 -->
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <!-- 允许读取wifi网络状态 -->
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.BLUETOOTH"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+
 
     <application
         android:name=".app.MApp"
@@ -19,40 +26,45 @@
         tools:ignore="GoogleAppIndexingWarning">
         <meta-data
             android:name="android.max_aspect"
-            android:value="2.1" />
+            android:value="2.1"/>
 
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTask">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".http.HttpActivity" />
-        <activity android:name=".permission.PermisssionActivity" />
-        <activity android:name=".image.ImageActivity" />
-        <activity android:name=".rxbus.RxBusActivity" />
-        <activity android:name=".easyRecyclerview.RecyclerActivity" />
-        <activity android:name=".http.down.DownActivity" />
-        <activity android:name=".rxjava.RxJavaActivity" />
-        <activity android:name=".greendao.GreendaoActivity" />
-        <activity android:name=".constraintLayout.ConstraintLayoutActivity" />
-        <activity android:name=".login.LoginActivity" />
-        <activity android:name=".share.ShareActivity" />
-        <activity android:name=".vpFragment.VpFragmentActivity" />
+        <activity android:name=".http.HttpActivity"/>
+        <activity android:name=".permission.PermisssionActivity"/>
+        <activity android:name=".image.ImageActivity"/>
+        <activity android:name=".rxbus.RxBusActivity"/>
+        <activity android:name=".easyRecyclerview.RecyclerActivity"/>
+        <activity android:name=".http.down.DownActivity"/>
+        <activity android:name=".rxjava.RxJavaActivity"/>
+        <activity android:name=".greendao.GreendaoActivity"/>
+        <activity android:name=".constraintLayout.ConstraintLayoutActivity"/>
+        <activity android:name=".login.LoginActivity"/>
+        <activity android:name=".share.ShareActivity"/>
+        <activity android:name=".vpFragment.VpFragmentActivity"/>
 
-        <receiver android:name=".http.down.down.NetworkConnectChangedReceiver" />
+        <receiver android:name=".http.down.down.NetworkConnectChangedReceiver"/>
 
         <activity
             android:name=".youtube.YouTubeActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".youtube.video.YouTubeVideoActivity"
-            android:configChanges="orientation|screenSize|keyboardHidden" />
-        <activity android:name=".youtube.comment.YouTubeCommentActivity" />
-        <activity android:name=".youtube.comment.childComment.YouTubeChildCommentActivity" />
+            android:configChanges="orientation|screenSize|keyboardHidden"/>
+        <activity android:name=".youtube.comment.YouTubeCommentActivity"/>
+        <activity android:name=".youtube.comment.childComment.YouTubeChildCommentActivity"/>
+
+
+        <service
+            android:name=".service.SdlService"
+            android:enabled="true"></service>
     </application>
 
 </manifest>

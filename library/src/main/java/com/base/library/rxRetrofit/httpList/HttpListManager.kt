@@ -101,7 +101,8 @@ class HttpListManager() {
                     }
 
                     override fun onError(e: Throwable) {
-                        onResultError(ApiException(e), listResult)
+                        onResultError(e as? ApiException
+                                ?: ApiException(Throwable(), HttpTimeException.HTTP_CANCEL, RxRetrofitApp.getApplication().getString(R.string.http_cancel)), listResult)
                         dismissProgressDialog()
                         listResult.complete()
                     }

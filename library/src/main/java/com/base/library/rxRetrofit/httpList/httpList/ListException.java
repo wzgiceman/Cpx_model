@@ -2,6 +2,7 @@ package com.base.library.rxRetrofit.httpList.httpList;
 
 
 import com.base.library.rxRetrofit.api.BaseApi;
+import com.base.library.rxRetrofit.exception.FactoryException;
 import com.base.library.utils.utilcode.util.StringUtils;
 
 import io.reactivex.Observable;
@@ -26,7 +27,7 @@ public class ListException implements Function<Throwable, Observable> {
         if (!StringUtils.isEmpty(cacheContent)) {
             return Observable.just(cacheContent);
         }
-        return Observable.error(throwable);
+        return Observable.error(FactoryException.analysisExcetpion(throwable));
     }
 
 }
