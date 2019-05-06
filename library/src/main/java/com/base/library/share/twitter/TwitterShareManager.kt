@@ -48,8 +48,9 @@ class TwitterShareManager(private val context: Context, private val onShareListe
             is Uri -> image
             else -> Uri.EMPTY
         }
-        context.startActivity(ComposerActivity.Builder(context)
-                .image(imageUri)
+        val builder = ComposerActivity.Builder(context)
+        if (Uri.EMPTY != imageUri) builder.image(imageUri)
+        context.startActivity(builder
                 .text(text)
                 .session(TwitterCore.getInstance().sessionManager.activeSession)
                 .createIntent())

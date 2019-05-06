@@ -138,7 +138,7 @@ public class ProgressDownSubscriber<T> implements Observer<T>, DownloadProgressL
                 mSubscriberOnNextListener.get().updateProgress(downInfo.getReadLength(), downInfo.getCountLength());
             });
         }
-        
+
     }
 
     /**

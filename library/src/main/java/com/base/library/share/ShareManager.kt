@@ -77,6 +77,7 @@ class ShareManager {
     }
 
     fun shareText(type: String, text: String) {
+
         when (type) {
             FACEBOOK -> getFacebookShareManager()?.shareText(text)
             TWITTER -> getTwitterShareManager()?.shareText(text)
